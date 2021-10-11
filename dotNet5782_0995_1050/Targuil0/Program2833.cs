@@ -7,7 +7,7 @@ namespace Targuil0
         static void Main(string[] args)
         {
             Welcome2833();
-            Welcome0088();
+            Welcome0088(); 
             Console.ReadKey();
         }
         static partial void Welcome0088();
