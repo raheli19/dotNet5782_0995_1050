@@ -1,20 +1,27 @@
-﻿using System;
+﻿
+using System;
 namespace IDAL
 {
     namespace DO
     {
         public enum DroneStatuses
         {
-            Status,
-        }
+            free,maintenance,shipping
+        };
         public enum WeightCategories
         {
-            MaxWeight,
-        }
+            low, middle, heavy
+        };
         public enum Priorities
         {
-            Priority,
-        }
+            regular,fast,emergency
+        };
+        public enum datetime
+        {
+            fast, normal, low
+        };
+        
     }
+    
+ }
 
-}
