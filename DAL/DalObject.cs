@@ -26,12 +26,12 @@ namespace DalObject
         internal class Config
         {
             internal static int NumOfClients = 0;
-           
+           static int count=0; // counter for all the products
            
 
         }
 
-
+        // functions initializing each one of the lists
         public static void InitializeClient(int numClient=10)
         {
             ClientList = new List<Client>();
@@ -84,18 +84,29 @@ namespace DalObject
                     TargetId=rand.Next(1000000,1000000),
                     Weight = (WeightCategories).rand(3),
                     Priority= (Priorities).rand(3),
-                    Requested=
+                    Requested= (datetime)rand(3),
                 }
 
         }
 
+        public static Initialize()// intialising global function
+        {
+            InitializeClient();
+            InitializeDrone();
+            InitializeParcel();
+            InitializeStations();
+            
+        }
 
 
 
     }
   
 
-    //dalobjkect classo
+    public class DalObject
+    {
+
+    }
 
 
 
