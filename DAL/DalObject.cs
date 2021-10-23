@@ -89,7 +89,7 @@ namespace DalObject
 
         }
 
-        public static Initialize()// intialising global function
+        public static void Initialize()// intialising global function
         {
             InitializeClient();
             InitializeDrone();
@@ -102,10 +102,27 @@ namespace DalObject
 
     }
   
-
+ 
     public class DalObject
     {
-
+        DalObject() {DataSource.Initialize();}
+        public static void addDrone(Drone drone)// add a new drone to the dronelist
+        {
+            DataSource.DroneList.Add(drone);
+        }
+        public static void addClient (Client client)
+        {
+            DataSource.ClientList(client )
+        }
+        public static void addStation(Station station)
+        {
+            DataSource.StationList(station)
+        }
+        public static void addParcel(Parcel parcel)
+        {
+            DataSource.ParcelList(parcel)
+        }
+      
     }
 
 
