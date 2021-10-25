@@ -10,11 +10,11 @@ namespace IDAL
             public int TargetId { get; set; }
             public WeightCategories Weight { get; set; } // à construire
             public Priorities Priority { get; set; }
-            public datetime Requested { get; set; }
+            public DateTime Requested { get; set; }
             public int DroneId { get; set; }
-            public datetime Scheduled { get; set; }
-            public datetime PickedUp { get; set; }
-            public datetime Delivered { get; set; }
+            public DateTime Scheduled { get; set; }
+            public DateTime PickedUp { get; set; }
+            public DateTime Delivered { get; set; }
 
 
             public override string ToString()

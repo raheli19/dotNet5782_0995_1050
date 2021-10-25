@@ -16,11 +16,7 @@ namespace IDAL
         {
             regular,fast,emergency
         };
-        public enum datetime
-        {
-            fast, normal, low
-        };
-        
+       
     }
     
  }
