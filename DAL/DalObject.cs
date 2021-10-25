@@ -14,8 +14,11 @@ namespace DalObject
         internal static List<IDAL.DO.Drone> DroneList;
         internal static List<IDAL.DO.Parcel> ParcelList;
         internal static List<IDAL.DO.Station> StationList;
-        internal static List<IDAL.DO.DroneCharge> DroneChargesList; // faire un ithoul
+        internal static List<IDAL.DO.DroneCharge> DroneChargesList;
         static Random rand = new Random();
+
+        public static int ID { get; private set; }
+        public static int DroneId { get; private set; }
 
         public static Double GetrandomCoordinate(double x)
         {
@@ -31,59 +34,76 @@ namespace DalObject
 
         // functions initializing each one of the lists
         public static void InitializeClient(int numClient=10)
-        {
-            ClientList = new List<Client>();
+        {            
             for(int i=0; i<numClient; i++)
             {
-              ClientList.Add(new Client())
+                ClientList.Add(new Client()
                 {
-                    ID= rand.Next(1000000,10000000),
+                    ID = rand.Next(1000000, 10000000),
                     Name = $"Client {Config.NumOfClients}",
-                    Phone = $"0{rand.Next(50,58)} - {rand.Next(1000000,10000000)}",
+                    Phone= $"0{rand.Next(50, 58)} - {rand.Next(1000000, 10000000)}",
+                    //Latitude
+                    //longitude
 
-
-                }
-                IndexClients++;
+                });
             }
-
-
         }
-        public static void InitializeDrone(int numDrone=5)
+        public static void InitializeDroneChargesList(int num=1)
         {
-            DroneList.Add(new Drone())
-                for(int i=0; i<numDrone; i++)
+           
+            for(int i=0; i<num; i++)
+            {
+                DroneChargesList.Add(new DroneCharge()
                 {
-                   ID= rand.Next(1000000,10000000),
+                    DroneId = rand.Next(1000000, 10000000),
+                    StationId = rand.Next(1000000, 10000000),
+                });
+            }
+        }
+        public static void InitializeDrone(int numDrone = 5)
+        {
+
+            for (int i = 0; i < numDrone; i++)
+            {
+                DroneList.Add(new Drone()
+                { ID = rand.Next(1000000, 10000000),
                     Model = $"Nebula {i}",
-                    MaxWeight = (WeighCategories).rand(3),
-                    Status =(DroneStatuses).rand(3),
-                    Battery = rand.Next(0,101),
-                }
+                    MaxWeight = (WeightCategories)rand.Next(3),
+                    Status = (DroneStatuses)rand.Next(3),
+                    Battery = rand.Next(0, 101),
+
+                });
+            }
         }
         public static void InitializeStations (int NumStations=2)
         {
-            StationList.Add(new Station())
-                for(int i=0; i<NumStations; i++)
+
+                for (int i = 0; i < NumStations; i++)
                 {
-                    ID= rand.Next(1000000,1000000),
-                    Station= $"Bahnhof {i}",
-                    Longitude= GetrandomCoordinate(26.2),
+                    StationList.Add(new Station()
+                    { ID = rand.Next(1000000, 10000000),
+                    Name = rand.Next(1000000,10000000),
+                    Longitude = GetrandomCoordinate(26.2),
                     Latitude = GetrandomCoordinate(25.4),
-                    ChargeSlots= rand.Next(0,101),
+                    ChargeSlots = rand.Next(0, 101),
+                });
                 }
         }
         public static void InitializeParcel(int numParcel=10)
         {
-            ParcelList.Add(new Parcel())
-                for(int i=0; i<numParcel; i++)
+
+            for (int i = 0; i < numParcel; i++)
+            {
+                ParcelList.Add(new Parcel()
                 {
-                    ID=rand.Next(1000000,1000000),
-                    SenderId=rand.Next(1000000,1000000),
-                    TargetId=rand.Next(1000000,1000000),
-                    Weight = (WeightCategories).rand(3),
-                    Priority= (Priorities).rand(3),
-                    Requested= (datetime)rand(3),
-                }
+                    ID = rand.Next(1000000, 1000000),
+                    SenderId = rand.Next(1000000, 1000000),
+                    TargetId = rand.Next(1000000, 1000000),
+                    Weight = (WeightCategories)rand.Next(3),
+                    Priority = (Priorities)rand.Next(3),
+                    Requested = DateTime.Now,
+                });
+            }
 
         }
         public static void Initialize()// intialising global function
@@ -108,15 +128,15 @@ namespace DalObject
         }
         public static void addClient (Client client)
         {
-            DataSource.ClientList.Add(client )
+            DataSource.ClientList.Add(client);
         }
         public static void addStation(Station station)
         {
-            DataSource.StationList.Add(station)
+            DataSource.StationList.Add(station);
         }
         public static void addParcel(Parcel parcel)
         {
-            DataSource.ParcelList.Add(parcel)
+            DataSource.ParcelList.Add(parcel);
         }
         public static void addDroneCharge(DroneCharge dc)
         {
@@ -128,29 +148,33 @@ namespace DalObject
             //cherceh un free
             // si y en a pas, regarde ceux qui sont chargés?????????
             int droneId=0;
+            IDAL.DO.Drone d = new IDAL.DO.Drone();
             foreach( var item in DataSource.DroneList)
             {
                 if(item.Status== DroneStatuses.free)
                 {
-                   item.Status= DroneStatuses.shipping;// the drone is shipping
-                   droneId= item.ID;// save the id of the drone
+                    d = item;
+                    droneId= item.ID;// save the id of the drone
+                    DataSource.DroneList.Remove(item);
                     break;
                 }
             }
+            d.Status = DroneStatuses.shipping; // the drone is shipping
+            addDrone(d);
             parcel.DroneId= droneId;// assigns the id of the drone to the parcel
         }
 
         //functions UPDATE
         public static void GetParcelByDrone(int parcelId,int droneId)
         {
-            Parcel p;
-            Drone d;
+            IDAL.DO.Parcel p= new IDAL.DO.Parcel();
+            IDAL.DO.Drone d= new IDAL.DO.Drone();
            foreach( var item in DataSource.ParcelList)//search in the list of Parcels where the ID we received is
             {
                 if(item.ID==parcelId)
                 {
                    p=item;//faire un operateur =
-                    DataSource.ParcelList.Remove(item)//deletes the current item from the list, and we'll add the modified one
+                    DataSource.ParcelList.Remove(item);//deletes the current item from the list, and we'll add the modified one
                 }
             }
            foreach( var item in DataSource.DroneList)//search in the list of Drones where the ID we received is
@@ -172,15 +196,15 @@ namespace DalObject
         }
         public static void DeliveryToClient(int parcelId)//deliver a package to a customer
         {
-            Parcel p;
-            Drone d;
+            IDAL.DO.Parcel p= new IDAL.DO.Parcel();
+            IDAL.DO.Drone d= new IDAL.DO.Drone();
             foreach( var item in DataSource.ParcelList)//search in the list of Parcels where the ID we received is
             {
                 if(item.ID==parcelId)
                 {
-                   p=item;// save the current item
-                     DataSource.ParcelList.Remove(item)//deletes the current item from the list, and we'll add the modified one
-                        break;
+                    p=item;// save the current item
+                    DataSource.ParcelList.Remove(item);//deletes the current item from the list, and we'll add the modified one
+                    break;
                 }
             }
             foreach( var item in DataSource.DroneList)//search in the list of Drones where the ID we received is
@@ -193,29 +217,39 @@ namespace DalObject
                 }
             }
             p.Delivered=DateTime.Now;// time of delivering
-            p.DroneId= rand.Next(1000000,10000000);
+            p.DroneId = 123456;
             d.Status=DroneStatuses.free; // the drone is free
 
 
         }
+        
         public static void DroneToCharge(int droneId,int stationId)
         {
-            Drone d;
+            IDAL.DO.Drone d= new IDAL.DO.Drone();
             for( int i=0; i<DataSource.DroneList.Count; i++)
             {
                 if(DataSource.DroneList[i].ID==droneId)
                 {
-                    DataSource.DroneList[i].Status=DroneStatuses.maintenance;// change the statut of the drone
+                    d = DataSource.DroneList[i];
+                    DataSource.DroneList.Remove(DataSource.DroneList[i]);
+                    break;
                 }
             }
+            d.Status = DroneStatuses.maintenance;// plug in the drone to charge
+            addDrone(d);// add it back to the list
+            IDAL.DO.Station s = new IDAL.DO.Station();
             for(int i=0; i<DataSource.StationList.Count; i++)
             {
                  if(DataSource.StationList[i].ID==stationId)
-                {
-                    DataSource.StationList[i].ChargeSlots--;// one is occupied by the new drone
-                }
+                 {
+                    s = DataSource.StationList[i];
+                    DataSource.StationList.Remove(DataSource.StationList[i]);
+                    break;
+                 }
             }
-            DroneCharge DC;
+            s.ChargeSlots--;// a slot if occupied by the new drone
+            addStation(s);
+            IDAL.DO.DroneCharge DC= new IDAL.DO.DroneCharge();
             DC.DroneId=droneId;
             DC.StationId=stationId;
             addDroneCharge(DC);// add the linked thing to the list
@@ -223,27 +257,37 @@ namespace DalObject
         }
         public static void DroneCharged(int droneId, int stationId)
         {
-            for(var item in DataSource.DroneChargesList)
+            foreach(var item in DataSource.DroneChargesList)
             {
                 if(item.DroneId==droneId && item.StationId==stationId)
                 {
-                    DataSource.DroneChargesList.Remove(item)// delete the item; the drone is not charging anymore
+                    DataSource.DroneChargesList.Remove(item);// delete the item; the drone is not charging anymore
                 }
             }
-            for(int i=0; i<DataSource.DroneList.Count; i++)
+            IDAL.DO.Drone d = new IDAL.DO.Drone();
+            for (int i=0; i<DataSource.DroneList.Count; i++)
             {
                 if(DataSource.DroneList[i].ID==droneId)
                 {
-                    DataSource.DroneList[i].Status=DroneStatuses.free;// the drone is charged; he's free for shipping
+                     d= DataSource.DroneList[i];// the drone is charged; he's free for shipping
+                    DataSource.DroneList.Remove(DataSource.DroneList[i]);
+                    break;
                 }
+                d.Status = DroneStatuses.free;
+                addDrone(d);
             }
-            for(int i=0; i<DataSource.StationList.Count; i++)
+            IDAL.DO.Station s = new IDAL.DO.Station();
+            for (int i = 0; i < DataSource.StationList.Count; i++)
             {
-                if(DataSource.StationList[i].ID== stationId)
+                if (DataSource.StationList[i].ID == stationId)
                 {
-                    DataSource.StationList[i].ChargeSlots++;// a slot is available
+                    s = DataSource.StationList[i];
+                    DataSource.StationList.Remove(DataSource.StationList[i]);
+                    break;
                 }
             }
+            s.ChargeSlots++;// one is free from the charged drone
+            addStation(s);
         }
 
         //functions PRINT(one entity)
@@ -305,21 +349,21 @@ namespace DalObject
         {
             for(int i=0; i< DataSource.DroneList.Count; i++)
             {
-                PrintDrone(DataSource.DroneList[i].ID)
+                PrintDrone(DataSource.DroneList[i].ID);
             }
         }
         public static void PrintClientList()
         {
             for(int i=0; i<DataSource.ClientList.Count; i++)
             {
-                PrintClient(DataSource.ClientList[i].ID)
+                PrintClient(DataSource.ClientList[i].ID);
             }
         }
         public static void PrintParcelList()
         {
             for(int i=0; i<DataSource.ParcelList.Count; i++)
             {
-                PrintParcel(DataSource.ParcelList[i].ID)
+                PrintParcel(DataSource.ParcelList[i].ID);
             }
         }
 
