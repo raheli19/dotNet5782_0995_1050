@@ -10,15 +10,17 @@ namespace ConsoleUI
         enum entities { EXIT=0, STATION, DRONE, CLIENT, PARCEL, DRONECHARGES };
         enum update { EXIT, ASSIGNEMENT, PICKEDUP, DELIVERED,CHARGING, CHARGED,};
 
-        public static void Main(string[] args)
+        public static void Main()
         {
+            new DalObject.DalObject();
             option options;
             entities entity;
             Console.WriteLine("Welcome to our Nebula Drone delivery System!\n");
             Console.WriteLine("To add an entity please press 1\nTo update an entity please press 2\nTo print an entity please press 3\nTo print a list please press 4\nTo exit please press 0\n");
-            options= (option)int.Parse(Console.ReadLine());
+            options = (option)int.Parse(Console.ReadLine());
             do
             {
+               
                 switch (options)
                 {
                     case option.ADD:
@@ -27,6 +29,9 @@ namespace ConsoleUI
                             entity = (entities)int.Parse(Console.ReadLine());
                             switch (entity)
                             {
+                            case entities.EXIT:
+                                options = 0;
+                                break;
                             case entities.STATION:
                                 IDAL.DO.Station myStation = new IDAL.DO.Station();
                                 int myId;
@@ -44,7 +49,7 @@ namespace ConsoleUI
 
                             case entities.DRONE:
                                 IDAL.DO.Drone myDrone = new IDAL.DO.Drone();
-                                Console.WriteLine("You chose to add a Drone,\n Please enter its ID, Model, MaxWeight, Status, Battery:\n");
+                                Console.WriteLine("You chose to add a Drone,\nPlease enter its ID, Model, MaxWeight, Status, Battery:\n");
                                 int.TryParse(Console.ReadLine(), out int DID); //DroneID
                                 string myModel;
                                 myModel = Console.ReadLine();
@@ -137,8 +142,6 @@ namespace ConsoleUI
                                 DalObject.DalObject.DroneCharged(DrID,statID);
                                 break;
                         }
-
-
                         break;
                     case option.PRINT:
                         Console.WriteLine("You chose to print an entity.\n");
@@ -197,6 +200,8 @@ namespace ConsoleUI
                         }
                         break;
                 };
+                Console.WriteLine("To add an entity please press 1\nTo update an entity please press 2\nTo print an entity please press 3\nTo print a list please press 4\nTo exit please press 0\n");
+                options = (option)int.Parse(Console.ReadLine());
             } while (options != 0);
         }
        

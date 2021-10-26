@@ -10,11 +10,11 @@ namespace DalObject
     public class DataSource
     {
         //creation of all the list
-        internal static List<IDAL.DO.Client> ClientList; 
-        internal static List<IDAL.DO.Drone> DroneList;
-        internal static List<IDAL.DO.Parcel> ParcelList;
-        internal static List<IDAL.DO.Station> StationList;
-        internal static List<IDAL.DO.DroneCharge> DroneChargesList;
+        internal static List<IDAL.DO.Client> ClientList = new List<Client>(); 
+        internal static List<IDAL.DO.Drone> DroneList = new List<Drone>();
+        internal static List<IDAL.DO.Parcel> ParcelList = new List<Parcel>();
+        internal static List<IDAL.DO.Station> StationList = new List<Station>();
+        internal static List<IDAL.DO.DroneCharge> DroneChargesList = new List<DroneCharge>();
         static Random rand = new Random();
 
         public static int ID { get; private set; }
@@ -32,21 +32,21 @@ namespace DalObject
         static Random r = new Random();//מספר רץ
 
         // functions initializing each one of the lists
-        public static void InitializeClient(int numClient=10)
-        {            
-            for(int i=0; i<numClient; i++)
+         public static void InitializeClient(int numClient=10)
+        {
+            for (int i = 0; i < numClient; i++)
             {
                 ClientList.Add(new Client()
                 {
                     ID = rand.Next(1000000, 10000000),
                     Name = $"Client {Config.NumOfClients}",
-                    Phone= $"0{rand.Next(50, 58)} - {rand.Next(1000000, 10000000)}",
-                    //Latitude
-                    //longitude
+                    Phone = $"0{rand.Next(50, 58)} - {rand.Next(1000000, 10000000)}",
+                    Latitude = 000000,
+                    Longitude = 0000000,
 
                 });
             }
-        }
+          }
         public static void InitializeDroneChargesList(int num=1)
         {
            
@@ -65,7 +65,8 @@ namespace DalObject
             for (int i = 0; i < numDrone; i++)
             {
                 DroneList.Add(new Drone()
-                { ID = rand.Next(1000000, 10000000),
+                { 
+                    ID = rand.Next(1000000, 10000000),
                     Model = $"Nebula {i}",
                     MaxWeight = (WeightCategories)rand.Next(3),
                     Status = (DroneStatuses)rand.Next(3),
@@ -118,11 +119,12 @@ namespace DalObject
  
     public class DalObject
     {
-        DalObject() {DataSource.Initialize();}//constructor
+        public DalObject() {DataSource.Initialize();}//constructor
 
         //functions ADD
         public static void addDrone(Drone drone)// add a new drone to the dronelist
         {
+       
             DataSource.DroneList.Add(drone);
         }
         public static void addClient (Client client)
@@ -309,7 +311,8 @@ namespace DalObject
             for(int i=0;i<DataSource.StationList.Count;i++)
             {
                 if(DataSource.StationList[i].ID==stationId)
-                    {DataSource.StationList[i].ToString();
+                    {
+                    Console.WriteLine(DataSource.DroneList[i]);
                     printLong(DataSource.StationList[i].Longitude);
                     printLat(DataSource.StationList[i].Latitude);
                     break;}
@@ -320,7 +323,8 @@ namespace DalObject
             for(int i=0; i<DataSource.DroneList.Count; i++)
             {
                 if(DataSource.DroneList[i].ID==droneId)
-                { DataSource.DroneList[i].ToString();
+                {
+                    Console.WriteLine(DataSource.DroneList[i]);
                 break;
                 }
 
@@ -332,7 +336,7 @@ namespace DalObject
             {
                 if(DataSource.ClientList[i].ID==clientId)
                     {
-                    DataSource.ClientList[i].ToString();
+                    Console.WriteLine(DataSource.DroneList[i]);
                     printLong(DataSource.ClientList[i].Longitude);
                     printLat(DataSource.ClientList[i].Latitude);
                     break;
@@ -347,7 +351,7 @@ namespace DalObject
             {
                 if (DataSource.ParcelList[i].ID == ParcelId)
                 {
-                    DataSource.ParcelList[i].ToString();
+                    Console.WriteLine(DataSource.DroneList[i]);
                     break;
                 }
             }
