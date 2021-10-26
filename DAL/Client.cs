@@ -18,9 +18,7 @@ namespace IDAL
                 String result = "";
                 result += $"ID is {ID},\n";
                 result += $"Name is {Name},\n";
-                result += $"Phone is {Phone.Substring (0, 3)+ '-' + Phone.Substring(3)},\n";
-                result += $"Longitude is {Longitude},\n";
-                result += $"Latitude is {Latitude},\n";
+                result += $"Phone is {Phone.Substring(0, 3) + '-' + Phone.Substring(3)},\n";
                 return result;
             }
         }

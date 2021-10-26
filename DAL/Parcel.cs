@@ -30,7 +30,7 @@ namespace IDAL
                 result += $"Scheduled is {Scheduled},\n";
                 result += $"PickedUp is {PickedUp},\n";
                 result += $"Delivered is {Delivered},\n";
-
+                
                 return result;
             }
         }

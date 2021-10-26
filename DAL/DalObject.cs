@@ -26,11 +26,10 @@ namespace DalObject
         }
         internal class Config
         {
-            internal static int NumOfClients = 0;
-           static int count=0; // counter for all the products
-           
-
+            internal static int NumOfClients = 100;
+  
         }
+        static Random r = new Random();//מספר רץ
 
         // functions initializing each one of the lists
         public static void InitializeClient(int numClient=10)
@@ -165,7 +164,7 @@ namespace DalObject
         }
 
         //functions UPDATE
-        public static void GetParcelByDrone(int parcelId,int droneId)
+        public static void Assignement(int parcelId,int droneId)
         {
             IDAL.DO.Parcel p= new IDAL.DO.Parcel();
             IDAL.DO.Drone d= new IDAL.DO.Drone();
@@ -173,8 +172,9 @@ namespace DalObject
             {
                 if(item.ID==parcelId)
                 {
-                   p=item;//faire un operateur =
+                   p=item;
                     DataSource.ParcelList.Remove(item);//deletes the current item from the list, and we'll add the modified one
+                    break;
                 }
             }
            foreach( var item in DataSource.DroneList)//search in the list of Drones where the ID we received is
@@ -194,7 +194,20 @@ namespace DalObject
             addParcel(p);
       
         }
-        public static void DeliveryToClient(int parcelId)//deliver a package to a customer
+        public static void IsPickedUp(int parcelId, int droneId)
+        {
+            IDAL.DO.Parcel p = new IDAL.DO.Parcel();
+            foreach (var item in DataSource.ParcelList)//search in the list of Parcels where the ID we received is
+            {
+                if (item.ID == parcelId)
+                {
+                    p = item;
+                    DataSource.ParcelList.Remove(item);//deletes the current item from the list, and we'll add the modified one
+                }
+            }
+            p.PickedUp = DateTime.Now;// the parcel is picked up, and in delivering
+        }
+        public static void DeliveredToClient(int parcelId)//deliver a package to a customer
         {
             IDAL.DO.Parcel p= new IDAL.DO.Parcel();
             IDAL.DO.Drone d= new IDAL.DO.Drone();
@@ -217,7 +230,7 @@ namespace DalObject
                 }
             }
             p.Delivered=DateTime.Now;// time of delivering
-            p.DroneId = 123456;
+            p.DroneId = 000000;
             d.Status=DroneStatuses.free; // the drone is free
 
 
@@ -297,6 +310,8 @@ namespace DalObject
             {
                 if(DataSource.StationList[i].ID==stationId)
                     {DataSource.StationList[i].ToString();
+                    printLong(DataSource.StationList[i].Longitude);
+                    printLat(DataSource.StationList[i].Latitude);
                     break;}
             }
         }
@@ -317,7 +332,9 @@ namespace DalObject
             {
                 if(DataSource.ClientList[i].ID==clientId)
                     {
-                  DataSource.ClientList[i].ToString();
+                    DataSource.ClientList[i].ToString();
+                    printLong(DataSource.ClientList[i].Longitude);
+                    printLat(DataSource.ClientList[i].Latitude);
                     break;
                     }
 
@@ -336,6 +353,7 @@ namespace DalObject
             }
 
         }
+        //////printdronecharge
 
         //functions PRINT(entire lists)
         public static void PrintStationList ()
@@ -366,7 +384,47 @@ namespace DalObject
                 PrintParcel(DataSource.ParcelList[i].ID);
             }
         }
+        public static void printLat(double num)
+        {
+            char coordin;
+            int hours = (int)num;
+            if (hours < 0)
+            {
+                coordin = 'S';
+                num *= -1;
+                hours *= -1;
+            }
+            else coordin = 'N';
+            double minutes = (num - hours) * 60;
+            int minute = (int)minutes;
+            double second = (minutes - minute) * 600000;
+            int sec = (int)second;
+            double secs = sec / 10;
+            secs /= 1000;
 
+            Console.WriteLine("LATITUDE IS:  " + hours + "° " + minute + "' " + secs + (char)34 + " " + coordin + "\n");
+
+        }
+       public  static void printLong(double num)
+        {
+            char coordin;
+            int hours = (int)num;
+            if (hours < 0)
+            {
+                coordin = 'W';
+                num *= -1;
+                hours *= -1;
+            }
+            else coordin = 'E';
+            double minutes = (num - hours) * 60;
+            int minute = (int)minutes;
+            double second = (minutes - minute) * 600000;
+            int sec = (int)second;
+            double secs = sec / 10;
+            secs /= 100;
+            Console.WriteLine("LONGITUDE IS:  " + hours + "° " + minute + "' " + secs + (char)34 + " " + coordin + "\n");
+
+        }
     }
 
  }
