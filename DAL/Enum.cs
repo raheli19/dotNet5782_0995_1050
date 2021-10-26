@@ -6,7 +6,7 @@ namespace IDAL
     {
         public enum DroneStatuses
         {
-            free,maintenance,shipping
+            free, maintenance, shipping
         };
         public enum WeightCategories
         {
@@ -14,7 +14,7 @@ namespace IDAL
         };
         public enum Priorities
         {
-            regular,fast,emergency
+            regular, fast, emergency
         };
        
     }

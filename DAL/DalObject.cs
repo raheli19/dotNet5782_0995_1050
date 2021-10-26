@@ -409,7 +409,7 @@ namespace DalObject
             Console.WriteLine("LATITUDE IS:  " + hours + "° " + minute + "' " + secs + (char)34 + " " + coordin + "\n");
 
         }
-       public  static void printLong(double num)
+        public  static void printLong(double num)
         {
             char coordin;
             int hours = (int)num;
