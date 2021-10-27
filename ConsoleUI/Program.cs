@@ -2,7 +2,7 @@
 using IDAL.DO;
 using DAL;
 using DalObject;
-
+ 
 namespace ConsoleUI
 {
     class Program
