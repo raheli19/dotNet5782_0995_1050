@@ -16,11 +16,11 @@ namespace IDAL
             public override string ToString()
             {
                 String result = "";
-                result += $"ID is {ID},\n";
-                result += $"Model is {Model},\n";
-                result += $"MaxWeight is {MaxWeight},\n";
-                result += $"Status is {Status},\n";
-                result += $"Battery is {Battery}%,\n";
+                result += $"ID is: {ID},\n";
+                result += $"Model is: {Model},\n";
+                result += $"MaxWeight is: {MaxWeight},\n";
+                result += $"Status is: {Status},\n";
+                result += $"Battery is: {Battery}%,\n";
                 return result;
             }
         }

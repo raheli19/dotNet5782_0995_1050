@@ -2,11 +2,8 @@
 using System.Collections.Generic;
 using IDAL.DO;
 
-
-
 namespace DalObject
 {
-    
     public class DataSource
     {
         //creation of all the list
@@ -27,9 +24,10 @@ namespace DalObject
         internal class Config
         {
             internal static int NumOfClients = 100;
+            internal static int ParceId = 1000;
   
         }
-        static Random r = new Random();//מספר רץ
+        static Random r = new Random();
 
         // functions initializing each one of the lists
          public static void InitializeClient(int numClient=10)
@@ -41,15 +39,14 @@ namespace DalObject
                     ID = rand.Next(1000000, 10000000),
                     Name = $"Client {Config.NumOfClients}",
                     Phone = $"0{rand.Next(50, 58)} - {rand.Next(1000000, 10000000)}",
-                    Latitude = 000000,
-                    Longitude = 0000000,
+                    Latitude = DataSource.GetrandomCoordinate(31.37),
+                    Longitude = DataSource.GetrandomCoordinate(35.16),
 
-                });
+                }) ;
             }
           }
         public static void InitializeDroneChargesList(int num=1)
         {
-           
             for(int i=0; i<num; i++)
             {
                 DroneChargesList.Add(new DroneCharge()
@@ -61,7 +58,6 @@ namespace DalObject
         }
         public static void InitializeDrone(int numDrone = 5)
         {
-
             for (int i = 0; i < numDrone; i++)
             {
                 DroneList.Add(new Drone()
@@ -75,9 +71,9 @@ namespace DalObject
                 });
             }
         }
+        
         public static void InitializeStations (int NumStations=2)
         {
-
                 for (int i = 0; i < NumStations; i++)
                 {
                     StationList.Add(new Station()
@@ -85,26 +81,24 @@ namespace DalObject
                     Name = rand.Next(1000000,10000000),
                     Longitude = GetrandomCoordinate(26.2),
                     Latitude = GetrandomCoordinate(25.4),
-                    ChargeSlots = rand.Next(0, 101),
+                    ChargeSlots = rand.Next(0, 10),
                 });
                 }
         }
         public static void InitializeParcel(int numParcel=10)
         {
-
             for (int i = 0; i < numParcel; i++)
             {
                 ParcelList.Add(new Parcel()
                 {
-                    ID = rand.Next(1000000, 1000000),
+                    ID = Config.ParceId++,
                     SenderId = rand.Next(1000000, 1000000),
                     TargetId = rand.Next(1000000, 1000000),
                     Weight = (WeightCategories)rand.Next(3),
                     Priority = (Priorities)rand.Next(3),
                     Requested = DateTime.Now,
-                });
+                }) ;
             }
-
         }
         public static void Initialize()// intialising global function
         {
@@ -112,7 +106,6 @@ namespace DalObject
             InitializeDrone();
             InitializeParcel();
             InitializeStations();
-            
         }
     }
   
@@ -305,130 +298,70 @@ namespace DalObject
             addStation(s);
         }
 
-        //functions PRINT(one entity)
-        public static void PrintStation(int stationId)
+        public static Station StationById(int id)
         {
-            for(int i=0;i<DataSource.StationList.Count;i++)
+            for (int i = 0; i < DataSource.StationList.Count; i++)
             {
-                if(DataSource.StationList[i].ID==stationId)
-                    {
-                    Console.WriteLine(DataSource.DroneList[i]);
-                    printLong(DataSource.StationList[i].Longitude);
-                    printLat(DataSource.StationList[i].Latitude);
-                    break;}
-            }
-        }
-        public static void PrintDrone(int droneId)
-        {
-            for(int i=0; i<DataSource.DroneList.Count; i++)
-            {
-                if(DataSource.DroneList[i].ID==droneId)
+                if (DataSource.StationList[i].ID == id)
                 {
-                    Console.WriteLine(DataSource.DroneList[i]);
-                break;
-                }
-
-            }
-        }
-        public static void PrintClient(int clientId)
-        {
-            for(int i=0;i<DataSource.ClientList.Count;i++)
-            {
-                if(DataSource.ClientList[i].ID==clientId)
-                    {
-                    Console.WriteLine(DataSource.DroneList[i]);
-                    printLong(DataSource.ClientList[i].Longitude);
-                    printLat(DataSource.ClientList[i].Latitude);
-                    break;
-                    }
-
-            }
-                    
-        }
-        public static void PrintParcel(int ParcelId)
-        {
-            for(int i = 0; i < DataSource.ParcelList.Count; i++)
-            {
-                if (DataSource.ParcelList[i].ID == ParcelId)
-                {
-                    Console.WriteLine(DataSource.DroneList[i]);
-                    break;
+                    return DataSource.StationList[i];
                 }
             }
+            return new Station();
+        }
 
+        public static Drone DroneById(int id)
+        {
+            for (int i = 0; i < DataSource.DroneList.Count; i++)
+            {
+                if (DataSource.DroneList[i].ID == id)
+                {
+                    return DataSource.DroneList[i];
+                }
+            }
+            return new Drone();
         }
-        //////printdronecharge
 
-        //functions PRINT(entire lists)
-        public static void PrintStationList ()
+        public static Client ClientById(int id)
         {
-            for(int i=0; i< DataSource.StationList.Count; i++)
+            for (int i = 0; i < DataSource.ClientList.Count; i++)
             {
-               PrintStation( DataSource.StationList[i].ID);
+                if (DataSource.ClientList[i].ID == id)
+                {
+                    return DataSource.ClientList[i];
+                }
             }
+            return new Client();
         }
-        public static void PrintDroneList()
-        {
-            for(int i=0; i< DataSource.DroneList.Count; i++)
-            {
-                PrintDrone(DataSource.DroneList[i].ID);
-            }
-        }
-        public static void PrintClientList()
-        {
-            for(int i=0; i<DataSource.ClientList.Count; i++)
-            {
-                PrintClient(DataSource.ClientList[i].ID);
-            }
-        }
-        public static void PrintParcelList()
-        {
-            for(int i=0; i<DataSource.ParcelList.Count; i++)
-            {
-                PrintParcel(DataSource.ParcelList[i].ID);
-            }
-        }
-        public static void printLat(double num)
-        {
-            char coordin;
-            int hours = (int)num;
-            if (hours < 0)
-            {
-                coordin = 'S';
-                num *= -1;
-                hours *= -1;
-            }
-            else coordin = 'N';
-            double minutes = (num - hours) * 60;
-            int minute = (int)minutes;
-            double second = (minutes - minute) * 600000;
-            int sec = (int)second;
-            double secs = sec / 10;
-            secs /= 1000;
 
-            Console.WriteLine("LATITUDE IS:  " + hours + "° " + minute + "' " + secs + (char)34 + " " + coordin + "\n");
-
-        }
-        public  static void printLong(double num)
+        public static Parcel ParcelById(int id)
         {
-            char coordin;
-            int hours = (int)num;
-            if (hours < 0)
+            for (int i = 0; i < DataSource.ParcelList.Count; i++)
             {
-                coordin = 'W';
-                num *= -1;
-                hours *= -1;
+                if (DataSource.ParcelList[i].ID == id)
+                {
+                    return DataSource.ParcelList[i];
+                }
             }
-            else coordin = 'E';
-            double minutes = (num - hours) * 60;
-            int minute = (int)minutes;
-            double second = (minutes - minute) * 600000;
-            int sec = (int)second;
-            double secs = sec / 10;
-            secs /= 100;
-            Console.WriteLine("LONGITUDE IS:  " + hours + "° " + minute + "' " + secs + (char)34 + " " + coordin + "\n");
+            return new Parcel();
+        }
 
+
+        public static List<Station> StationList()
+        {
+            return DataSource.StationList;
+        }
+        public static List<Drone> DroneList()
+        {
+            return DataSource.DroneList;
+        }
+        public static List<Client> ClientList()
+        {
+            return DataSource.ClientList;
+        }
+        public static List<Parcel> ParcelList()
+        {
+            return DataSource.ParcelList;
         }
     }
-
- }
+}
