@@ -17,10 +17,19 @@ namespace DalObject
         public static int ID { get; private set; }
         public static int DroneId { get; private set; }
 
+        /// <summary>
+        /// The function return random coordinates
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
         public static Double GetrandomCoordinate(double x)
         {
             return x + rand.NextDouble() /10;
         }
+
+        /// <summary>
+        /// Continue static number
+        /// </summary>
         internal class Config
         {
             internal static int NumOfClients = 100;
@@ -29,8 +38,11 @@ namespace DalObject
         }
         static Random r = new Random();
 
-        // functions initializing each one of the lists
-         public static void InitializeClient(int numClient=10)
+        /// <summary>
+        /// function initializing a client
+        /// </summary>
+        /// <param name="numClient"></param>
+        public static void InitializeClient(int numClient=10)
         {
             for (int i = 0; i < numClient; i++)
             {
@@ -45,6 +57,10 @@ namespace DalObject
                 }) ;
             }
           }
+        /// <summary>
+        /// function initializing a droneCharge
+        /// </summary>
+        /// <param name="num"></param>
         public static void InitializeDroneChargesList(int num=1)
         {
             for(int i=0; i<num; i++)
@@ -56,6 +72,11 @@ namespace DalObject
                 });
             }
         }
+
+        /// <summary>
+        /// function initializing a drone
+        /// </summary>
+        /// <param name="numDrone"></param>
         public static void InitializeDrone(int numDrone = 5)
         {
             for (int i = 0; i < numDrone; i++)
@@ -71,7 +92,11 @@ namespace DalObject
                 });
             }
         }
-        
+
+        /// <summary>
+        /// function initializing a station
+        /// </summary>
+        /// <param name="NumStations"></param>
         public static void InitializeStations (int NumStations=2)
         {
                 for (int i = 0; i < NumStations; i++)
@@ -85,6 +110,11 @@ namespace DalObject
                 });
                 }
         }
+
+        /// <summary>
+        /// function initializing a parcel
+        /// </summary>
+        /// <param name="numParcel"></param>
         public static void InitializeParcel(int numParcel=10)
         {
             for (int i = 0; i < numParcel; i++)
@@ -100,6 +130,11 @@ namespace DalObject
                 }) ;
             }
         }
+
+
+        /// <summary>
+        /// Initialize all the entities
+        /// </summary>
         public static void Initialize()// intialising global function
         {
             InitializeClient();
@@ -136,11 +171,13 @@ namespace DalObject
         {
             DataSource.DroneChargesList.Add(dc);
         }
+
+        /// <summary>
+        /// Function which associate a parcel to a drone by its id
+        /// </summary>
+        /// <param name="parcel"></param>
         public static void AddParcelToDrone(Parcel parcel) // associate a parcel to a drone
         {
-            // passer sur la liste
-            //cherceh un free
-            // si y en a pas, regarde ceux qui sont chargés?????????
             int droneId=0;
             IDAL.DO.Drone d = new IDAL.DO.Drone();
             foreach( var item in DataSource.DroneList)
@@ -159,6 +196,12 @@ namespace DalObject
         }
 
         //functions UPDATE
+
+        /// <summary>
+        /// Function which assigns a parcelto a drone
+        /// </summary>
+        /// <param name="parcelId"></param>
+        /// <param name="droneId"></param>
         public static void Assignement(int parcelId,int droneId)
         {
             IDAL.DO.Parcel p= new IDAL.DO.Parcel();
@@ -189,6 +232,12 @@ namespace DalObject
             addParcel(p);
       
         }
+
+        /// <summary>
+        /// To pick a parcel contained in a drone and update their statuses
+        /// </summary>
+        /// <param name="parcelId"></param>
+        /// <param name="droneId"></param>
         public static void IsPickedUp(int parcelId, int droneId)
         {
             IDAL.DO.Parcel p = new IDAL.DO.Parcel();
@@ -202,6 +251,11 @@ namespace DalObject
             }
             p.PickedUp = DateTime.Now;// the parcel is picked up, and in delivering
         }
+
+        /// <summary>
+        /// To deliver a package to a customer
+        /// </summary>
+        /// <param name="parcelId"></param>
         public static void DeliveredToClient(int parcelId)//deliver a package to a customer
         {
             IDAL.DO.Parcel p= new IDAL.DO.Parcel();
@@ -227,10 +281,13 @@ namespace DalObject
             p.Delivered=DateTime.Now;// time of delivering
             p.DroneId = 000000;
             d.Status=DroneStatuses.free; // the drone is free
-
-
         }
         
+        /// <summary>
+        /// Lead a drone to a station of chargement
+        /// </summary>
+        /// <param name="droneId"></param>
+        /// <param name="stationId"></param>
         public static void DroneToCharge(int droneId,int stationId)
         {
             IDAL.DO.Drone d= new IDAL.DO.Drone();
@@ -263,6 +320,12 @@ namespace DalObject
             addDroneCharge(DC);// add the linked thing to the list
            
         }
+
+        /// <summary>
+        /// The drone has finished charging. We need to let it go
+        /// </summary>
+        /// <param name="droneId"></param>
+        /// <param name="stationId"></param>
         public static void DroneCharged(int droneId, int stationId)
         {
             foreach(var item in DataSource.DroneChargesList)
@@ -298,6 +361,11 @@ namespace DalObject
             addStation(s);
         }
 
+        /// <summary>
+        /// Receives an id and returns the station which contains this ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public static Station StationById(int id)
         {
             for (int i = 0; i < DataSource.StationList.Count; i++)
@@ -310,6 +378,11 @@ namespace DalObject
             return new Station();
         }
 
+        /// <summary>
+        /// Receives an id and returns the drone which contains this ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public static Drone DroneById(int id)
         {
             for (int i = 0; i < DataSource.DroneList.Count; i++)
@@ -322,6 +395,11 @@ namespace DalObject
             return new Drone();
         }
 
+        /// <summary>
+        /// Receives an id and returns the client which contains this ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public static Client ClientById(int id)
         {
             for (int i = 0; i < DataSource.ClientList.Count; i++)
@@ -334,6 +412,11 @@ namespace DalObject
             return new Client();
         }
 
+        /// <summary>
+        /// Receives an id and returns the parcel which contains this ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public static Parcel ParcelById(int id)
         {
             for (int i = 0; i < DataSource.ParcelList.Count; i++)
@@ -346,19 +429,37 @@ namespace DalObject
             return new Parcel();
         }
 
-
+        /// <summary>
+        /// Returns the stations' list
+        /// </summary>
+        /// <returns></returns>
         public static List<Station> StationList()
         {
             return DataSource.StationList;
         }
+
+        /// <summary>
+        /// Returns the drones' list
+        /// </summary>
+        /// <returns></returns>
         public static List<Drone> DroneList()
         {
             return DataSource.DroneList;
         }
+
+        /// <summary>
+        /// Returns the clients' list
+        /// </summary>
+        /// <returns></returns>
         public static List<Client> ClientList()
         {
             return DataSource.ClientList;
         }
+
+        /// <summary>
+        /// Returns the parcels' list
+        /// </summary>
+        /// <returns></returns>
         public static List<Parcel> ParcelList()
         {
             return DataSource.ParcelList;
