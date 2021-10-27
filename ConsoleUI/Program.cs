@@ -16,7 +16,7 @@ namespace ConsoleUI
             option options;
             entities entity;
             Console.WriteLine("Welcome to our Nebula Drone delivery System!\n");
-            Console.WriteLine("To add an entity please press 1\nTo update an entity please press 2\nTo print an entity please press 3\nTo print a list please press 4\nTo exit please press 0\n");
+            Console.WriteLine("To add an entity please press 1\nTo update an entity please press 2\nTo print an entity please press 3\nTo print a list please press 4\nTo exit please press 0:");
             options = (option)int.Parse(Console.ReadLine());
             do
             {
@@ -25,7 +25,7 @@ namespace ConsoleUI
                 {
                     case option.ADD:
                             Console.WriteLine("You chose to add an entity.\n ");
-                            Console.WriteLine("To add a Station please press 1,\nTo add a drone please press 2,\nTo add a Client please press 3,\nTo add a Parcel please press 4\n To exit please press 0\n");
+                            Console.WriteLine("To add a Station please press 1,\nTo add a drone please press 2,\nTo add a Client please press 3,\nTo add a Parcel please press 4\nTo exit please press 0:");
                             entity = (entities)int.Parse(Console.ReadLine());
                             switch (entity)
                             {
@@ -36,7 +36,7 @@ namespace ConsoleUI
                                 IDAL.DO.Station myStation = new IDAL.DO.Station();
                                 int myId;
                                 int myName;
-                                Console.WriteLine("You chose to add a Station,\n Please enter its Id, name, longitude, latitude:\n");
+                                Console.WriteLine("You chose to add a Station,\n Please enter its Id, name, longitude, latitude:");
                                 myId = int.Parse(Console.ReadLine());
                                 myName = int.Parse(Console.ReadLine());
                                 double.TryParse(Console.ReadLine(), out double myLongitude);
@@ -49,7 +49,7 @@ namespace ConsoleUI
 
                             case entities.DRONE:
                                 IDAL.DO.Drone myDrone = new IDAL.DO.Drone();
-                                Console.WriteLine("You chose to add a Drone,\nPlease enter its ID, Model, MaxWeight, Status, Battery:\n");
+                                Console.WriteLine("You chose to add a Drone,\nPlease enter its ID, Model, MaxWeight, Status, Battery:");
                                 int.TryParse(Console.ReadLine(), out int DID); //DroneID
                                 string myModel;
                                 myModel = Console.ReadLine();
@@ -64,7 +64,7 @@ namespace ConsoleUI
 
                             case entities.PARCEL:
                                 IDAL.DO.Parcel myParcel = new Parcel();
-                                Console.WriteLine("You chose to add a Parcel,\n Please enter its ID, SenderId, TargetId, MaxWeight, Priority, Requested time, DroneId:\n");
+                                Console.WriteLine("You chose to add a Parcel,\n Please enter its ID, SenderId, TargetId, MaxWeight, Priority, Requested time, DroneId:");
                                 int.TryParse(Console.ReadLine(), out int PID);// ParcelID
                                 int.TryParse(Console.ReadLine(), out int senderId);
                                 int.TryParse(Console.ReadLine(), out int targetId);
