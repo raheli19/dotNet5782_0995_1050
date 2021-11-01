@@ -36,6 +36,7 @@ namespace DalObject
             internal static WeightCategories light;
             internal static WeightCategories middle;
             internal static WeightCategories heavy;
+            internal static int charging; // chargement % per hour
   
         }
         static Random r = new Random();
@@ -148,7 +149,7 @@ namespace DalObject
   
  
     public class DalObject :IDAL.IDal
-    {
+        {
         public DalObject() {DataSource.Initialize();}//constructor
 
         //functions ADD
@@ -208,15 +209,22 @@ namespace DalObject
         {
             IDAL.DO.Parcel p= new IDAL.DO.Parcel();
             IDAL.DO.Drone d= new IDAL.DO.Drone();
+            bool flag= false;
            foreach( var item in DataSource.ParcelList)//search in the list of Parcels where the ID we received is
-            {
+           {
                 if(item.ID==parcelId)
                 {
                    p=item;
                     DataSource.ParcelList.Remove(item);//deletes the current item from the list, and we'll add the modified one
+                    flag = true; // we found it
                     break;
                 }
+           }
+           if(flag==false)
+            {
+                throw new ParcelException("parcel not found")
             }
+              
            foreach( var item in DataSource.DroneList)//search in the list of Drones where the ID we received is
             {
                 if(item.ID==droneId)
