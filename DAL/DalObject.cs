@@ -32,8 +32,10 @@ namespace DalObject
         /// </summary>
         internal class Config
         {
-            internal static int NumOfClients = 100;
-            internal static int ParceId = 1000;
+            internal static bool statut;/// 1 if free, 0 if not
+            internal static WeightCategories light;
+            internal static WeightCategories middle;
+            internal static WeightCategories heavy;
   
         }
         static Random r = new Random();
