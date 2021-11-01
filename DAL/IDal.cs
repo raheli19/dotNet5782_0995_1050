@@ -9,27 +9,27 @@ namespace IDAL
 {
     public interface IDal
     {
-        public void AddDrone(Drone drone);// add a new drone to the dronelist
+        void AddDrone(Drone drone);// add a new drone to the dronelist
 
-        public void addClient(Client client);
+        void addClient(Client client);
 
-        public void addStation(Station station);
+         void addStation(Station station);
 
-        public void addParcel(Parcel parcel);
+        void addParcel(Parcel parcel);
 
-        public void addDroneCharge(DroneCharge dc);
+         void addDroneCharge(DroneCharge dc);
 
-        public void AddParcelToDrone(Parcel parcel); // associate a parcel to a drone
+         void AddParcelToDrone(Parcel parcel); // associate a parcel to a drone
 
-        public void Assignement(int parcelId, int droneId);
+        void Assignement(int parcelId, int droneId);
 
-        public void IsPickedUp(int parcelId, int droneId);
+       void IsPickedUp(int parcelId, int droneId);
 
-        public void DeliveredToClient(int parcelId);//deliver a package to a customer
+        void DeliveredToClient(int parcelId);//deliver a package to a customer
 
-        public void DroneToCharge(int droneId, int stationId);
+         void DroneToCharge(int droneId, int stationId);
 
-        public void DroneCharged(int droneId, int stationId);
+         void DroneCharged(int droneId, int stationId);
 
         Station StationById(int id);
         Drone DroneById(int id);

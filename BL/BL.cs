@@ -4,7 +4,11 @@ using System.Text;
 
 namespace BL
 {
-    class BL
+    public class BL
     {
+        public BL() {; }
+
+
+
     }
 }
