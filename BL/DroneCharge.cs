@@ -2,19 +2,22 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BL
+namespace IBL
 {
-    class DroneCharge
+    namespace BO
     {
-        public int DroneId { get; set; }
-        public int StationId { get; set; }
-        public override string ToString()
+        class DroneCharge
         {
-            String result = "";
-            result += $"DroneId is: {DroneId},\n";
-            result += $"StationId is: {StationId},\n";
+            public int DroneId { get; set; }
+            public int StationId { get; set; }
+            public override string ToString()
+            {
+                String result = "";
+                result += $"DroneId is: {DroneId},\n";
+                result += $"StationId is: {StationId},\n";
 
-            return result;
+                return result;
+            }
         }
     }
 }

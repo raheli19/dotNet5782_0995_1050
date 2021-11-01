@@ -183,18 +183,24 @@ namespace DalObject
         {
             int droneId=0;
             IDAL.DO.Drone d = new IDAL.DO.Drone();
+            bool flag = false;
             foreach( var item in DataSource.DroneList)
             {
                 if(item.Status== DroneStatuses.free)
                 {
                     d = item;
                     droneId= item.ID;// save the id of the drone
+                    flag = true;
                     DataSource.DroneList.Remove(item);
                     break;
                 }
             }
-            d.Status = DroneStatuses.shipping; // the drone is shipping
-            addDrone(d);
+            if (flag == false)
+            {
+                throw new DroneException("drone not found");
+            }
+            
+            AddDrone(d);
             parcel.DroneId= droneId;// assigns the id of the drone to the parcel
         }
 
@@ -209,7 +215,7 @@ namespace DalObject
         {
             IDAL.DO.Parcel p= new IDAL.DO.Parcel();
             IDAL.DO.Drone d= new IDAL.DO.Drone();
-            bool flag= false;
+            bool flag = false, flag2 = false;
            foreach( var item in DataSource.ParcelList)//search in the list of Parcels where the ID we received is
            {
                 if(item.ID==parcelId)
@@ -222,7 +228,7 @@ namespace DalObject
            }
            if(flag==false)
             {
-                throw new ParcelException("parcel not found")
+                throw new ParcelException("parcel not found");
             }
               
            foreach( var item in DataSource.DroneList)//search in the list of Drones where the ID we received is
@@ -231,14 +237,18 @@ namespace DalObject
                 {
                    d=item;
                   DataSource.DroneList.Remove(item);// deletes the current item from the list, and we'll add the modified one
+                    flag2 = true;
                     break;
                 }
             }
-           d.Status=DroneStatuses.shipping;
+            if (flag2 == false)
+            {
+                throw new DroneException("drone not found");
+            }
            p.DroneId=d.ID;
            p.Requested=DateTime.Now;
             // add the modified items into their lists
-            addDrone(d);
+            AddDrone(d);
             addParcel(p);
       
         }
@@ -251,13 +261,19 @@ namespace DalObject
         public void IsPickedUp(int parcelId, int droneId)
         {
             IDAL.DO.Parcel p = new IDAL.DO.Parcel();
+            bool flag = false;
             foreach (var item in DataSource.ParcelList)//search in the list of Parcels where the ID we received is
             {
                 if (item.ID == parcelId)
                 {
                     p = item;
+                    flag = true;
                     DataSource.ParcelList.Remove(item);//deletes the current item from the list, and we'll add the modified one
                 }
+            }
+            if (flag == false)
+            {
+                throw new ParcelException("parcel not found");
             }
             p.PickedUp = DateTime.Now;// the parcel is picked up, and in delivering
         }
@@ -270,27 +286,39 @@ namespace DalObject
         {
             IDAL.DO.Parcel p= new IDAL.DO.Parcel();
             IDAL.DO.Drone d= new IDAL.DO.Drone();
+            bool flag = false, flag2 = false;
             foreach( var item in DataSource.ParcelList)//search in the list of Parcels where the ID we received is
             {
                 if(item.ID==parcelId)
                 {
+                    flag = true;
                     p=item;// save the current item
                     DataSource.ParcelList.Remove(item);//deletes the current item from the list, and we'll add the modified one
                     break;
                 }
             }
+            if (flag == false)
+            {
+                throw new ParcelException("parcel not found");
+            }
+
             foreach( var item in DataSource.DroneList)//search in the list of Drones where the ID we received is
             {
                 if(item.ID==p.DroneId)
                 {
+                    flag2 = true;
                     d=item;
                     DataSource.DroneList.Remove(item);// remove it from the list
                     break;
                 }
             }
+            if (flag2 == false)
+            {
+                throw new DroneException("drone not found");
+            }
             p.Delivered=DateTime.Now;// time of delivering
             p.DroneId = 000000;
-            d.Status=DroneStatuses.free; // the drone is free
+            //d.Status=DroneStatuses.free; // the drone is free
         }
         
         /// <summary>
@@ -301,26 +329,38 @@ namespace DalObject
         public void DroneToCharge(int droneId,int stationId)
         {
             IDAL.DO.Drone d= new IDAL.DO.Drone();
+            bool flag = false,flag2=false;
             for( int i=0; i<DataSource.DroneList.Count; i++)
             {
                 if(DataSource.DroneList[i].ID==droneId)
                 {
+                    flag = true;
                     d = DataSource.DroneList[i];
                     DataSource.DroneList.Remove(DataSource.DroneList[i]);
                     break;
                 }
             }
-            d.Status = DroneStatuses.maintenance;// plug in the drone to charge
-            addDrone(d);// add it back to the list
+            if (flag == false)
+            {
+                    throw new DroneException("drone not found");
+                
+            }
+            //d.Status = DroneStatuses.maintenance;// plug in the drone to charge
+            AddDrone(d);// add it back to the list
             IDAL.DO.Station s = new IDAL.DO.Station();
             for(int i=0; i<DataSource.StationList.Count; i++)
             {
                  if(DataSource.StationList[i].ID==stationId)
                  {
+                    flag2 = true;
                     s = DataSource.StationList[i];
                     DataSource.StationList.Remove(DataSource.StationList[i]);
                     break;
                  }
+            }
+            if (flag2 == false)
+            {
+                throw new StationException("parcel not found");
             }
             s.ChargeSlots--;// a slot if occupied by the new drone
             addStation(s);
@@ -338,34 +378,62 @@ namespace DalObject
         /// <param name="stationId"></param>
         public void DroneCharged(int droneId, int stationId)
         {
+            bool flag = false, flag2 = false;
             foreach(var item in DataSource.DroneChargesList)
             {
-                if(item.DroneId==droneId && item.StationId==stationId)
+                if (item.DroneId == droneId) {
+                    flag = true;
+                    if (item.StationId == stationId)
                 {
-                    DataSource.DroneChargesList.Remove(item);// delete the item; the drone is not charging anymore
+                        flag2 = true;
+                        DataSource.DroneChargesList.Remove(item);// delete the item; the drone is not charging anymore
                 }
+                }
+
             }
+
+            if (flag == false)
+            {
+                throw new DroneException("drone not found");
+            }
+            if (flag2 == false)
+            {
+                throw new StationException("station not found");
+            }
+            bool flag3 = false;
             IDAL.DO.Drone d = new IDAL.DO.Drone();
             for (int i=0; i<DataSource.DroneList.Count; i++)
             {
                 if(DataSource.DroneList[i].ID==droneId)
                 {
+                    flag3 = true;
                      d= DataSource.DroneList[i];// the drone is charged; he's free for shipping
                     DataSource.DroneList.Remove(DataSource.DroneList[i]);
                     break;
                 }
-                d.Status = DroneStatuses.free;
-                addDrone(d);
+                
             }
+            if (flag3 == false)
+            {
+                throw new DroneException("drone not found");
+            }
+            bool flag4 = false;
+            //d.Status = DroneStatuses.free;
+            AddDrone(d);
             IDAL.DO.Station s = new IDAL.DO.Station();
             for (int i = 0; i < DataSource.StationList.Count; i++)
             {
                 if (DataSource.StationList[i].ID == stationId)
                 {
+                    flag4 = true;
                     s = DataSource.StationList[i];
                     DataSource.StationList.Remove(DataSource.StationList[i]);
                     break;
                 }
+            }
+            if (flag4 == false)
+            {
+                throw new StationException("station not found");
             }
             s.ChargeSlots++;// one is free from the charged drone
             addStation(s);
@@ -378,14 +446,20 @@ namespace DalObject
         /// <returns></returns>
         public Station StationById(int id)
         {
-            for (int i = 0; i < DataSource.StationList.Count; i++)
+            Station? temp = null;
+            foreach (Station s in DataSource.StationList)
             {
-                if (DataSource.StationList[i].ID == id)
+                if (s.ID == id)
                 {
-                    return DataSource.StationList[i];
+                    temp = s;
+                    break;
                 }
             }
-            return new Station();
+            if (temp == null)
+            {
+                throw new StationException("station not found");
+            }
+            return (Station)temp;
         }
 
         /// <summary>
@@ -395,14 +469,20 @@ namespace DalObject
         /// <returns></returns>
         public Drone DroneById(int id)
         {
-            for (int i = 0; i < DataSource.DroneList.Count; i++)
+            Drone? temp = null;
+            foreach (Drone d in DataSource.DroneList)
             {
-                if (DataSource.DroneList[i].ID == id)
+                if (d.ID == id)
                 {
-                    return DataSource.DroneList[i];
+                    temp = d;
+                    break;
                 }
             }
-            return new Drone();
+            if (temp == null)
+            {
+                throw new DroneException("drone not found");
+            }
+            return (Drone)temp;
         }
 
         /// <summary>
@@ -412,14 +492,20 @@ namespace DalObject
         /// <returns></returns>
         public Client ClientById(int id)
         {
-            for (int i = 0; i < DataSource.ClientList.Count; i++)
+            Client? temp = null;
+            foreach (Client c in DataSource.ClientList)
             {
-                if (DataSource.ClientList[i].ID == id)
+                if (c.ID == id)
                 {
-                    return DataSource.ClientList[i];
+                    temp = c;
+                    break;
                 }
             }
-            return new Client();
+            if (temp == null)
+            {
+                throw new ClientException("client not found");
+            }
+            return (Client)temp;
         }
 
         /// <summary>
@@ -429,14 +515,20 @@ namespace DalObject
         /// <returns></returns>
         public Parcel ParcelById(int id)
         {
-            for (int i = 0; i < DataSource.ParcelList.Count; i++)
+            Parcel? temp = null;
+            foreach (Parcel p in DataSource.ParcelList)
             {
-                if (DataSource.ParcelList[i].ID == id)
+                if (p.ID == id)
                 {
-                    return DataSource.ParcelList[i];
+                    temp = p;
+                    break;
                 }
             }
-            return new Parcel();
+            if (temp == null)
+            {
+                throw new ParcelException("parcel not found");
+            }
+            return (Parcel)temp;
         }
 
         /// <summary>
