@@ -85,8 +85,8 @@ namespace DalObject
                 { 
                     ID = rand.Next(1000000, 10000000),
                     Model = $"Nebula {i}",
-                    MaxWeight = (WeightCategories)rand.Next(3),
-                    Status = (DroneStatuses)rand.Next(3),
+                    //MaxWeight = (WeightCategories)rand.Next(3),
+                    //Status = (DroneStatuses)rand.Next(3),
                     Battery = rand.Next(0, 101),
 
                 });
@@ -145,29 +145,29 @@ namespace DalObject
     }
   
  
-    public class DalObject
+    public class DalObject :IDAL.IDal
     {
         public DalObject() {DataSource.Initialize();}//constructor
 
         //functions ADD
-        public static void addDrone(Drone drone)// add a new drone to the dronelist
+        public void AddDrone(Drone drone)// add a new drone to the dronelist
         {
        
             DataSource.DroneList.Add(drone);
         }
-        public static void addClient (Client client)
+         public void addClient (Client client)
         {
             DataSource.ClientList.Add(client);
         }
-        public static void addStation(Station station)
+        public void addStation(Station station)
         {
             DataSource.StationList.Add(station);
         }
-        public static void addParcel(Parcel parcel)
+        public void addParcel(Parcel parcel)
         {
             DataSource.ParcelList.Add(parcel);
         }
-        public static void addDroneCharge(DroneCharge dc)
+        public void addDroneCharge(DroneCharge dc)
         {
             DataSource.DroneChargesList.Add(dc);
         }
@@ -176,7 +176,7 @@ namespace DalObject
         /// Function which associate a parcel to a drone by its id
         /// </summary>
         /// <param name="parcel"></param>
-        public static void AddParcelToDrone(Parcel parcel) // associate a parcel to a drone
+        public void AddParcelToDrone(Parcel parcel) // associate a parcel to a drone
         {
             int droneId=0;
             IDAL.DO.Drone d = new IDAL.DO.Drone();
@@ -202,7 +202,7 @@ namespace DalObject
         /// </summary>
         /// <param name="parcelId"></param>
         /// <param name="droneId"></param>
-        public static void Assignement(int parcelId,int droneId)
+        public void Assignement(int parcelId,int droneId)
         {
             IDAL.DO.Parcel p= new IDAL.DO.Parcel();
             IDAL.DO.Drone d= new IDAL.DO.Drone();
@@ -238,7 +238,7 @@ namespace DalObject
         /// </summary>
         /// <param name="parcelId"></param>
         /// <param name="droneId"></param>
-        public static void IsPickedUp(int parcelId, int droneId)
+        public void IsPickedUp(int parcelId, int droneId)
         {
             IDAL.DO.Parcel p = new IDAL.DO.Parcel();
             foreach (var item in DataSource.ParcelList)//search in the list of Parcels where the ID we received is
@@ -256,7 +256,7 @@ namespace DalObject
         /// To deliver a package to a customer
         /// </summary>
         /// <param name="parcelId"></param>
-        public static void DeliveredToClient(int parcelId)//deliver a package to a customer
+        public void DeliveredToClient(int parcelId)//deliver a package to a customer
         {
             IDAL.DO.Parcel p= new IDAL.DO.Parcel();
             IDAL.DO.Drone d= new IDAL.DO.Drone();
@@ -288,7 +288,7 @@ namespace DalObject
         /// </summary>
         /// <param name="droneId"></param>
         /// <param name="stationId"></param>
-        public static void DroneToCharge(int droneId,int stationId)
+        public void DroneToCharge(int droneId,int stationId)
         {
             IDAL.DO.Drone d= new IDAL.DO.Drone();
             for( int i=0; i<DataSource.DroneList.Count; i++)
@@ -326,7 +326,7 @@ namespace DalObject
         /// </summary>
         /// <param name="droneId"></param>
         /// <param name="stationId"></param>
-        public static void DroneCharged(int droneId, int stationId)
+        public void DroneCharged(int droneId, int stationId)
         {
             foreach(var item in DataSource.DroneChargesList)
             {
@@ -366,7 +366,7 @@ namespace DalObject
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public static Station StationById(int id)
+        public Station StationById(int id)
         {
             for (int i = 0; i < DataSource.StationList.Count; i++)
             {
@@ -383,7 +383,7 @@ namespace DalObject
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public static Drone DroneById(int id)
+        public Drone DroneById(int id)
         {
             for (int i = 0; i < DataSource.DroneList.Count; i++)
             {
@@ -400,7 +400,7 @@ namespace DalObject
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public static Client ClientById(int id)
+        public Client ClientById(int id)
         {
             for (int i = 0; i < DataSource.ClientList.Count; i++)
             {
@@ -417,7 +417,7 @@ namespace DalObject
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public static Parcel ParcelById(int id)
+        public Parcel ParcelById(int id)
         {
             for (int i = 0; i < DataSource.ParcelList.Count; i++)
             {
@@ -433,36 +433,40 @@ namespace DalObject
         /// Returns the stations' list
         /// </summary>
         /// <returns></returns>
-        public static List<Station> StationList()
+        public IEnumerable<Station> StationList()
         {
-            return DataSource.StationList;
+            List<Station> StationList = new List<Station>();
+            return StationList;
         }
 
         /// <summary>
         /// Returns the drones' list
         /// </summary>
         /// <returns></returns>
-        public static List<Drone> DroneList()
+        public IEnumerable<Drone> DroneList()
         {
-            return DataSource.DroneList;
+            List<Drone> DroneList = new List<Drone>();
+            return DroneList;
         }
 
         /// <summary>
         /// Returns the clients' list
         /// </summary>
         /// <returns></returns>
-        public static List<Client> ClientList()
+        public IEnumerable <Client> ClientList()
         {
-            return DataSource.ClientList;
+            List<Client> ClientList = new List<Client>();
+            return ClientList;
         }
 
         /// <summary>
         /// Returns the parcels' list
         /// </summary>
         /// <returns></returns>
-        public static List<Parcel> ParcelList()
+        public IEnumerable <Parcel> ParcelList()
         {
-            return DataSource.ParcelList;
+            List<Parcel> ParcelList = new List<Parcel>();
+            return ParcelList;
         }
     }
 }
