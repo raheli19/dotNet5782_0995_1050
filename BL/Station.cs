@@ -6,13 +6,13 @@ namespace IBL
 {
     namespace BO
     {
-        class Station
+        public class Station
         {
             public int ID { get; set; }
             public int Name { get; set; }
-            public double Longitude { get; set; }
-            public double Latitude { get; set; }
+            public Localisation loc { get; set; }
             public int ChargeSlots { get; set; }
+            public List <Drone> DroneCharging= new List<Drone>();
             public override string ToString()
             {
                 String result = "";

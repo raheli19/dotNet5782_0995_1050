@@ -21,7 +21,35 @@ namespace IBL
 
         //functions UPDATE
 
-        void updateDrone(Drone d);
+        void updateDrone(int Id,string newName);
+
+        void updateStation(int Id, int newName=-1,int newCS=-1);
+
+        void updateClient(int Id, string newName =" ", string newTel=" ");
+
+        void DroneToCharge(int DroneId);
+
+        void DroneCharged(int DroneId,double timeInCharge);
+
+        void Assignement(int DroneId);
+
+        void PickedUp(int DroneId);
+
+        void delivered(int DroneId);
+
+
+        //functions print
+
+        void printStation();
+        void printDrone();
+        void printClient();
+        void printParcel();
+        void printStationList();
+        void printDroneList();
+        void printClientList();
+        void printParcelList();
+        void printParcelsNotAssigned();
+        void printFreeStations();
 
     }
 }

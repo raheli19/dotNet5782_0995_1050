@@ -11,8 +11,10 @@ namespace IBL
             public int ID { get; set; }
             public String Model { get; set; }
             public WeightCategories MaxWeight { get; set; } // à construire
-            // public DroneStatuses Status { get; set; }
+            public DroneStatuses Status { get; set; }
             public double Battery { get; set; }
+            
+            //public Parcel myParcel{get;set;}
             public override string ToString()
             {
                 String result = "";
