@@ -7,7 +7,7 @@ using IBL.BO;
 
 namespace IBL
 {
-    interface IBL
+    public interface IBL
     {
         //using functions
         Drone DroneById(int id);

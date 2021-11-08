@@ -10,6 +10,7 @@ namespace IBL
         public class Localisation
         {
             public double longitude { get; set; }
+            public double latitude { get; set; }
         }
 
     }

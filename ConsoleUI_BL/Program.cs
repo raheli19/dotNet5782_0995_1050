@@ -1,22 +1,21 @@
 ﻿using System;
-using IDAL.DO;
-using DAL;
-using DalObject;
+using IBL.BO;
+using BL;
 
- 
-namespace ConsoleUI
+namespace ConsoleUI_BL
 {
     class Program
     {
-         enum option { EXIT, ADD, UPDATE, PRINT,PRINT_LIST,};
+
+        enum option { EXIT, ADD, UPDATE, PRINT,PRINT_LIST, };
         enum entities { EXIT, STATION, DRONE, CLIENT, PARCEL, DRONECHARGES };
-        enum update { EXIT, ASSIGNEMENT, PICKEDUP, DELIVERED,CHARGING, CHARGED,};
+        enum update { EXIT, DRONE,STAT,CLIENT, CHARGING, CHARGED, ASSIGNEMENT, PICKEDUP, DELIVERED,   };
 
         public static void Main()
         {
-            IDAL.IDal myDalObject=new DalObject.DalObject();
+            IBL.IBL obj = new BL.BL();
 
-            
+
             option options;
             entities entity;
             Console.WriteLine("Welcome to our Nebula Drone delivery System!\n");
@@ -24,20 +23,20 @@ namespace ConsoleUI
             options = (option)int.Parse(Console.ReadLine());
             do
             {
-               
+
                 switch (options)
                 {
                     case option.ADD:
-                            Console.WriteLine("You chose to add an entity.");
-                            Console.WriteLine("To add a Station please press 1;\nTo add a Drone please press 2;\nTo add a Client please press 3;\nTo add a Parcel please press 4;\nTo exit please press 0:");
-                            entity = (entities)int.Parse(Console.ReadLine());
-                            switch (entity)
-                            {
+                        Console.WriteLine("You chose to add an entity.");
+                        Console.WriteLine("To add a Station please press 1;\nTo add a Drone please press 2;\nTo add a Client please press 3;\nTo add a Parcel please press 4;\nTo exit please press 0:");
+                        entity = (entities)int.Parse(Console.ReadLine());
+                        switch (entity)
+                        {
                             case entities.EXIT:
                                 options = 0;
                                 break;
                             case entities.STATION:
-                                IDAL.DO.Station myStation = new IDAL.DO.Station();
+                                IBL.BO.Station myStation = new IBL.BO.Station();
                                 int myId;
                                 int myName;
                                 Console.WriteLine("You chose to add a Station.\nPlease enter its Id, Name, Longitude, Latitude and ChargeSlots:");
@@ -48,45 +47,29 @@ namespace ConsoleUI
                                 int.TryParse(Console.ReadLine(), out int myCs);
                                 myStation.ID = myId;
                                 myStation.Name = myName;
-                                myStation.Longitude = myLongitude;
+                                myStation.loc.longitude = myLongitude;
+                                myStation.loc.latitude = myLatitude;
                                 myStation.ChargeSlots = myCs;
-                                myDalObject.addStation(myStation);
+                                obj.addStation(myStation);
+                                myStation.DroneCharging = null;
                                 break;
 
                             case entities.DRONE:
-                                IDAL.DO.Drone myDrone = new IDAL.DO.Drone();
-                                Console.WriteLine("You chose to add a Drone.\nPlease enter its ID, Model, MaxWeight, Status, Battery:");
+                                IBL.BO.Drone myDrone = new IBL.BO.Drone();
+                                Console.WriteLine("You chose to add a Drone.\nPlease enter its ID, Model, MaxWeight,Number of station :");
                                 int.TryParse(Console.ReadLine(), out int DID); //DroneID
                                 string myModel;
                                 myModel = Console.ReadLine();
-                                myDrone.MaxWeight = (IDAL.DO.WeightCategories)int.Parse(Console.ReadLine());
-                                myDrone.Status = (IDAL.DO.DroneStatuses)int.Parse(Console.ReadLine());
-                                double.TryParse(Console.ReadLine(), out double battery);
+                                myDrone.MaxWeight = (IBL.BO.WeightCategories)int.Parse(Console.ReadLine());
+                                int.TryParse(Console.ReadLine(), out int NumSt);
                                 myDrone.ID = DID;
                                 myDrone.Model = myModel;
-                                myDrone.Battery = battery;
-                                myDalObject.AddDrone(myDrone);
+                                obj.addDrone(myDrone, NumSt);
                                 break;
 
-                            case entities.PARCEL:
-                                IDAL.DO.Parcel myParcel = new Parcel();
-                                Console.WriteLine("You chose to add a Parcel.\nPlease enter its ID, SenderId, TargetId, MaxWeight, Priority, DroneId:");
-                                int.TryParse(Console.ReadLine(), out int PID);// ParcelID
-                                int.TryParse(Console.ReadLine(), out int senderId);
-                                int.TryParse(Console.ReadLine(), out int targetId);
-                                myParcel.Weight = (IDAL.DO.WeightCategories)int.Parse(Console.ReadLine());
-                                myParcel.Priority = (IDAL.DO.Priorities)int.Parse(Console.ReadLine());
-                                int.TryParse(Console.ReadLine(), out int droneId);
-                                myParcel.ID = PID;
-                                myParcel.SenderId = senderId;
-                                myParcel.TargetId = targetId;
-                                myParcel.DroneId = droneId;
-                                myParcel.Requested = DateTime.Now; //A verifier
-                                myDalObject.addParcel(myParcel);
-                                break;
 
                             case entities.CLIENT:
-                                IDAL.DO.Client client = new Client();
+                                IBL.BO.Client client = new Client();
                                 Console.WriteLine("You chose to add a Client.\nPlease enter his ID, Name, Phone, and his location: latitude and longitude:\n");
                                 int.TryParse(Console.ReadLine(), out int CID);//ClientID
                                 string Cname, Cphone;
@@ -97,47 +80,118 @@ namespace ConsoleUI
                                 client.ID = CID;
                                 client.Name = Cname;
                                 client.Phone = Cphone;
-                                client.Latitude = Clatitude;
-                                client.Longitude = Clongitude;
-                                myDalObject.addClient(client);// add it to the list
+                                client.ClientLoc.latitude = Clatitude;
+                                client.ClientLoc.longitude = Clongitude;
+                                obj.addClient(client);// add it to the list
                                 break;
-                            }
+
+                            case entities.PARCEL:
+                                IBL.BO.Parcel myParcel = new Parcel();
+                                Console.WriteLine("You chose to add a Parcel.\nPlease enter SenderId, TargetId, MaxWeight, Priority:");
+                                int.TryParse(Console.ReadLine(), out int senderId);
+                                int.TryParse(Console.ReadLine(), out int targetId);
+                                myParcel.Weight = (IBL.BO.WeightCategories)int.Parse(Console.ReadLine());
+                                myParcel.Priority = (IBL.BO.Priorities)int.Parse(Console.ReadLine());
+                                int.TryParse(Console.ReadLine(), out int droneId);
+                                myParcel.Sender.ID = senderId;
+                                myParcel.Target.ID = targetId;
+                                myParcel.Requested = DateTime.Now; //A verifier
+                                myParcel.PickedUp = DateTime.MinValue;
+                                myParcel.Delivered = DateTime.MinValue;
+                                myParcel.Scheduled = DateTime.MinValue;
+                                obj.addParcel(myParcel);
+                                break;
+                        }
                         break;
                     case option.UPDATE:
                         Console.WriteLine("You chose to update an entity.\nTo assign a Parcel to a Drone please press 1;\nTo pick up a parcel please press 2;\nTo plug in a Drone please press 3;\nTo remove a Drone from the ChargeSlot please press 4,\nTo exit please press 0:\n ");
                         update updating;
                         updating = (update)int.Parse(Console.ReadLine());
-                        switch(updating)
+                        switch (updating)
                         {
-                            case update.ASSIGNEMENT:
-                                Console.WriteLine("You chose to assign a Parcel to a Drone.\nPlease enter the Parcel's Id and Drone's Id:\n");
-                                int.TryParse(Console.ReadLine(), out int ParcelID);
+                            case update.DRONE:
+                                Console.WriteLine("You chose to update a drone. \nPlease enter the Drone's Id and its new Model:\n");
+                                string newMod;
                                 int.TryParse(Console.ReadLine(), out int DroneID);
-                                myDalObject.Assignement(ParcelID, DroneID);
+                                newMod = Console.ReadLine();
+                                obj.updateDrone(DroneID, newMod);
                                 break;
+                            case update.STAT:
+                                Console.WriteLine("You chose to update a station. \nPlease enter the Station's Id, its new Name and/or chargeSlots :\n");
+                                int.TryParse(Console.ReadLine(), out int StatID);
+                                Console.WriteLine("Do you want to update the station's name? Enter yes or no\n");
+                                string ans="yes";
+                                int newNam=0;
+                                if (ans == Console.ReadLine())
+                                {
+                                    Console.WriteLine("Enter the new name\n");
+                                    int.TryParse(Console.ReadLine(), out newNam);
+                                }
+                                Console.WriteLine("Do you want to update the station's chargeSlots? Enter yes or no\n");
+                                
+                                int newCs = 0;
+                                if (ans == Console.ReadLine())
+                                {
+                                    Console.WriteLine("Enter the number of chargeSlots\n");
+                                    int.TryParse(Console.ReadLine(), out newCs);
+                                }
+                                obj.updateStation(StatID, newNam, newCs);
+                                break;
+
+                            case update.CLIENT:
+                                Console.WriteLine("You choose to update a Client, please enter his ID number:\n");
+                                int.TryParse(Console.ReadLine(), out int myID);
+                                Console.WriteLine("Do you want to update the Client's name? Enter yes or no:\n");
+                                string answer = "yes", newPnumber = "n";
+                                string NewClName = "n";
+                                if(answer==Console.ReadLine())
+                                {
+                                    Console.WriteLine("Please enter the new name:\n");
+                                    NewClName = Console.ReadLine();
+                                }
+                                Console.WriteLine("Do you want to change the Client's PhoneNumber? Enter yes or no:\n");
+                                if(answer== Console.ReadLine())
+                                {
+                                    Console.WriteLine("Please enter new PhoneNumber:\n");
+                                    newPnumber = Console.ReadLine();
+                                }
+                                obj.updateClient(myID, NewClName, newPnumber);
+                                break;
+
+
+                            case update.CHARGING:
+                                Console.WriteLine("You want to plug in a Drone.\nPlease enter the Drone's Id:\n");
+                                int.TryParse(Console.ReadLine(), out int myDronID);                      
+                                obj.DroneToCharge(myDronID);
+                                break;
+
+                            case update.CHARGED:
+                                Console.WriteLine("Your drone has finished charging.\nPlease enter the Drone's Id, and how long time it was charging:\n");
+                                int.TryParse(Console.ReadLine(), out int DrID);
+                                int.TryParse(Console.ReadLine(), out int time);
+                                obj.DroneCharged(DrID, time);
+                                break;
+
+
+                            case update.ASSIGNEMENT:
+                                Console.WriteLine("You chose to assign a Parcel to a Drone.\nPlease enter the Drone's Id:\n");               
+                                int.TryParse(Console.ReadLine(), out int droneID);
+                                obj.Assignement(droneID);
+                                break;
+
                             case update.PICKEDUP:
-                                Console.WriteLine("You chose to pick up a Parcel.\nPlease enter the Parcel's Id and the Drone's Id:\n");
-                                int.TryParse(Console.ReadLine(), out int ParcID);
+                                Console.WriteLine("You chose to pick up a Parcel.\nPlease enter the Drone's Id:\n");
                                 int.TryParse(Console.ReadLine(), out int DronID);
-                                myDalObject.IsPickedUp(ParcID, DronID);
+                                obj.PickedUp( DronID);
                                 break;
+
                             case update.DELIVERED:
                                 Console.WriteLine("Your Parcel has arrived!.\nPlease enter the Parcel's Id:\n");
                                 int.TryParse(Console.ReadLine(), out int myParcID);
-                                myDalObject.DeliveredToClient(myParcID);
+                                obj.delivered(myParcID);
                                 break;
-                            case update.CHARGING:
-                                Console.WriteLine("You want to plug in a Drone.\nPlease enter the Drone's and Station's Id:\n");
-                                int.TryParse(Console.ReadLine(), out int myDronID);
-                                int.TryParse(Console.ReadLine(), out int myStationID);
-                                myDalObject.DroneToCharge(myDronID, myStationID);
-                                break;
-                            case update.CHARGED:
-                                Console.WriteLine("Your drone has finished charging.\nPlease enter the Drone's and Station Id:\n");
-                                int.TryParse(Console.ReadLine(), out int DrID);
-                                int.TryParse(Console.ReadLine(), out int statID);
-                                myDalObject.DroneCharged(DrID,statID);
-                                break;
+                            
+                            
                         }
                         break;
                     case option.PRINT:
@@ -149,13 +203,13 @@ namespace ConsoleUI
                             case entities.STATION:
                                 Console.WriteLine("You chose to print a Station, please enter its Id:\n");
                                 int.TryParse(Console.ReadLine(), out int StationId);
-                                Console.WriteLine(myDalObject.StationById(StationId)) ;// calls the function to print the asked station
+                                Console.WriteLine(obj.StationById(StationId));// calls the function to print the asked station
                                 break;
 
                             case entities.DRONE:
                                 Console.WriteLine("You chose to print a Drone, please enter its Id:\n");
                                 int.TryParse(Console.ReadLine(), out int DroneId);
-                                Console.WriteLine(myDalObject.DroneById(DroneId));// calls the function to print the asked drone
+                                Console.WriteLine(obj.DroneById(DroneId));// calls the function to print the asked drone
                                 break;
 
                             case entities.PARCEL:
@@ -169,7 +223,7 @@ namespace ConsoleUI
                                 int.TryParse(Console.ReadLine(), out int ClientId);
                                 Console.WriteLine(myDalObject.ClientById(ClientId));// calls the function to print the asked drone
                                 break;
-                           
+
                         }
 
                         break;
@@ -181,7 +235,7 @@ namespace ConsoleUI
                         {
                             case entities.STATION:
                                 Console.WriteLine("Stations' List:\n");
-                                foreach (var item in myDalObject.StationList() )
+                                foreach (var item in myDalObject.StationList())
                                 {
                                     Console.WriteLine(item);
                                     Console.WriteLine(" ");
@@ -211,9 +265,10 @@ namespace ConsoleUI
                                     Console.WriteLine(" ");
                                 }
                                 break;
-                           
+
                         }
                         break;
+
                 };
                 Console.WriteLine("To add an entity please press 1\nTo update an entity please press 2\nTo print an entity please press 3\nTo print a list please press 4\nTo exit please press 0\n");
                 options = (option)int.Parse(Console.ReadLine());

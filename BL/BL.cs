@@ -2,19 +2,20 @@
 using System.Collections.Generic;
 using System.Text;
 using IBL.BO;
-
+using DAL;
+using DalObject;
 
 
 
 
 namespace BL
 {
+    
     public class BL:IBL.IBL
     {
         
-        IDAL.IDal d = IDAL.DalObject();
-          
-
+        IDAL.IDal p = new DalObject.DalObject();
+        
         public Drone DroneById(int id)
         {
             Drone? temp = null;
@@ -34,20 +35,21 @@ namespace BL
         }
         public Station StationById(int id)
         {
-            Station? temp = null;
-            foreach (Station s in StationList)
-            {
-                if (s.ID == id)
-                {
-                    temp = s;
-                    break;
-                }
-            }
-            if (temp == null)
-            {
-                throw new StationException("station not found");
-            }
-            return (Station)temp;
+            IDAL.DO.Station st = p.StationById(id);
+            Station sta=IBL.BO.Station st;
+            //foreach (Station s in p.StationList())
+            //{
+            //    if (s.ID == id)
+            //    {
+            //        temp = s;
+            //        break;
+            //    }
+            //}
+            //if (temp == null)
+            //{
+            //    throw new StationException("station not found");
+            //}
+            //return (Station)temp;
         }
         public Client ClientById(int id)
         {
@@ -87,15 +89,27 @@ namespace BL
         
         public BL() { }
         
-
+        
 
         static Random rand = new Random();
         //functions ADD
 
-        public void addStation(Station s)   
+        public void addStation(IBL.BO.Station s)   
         {
-            List<Station> StationList = DAL.DalObject.DalObject.StationList();
-            StationList.Add(s);
+            IEnumerable<IDAL.DO.Station> stationLst = p.StationList();
+            IDAL.DO.Station stat = new IDAL.DO.Station();
+            stat.Name = s.Name;
+            if (!(s.ID <= 99999999 && s.ID > 9999999))
+                throw new IDException("ID not valid");
+            stat.ID = s.ID;
+            if (s.loc.latitude> 180)/////////////// a verifier
+                throw new LatException("latitude is not valid");
+            stat.Latitude = s.loc.latitude;
+            if (s.loc.longitude>90)
+                throw new LatException("longitude is not valid");
+            stat.Longitude = s.loc.longitude;
+            p.addStation(stat);
+            
         }
 
 
@@ -105,24 +119,77 @@ namespace BL
             Station s = StationById(StationID);// find the station
             d.initialLoc = s.loc;// the drone's location is the station's one
             s.DroneCharging.Add(d);// add the drone to the station's list
-            DroneList.Add(d);// add the drone to the dronelist
+
+            IDAL.DO.Drone dr = new IDAL.DO.Drone();
+            if (!(d.ID <= 99999999 && d.ID > 9999999))
+                throw new IDException("ID is not valid");
+            dr.ID = d.ID;
+           
+            dr.Model = d.Model;
+            if (d.Battery < 0 || d.Battery > 100)
+                throw new BatException("Battery is not valid");
+            dr.Battery = d.Battery;
+            p.AddDrone(dr);   
         }
 
         public void addClient(Client c) 
         {
-            ClientList.Add(c);
+            IDAL.DO.Client cl= new IDAL.DO.Client();
+            if (!(c.ID <= 99999999 && c.ID > 9999999))
+                throw new IDException("ID not valid");
+            cl.ID = c.ID;
+
+            cl.Name = c.Name;
+            if (c.Phone.Length!=11)
+                throw new PhoneException("Phone not valid");
+            cl.Phone = c.Phone;
+            if (c.ClientLoc.latitude > 180)/////////////// a verifier
+                throw new LatException("latitude is not valid");
+            cl.Latitude = c.ClientLoc.latitude;
+            if (c.ClientLoc.longitude > 90)
+                throw new LatException("longitude is not valid");
+            cl.Longitude = c.ClientLoc.longitude;
+            p.addClient(cl);
+           
         }
 
-        public void addParcel(Parcel p) 
+        public void addParcel(Parcel pack) 
         {
-
-        
-
+            IDAL.DO.Parcel package = new IDAL.DO.Parcel();
+            if (!(pack.ID <= 99999999 && pack.ID > 9999999))
+                throw new IDException("ID not valid");
+            package.ID = pack.ID;
+            if (!(pack.Sender.ID <= 99999999 && pack.Sender.ID > 9999999))
+                throw new IDException("SenderID not valid");
+            package.SenderId = pack.Sender.ID;
+            if (!(pack.Target.ID <= 99999999 && pack.Target.ID > 9999999))
+                throw new IDException("TargetID not valid");
+            package.TargetId = pack.Target.ID;
+            package.Weight =(IDAL.DO.WeightCategories) pack.Weight;
+            package.Priority = (IDAL.DO.Priorities)pack.Priority;
+            package.Scheduled = DateTime.MinValue;////Verifier
+            package.PickedUp = DateTime.MinValue;
+            package.Delivered = DateTime.MinValue;
+            package.Requested = DateTime.Now;
+            pack.Drone = null;
+            p.addParcel(package);
         }
 
         //functions UPDATE
 
-        public void updateDrone(int Id, string newName) { }
+        public void updateDrone(int Id, string newModel) 
+        {
+            //Drone temp = new Drone();
+            //Drone d = DroneById(Id);
+            //temp = d;
+            //temp.Model = newModel;
+
+           IDAL.DO.Drone myDrone = p.DroneById(Id);
+            myDrone.Model = newModel;
+            p.AddDrone(myDrone);
+        
+        
+        }
 
         public void updateStation(int Id, int newName = -1, int newCS = -1) { }
 
