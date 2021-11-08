@@ -8,10 +8,17 @@ namespace IBL
     {
         public class ParcelInDelivering
         {
-            public int ID { set; get; }
-            public Priorities priority { set; get; }
-            public Client sender { set; get; }
-            public Client receiver { set; get; }
+            public int ID { get; set; }
+            public bool DeliveringStatus { get; set; }
+
+            public WeightCategories weight { get; set; }
+            public Priorities priority { get; set; }
+           
+            public ClientInParcel Sender { get; set; }
+            public ClientInParcel Target { get; set; }
+            public Localisation picking { get; set; }
+            public Localisation delivered { get; set; }
+            public double distance { get; set; }
         }
     }
 }

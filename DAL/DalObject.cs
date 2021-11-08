@@ -537,8 +537,9 @@ namespace DalObject
         /// <returns></returns>
         public IEnumerable<Station> StationList()
         {
-            List<Station> StationList = new List<Station>();
-            return StationList;
+            List<Station> StationLst = new List<Station>();
+            StationLst = DataSource.StationList;
+            return StationLst;
         }
 
         /// <summary>
@@ -547,8 +548,9 @@ namespace DalObject
         /// <returns></returns>
         public IEnumerable<Drone> DroneList()
         {
-            List<Drone> DroneList = new List<Drone>();
-            return DroneList;
+            List<Drone> DroneLst = new List<Drone>();
+            DroneLst = DataSource.DroneList;
+            return DroneLst;
         }
 
         /// <summary>
@@ -557,8 +559,9 @@ namespace DalObject
         /// <returns></returns>
         public IEnumerable <Client> ClientList()
         {
-            List<Client> ClientList = new List<Client>();
-            return ClientList;
+            List<Client> ClientLst = new List<Client>();
+            ClientLst = DataSource.ClientList;
+            return ClientLst;
         }
 
         /// <summary>
@@ -567,8 +570,9 @@ namespace DalObject
         /// <returns></returns>
         public IEnumerable <Parcel> ParcelList()
         {
-            List<Parcel> ParcelList = new List<Parcel>();
-            return ParcelList;
+            List<Parcel> ParcelLst = new List<Parcel>();
+            ParcelLst = DataSource.ParcelList;
+            return ParcelLst;
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
+
 namespace IBL
 {
     namespace BO
@@ -12,7 +13,10 @@ namespace IBL
             public String Name { get; set; }
             public String Phone { get; set; }
             public Localisation ClientLoc { set; get; }
-            // 2 listes
+
+            List<ParcelToClient> ParcLstFromClient = new List<ParcelToClient>();
+
+            List<ParcelToClient> ParcLstToClient = new List<ParcelToClient>();
 
 
             public override string ToString()

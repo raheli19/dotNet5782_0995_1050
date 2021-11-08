@@ -13,8 +13,8 @@ namespace IBL
             public WeightCategories MaxWeight { get; set; } // à construire
             public DroneStatuses Status { get; set; }
             public double Battery { get; set; }
-            
-            //public Parcel myParcel{get;set;}
+            public Localisation initialLoc { get; set; }
+            public ParcelInDelivering myParcel{get;set;}
             public override string ToString()
             {
                 String result = "";

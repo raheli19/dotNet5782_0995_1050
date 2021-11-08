@@ -9,11 +9,17 @@ namespace IBL
 {
     interface IBL
     {
+        //using functions
+        Drone DroneById(int id);
+        Station StationById(int id);
+        Client ClientById(int id);
+        Parcel ParcelById(int id);
+
         //functions ADD
 
         void addStation(Station s);
 
-        void addDrone(Drone d);
+        void addDrone(Drone d, int StationID);
 
         void addClient(Client c);
 

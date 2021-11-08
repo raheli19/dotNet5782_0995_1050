@@ -6,7 +6,7 @@ namespace IBL
 {
     namespace BO
     {
-        public class DeliverClient
+        public class ClientInParcel //client in Parcel
         {
             public int ID { set; get; }
             string name { set; get; }

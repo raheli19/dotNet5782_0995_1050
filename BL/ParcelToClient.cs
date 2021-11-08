@@ -6,13 +6,16 @@ namespace IBL
 {
     namespace BO
     {
-        public class OnSaitPas
+        public class ParcelToClient
         {
             public int ID { set; get; }
             public WeightCategories weight { set; get; }
-            public Priorities priority { set; get;}
-            //public Status myStatus { set; get; }
-            // adresses
+
+            public Priorities priority { set; get; }
+
+            public ParcelStatus Status { set; get; }
+            public ClientInParcel client { set; get; }
+            
         }
     }
 }
