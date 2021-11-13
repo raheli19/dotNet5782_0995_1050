@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace IBL.BO
 {
     [Serializable]
-    internal class StationException : Exception
+    public class StationException : Exception
     {
         public StationException()
         {
@@ -25,7 +25,7 @@ namespace IBL.BO
 
 
     [Serializable]
-    internal class ParcelException : Exception
+    public class ParcelException : Exception
     {
         public ParcelException()
         {
@@ -46,7 +46,7 @@ namespace IBL.BO
 
 
     [Serializable]
-    internal class DroneException : Exception
+    public class DroneException : Exception
     {
         public DroneException()
         {
@@ -68,7 +68,7 @@ namespace IBL.BO
 
 
     [Serializable]
-    internal class ClientException : Exception
+    public class ClientException : Exception
     {
         public ClientException()
         {
@@ -83,6 +83,109 @@ namespace IBL.BO
         }
 
         protected ClientException(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
+        }
+    }
+
+    [Serializable]
+    public class BatException : Exception
+    {
+        public BatException()
+        {
+        }
+
+        public BatException(string message) : base(message)
+        {
+        }
+
+        public BatException(string message, Exception innerException) : base(message, innerException)
+        {
+        }
+
+        protected BatException(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
+        }
+    }
+
+    [Serializable]
+    public class IDException : Exception
+    {
+        public IDException()
+        {
+        }
+
+        public IDException(string message) : base(message)
+        {
+        }
+
+        public IDException(string message, Exception innerException) : base(message, innerException)
+        {
+        }
+
+        protected IDException(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
+        }
+    }
+
+
+    [Serializable]
+    public class LatException : Exception
+    {
+        public LatException()
+        {
+        }
+
+        public LatException(string message) : base(message)
+        {
+        }
+
+        public LatException(string message, Exception innerException) : base(message, innerException)
+        {
+        }
+
+        protected LatException(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
+        }
+    }
+
+
+    [Serializable]
+    public class LongException : Exception
+    {
+        public LongException()
+        {
+        }
+
+        public LongException(string message) : base(message)
+        {
+        }
+
+        public LongException(string message, Exception innerException) : base(message, innerException)
+        {
+        }
+
+        protected LongException(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
+        }
+    }
+
+
+    [Serializable]
+    public class PhoneException : Exception
+    {
+        public PhoneException()
+        {
+        }
+
+        public PhoneException(string message) : base(message)
+        {
+        }
+
+        public PhoneException(string message, Exception innerException) : base(message, innerException)
+        {
+        }
+
+        protected PhoneException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
         }
     }

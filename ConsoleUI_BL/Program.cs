@@ -215,13 +215,13 @@ namespace ConsoleUI_BL
                             case entities.PARCEL:
                                 Console.WriteLine("You chose to print a Parcel, please enter its Id:\n");
                                 int.TryParse(Console.ReadLine(), out int Pid);
-                                Console.WriteLine(myDalObject.ParcelById(Pid));// calls the function to print the asked drone
+                                Console.WriteLine(obj.ParcelById(Pid));// calls the function to print the asked drone
                                 break;
 
                             case entities.CLIENT:
                                 Console.WriteLine("You chose to print a Client, please enter its Id:\n");
                                 int.TryParse(Console.ReadLine(), out int ClientId);
-                                Console.WriteLine(myDalObject.ClientById(ClientId));// calls the function to print the asked drone
+                                Console.WriteLine(obj.ClientById(ClientId));// calls the function to print the asked drone
                                 break;
 
                         }
@@ -235,7 +235,7 @@ namespace ConsoleUI_BL
                         {
                             case entities.STATION:
                                 Console.WriteLine("Stations' List:\n");
-                                foreach (var item in myDalObject.StationList())
+                                foreach (var item in obj.StationList())
                                 {
                                     Console.WriteLine(item);
                                     Console.WriteLine(" ");
@@ -243,7 +243,7 @@ namespace ConsoleUI_BL
                                 break;
                             case entities.DRONE:
                                 Console.WriteLine("Drones' List:\n");
-                                foreach (var item in myDalObject.DroneList())
+                                foreach (var item in obj.DroneList())
                                 {
                                     Console.WriteLine(item);
                                     Console.WriteLine(" ");
@@ -251,7 +251,7 @@ namespace ConsoleUI_BL
                                 break;
                             case entities.PARCEL:
                                 Console.WriteLine("Parcels' List:\n");
-                                foreach (var item in myDalObject.ParcelList())
+                                foreach (var item in obj.ParcelList())
                                 {
                                     Console.WriteLine(item);
                                     Console.WriteLine(" ");
@@ -259,7 +259,7 @@ namespace ConsoleUI_BL
                                 break;
                             case entities.CLIENT:
                                 Console.WriteLine("Clients' List:\n");
-                                foreach (var item in myDalObject.ClientList())
+                                foreach (var item in obj.ClientList())
                                 {
                                     Console.WriteLine(item);
                                     Console.WriteLine(" ");

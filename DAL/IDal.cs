@@ -19,7 +19,7 @@ namespace IDAL
 
          void addDroneCharge(DroneCharge dc);
 
-         void AddParcelToDrone(Parcel parcel); // associate a parcel to a drone
+         void AddParcelToDrone(Parcel parcel,Drone d); // associate a parcel to a drone
 
         void Assignement(int parcelId, int droneId);
 

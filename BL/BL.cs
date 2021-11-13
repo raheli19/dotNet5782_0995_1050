@@ -11,92 +11,57 @@ using DalObject;
 namespace BL
 {
     
-    public class BL:IBL.IBL
+    public class BL: IBL.IBL
     {
         
-        IDAL.IDal p = new DalObject.DalObject();
-        
-        public Drone DroneById(int id)
-        {
-            Drone? temp = null;
-            foreach (Drone d in DroneList)
-            {
-                if (d.ID == id)
-                {
-                    temp = d;
-                    break;
-                }
-            }
-            if (temp == null)
-            {
-                throw new DroneException("drone not found");
-            }
-            return (Drone)temp;
-        }
-        public Station StationById(int id)
-        {
-            IDAL.DO.Station st = p.StationById(id);
-            Station sta=IBL.BO.Station st;
-            //foreach (Station s in p.StationList())
-            //{
-            //    if (s.ID == id)
-            //    {
-            //        temp = s;
-            //        break;
-            //    }
-            //}
-            //if (temp == null)
-            //{
-            //    throw new StationException("station not found");
-            //}
-            //return (Station)temp;
-        }
-        public Client ClientById(int id)
-        {
-            Client? temp = null;
-            foreach (Client c in ClientList)
-            {
-                if (c.ID == id)
-                {
-                    temp = c;
-                    break;
-                }
-            }
-            if (temp == null)
-            {
-                throw new ClientException("client not found");
-            }
-            return (Client)temp;
-        }
-        public Parcel ParcelById(int id)
-        {
-            Parcel? temp = null;
-            foreach (Parcel p in ParcelList)
-            {
-                if (p.ID == id)
-                {
-                    temp = p;
-                    break;
-                }
-            }
-            if (temp == null)
-            {
-                throw new ParcelException("parcel not found");
-            }
-            return (Parcel)temp;
-        }
-
+        readonly IDAL.IDal p = new DalObject.DalObject();
         
         public BL() { }
         
-        
+        public Client GetClient(int id)
+        {
+            Client c = default;
+            try
+            { IDAL.DO.Client dalClient = p.ClientById(id);
+            }
+            catch(IDAL.DO.ClientException custEX)
+            {
+                throw new ClientException($"Client ID {id} was not found", custEX);
+            }
+            return c;
+        }
+       public Station GetStation(int id)
+        {
+            Station s = default;
+            try
+            {
+                IDAL.DO.Station dalStat = p.StationById(id);
+            }
+            catch (IDAL.DO.StationException statEX)
+            {
+                throw new StationException($"Station ID {id} was not found", statEX);
+            }
+            return s;
+        }
+        public Drone GetDrone(int id)
+        {
+            Drone d = default;
+            try
+            {
+                IDAL.DO.Drone dalDrone = p.DroneById(id);
+            }
+            catch (IDAL.DO.DroneException drEX)
+            {
+                throw new DroneException($"Drone ID {id} was not found", drEX);
+            }
+            return d;
 
+        }
         static Random rand = new Random();
         //functions ADD
 
         public void addStation(IBL.BO.Station s)   
         {
-            IEnumerable<IDAL.DO.Station> stationLst = p.StationList();
             IDAL.DO.Station stat = new IDAL.DO.Station();
             stat.Name = s.Name;
             if (!(s.ID <= 99999999 && s.ID > 9999999))
@@ -106,7 +71,7 @@ namespace BL
                 throw new LatException("latitude is not valid");
             stat.Latitude = s.loc.latitude;
             if (s.loc.longitude>90)
-                throw new LatException("longitude is not valid");
+                throw new LongException("longitude is not valid");
             stat.Longitude = s.loc.longitude;
             p.addStation(stat);
             
@@ -208,16 +173,16 @@ namespace BL
 
         //functions print
 
-        public void printStation();
-        public void printDrone();
-        public void printClient();
-        public void printParcel();
-        public void printStationList();
-        public void printDroneList();
-        public void printClientList();
-        public void printParcelList();
-        public void printParcelsNotAssigned();
-        public void printFreeStations();
+        public void printStation() { }
+        public void printDrone() { }
+        public void printClient() { }
+        public void printParcel() { }
+        public void printStationList() { }
+        public void printDroneList() { }
+        public void printClientList() { }
+        public void printParcelList() { }
+        public void printParcelsNotAssigned() { }
+        public void printFreeStations() { }
 
     }
 }

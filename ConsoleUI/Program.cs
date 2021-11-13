@@ -15,7 +15,7 @@ namespace ConsoleUI
         public static void Main()
         {
             IDAL.IDal myDalObject=new DalObject.DalObject();
-
+            
             
             option options;
             entities entity;

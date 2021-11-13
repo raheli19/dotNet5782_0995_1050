@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace IDAL.DO
 {
     [Serializable]
-    internal class StationException : Exception
+    public class StationException : Exception
     {
         public StationException()
         {
@@ -25,7 +25,7 @@ namespace IDAL.DO
 
 
     [Serializable]
-    internal class ParcelException : Exception
+    public class ParcelException : Exception
     {
         public ParcelException()
         {
@@ -46,7 +46,7 @@ namespace IDAL.DO
 
 
     [Serializable]
-    internal class DroneException : Exception
+    public class DroneException : Exception
     {
         public DroneException()
         {
@@ -68,7 +68,7 @@ namespace IDAL.DO
 
 
     [Serializable]
-    internal class ClientException : Exception
+    public class ClientException : Exception
     {
         public ClientException()
         {
