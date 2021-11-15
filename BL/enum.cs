@@ -18,6 +18,10 @@ namespace IBL
         {
             regular, fast, emergency
         };
+        public enum ParcelStatus
+        {
+           requested,scheduled, pickedup, delivered
+        };
 
     }
 }
