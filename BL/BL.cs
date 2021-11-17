@@ -101,13 +101,18 @@ namespace BL
 
         }
 
-
+        #region GetClient
         public Client GetClient(int id)
         {
             Client c = default;
             try
             { 
                 IDAL.DO.Client dalClient = p.ClientById(id);
+                c.ID = dalClient.ID;
+                c.Name = dalClient.Name;
+                c.Phone = dalClient.Phone;
+                c.ClientLoc.longitude = dalClient.Longitude;
+                c.ClientLoc.latitude = dalClient.Latitude;
             }
             catch(IDAL.DO.ClientException custEX)
             {
@@ -115,12 +120,19 @@ namespace BL
             }
             return c;
         }
+        #endregion
+
         public Station GetStation(int id)
         {
             Station s = default;
             try
             {
                 IDAL.DO.Station dalStat = p.StationById(id);
+                s.ID = dalStat.ID;
+                s.Name = dalStat.Name;
+                s.loc.longitude = dalStat.Longitude;
+                s.loc.latitude = dalStat.Latitude;
+                s.ChargeSlots = dalStat.ChargeSlots;
             }
             catch (IDAL.DO.StationException statEX)
             {
@@ -134,6 +146,10 @@ namespace BL
             try
             {
                 IDAL.DO.Drone dalDrone = p.DroneById(id);
+                d.ID = dalDrone.ID;
+                d.Model = dalDrone.Model;
+                d.Battery = dalDrone.Battery;
+               
             }
             catch (IDAL.DO.DroneException drEX)
             {

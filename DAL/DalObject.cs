@@ -1,4 +1,12 @@
-﻿using System;
+﻿/*
+ update
+region
+hagrala sur une liste pour la localisation du drone
+*/
+
+
+
+using System;
 using System.Collections.Generic;
 using IDAL.DO;
 
@@ -17,6 +25,7 @@ namespace DalObject
         public static int ID { get; private set; }
         public static int DroneId { get; private set; }
 
+        #region Random
         /// <summary>
         /// The function return random coordinates
         /// </summary>
@@ -26,7 +35,9 @@ namespace DalObject
         {
             return x + rand.NextDouble() /10;
         }
+        #endregion
 
+        #region ClassConfig
         /// <summary>
         /// Continue static number
         /// </summary>
@@ -39,8 +50,11 @@ namespace DalObject
             internal static int charging; // chargement % per hour
   
         }
+        #endregion
         static Random r = new Random();
 
+        #region Initializing
+        #region InitializeClient
         /// <summary>
         /// function initializing a client
         /// </summary>
@@ -59,7 +73,10 @@ namespace DalObject
 
                 }) ;
             }
-          }
+        }
+        #endregion
+
+        #region InitializeDroneChargesList
         /// <summary>
         /// function initializing a droneCharge
         /// </summary>
@@ -75,7 +92,9 @@ namespace DalObject
                 });
             }
         }
+        #endregion
 
+        #region InitializeDrone
         /// <summary>
         /// function initializing a drone
         /// </summary>
@@ -95,7 +114,9 @@ namespace DalObject
                 });
             }
         }
+        #endregion
 
+        #region InitializeStations
         /// <summary>
         /// function initializing a station
         /// </summary>
@@ -113,7 +134,9 @@ namespace DalObject
                 });
                 }
         }
+        #endregion
 
+        #region InitializeParcel
         /// <summary>
         /// function initializing a parcel
         /// </summary>
@@ -133,8 +156,9 @@ namespace DalObject
                 }) ;
             }
         }
+        #endregion
 
-
+        #region Initialize
         /// <summary>
         /// Initialize all the entities
         /// </summary>
@@ -146,13 +170,18 @@ namespace DalObject
             InitializeStations();
         }
     }
-  
- 
+    #endregion
+    
+    #endregion
     public class DalObject :IDAL.IDal
         {
         public DalObject() {DataSource.Initialize();}//constructor
 
-        //functions ADD
+
+
+        //-----------------------------------CREATE-FUNCTIONS/ADD----------------------------------------
+
+        #region AddDrone
         public void AddDrone(Drone d)// add a new drone to the dronelist
         {
             if(DataSource.DroneChargeList.Exists(drone=>drone.ID==d.ID))
@@ -162,7 +191,10 @@ namespace DalObject
 
             DataSource.DroneChargeList.Add(d);
         }
-         public void addClient (Client c)
+        #endregion
+
+        #region addClient
+        public void addClient (Client c)
         {
 
             if (DataSource.ClientList.Exists(client => client.ID == c.ID))
@@ -171,6 +203,9 @@ namespace DalObject
             }
             DataSource.ClientList.Add(c);
         }
+        #endregion
+
+        #region addStation
         public void addStation(Station s)
         {
 
@@ -181,10 +216,16 @@ namespace DalObject
 
             DataSource.StationList.Add(s);
         }
+        #endregion
+
+        #region addParcel
         public void addParcel(Parcel parcel)
         {
             DataSource.ParcelList.Add(parcel);
         }
+        #endregion
+
+        #region addDroneCharge
         public void addDroneCharge(DroneCharge dc)
         {
 
@@ -194,16 +235,20 @@ namespace DalObject
             }
             DataSource.DroneChargesList.Add(dc);
         }
+        #endregion
 
+        #region addParcelToDrone
         /// <summary>
         /// Function which associate a parcel to a drone by its id
         /// </summary>
         /// <param name="parcel"></param>
-         public void AddParcelToDrone(Parcel parcel,Drone d) // associate a parcel to a drone
+        public void AddParcelToDrone(Parcel parcel,Drone d) // associate a parcel to a drone
         {
             parcel.DroneId = d.ID;
             UpdateParcel(parcel);
         }
+        
+
 
         public void UpdateParcel (Parcel parcel)
         {
@@ -213,11 +258,57 @@ namespace DalObject
             }
             int index = DataSource.ParcelList.FindIndex(item => item.ID == parcel.ID);
             DataSource.ParcelList[index] = parcel;
+        }
+        #endregion
+
+        //-----------------------------------UPDATE-FUNCTIONS-------------------------------------------
+
+        #region UPDATING
+        #region UpdateDrone
+        public void UpdateDrone(Drone droneToUpdate)
+        {
+            Drone myDrone = DataSource.DroneChargeList.Find(x => x.ID == droneToUpdate.ID);
+            if (myDrone == null)
+            {
+                throw new DroneException("This drone doesn't exist in the system.");
+
+            }
+            myDrone.ID = droneToUpdate.ID;
+            myDrone.Model = droneToUpdate.Model;
+            myDrone.Battery = droneToUpdate.Battery;
+            DataSource.DroneChargeList.Remove(myDrone);
+            DataSource.DroneChargeList.Add(droneToUpdate);
+
+        }
+        #endregion
+
+        #region UpdateStation
+        public void UpdateStation(Station stationToUpdate)
+        {
+            Station myStation = DataSource.StationList.Find(x => x.ID == stationToUpdate.ID);
+            DataSource.StationList.Remove(myStation);
+            if (myStation == null)
+            {
+                throw new StationException("This station doesn't exists in the system.");
+            }
+            myStation.ID = stationToUpdate.ID;
+            myStation.Name = stationToUpdate.Name;
+            myStation.Longitude = stationToUpdate.Longitude;
+            myStation.Latitude = stationToUpdate.Latitude;
+            myStation.ChargeSlots = stationToUpdate.ChargeSlots;
+            // listeeeee
+
+
+            DataSource.StationList.Add(stationToUpdate);
 
 
         }
-        //functions UPDATE
+        #endregion
+        #endregion
 
+        //-----------------------------------ACTIONS-------------------------------------------
+
+        #region AssignementFunction
         /// <summary>
         /// Function which assigns a parcelto a drone
         /// </summary>
@@ -264,7 +355,9 @@ namespace DalObject
             addParcel(p);
       
         }
+        #endregion
 
+        #region PickedUpFunction
         /// <summary>
         /// To pick a parcel contained in a drone and update their statuses
         /// </summary>
@@ -291,7 +384,9 @@ namespace DalObject
            //Update the drone status into delivery
            
         }
+        #endregion
 
+        #region DeliveredFunction
         /// <summary>
         /// To deliver a package to a customer
         /// </summary>
@@ -334,7 +429,9 @@ namespace DalObject
             p.DroneId = 000000;
             //d.Status=DroneStatuses.free; // the drone is free
         }
-        
+        #endregion
+
+        #region DroneToCharge
         /// <summary>
         /// Lead a drone to a station of chargement
         /// </summary>
@@ -384,7 +481,9 @@ namespace DalObject
             addDroneCharge(DC);// add the linked thing to the list
            
         }
+        #endregion
 
+        #region DroneCharged
         /// <summary>
         /// The drone has finished charging. We need to let it go
         /// </summary>
@@ -452,7 +551,9 @@ namespace DalObject
             s.ChargeSlots++;// one is free from the charged drone
             addStation(s);
         }
+        #endregion
 
+        #region StationById
         /// <summary>
         /// Receives an id and returns the station which contains this ID
         /// </summary>
@@ -469,7 +570,9 @@ namespace DalObject
             sToReturn = DataSource.StationList.Find(s => s.ID == id);
             return sToReturn;
         }
+        #endregion
 
+        #region DroneById
         /// <summary>
         /// Receives an id and returns the drone which contains this ID
         /// </summary>
@@ -486,7 +589,9 @@ namespace DalObject
             dToReturn = DataSource.DroneChargeList.Find(d => d.ID == id);
             return dToReturn;
         }
+        #endregion
 
+        #region ClientById
         /// <summary>
         /// Receives an id and returns the client which contains this ID
         /// </summary>
@@ -503,7 +608,9 @@ namespace DalObject
             cToReturn = DataSource.ClientList.Find(c => c.ID == id);
             return cToReturn;
         }
+        #endregion
 
+        #region ParcelById
         /// <summary>
         /// Receives an id and returns the parcel which contains this ID
         /// </summary>
@@ -520,7 +627,10 @@ namespace DalObject
             pToReturn = DataSource.ParcelList.Find(p => p.ID == id);
             return pToReturn;
         }
+        #endregion
 
+        #region IENUMERABLE
+        #region StationList
         /// <summary>
         /// Returns the stations' list
         /// </summary>
@@ -531,7 +641,9 @@ namespace DalObject
             StationLst = DataSource.StationList;
             return StationLst;
         }
+        #endregion
 
+        #region DroneList
         /// <summary>
         /// Returns the drones' list
         /// </summary>
@@ -542,7 +654,9 @@ namespace DalObject
             DroneLst = DataSource.DroneChargeList;
             return DroneLst;
         }
+        #endregion
 
+        #region ClientList
         /// <summary>
         /// Returns the clients' list
         /// </summary>
@@ -553,7 +667,8 @@ namespace DalObject
             ClientLst = DataSource.ClientList;
             return ClientLst;
         }
-
+        #endregion
+        #region ParcelList
         /// <summary>
         /// Returns the parcels' list
         /// </summary>
@@ -564,5 +679,10 @@ namespace DalObject
             ParcelLst = DataSource.ParcelList;
             return ParcelLst;
         }
+        #endregion
+        #endregion
+
+        
+
     }
 }
