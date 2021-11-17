@@ -77,8 +77,11 @@ namespace BL
                 if(dr.Status==DroneStatuses.maintenance)// if the drone is charging
                 {
                     // random localisation entre les differentes stations
-                    
-                    
+                    List<int> helplist = p.IdStation();
+                    int index = rand.Next(helplist.Count);
+                    // recuperer la station selon son makom
+                    // prendre sa loc et la mettre dans le drone
+
                     dr.battery = h.getRandomNumber(0, 20);
 
                 }
