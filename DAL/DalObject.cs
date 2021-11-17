@@ -696,6 +696,13 @@ namespace DalObject
             return IdStation;
 
         }
+       
+            public static IEnumerable<T> GetNth<T>(this IList<T> list, int n)
+        {
+
+            from var station in StationList.GetNth(i) select station;
+            return ;
+        }
 
     }
 }

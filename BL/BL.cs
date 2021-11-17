@@ -79,6 +79,7 @@ namespace BL
                     // random localisation entre les differentes stations
                     List<int> helplist = p.IdStation();
                     int index = rand.Next(helplist.Count);
+                    Station s = p.StationList()[index];
                     // recuperer la station selon son makom
                     // prendre sa loc et la mettre dans le drone
 

@@ -40,7 +40,9 @@ namespace IDAL
         IEnumerable<Drone> DroneList();
         IEnumerable<Client> ClientList();
         IEnumerable<Parcel> ParcelList();
+        
         List<int> IdStation();
+        Station FoundStation(int);
     }
 }
  
