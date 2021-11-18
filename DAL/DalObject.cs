@@ -35,6 +35,7 @@ namespace DalObject
         {
             return x + rand.NextDouble() /10;
         }
+        static Random r = new Random();
         #endregion
 
         #region ClassConfig
@@ -51,7 +52,7 @@ namespace DalObject
   
         }
         #endregion
-        static Random r = new Random();
+        
 
         #region Initializing
         #region InitializeClient
@@ -708,7 +709,26 @@ namespace DalObject
         #endregion
         #endregion
 
-        
+        //----------------------------HELP---------------------
+        public List<int> IdStation()
+        {
+            List<int> IdStation = new List<int>();
+            int sid = 0;
+            foreach (var Stat in StationList())
+            {
+                sid = Stat.ID;
+                IdStation.Add(sid);
+            }
+            return IdStation;
+
+        }
+       
+            public static IEnumerable<T> GetNth<T>(this IList<T> list, int n)
+        {
+
+            from var station in StationList.GetNth(i) select station;
+            return ;
+        }
 
     }
 }
