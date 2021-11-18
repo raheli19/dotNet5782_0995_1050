@@ -267,17 +267,20 @@ namespace DalObject
         #region UpdateDrone
         public void UpdateDrone(Drone droneToUpdate)
         {
-            Drone myDrone = DataSource.DroneChargeList.Find(x => x.ID == droneToUpdate.ID);
-            if (myDrone == null)
+            Drone myDrone = new Drone();
+            myDrone.ID = -1;
+            myDrone= DataSource.DroneChargeList.Find(x => x.ID == droneToUpdate.ID);
+            
+            if (myDrone.ID == -1)
             {
                 throw new DroneException("This drone doesn't exist in the system.");
 
             }
+            DataSource.DroneChargeList.Remove(myDrone);
             myDrone.ID = droneToUpdate.ID;
             myDrone.Model = droneToUpdate.Model;
             myDrone.Battery = droneToUpdate.Battery;
-            DataSource.DroneChargeList.Remove(myDrone);
-            DataSource.DroneChargeList.Add(droneToUpdate);
+            DataSource.DroneChargeList.Add(myDrone);
 
         }
         #endregion
@@ -285,23 +288,46 @@ namespace DalObject
         #region UpdateStation
         public void UpdateStation(Station stationToUpdate)
         {
-            Station myStation = DataSource.StationList.Find(x => x.ID == stationToUpdate.ID);
-            DataSource.StationList.Remove(myStation);
-            if (myStation == null)
+            Station myStation = new Station();
+            myStation.ID = -1;
+            myStation = DataSource.StationList.Find(x => x.ID == stationToUpdate.ID);
+            
+            if (myStation.ID==-1)
             {
                 throw new StationException("This station doesn't exists in the system.");
             }
+            DataSource.StationList.Remove(myStation);
             myStation.ID = stationToUpdate.ID;
             myStation.Name = stationToUpdate.Name;
             myStation.Longitude = stationToUpdate.Longitude;
             myStation.Latitude = stationToUpdate.Latitude;
             myStation.ChargeSlots = stationToUpdate.ChargeSlots;
             // listeeeee
+            DataSource.StationList.Add(myStation);
 
 
-            DataSource.StationList.Add(stationToUpdate);
+        }
+        #endregion
 
+        #region UpdateClient
+        public void UpdateClient(Client ClientToUpdate)
+        {
+            Client myClient = new Client();
+            myClient.ID = -1;
+            myClient = DataSource.ClientList.Find(x => x.ID == ClientToUpdate.ID);
+            
+            if (myClient.ID == -1)
+            {
+                throw new ClientException("This Client doesn't exist in the system.");
 
+            }
+            DataSource.ClientList.Remove(myClient);
+            myClient.ID = ClientToUpdate.ID;
+            myClient.Name = ClientToUpdate.Name;
+            myClient.Phone = ClientToUpdate.Phone;
+            myClient.Latitude = ClientToUpdate.Latitude;
+            myClient.Longitude = ClientToUpdate.Longitude;
+            DataSource.ClientList.Add(myClient);
         }
         #endregion
         #endregion

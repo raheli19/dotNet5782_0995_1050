@@ -9,37 +9,42 @@ namespace IDAL
 {
     public interface IDal
     {
-        void AddDrone(Drone drone);// add a new drone to the dronelist
+       void AddDrone(Drone drone);// add a new drone to the dronelist
 
-        void addClient(Client client);
+       void addClient(Client client);
 
-         void addStation(Station station);
+       void addStation(Station station);
 
-        void addParcel(Parcel parcel);
+       void addParcel(Parcel parcel);
 
-         void addDroneCharge(DroneCharge dc);
+       void addDroneCharge(DroneCharge dc);
 
-         void AddParcelToDrone(Parcel parcel,Drone d); // associate a parcel to a drone
+       void AddParcelToDrone(Parcel parcel,Drone d); // associate a parcel to a drone
 
-        void Assignement(int parcelId, int droneId);
+       void Assignement(int parcelId, int droneId);
 
        void IsPickedUp(int parcelId, int droneId);
 
-        void DeliveredToClient(int parcelId);//deliver a package to a customer
+       void DeliveredToClient(int parcelId);//deliver a package to a customer
 
-         void DroneToCharge(int droneId, int stationId);
+       void DroneToCharge(int droneId, int stationId);
 
-         void DroneCharged(int droneId, int stationId);
+       void DroneCharged(int droneId, int stationId);
 
-        Station StationById(int id);
-        Drone DroneById(int id);
-        Client ClientById(int id);
-        Parcel ParcelById(int id);
-        IEnumerable<Station> StationList();
+       void UpdateDrone(Drone droneToUpdate);
 
-        IEnumerable<Drone> DroneList();
-        IEnumerable<Client> ClientList();
-        IEnumerable<Parcel> ParcelList();
+       void UpdateStation(Station stationToUpdate);
+
+       void UpdateClient(Client clientToUpdate);
+       Station StationById(int id);
+       Drone DroneById(int id);
+       Client ClientById(int id);
+       Parcel ParcelById(int id);
+       IEnumerable<Station> StationList();
+
+       IEnumerable<Drone> DroneList();
+       IEnumerable<Client> ClientList();
+       IEnumerable<Parcel> ParcelList();
        
     }
 }

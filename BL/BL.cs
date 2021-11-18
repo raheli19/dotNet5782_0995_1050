@@ -281,43 +281,70 @@ namespace BL
 
         //-----------------------------------UPDATE-FUNCTIONS----------------------------------------
 
-        public void updateDrone(int Id, string newModel) 
+        public void updateDroneName(int Id, string newModel) 
         {
-            //foreach va chercher dans la liste selon le id
-            Drone d = GetDrone(Id);
-            
-        
+            try
+            {
+                IDAL.DO.Drone d = p.DroneById(Id);
+                d.Model = newModel;
+                p.UpdateDrone(d);
+
+            }
+            catch(DroneException ex)
+            {
+                throw new DroneException("Can't update the name", ex);
+            }
         
         }
-
-        public void updateStation(int Id, int newName = -1, int newCS = -1)
+        public void updateStationName_CS(int Id, int newName = -1, int newCS = -1)
         {
-            Station s = GetStation(Id);
-            if (newName != -1)
+            try
             {
-                s.Name = newName;
+                IDAL.DO.Station s = p.StationById(Id);
+                if (newName != -1)
+                    s.Name = newName;
+                if (newCS != -1)
+                    s.ChargeSlots = newCS;
+                p.UpdateStation(s);
             }
-
-            if (newCS != -1)
+            catch (StationException ex)
             {
-                s.ChargeSlots = newCS;
+                throw new StationException("Can't update the station name and/or the number of chargeSlots", ex);
             }
             
             //Enlever de la list puis le remettre
 
         }
-        public void updateClient(int Id, string newName = " ", string newTel = " ") 
+        public void updateClientName_Phone(int Id, string newName = " ", string newTel = " ") 
         {
-            Client c = GetClient(Id);
-            if(newName!=" ")
+            try
             {
-                c.Name = newName;
+                IDAL.DO.Client c = p.ClientById(Id);
+                if (newName != " ")
+                {
+                    c.Name = newName;
+                }
+                p.UpdateClient(c);
+            }
+            catch(ClientException ex)
+            {
+                throw new ClientException("Can't update the client name",ex);
             }
         
         }
+        public void DroneToCharge(int DroneId)
+        {
 
-        
-        public void DroneToCharge(int DroneId) { }
+            DroneDescription myDrone = DroneList.Find(Drone => Drone.Id == DroneId);
+            if (myDrone == null)
+            {
+                throw new DroneException("Drone not found");
+            }
+            if (myDrone.Status == DroneStatuses.free)
+            {
+
+            }
+        }
 
         public void DroneCharged(int DroneId, double timeInCharge) { }
 

@@ -27,11 +27,11 @@ namespace IBL
 
         //functions UPDATE
 
-        void updateDrone(int Id,string newName);
+        void updateDroneName(int Id,string newName);
 
-        void updateStation(int Id, int newName=-1,int newCS=-1);
+        void updateStationName_CS(int Id, int newName=-1,int newCS=-1);
 
-        void updateClient(int Id, string newName =" ", string newTel=" ");
+        void updateClientName_Phone(int Id, string newName =" ", string newTel=" ");
 
         void DroneToCharge(int DroneId);
 
