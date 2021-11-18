@@ -346,21 +346,45 @@ namespace BL
             }
             if (myDrone.Status == DroneStatuses.free)
             {
+                Station nearestStation = NearestStation(myDrone.loc, true);
+                double d = distance(myDrone.loc.latitude, myDrone.loc.longitude, nearestStation.loc.latitude, nearestStation.loc.longitude);
+                bool canGoToCharge = false;
+                if (DistanceAccToBattery(myDrone.battery) >= d)
+                    canGoToCharge = true;
+                if(canGoToCharge==true)
+                {
+                    myDrone.battery -= BatteryAccToDistance(DistanceAccToBattery(myDrone.battery));// substract the account of percetn from the battery to go to the nearest station
+                    DroneDescription tempDD = new DroneDescription();//UPDATE DroneDescriptionLIST IN BL
+                    tempDD = myDrone;
+                    tempDD.loc = nearestStation.loc;
+                    tempDD.Status = DroneStatuses.maintenance;
+                    DroneList.Remove(myDrone);
+                    DroneList.Add(tempDD);
 
+                    p.AddFromBLDroneCharging(myDrone.Id, nearestStation.ID);//ADD The DroneCharge(drone+station) to DAL 
+                   
+                }
             }
         }
-
+        //---------------------------------------ACTIONS------------------------------------------------
+        #region Dronecharged
         public void DroneCharged(int DroneId, double timeInCharge) { }
+        #endregion
 
+        #region Assignement
         public void Assignement(int DroneId) { }
+        #endregion
 
+        #region PickedUp
         public void PickedUp(int DroneId) { }
+        #endregion
 
+        #region Delivered
         public void delivered(int DroneId) { }
-
+        #endregion
 
         //-----------------------------------PRINT-FUNCTIONS----------------------------------------
-
+        #region PRINTING
         public void printStation() { }
         public void printDrone() { }
         public void printClient() { }
@@ -371,6 +395,63 @@ namespace BL
         public void printParcelList() { }
         public void printParcelsNotAssigned() { }
         public void printFreeStations() { }
+        #endregion
 
+        //Distance
+        static double distance(double lat1, double lon1, double lat2, double lon2)
+        {
+            var myPI = 0.017453292519943295;    // Math.PI / 180
+            var a = 0.5 - Math.Cos((lat2 - lat1) * myPI) / 2 +
+                    Math.Cos(lat1 * myPI) * Math.Cos(lat2 * myPI) *
+                    (1 - Math.Cos((lon2 - lon1) * myPI)) / 2;
+
+            return 12742 * Math.Asin(Math.Sqrt(a)); // 2 * R; R = 6371 km
+        }
+
+        public Station NearestStation(Localisation l,bool flag)
+        {
+            Station s = new Station();
+            double lat1 = l.latitude;
+            double long1 = l.longitude;
+            double minDistance = 99999999;
+            double tempDistance = 0;
+
+            foreach(var item in p.StationList())
+            {
+                if(flag==true)
+                   // verifier les chargeslots 
+                tempDistance = distance(lat1, long1, item.Latitude, item.Longitude);
+
+
+                if (minDistance > tempDistance)
+                {
+                    minDistance = tempDistance;// keeps the closest one
+                    s.ID = item.ID;
+                    s.Name = item.ID;
+                    s.loc.longitude = item.Longitude;
+                    s.loc.latitude = item.Latitude;
+                    s.ChargeSlots = item.ChargeSlots;
+                }
+            }
+            return s;
+        }
+
+        public double DistanceAccToBattery(double battery)
+        {
+            //Le drone perd 1% en 7 min  et la vitesse du drone  de 50 km/h
+           double timeInHours = 7 / 60;
+           double speed = 50;  //50km/h
+           double totalTime = timeInHours * battery;
+            double distance = totalTime * speed;
+            return distance;
+
+        }
+
+        public double BatteryAccToDistance(double distance)
+        {
+            double time = distance / 50;
+            double batteryLost = time / (7 / 60);
+            return batteryLost;
+        }
     }
 }

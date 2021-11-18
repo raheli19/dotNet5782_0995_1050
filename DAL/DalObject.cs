@@ -331,6 +331,16 @@ namespace DalObject
             DataSource.ClientList.Add(myClient);
         }
         #endregion
+
+        public void AddFromBLDroneCharging(int DroneID,int StationID)
+        {
+            DroneCharge DC = new DroneCharge();
+            DC.DroneId = DroneID;
+            DC.StationId = StationID;
+            addDroneCharge(DC);
+
+
+        }
         #endregion
 
         //-----------------------------------ACTIONS-------------------------------------------
@@ -722,13 +732,16 @@ namespace DalObject
             return IdStation;
 
         }
-       
-            public static IEnumerable<T> GetNth<T>(this IList<T> list, int n)
-        {
+       // trouver la enieme sttion dans la liste
 
-            from var station in StationList.GetNth(i) select station;
-            return ;
-        }
 
-    }
+
+    //        public static IEnumerable<T> GetNth<T>(this IList<T> list, int n)
+    //    {
+
+    //        from var station in StationList.GetNth(i) select station;
+    //        return ;
+    //    }
+
+    //}
 }

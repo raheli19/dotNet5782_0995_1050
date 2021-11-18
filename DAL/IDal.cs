@@ -36,6 +36,8 @@ namespace IDAL
        void UpdateStation(Station stationToUpdate);
 
        void UpdateClient(Client clientToUpdate);
+
+        void AddFromBLDroneCharging(int DroneID, int StationID);
        Station StationById(int id);
        Drone DroneById(int id);
        Client ClientById(int id);
@@ -46,6 +48,12 @@ namespace IDAL
        IEnumerable<Client> ClientList();
        IEnumerable<Parcel> ParcelList();
        
+
+      
+        
+        List<int> IdStation();
+        Station FoundStation(int);
+
     }
 }
  
