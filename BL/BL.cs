@@ -125,7 +125,7 @@ namespace BL
             return c;
         }
         #endregion
-
+        #region GetStation
         public Station GetStation(int id)
         {
             Station s = default;
@@ -144,6 +144,9 @@ namespace BL
             }
             return s;
         }
+        #endregion
+
+        #region GetDrone
         public Drone GetDrone(int id)
         {
             Drone d = default;
@@ -162,10 +165,10 @@ namespace BL
             return d;
 
         }
-
+        #endregion
 
         //-----------------------------------ADD-FUNCTIONS----------------------------------------
-        
+
         public void addStation(IBL.BO.Station s)   
         {
             //IDAL.DO.Station stat = new IDAL.DO.Station();
