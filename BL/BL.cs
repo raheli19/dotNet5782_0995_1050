@@ -810,15 +810,29 @@ namespace BL
                     if (item2.StationId == item.ID)
                         statD.fullChargeSlots++;
                 }
+
                 statD.freeChargeSlots = item.ChargeSlots;// free ones
                 statList.Add(statD);// add it to the list
 
             }
             return statList;
         }
-        public void printDroneList() { }
+        public <DroneDescription> printDroneList() 
+        {
+            return this.DroneList;
+        }
         public IEnumerable<ClientAc> printClientList() { }
-        public void printParcelList() { }
+        public IEnumerable<ParcelDescription> printParcelList() 
+        {
+            List<ParcelDescription> parcelList = new List<ParcelDescription>();
+            ParcelDescription tempPar = new ParcelDescription();
+            foreach(var item in p.ParcelList())
+            {
+                tempPar.Id = item.ID;
+                tempPar.SenderName = item.SenderId;
+            }
+
+        }
         public void printParcelsNotAssigned() { }
         public void printFreeStations() { }
         #endregion
