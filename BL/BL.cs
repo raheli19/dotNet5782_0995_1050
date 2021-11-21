@@ -146,7 +146,6 @@ namespace BL
             return s;
         }
         #endregion
-
         #region GetDrone
         public Drone GetDrone(int id)
         {
@@ -166,6 +165,35 @@ namespace BL
             return d;
 
         }
+        #endregion
+
+        #region GetParcel
+
+        public Parcel GetParcel(int id)
+        {
+            Parcel myParcel = default;
+            try
+            {
+                IDAL.DO.Parcel dalParcel = p.ParcelById(id);
+                myParcel.ID = dalParcel.ID;
+                myParcel.Sender.ID = dalParcel.SenderId;
+                myParcel.Target.ID = dalParcel.TargetId;
+                myParcel.Weight = (WeightCategories)dalParcel.Weight;
+                myParcel.Priority = (Priorities)dalParcel.Priority;
+                myParcel.Requested = dalParcel.Requested;
+                myParcel.Scheduled = dalParcel.Scheduled;
+                myParcel.PickedUp = dalParcel.PickedUp;
+                myParcel.Delivered = dalParcel.Delivered;
+                myParcel.Drone.ID = dalParcel.DroneId;
+            }
+            catch (IDAL.DO.DroneException drEX)
+            {
+                throw new DroneException($"Drone ID {id} was not found", drEX);
+            }
+            return myParcel;
+        }
+
+
         #endregion
 
         //-----------------------------------ADD-FUNCTIONS----------------------------------------
@@ -578,7 +606,8 @@ namespace BL
         public Station displayStation(int stationId) 
         {
             Station s = GetStation(stationId);  //recupere les donnees de la DAL
-             //the only missing is the list of drones
+                                                //the only field missing is the list of drones
+            List<DroneCharging> droneCharging = new List<DroneCharging>();
             List<int> DronesID = new List<int>();
             foreach(var item in p.DroneChargeList())
             {
@@ -592,20 +621,180 @@ namespace BL
             {
                 if (item.Id == DronesID[i])
                 {
-                    s.DroneCharging[j].ID = item.Id;
-                    s.DroneCharging[j].battery = item.battery;
+                    i++;
+                    //s.DroneCharging[j].ID = item.Id;
+                    //s.DroneCharging[j].battery = item.battery;
+                    droneCharging[j].ID= item.Id;
+                    droneCharging[j].battery = item.battery;
+                    j++;
+                }
+             
+            }
+            s.DroneCharging = droneCharging;
+            return s;
+        }
+        public Drone displayDrone(int droneId) 
+        {
+            Drone d = GetDrone(droneId); //Copies the fields from DAL
+            //the missing fields are:MaxWeight,Status,initialLoc,ParcelIndelivering
+            DroneDescription tmp = DroneList.Find(x => x.Id == droneId);
+            d.MaxWeight = tmp.weight;
+            d.Status = tmp.Status;
+            d.initialLoc = tmp.loc;
+            ParcelInDelivering PID = new ParcelInDelivering();
+            if (d.Status == DroneStatuses.shipping)
+            {
+                foreach(var item in p.ParcelList())
+                {
+                    if (item.DroneId==droneId)
+                    {
+                        PID.ID = item.ID;
+                        PID.weight = (WeightCategories)item.Weight;
+                        PID.priority = (Priorities)item.Priority;
+                        ClientInParcel sender = new ClientInParcel();
+                        ClientInParcel target = new ClientInParcel();
+                        sender.ID = item.SenderId;
+                        sender.name = p.ClientById(item.SenderId).Name;
+                        target.ID = item.TargetId;
+                        target.name= p.ClientById(item.TargetId).Name;
+                        PID.Sender = sender;
+                        PID.Target = target;
+                        Localisation pickLoc = new Localisation();
+                        Localisation delLoc = new Localisation();
+                        pickLoc.latitude= p.ClientById(item.SenderId).Latitude;
+                        pickLoc.longitude=p.ClientById(item.SenderId).Longitude;
+                        delLoc.latitude= p.ClientById(item.TargetId).Latitude;
+                        delLoc.longitude = p.ClientById(item.TargetId).Longitude;
+                        PID.picking = pickLoc;
+                        PID.delivered = delLoc;
+                        //calculer la distance de transport
+                    }
                 }
             }
-            
-            return s;
+            d.myParcel = PID;
+            return d;
+        }
+        public Client displayClient(int clientId) 
+        {
+            Client c = GetClient(clientId);   //Copies the fields from DAL
+
+            List<ParcelToClient> TempParcLstFromClient = new List<ParcelToClient>();
+
+            foreach (var item in p.ParcelList())
+            {
+                if(item.SenderId==clientId)  //The parcel has been sent by this client
+                {
+                    ParcelToClient PCT = new ParcelToClient();
+                    PCT.ID = item.ID;
+                    PCT.weight = (WeightCategories)item.Weight;
+                    PCT.priority = (Priorities)item.Priority;
+                    if (item.Requested == DateTime.Now)
+                    {
+                        PCT.Status = ParcelStatus.requested;
+                    }
+                    else if (item.Scheduled == DateTime.Now)
+                    {
+                        PCT.Status = ParcelStatus.scheduled;
+                    }
+                    else if (item.PickedUp == DateTime.Now)
+                    {
+                        PCT.Status = ParcelStatus.pickedup;
+                    }
+                    else if (item.Delivered == DateTime.Now)
+                    {
+                        PCT.Status = ParcelStatus.delivered;
+                    }
+                    ClientInParcel myClient = new ClientInParcel();
+                    myClient.ID = clientId;
+                    myClient.name = p.ClientById(clientId).Name;
+
+                    PCT.client = myClient;
+                    TempParcLstFromClient.Add(PCT);
+
+                }
+            }
+            c.ParcLstFromClient = TempParcLstFromClient;
+
+
+            List<ParcelToClient> TempParcLstToClient = new List<ParcelToClient>();
+
+            foreach (var item in p.ParcelList())
+            {
+                if (item.TargetId == clientId)  //The parcel has been sent by this client
+                {
+                    ParcelToClient PCT = new ParcelToClient();
+                    PCT.ID = item.ID;
+                    PCT.weight = (WeightCategories)item.Weight;
+                    PCT.priority = (Priorities)item.Priority;
+                    if (item.Requested == DateTime.Now)
+                    {
+                        PCT.Status = ParcelStatus.requested;
+                    }
+                    else if (item.Scheduled == DateTime.Now)
+                    {
+                        PCT.Status = ParcelStatus.scheduled;
+                    }
+                    else if (item.PickedUp == DateTime.Now)
+                    {
+                        PCT.Status = ParcelStatus.pickedup;
+                    }
+                    else if (item.Delivered == DateTime.Now)
+                    {
+                        PCT.Status = ParcelStatus.delivered;
+                    }
+                    ClientInParcel myClient = new ClientInParcel();
+                    myClient.ID = clientId;
+                    myClient.name = p.ClientById(clientId).Name;
+
+                    PCT.client = myClient;
+                    TempParcLstToClient.Add(PCT);
+
+                }
+            }
+
+            c.ParcLstToClient = TempParcLstToClient;
+
+            return c;
+        
+        }
+        public Parcel displayParcel(int parcelId) 
+        {
+
+            Parcel prcl = GetParcel(parcelId);
+            //The missing fields are Sender(ClientInParcel),Target(ClientInParcel) and Drone(droneWithParcel)
+
+            ClientInParcel tempSender = new ClientInParcel();
+            ClientInParcel tempTarget = new ClientInParcel();
+            DroneWithParcel tempDrone = new DroneWithParcel();
+
+            tempSender.ID = prcl.Sender.ID;
+            tempSender.name = p.ClientById(tempSender.ID).Name;
+            prcl.Sender = tempSender;
+
+            tempTarget.ID = prcl.Target.ID;
+            tempTarget.name = p.ClientById(tempTarget.ID).Name;
+            prcl.Target = tempTarget;
+
+            tempDrone.ID = prcl.Drone.ID;
+            tempDrone.battery = p.DroneById(tempDrone.ID).Battery;
+            foreach(var item in DroneList)
+            {
+                if (item.Id == tempDrone.ID)
+                {
+                    tempDrone.departureLoc = item.loc;
+                }
+            }
+            prcl.Drone = tempDrone;
+            return prcl;
+
+
         }
         public void displayDrone() { }
         public void displayClient() { }
         public void displayParcel() { }
-
         public void printStationList() { }
         public void printDroneList() { }
-        public void printClientList() { }
+        public IEnumerable<ClientAc> printClientList() { }
         public void printParcelList() { }
         public void printParcelsNotAssigned() { }
         public void printFreeStations() { }
@@ -655,7 +844,7 @@ namespace BL
 
         public double DistanceAccToBattery(double battery)
         {
-            //Le drone perd 1% en 7 min  et la vitesse du drone  de 50 km/h
+            //Le drone perd 1% en 7 min  et la vitesse du drone de 50 km/h
             // le drone gagne 1% en 7 min
            double timeInHours = 7 / 60;
            double speed = 50;  //50km/h
