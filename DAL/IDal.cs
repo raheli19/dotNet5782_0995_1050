@@ -21,7 +21,15 @@ namespace IDAL
 
        void AddParcelToDrone(Parcel parcel,Drone d); // associate a parcel to a drone
 
-       void Assignement(int parcelId, int droneId);
+        void UpdateDrone(Drone droneToUpdate);
+
+        void updateDroneChargeList(int droneId, int statId);
+
+        void UpdateStation(Station stationToUpdate);
+
+        void UpdateClient(Client clientToUpdate);
+
+        void Assignement(int parcelId, int droneId);
 
        void IsPickedUp(int parcelId, int droneId);
 
@@ -31,34 +39,29 @@ namespace IDAL
 
        void DroneCharged(int droneId, int stationId);
 
-       void UpdateDrone(Drone droneToUpdate);
+       
 
-       void UpdateStation(Station stationToUpdate);
 
-       void UpdateClient(Client clientToUpdate);
-
-        void AddFromBLDroneCharging(int DroneID, int StationID);
        Station StationById(int id);
        Drone DroneById(int id);
        Client ClientById(int id);
        Parcel ParcelById(int id);
-       IEnumerable<Station> StationList();
 
+       IEnumerable<Station> StationList();
        IEnumerable<Drone> DroneList();
        IEnumerable<Client> ClientList();
        IEnumerable<Parcel> ParcelList();
-
         IEnumerable<DroneCharge> DroneChargeList();
 
 
+        Parcel FindParcelAssociatedWithDrone(int droneId);
+        double FindLat(int myID);
+        double FindLong(int myID);
+        void AddFromBLDroneCharging(int DroneID, int StationID);
+        void AddParcelFromBL(Parcel p);
 
         List<int> IdStation();
-        Station FoundStation(int id);
-        Parcel FindParcelAssociatedWithDrone(int droneId);
-        double FindLong(int myID);
-        double FindLat(int myID);
-        void AddParcelFromBL(Parcel p);
-        public void updateDroneChargeList(int droneId, int statId);
+        public Station FoundStation(int id);
 
     }
 }

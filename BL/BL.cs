@@ -103,7 +103,7 @@ namespace BL
             }
 
         }
-
+       
         #region GetClient
         public Client GetClient(int id)
         {
@@ -313,8 +313,10 @@ namespace BL
         }
         #endregion
 
-        //-----------------------------------UPDATE-FUNCTIONS----------------------------------------
+        //-----------------------------------UPDATE-FUNCTIONS-------------------------------------
         #region UPDATING
+
+        #region Update DroneName
         public void updateDroneName(int Id, string newModel) 
         {
             try
@@ -330,6 +332,9 @@ namespace BL
             }
         
         }
+        #endregion
+
+        #region Update StationName
         public void updateStationName_CS(int Id, int newName = -1, int newCS = -1)
         {
             try
@@ -349,6 +354,9 @@ namespace BL
             //Enlever de la list puis le remettre
 
         }
+        #endregion
+
+        #region Update ClientName_Phone
         public void updateClientName_Phone(int Id, string newName = " ", string newTel = " ") 
         {
             try
@@ -366,6 +374,9 @@ namespace BL
             }
         
         }
+        #endregion
+
+        #region DroneToCharge
         public void DroneToCharge(int DroneId)
         {
 
@@ -412,7 +423,9 @@ namespace BL
             else
                 throw new DroneException("The drone isn't avaiblable!");
         }
+        #endregion
 
+        #region DroneCharged
         public void DroneCharged(int ID, double time)
         {
             DroneDescription myDr = new DroneDescription();
@@ -476,7 +489,9 @@ namespace BL
 
 
         }
+        #endregion
 
+        #region Assignement
         public void Assignement(int ID)
         {
             IDAL.DO.Drone Daldrone = p.DroneById(ID); //from the dal
@@ -542,11 +557,8 @@ namespace BL
             
         }
         #endregion
-        //---------------------------------------ACTIONS------------------------------------------------
-       
-        #region Assignement
-        public void Assignement(int DroneId) { }
         #endregion
+        //---------------------------------------ACTIONS------------------------------------------
 
         #region PickedUp
         public void PickedUp(int DroneId)
@@ -615,9 +627,10 @@ namespace BL
         }
         #endregion
 
-        //-----------------------------------PRINT-FUNCTIONS----------------------------------------
+        //-----------------------------------PRINT-FUNCTIONS--------------------------------------
         #region PRINTING
 
+        #region displayStation
         public Station displayStation(int stationId) 
         {
             Station s = GetStation(stationId);  //recupere les donnees de la DAL
@@ -648,6 +661,9 @@ namespace BL
             s.DroneCharging = droneCharging;
             return s;
         }
+        #endregion
+
+        #region displayDrone
         public Drone displayDrone(int droneId) 
         {
             Drone d = GetDrone(droneId); //Copies the fields from DAL
@@ -689,6 +705,9 @@ namespace BL
             d.myParcel = PID;
             return d;
         }
+        #endregion
+
+        #region displayClient
         public Client displayClient(int clientId) 
         {
             Client c = GetClient(clientId);   //Copies the fields from DAL
@@ -772,6 +791,9 @@ namespace BL
             return c;
         
         }
+        #endregion
+
+        #region displayParcel
         public Parcel displayParcel(int parcelId) 
         {
 
@@ -804,7 +826,9 @@ namespace BL
 
 
         }
-        
+        #endregion
+
+        #region IENUMERABLE 
         public IEnumerable<StationDescription> DisplayStationList() 
         {
             
@@ -949,9 +973,12 @@ namespace BL
             }
             return PDList;
         }
-         public void printFreeStations() { }
+        #endregion
         #endregion
 
+
+
+        //------------------------------------------HELP------------------------------------------
         //Distance
         static double distance(double lat1, double lon1, double lat2, double lon2)
         {
