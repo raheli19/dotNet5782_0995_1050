@@ -4,9 +4,7 @@ using System.Text;
 using IBL.BO;
 using DAL;
 using DalObject;
-
-
-
+using System.Linq;
 
 namespace BL
 {
@@ -792,7 +790,32 @@ namespace BL
         public void printStationList() 
         { }
         public void printDroneList() { }
-        public IEnumerable<ClientAc> printClientList() { }
+        public IEnumerable<ClientActions> displayClientList() 
+        {
+            List<ClientActions> LstCA = new List<ClientActions>();
+            
+            foreach(var item in p.ClientList())
+            {
+                ClientActions tempCA = new ClientActions();
+                tempCA.Id = item.ID;
+                tempCA.name = item.Name;
+                tempCA.phone = item.Phone;
+                IEnumerable<IDAL.DO.Parcel> sent_and_delivLst = p.ParcelList().Where(x=>x.SenderId==item.ID&&x.Delivered!=DateTime.MinValue);
+                IEnumerable<IDAL.DO.Parcel> sent_and_notDelivLst = p.ParcelList().Where(x => x.SenderId == item.ID && x.Delivered == DateTime.MinValue);
+                IEnumerable<IDAL.DO.Parcel> receivLst = p.ParcelList().Where(x => x.TargetId == item.ID && x.Delivered != DateTime.MinValue);
+                IEnumerable<IDAL.DO.Parcel> receivingLst = p.ParcelList().Where(x => x.TargetId == item.ID && x.Delivered == DateTime.Now);
+                int sent_and_delivLstCount = sent_and_delivLst.Count();
+                int sent_and_notDelivLstCount = sent_and_notDelivLst.Count();
+                int receivLstCount = receivLst.Count();
+                int receivingLstCount = receivingLst.Count();
+                tempCA.deliveredParcels = sent_and_delivLstCount;
+                tempCA.deliveringParcels = sent_and_notDelivLstCount;
+                tempCA.receivedParcels = receivLstCount;
+                tempCA.receivingParcels = receivingLstCount;
+                LstCA.Add(tempCA);
+            }
+            return LstCA;
+        }
         public void printParcelList() { }
         public void printParcelsNotAssigned() { }
         public void printFreeStations() { }

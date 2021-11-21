@@ -9,7 +9,7 @@ namespace IBL
         public class ClientInParcel //client in Parcel
         {
             public int ID { set; get; }
-            string name { set; get; }
+           public  string name { set; get; }
 
             public override string ToString()
             {
