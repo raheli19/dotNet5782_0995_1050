@@ -792,7 +792,30 @@ namespace BL
         public void displayDrone() { }
         public void displayClient() { }
         public void displayParcel() { }
-        public void printStationList() { }
+        public IEnumerable<StationDescription> DisplayStationList() 
+        {
+            //id
+            //name
+            //freeslots
+            //fullslots
+            List<StationDescription> statList = new List<StationDescription>();
+            StationDescription statD = new StationDescription();
+            
+            foreach(var item in p.StationList())
+            {
+                statD.Id = item.ID;
+                statD.name = item.Name;
+                foreach( var item2 in p.DroneChargeList())// full chargeSlots
+                {
+                    if (item2.StationId == item.ID)
+                        statD.fullChargeSlots++;
+                }
+                statD.freeChargeSlots = item.ChargeSlots;// free ones
+                statList.Add(statD);// add it to the list
+
+            }
+            return statList;
+        }
         public void printDroneList() { }
         public IEnumerable<ClientAc> printClientList() { }
         public void printParcelList() { }
