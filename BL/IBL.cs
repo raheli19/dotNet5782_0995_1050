@@ -12,7 +12,7 @@ namespace IBL
         //using functions
 
         //functions ADD
-
+        Parcel GetParcel(int id);
         Client GetClient(int id);
         Station GetStation(int id);
         Drone GetDrone(int id);

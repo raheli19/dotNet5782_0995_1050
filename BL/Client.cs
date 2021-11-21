@@ -14,9 +14,9 @@ namespace IBL
             public String Phone { get; set; }
             public Localisation ClientLoc { set; get; }
 
-            List<ParcelToClient> ParcLstFromClient = new List<ParcelToClient>();
+            public List<ParcelToClient> ParcLstFromClient = new List<ParcelToClient>();
 
-            List<ParcelToClient> ParcLstToClient = new List<ParcelToClient>();
+           public  List<ParcelToClient> ParcLstToClient = new List<ParcelToClient>();
 
 
             public override string ToString()
