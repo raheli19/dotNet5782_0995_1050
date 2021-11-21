@@ -6,7 +6,7 @@ namespace IBL
 {
     namespace BO
     {
-        public class StationDescription
+       public class StationDescription
         {
             public int Id { get; set; }
             public int name { get; set; }
