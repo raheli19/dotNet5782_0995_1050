@@ -10,6 +10,15 @@ namespace IBL
         {
             public int ID { set; get; }
             public double battery { set; get; }
+
+            public override string ToString()
+            {
+                String result = "";
+                result += $"The DroneCharging's id id {ID},\n";
+                result += $"The battery of the Drone is at {battery}%.\n";
+
+                return result;
+            }
         }
     }
 }

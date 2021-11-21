@@ -11,9 +11,20 @@ namespace IBL
             public int Id { get; set; }
             public string name { get; set; }
 
-            public int FreeChargeSlots { get; set; }
-            public int FullChargeSlots { get; set; }
+            public int freeChargeSlots { get; set; }
+            public int fullChargeSlots { get; set; }
 
+            public override string ToString()
+            {
+                string result = "";
+                result += $"ID is: {Id},\n";
+
+                result += $"Name is: {name},\n";
+                result += $"Amount of freeChargeSlots: {freeChargeSlots},\n";
+                result += $"Amount of fullChargeSlots: {fullChargeSlots},\n";
+
+                return result;
+            }
 
 
         }

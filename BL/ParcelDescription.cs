@@ -16,6 +16,16 @@ namespace IBL
 
             // public ParcelStatus Status{ get; set; }
 
+            public override string ToString()
+            {
+                String result = "";
+                result += $"ID is: {Id},\n";
+                result += $"Sender's name is {SenderName},\n";
+                result += $"Target's name is {TargetName},\n";
+                result += $"Parcel's weight is: {weight},\n";
+                result += $"Priority is: {priority}.\n";
+                return result;
+            }
 
 
 

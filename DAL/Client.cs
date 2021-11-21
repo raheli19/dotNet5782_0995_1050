@@ -6,7 +6,7 @@ namespace IDAL
  
 
          public struct Client
-        {
+         {
             public int ID { get; set; }
             public String Name { get; set; }
             public String Phone { get; set; }
@@ -23,6 +23,6 @@ namespace IDAL
                 result += $"Latitude is: {(int)(this.Latitude)}°{(int)((this.Latitude - (int)(this.Latitude)) * 60)}' {((this.Latitude - (int)(this.Latitude)) * 60 - (int)((this.Latitude - (int)(this.Latitude)) * 60)) * 60}'',\n";
                 return result;
             }
-        }
+         }
     }
 }

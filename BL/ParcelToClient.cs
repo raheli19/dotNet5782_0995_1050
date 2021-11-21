@@ -15,7 +15,15 @@ namespace IBL
 
             public ParcelStatus Status { set; get; }
             public ClientInParcel client { set; get; }
-            
+
+
+            public override string ToString()
+            {
+
+                return
+                    $"ID: {ID}\nWeight:{weight}\nPriority:{priority}\n" +
+                    $"Status: {Status}\nClient: {client}";
+            }
         }
     }
 }

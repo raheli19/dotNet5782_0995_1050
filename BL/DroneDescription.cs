@@ -18,6 +18,19 @@ namespace IBL
             public Localisation loc { get; set; }
             public int DeliveredParcels { get; set; }
 
+            public override string ToString()
+            {
+                String result = "";
+                result += $"ID is: {Id},\n";
+                result += $"Name is: {Model},\n";
+                result += $"Weight can carry is: {weight},\n";
+                result += $"Battery is at: {battery}%,\n";
+                result += $"Drone's statut is: {Status},\n";
+                result += $"Longitude is: {(int)(this.loc.longitude)}°{(int)((this.loc.longitude - (int)(this.loc.longitude)) * 60)}' {((this.loc.longitude - (int)(this.loc.longitude)) * 60 - (int)((this.loc.longitude - (int)(this.loc.longitude)) * 60)) * 60}'',\n";
+                result += $"Latitude is: {(int)(this.loc.latitude)}°{(int)((this.loc.latitude - (int)(this.loc.latitude)) * 60)}' {((this.loc.latitude - (int)(this.loc.latitude)) * 60 - (int)((this.loc.latitude - (int)(this.loc.latitude)) * 60)) * 60}'',\n";
+                result += $"Number of delivered parcels: {DeliveredParcels}.\n";
+                return result;
+            }
 
         }
     }

@@ -16,7 +16,19 @@ namespace IBL
             public int receivedParcels { get; set; }
             public int receivingParcels { get; set; }
 
-
+            public override string ToString()
+            {
+                String result = "";
+                result += $"ID is: {Id},\n";
+                result += $"Name is: {name},\n";
+                result += $"Phone is: {phone.Substring(0, 3) + '-' + phone.Substring(3)},\n";
+                result += $"The customer sent {deliveredParcels} packages,\n";
+                result += $"The customer is sending {deliveringParcels} packages,\n";
+                result += $"The customer received: {receivedParcels} packages,\n";
+                result += $"The customer is wainting for {receivingParcels} packages.\n";
+                
+                return result;
+            }
         }
-        }
+    }
 }
