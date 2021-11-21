@@ -34,7 +34,7 @@ namespace BL
                 
                 foreach (var elmtParcel in p.ParcelList())
                 {
-                    if (elmtParcel.DroneId == item.ID)
+                    if (elmtParcel.DroneId == item.ID) //gets all the parcel's info from the dal
                     {
                         ParcelInClient.ID = elmtParcel.ID;
                         ParcelInClient.weight = (WeightCategories)elmtParcel.Weight;
@@ -57,7 +57,8 @@ namespace BL
                     dr.Status = DroneStatuses.shipping;
                     if (ParcelInClient.Status == ParcelStatus.scheduled && ParcelInClient.Status != ParcelStatus.pickedup)
                     {// la station la plus proche
-
+                        Station s = NearestStation(dr.loc, true);
+                        dr.loc = s.loc;
                     }
                 }
                 else if (ParcelInClient.Status == ParcelStatus.delivered || ParcelInClient.Status == ParcelStatus.scheduled)// the drone isn't shipping
@@ -398,7 +399,6 @@ namespace BL
                 }
             }
         }
-
 
         public void DroneCharged(int ID, double time)
         {
@@ -787,8 +787,33 @@ namespace BL
 
 
         }
-        public void printStationList() 
-        { }
+        public void displayDrone() { }
+        public void displayClient() { }
+        public void displayParcel() { }
+        public IEnumerable<StationDescription> DisplayStationList() 
+        {
+            //id
+            //name
+            //freeslots
+            //fullslots
+            List<StationDescription> statList = new List<StationDescription>();
+            StationDescription statD = new StationDescription();
+            
+            foreach(var item in p.StationList())
+            {
+                statD.Id = item.ID;
+                statD.name = item.Name;
+                foreach( var item2 in p.DroneChargeList())// full chargeSlots
+                {
+                    if (item2.StationId == item.ID)
+                        statD.fullChargeSlots++;
+                }
+                statD.freeChargeSlots = item.ChargeSlots;// free ones
+                statList.Add(statD);// add it to the list
+
+            }
+            return statList;
+        }
         public void printDroneList() { }
         public IEnumerable<ClientActions> displayClientList() 
         {
@@ -842,10 +867,13 @@ namespace BL
 
             foreach(var item in p.StationList())
             {
-                if(flag==true)
-                   // verifier les chargeslots 
-                tempDistance = distance(lat1, long1, item.Latitude, item.Longitude);
-
+                if (flag == true)
+                {
+                    if (item.ChargeSlots > 0)// if there s a slot available
+                    { tempDistance = distance(lat1, long1, item.Latitude, item.Longitude); }
+                    else
+                        continue;
+                }
 
                 if (minDistance > tempDistance)
                 {
