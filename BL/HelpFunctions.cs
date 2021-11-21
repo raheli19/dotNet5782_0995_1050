@@ -4,7 +4,8 @@ using System.Text;
 
 namespace BL
 {
-    class HelpFunctions
+    public class HelpFunctions
     {
+
     }
 }
