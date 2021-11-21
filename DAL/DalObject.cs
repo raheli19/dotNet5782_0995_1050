@@ -769,6 +769,7 @@ namespace DalObject
             }
             return (myClient).Longitude;
         }
+        
         public void AddFromBLDroneCharging(int DroneID, int StationID)
         {
             DroneCharge DC = new DroneCharge();

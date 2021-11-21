@@ -437,7 +437,7 @@ namespace BL
         {
             IDAL.DO.Drone Daldrone = p.DroneById(ID); //from the dal
             DroneDescription BLd = new DroneDescription(); //from the bl
-            foreach (var item in DroneList)
+            foreach (var item in DroneList)// searches the drone in the bllist
             {
                 if (item.Id == ID)
                 {
@@ -454,20 +454,24 @@ namespace BL
             }
             if (BLd.Status != DroneStatuses.free)
                 throw new DroneException("The drone is not free!");
-            IDAL.DO.Parcel parcel = new IDAL.DO.Parcel();
+            IDAL.DO.Parcel parcel = new IDAL.DO.Parcel(); // dalparcel
             bool flag = false;
+            double senderLat = p.FindLat(parcel.SenderId);
+            double senderLong = p.FindLong(parcel.SenderId);
+            double targetLat = p.FindLat(parcel.TargetId);
+            double targetLong = p.FindLong(parcel.TargetId);
+
             foreach (var item in p.ParcelList())
             {
-                double distToSender = distance(BLd.loc.latitude, BLd.loc.longitude, loc lat, lock long) ;
-                if (distToSender > DistanceAccToBattery(BLd.battery))
-                    continue;
+                double distToSender = distance(BLd.loc.latitude, BLd.loc.longitude, senderLat, senderLong);
                 BLd.battery -= BatteryAccToDistance(distToSender);
-                double distToTarget = distance(BLd.loc.latitude, BLd.loc.longitude, loc lat, lock long)
+                double distToTarget = distance(BLd.loc.latitude, BLd.loc.longitude, targetLat, targetLong);
                 if (distToTarget > DistanceAccToBattery(BLd.battery))
                     continue;
                 BLd.battery -= BatteryAccToDistance(distToTarget);
                 // besoin de recharger a partir de combien????
-                // recup loc de la parcel
+                double parcelLat = senderLat;
+                double parcelLong = senderLong;
                 // trouve la station la plus proche
 
                 if (item.Priority != IDAL.DO.Priorities.emergency)
