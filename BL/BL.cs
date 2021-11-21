@@ -856,8 +856,10 @@ namespace BL
                 tempPar.SenderName = Name(item.SenderId);
                 tempPar.TargetName = Name(item.TargetId);
                 tempPar.weight = (WeightCategories)item.Weight;
+                tempPar.priority = (Priorities)item.Priority;
 
             }
+
         }
         public IEnumerable<ParcelDescription> displayParcelsNotAssigned()
         {
