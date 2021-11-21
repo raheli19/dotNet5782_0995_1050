@@ -114,7 +114,7 @@ namespace ConsoleUI_BL
                                 string newMod;
                                 int.TryParse(Console.ReadLine(), out int DroneID);
                                 newMod = Console.ReadLine();
-                                obj.updateDrone(DroneID, newMod);
+                                obj.updateDroneName(DroneID, newMod);
                                 break;
                             case update.STAT:
                                 Console.WriteLine("You chose to update a station. \nPlease enter the Station's Id, its new Name and/or chargeSlots :\n");
@@ -135,7 +135,7 @@ namespace ConsoleUI_BL
                                     Console.WriteLine("Enter the number of chargeSlots\n");
                                     int.TryParse(Console.ReadLine(), out newCs);
                                 }
-                                obj.updateStation(StatID, newNam, newCs);
+                                obj.updateStationName_CS(StatID, newNam, newCs);
                                 break;
 
                             case update.CLIENT:
@@ -155,7 +155,7 @@ namespace ConsoleUI_BL
                                     Console.WriteLine("Please enter new PhoneNumber:\n");
                                     newPnumber = Console.ReadLine();
                                 }
-                                obj.updateClient(myID, NewClName, newPnumber);
+                                obj.updateClientName_Phone(myID, NewClName, newPnumber);
                                 break;
 
 
@@ -203,7 +203,7 @@ namespace ConsoleUI_BL
                             case entities.STATION:
                                 Console.WriteLine("You chose to print a Station, please enter its Id:\n");
                                 int.TryParse(Console.ReadLine(), out int StationId);
-                                Console.WriteLine(obj.displayStation(StationId);// calls the function to print the asked station
+                                Console.WriteLine(obj.displayStation(StationId));// calls the function to print the asked station
                                 break;
 
                             case entities.DRONE:

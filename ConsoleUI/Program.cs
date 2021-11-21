@@ -59,8 +59,6 @@ namespace ConsoleUI
                                 int.TryParse(Console.ReadLine(), out int DID); //DroneID
                                 string myModel;
                                 myModel = Console.ReadLine();
-                                myDrone.MaxWeight = (IDAL.DO.WeightCategories)int.Parse(Console.ReadLine());
-                                myDrone.Status = (IDAL.DO.DroneStatuses)int.Parse(Console.ReadLine());
                                 double.TryParse(Console.ReadLine(), out double battery);
                                 myDrone.ID = DID;
                                 myDrone.Model = myModel;

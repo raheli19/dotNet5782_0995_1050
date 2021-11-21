@@ -164,7 +164,6 @@ namespace BL
 
         }
         #endregion
-
         #region GetParcel
 
         public Parcel GetParcel(int id)
@@ -524,10 +523,7 @@ namespace BL
             
         }
         //---------------------------------------ACTIONS------------------------------------------------
-        #region Dronecharged
-        public void DroneCharged(int DroneId, double timeInCharge) { }
-        #endregion
-
+       
         #region Assignement
         public void Assignement(int DroneId) { }
         #endregion

@@ -53,9 +53,14 @@ namespace IBL
         IEnumerable<StationDescription> DisplayStationList();
         IEnumerable<DroneDescription> displayDroneList();
         IEnumerable<ClientActions> displayClientList();
-        void printParcelList();
+        IEnumerable<ParcelDescription> displayParcelList();
         IEnumerable<ParcelDescription> displayParcelsNotAssigned();
         void printFreeStations();
-
+        double distance(double lat1, double lon1, double lat2, double lon2);
+        Station NearestStation(Localisation l, bool flag);
+        double DistanceAccToBattery(double battery);
+        double BatteryAccToTime(double time);
+        double BatteryAccToDistance(double distance);
+        string Name(int id);
     }
 }
