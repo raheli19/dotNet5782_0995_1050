@@ -52,7 +52,12 @@ namespace IDAL
       
         
         List<int> IdStation();
-        Station FoundStation(int);
+        Station FoundStation(int id);
+        Parcel FindParcelAssociatedWithDrone(int droneId);
+        double FindLong(int myID);
+        double FindLat(int myID);
+        void AddParcelFromBL(Parcel p);
+
 
     }
 }

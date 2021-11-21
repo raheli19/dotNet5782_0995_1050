@@ -503,11 +503,70 @@ namespace BL
         #endregion
 
         #region PickedUp
-        public void PickedUp(int DroneId) { }
+        public void PickedUp(int DroneId)
+        {
+            DroneDescription myDrone = DroneList.Find(Drone => Drone.Id == DroneId);
+            if (myDrone == null)
+            {
+                throw new DroneException("Drone not found");
+            }
+            IDAL.DO.Parcel prcel = p.FindParcelAssociatedWithDrone(DroneId);
+            if ((prcel.Requested == DateTime.Now || prcel.Scheduled == DateTime.Now) && (prcel.PickedUp == DateTime.MinValue)) 
+            {
+                int senderId = prcel.SenderId;
+                Localisation senderLoc=new Localisation();
+                senderLoc.latitude = p.FindLat(senderId);
+                senderLoc.longitude = p.FindLong(senderId);
+                double myDistance = distance(myDrone.loc.latitude, myDrone.loc.longitude, senderLoc.latitude, senderLoc.longitude);
+                DroneDescription tempDD = new DroneDescription();//UPDATE DroneDescriptionLIST IN BL
+                tempDD = myDrone;
+                tempDD.battery -= BatteryAccToDistance(myDistance);
+                tempDD.loc = senderLoc;
+                DroneList.Remove(myDrone);
+                DroneList.Add(tempDD);
+                IDAL.DO.Parcel tempParcel = new IDAL.DO.Parcel();
+                tempParcel = prcel;
+                tempParcel.PickedUp = DateTime.Now;
+                p.AddParcelFromBL(tempParcel);
+            }
+
+
+
+        }
         #endregion
 
         #region Delivered
-        public void delivered(int DroneId) { }
+        public void delivered(int DroneId)
+        {
+            DroneDescription myDrone = DroneList.Find(Drone => Drone.Id == DroneId);
+            if (myDrone == null)
+            {
+                throw new DroneException("Drone not found");
+            }
+            IDAL.DO.Parcel prcel = p.FindParcelAssociatedWithDrone(DroneId);
+
+            if (prcel.PickedUp == DateTime.Now && prcel.Delivered == DateTime.MinValue)
+            {
+                
+                int targetId = prcel.TargetId;
+                Localisation targetLoc = new Localisation();
+                targetLoc.latitude = p.FindLat(targetId);
+                targetLoc.longitude = p.FindLong(targetId);
+                double myDistance = distance(myDrone.loc.latitude, myDrone.loc.longitude, targetLoc.latitude, targetLoc.longitude);
+                DroneDescription tempDD = new DroneDescription();//UPDATE DroneDescriptionLIST IN BL
+                tempDD = myDrone;
+                tempDD.battery -= BatteryAccToDistance(myDistance);
+                tempDD.loc = targetLoc;
+                tempDD.Status = DroneStatuses.free;
+                DroneList.Remove(myDrone);
+                DroneList.Add(tempDD);
+                IDAL.DO.Parcel tempParcel = new IDAL.DO.Parcel();
+                tempParcel = prcel;
+                tempParcel.Delivered = DateTime.Now;
+                p.AddParcelFromBL(tempParcel);
+
+            }
+        }
         #endregion
 
         //-----------------------------------PRINT-FUNCTIONS----------------------------------------
