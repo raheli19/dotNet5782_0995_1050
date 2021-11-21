@@ -787,9 +787,7 @@ namespace BL
 
 
         }
-        public void displayDrone() { }
-        public void displayClient() { }
-        public void displayParcel() { }
+        
         public IEnumerable<StationDescription> DisplayStationList() 
         {
             //id
@@ -797,10 +795,9 @@ namespace BL
             //freeslots
             //fullslots
             List<StationDescription> statList = new List<StationDescription>();
-            StationDescription statD = new StationDescription();
-            
             foreach(var item in p.StationList())
             {
+                StationDescription statD = new StationDescription();
                 statD.Id = item.ID;
                 statD.name = item.Name;
                 foreach( var item2 in p.DroneChargeList())// full chargeSlots
@@ -814,7 +811,11 @@ namespace BL
             }
             return statList;
         }
-        public void printDroneList() { }
+        public  IEnumerable<DroneDescription> displayDroneList() 
+        {
+            return DroneList;
+
+        }
         public IEnumerable<ClientActions> displayClientList() 
         {
             List<ClientActions> LstCA = new List<ClientActions>();
@@ -842,7 +843,21 @@ namespace BL
             return LstCA;
         }
         public void printParcelList() { }
-        public void printParcelsNotAssigned() { }
+        public IEnumerable<ParcelDescription> displayParcelsNotAssigned() 
+        {
+            List<ParcelDescription> PDList = new List < ParcelDescription > ();
+            foreach(var item in p.ParcelList())
+            {
+                if (item.Scheduled == DateTime.MinValue)
+                {
+                    ParcelDescription tempPD = new ParcelDescription();
+                    tempPD.Id = item.ID;
+                }
+            }
+        
+        
+        
+        }
         public void printFreeStations() { }
         #endregion
 

@@ -6,7 +6,7 @@ namespace IBL
 {
     namespace BO
     {
-        class DroneDescription
+       public class DroneDescription
         {
 
             public int Id { set; get; }
