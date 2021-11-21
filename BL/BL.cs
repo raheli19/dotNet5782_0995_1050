@@ -78,10 +78,12 @@ namespace BL
                     // random localisation entre les differentes stations
                     List<int> helplist = p.IdStation();
                     int index = rand.Next(helplist.Count);//yaeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeelllllllllll
-                    Station s =( p.StationList()).get(index);
+                    int s = helplist[index];
+                    IDAL.DO.Station stat = p.StationById(s);
                     // recuperer la station selon son makom
                     // prendre sa loc et la mettre dans le drone
-                    dr.loc = s.loc;
+                    dr.loc.latitude = stat.Latitude ;
+                    dr.loc.longitude = stat.Longitude;
                     dr.battery = h.getRandomNumber(0, 20);
 
                 }
