@@ -790,10 +790,7 @@ namespace BL
         
         public IEnumerable<StationDescription> DisplayStationList() 
         {
-            //id
-            //name
-            //freeslots
-            //fullslots
+            
             List<StationDescription> statList = new List<StationDescription>();
             foreach(var item in p.StationList())
             {
@@ -805,6 +802,7 @@ namespace BL
                     if (item2.StationId == item.ID)
                         statD.fullChargeSlots++;
                 }
+
                 statD.freeChargeSlots = item.ChargeSlots;// free ones
                 statList.Add(statD);// add it to the list
 
@@ -842,22 +840,26 @@ namespace BL
             }
             return LstCA;
         }
-        public void printParcelList() { }
-        public IEnumerable<ParcelDescription> displayParcelsNotAssigned() 
+        public IEnumerable<ParcelDescription> printParcelList() 
         {
-            List<ParcelDescription> PDList = new List < ParcelDescription > ();
+            //id 
+            //sendername
+            //targetname
+            //weight
+            //time
+            //matsav havila
+            List<ParcelDescription> parList = new List<ParcelDescription>();
+            ParcelDescription tempPar = new ParcelDescription();
             foreach(var item in p.ParcelList())
             {
-                if (item.Scheduled == DateTime.MinValue)
-                {
-                    ParcelDescription tempPD = new ParcelDescription();
-                    tempPD.Id = item.ID;
-                }
+                tempPar.Id = item.ID;
+                tempPar.SenderName = Name(item.SenderId);
+                tempPar.TargetName = Name(item.TargetId);
+                tempPar.weight = (WeightCategories)item.Weight;
+
             }
-        
-        
-        
         }
+        public void printParcelsNotAssigned() { }
         public void printFreeStations() { }
         #endregion
 
@@ -926,6 +928,12 @@ namespace BL
             double time = distance / 50;
             double batteryLost = time / (7 / 60);
             return batteryLost;
+        }
+
+        public string Name(int id)
+        {
+            IDAL.DO.Client c = p.ClientById(id);
+            return c.Name;
         }
     }
 }
