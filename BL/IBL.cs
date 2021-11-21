@@ -46,15 +46,15 @@ namespace IBL
 
         //functions print
 
-        void printStation();
-        void printDrone();
-        void printClient();
-        void printParcel();
-        void printStationList();
-        void printDroneList();
-        void printClientList();
+        Station displayStation(int stationId);
+        Drone displayDrone(int droneId);
+        Client displayClient(int clientId);
+        Parcel displayParcel(int parcelId);
+        IEnumerable<StationDescription> DisplayStationList();
+        IEnumerable<DroneDescription> displayDroneList();
+        IEnumerable<ClientActions> displayClientList();
         void printParcelList();
-        void printParcelsNotAssigned();
+        IEnumerable<ParcelDescription> displayParcelsNotAssigned();
         void printFreeStations();
 
     }
