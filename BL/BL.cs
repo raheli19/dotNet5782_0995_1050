@@ -365,9 +365,133 @@ namespace BL
                     DroneList.Add(tempDD);
 
                     p.AddFromBLDroneCharging(myDrone.Id, nearestStation.ID);//ADD The DroneCharge(drone+station) to DAL 
-                   
+                    DroneCharge CD = new DroneCharge();
+                    CD.DroneId = DroneId;
+                    CD.StationId = nearestStation.ID;
+                    nearestStation.DroneCharging.Add(CD);
                 }
             }
+        }
+
+
+        public void DroneCharged(int ID, double time)
+        {
+            DroneDescription myDr = new DroneDescription();
+            myDr.Id = ID;
+            myDr.Status = DroneStatuses.free; // signs if we don't find it
+            foreach(var item in DroneList)// get al the information about this drone from the dronelist
+            {
+                if(item.Id==ID)
+                {
+                    myDr.Status = item.Status;
+                    myDr.Model = item.Model;
+                    myDr.weight = item.weight;
+                    myDr.loc = item.loc;
+                    myDr.DeliveredParcels = item.DeliveredParcels;
+                    // don't copy the battery
+                    DroneList.Remove(item);// delete the drone from the list
+                }
+            }
+            if (myDr.Status != DroneStatuses.maintenance)// if the drone is not charging
+                throw new DroneChargedException("This drone isn't charging");
+
+            // upadte the drone in the bl DroneList
+            myDr.Status = DroneStatuses.free;
+            myDr.battery = BatteryAccToDistance(time);
+            DroneList.Add(myDr);
+
+            //update the drone in the droneList from the DAL
+            try
+            {
+                IDAL.DO.Drone drone = p.DroneById(ID);
+                drone.Battery = BatteryAccToTime(time);
+                p.UpdateDrone(drone);
+            }
+            catch
+            {
+                throw new DroneChargedException("Can't update the drone");
+            }
+
+            //update station
+            IDAL.DO.Station stat = p.StationById(ID);
+            foreach (var item in p.StationList())
+            {
+                if (item.Longitude == myDr.loc.longitude && item.Latitude == myDr.loc.latitude)
+                {
+                    stat.ID = item.ID;
+                    stat.Name = item.Name;
+                    stat.Latitude = item.Latitude;
+                    stat.Longitude = item.Longitude;
+                    stat.ChargeSlots = item.ChargeSlots;
+                }                   
+            }
+            stat.ChargeSlots++;
+            p.UpdateStation(stat); // puts back the station with one more chargeSlot free
+            foreach (var item in stat.)
+
+
+
+        }
+
+        public void Assignement(int ID)
+        {
+            IDAL.DO.Drone Daldrone = p.DroneById(ID); //from the dal
+            DroneDescription BLd = new DroneDescription(); //from the bl
+            foreach (var item in DroneList)
+            {
+                if (item.Id == ID)
+                {
+
+                    BLd.Id = item.Id;
+                    BLd.Model = item.Model;
+                    BLd.weight = item.weight;
+                    BLd.battery = item.battery;
+                    BLd.Status = item.Status;
+                    BLd.loc = item.loc;
+                    BLd.DeliveredParcels = item.DeliveredParcels;
+                    DroneList.Remove(item);
+                }
+            }
+            if (BLd.Status != DroneStatuses.free)
+                throw new DroneException("The drone is not free!");
+            IDAL.DO.Parcel parcel = new IDAL.DO.Parcel();
+            bool flag = false;
+            foreach (var item in p.ParcelList())
+            {
+                double distToSender = distance(BLd.loc.latitude, BLd.loc.longitude, loc lat, lock long) ;
+                if (distToSender > DistanceAccToBattery(BLd.battery))
+                    continue;
+                BLd.battery -= BatteryAccToDistance(distToSender);
+                double distToTarget = distance(BLd.loc.latitude, BLd.loc.longitude, loc lat, lock long)
+                if (distToTarget > DistanceAccToBattery(BLd.battery))
+                    continue;
+                BLd.battery -= BatteryAccToDistance(distToTarget);
+                // besoin de recharger a partir de combien????
+                // recup loc de la parcel
+                // trouve la station la plus proche
+
+                if (item.Priority != IDAL.DO.Priorities.emergency)
+                    continue;
+                if (item.Weight != (IDAL.DO.WeightCategories)BLd.weight)
+                    continue;
+                parcel.DroneId = BLd.Id;
+                parcel.ID = item.ID;
+                parcel.Priority = item.Priority;
+                parcel.SenderId = item.SenderId;
+                parcel.TargetId = item.TargetId;
+                parcel.Weight = item.Weight;
+                parcel.Requested = DateTime.Now;
+                flag = true;
+            }
+            if (flag == false) // we didn't find one
+                throw new ParcelException("We didn't find a parcel");
+            BLd.Status = DroneStatuses.free;
+            DroneList.Add(BLd);
+            p.Assignement(parcel.ID, BLd.Id); //
+            
+
+            // attiver chez le sender, arriver jusqu(au target, voir si il a besoin de recharger arriver a une station la plus proche;
+            
         }
         //---------------------------------------ACTIONS------------------------------------------------
         #region Dronecharged
@@ -524,6 +648,7 @@ namespace BL
         public double DistanceAccToBattery(double battery)
         {
             //Le drone perd 1% en 7 min  et la vitesse du drone  de 50 km/h
+            // le drone gagne 1% en 7 min
            double timeInHours = 7 / 60;
            double speed = 50;  //50km/h
            double totalTime = timeInHours * battery;
@@ -532,6 +657,12 @@ namespace BL
 
         }
 
+        public double BatteryAccToTime(double time)
+        {
+            double batt = time * 7;
+            return batt;
+
+        }
         public double BatteryAccToDistance(double distance)
         {
             double time = distance / 50;
