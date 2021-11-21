@@ -203,25 +203,25 @@ namespace ConsoleUI_BL
                             case entities.STATION:
                                 Console.WriteLine("You chose to print a Station, please enter its Id:\n");
                                 int.TryParse(Console.ReadLine(), out int StationId);
-                                Console.WriteLine(obj.StationById(StationId));// calls the function to print the asked station
+                                Console.WriteLine(obj.displayStation(StationId);// calls the function to print the asked station
                                 break;
 
                             case entities.DRONE:
                                 Console.WriteLine("You chose to print a Drone, please enter its Id:\n");
                                 int.TryParse(Console.ReadLine(), out int DroneId);
-                                Console.WriteLine(obj.DroneById(DroneId));// calls the function to print the asked drone
+                                Console.WriteLine(obj.displayDrone(DroneId));// calls the function to print the asked drone
                                 break;
 
                             case entities.PARCEL:
                                 Console.WriteLine("You chose to print a Parcel, please enter its Id:\n");
                                 int.TryParse(Console.ReadLine(), out int Pid);
-                                Console.WriteLine(obj.ParcelById(Pid));// calls the function to print the asked drone
+                                Console.WriteLine(obj.displayParcel(Pid));// calls the function to print the asked drone
                                 break;
 
                             case entities.CLIENT:
                                 Console.WriteLine("You chose to print a Client, please enter its Id:\n");
                                 int.TryParse(Console.ReadLine(), out int ClientId);
-                                Console.WriteLine(obj.ClientById(ClientId));// calls the function to print the asked drone
+                                Console.WriteLine(obj.displayClient(ClientId));// calls the function to print the asked drone
                                 break;
 
                         }
@@ -235,7 +235,7 @@ namespace ConsoleUI_BL
                         {
                             case entities.STATION:
                                 Console.WriteLine("Stations' List:\n");
-                                foreach (var item in obj.StationList())
+                                foreach (var item in obj.DisplayStationList())
                                 {
                                     Console.WriteLine(item);
                                     Console.WriteLine(" ");
@@ -243,7 +243,7 @@ namespace ConsoleUI_BL
                                 break;
                             case entities.DRONE:
                                 Console.WriteLine("Drones' List:\n");
-                                foreach (var item in obj.DroneList())
+                                foreach (var item in obj.displayDroneList())
                                 {
                                     Console.WriteLine(item);
                                     Console.WriteLine(" ");
@@ -251,7 +251,7 @@ namespace ConsoleUI_BL
                                 break;
                             case entities.PARCEL:
                                 Console.WriteLine("Parcels' List:\n");
-                                foreach (var item in obj.ParcelList())
+                                foreach (var item in obj.displayParcelList())
                                 {
                                     Console.WriteLine(item);
                                     Console.WriteLine(" ");
@@ -259,7 +259,7 @@ namespace ConsoleUI_BL
                                 break;
                             case entities.CLIENT:
                                 Console.WriteLine("Clients' List:\n");
-                                foreach (var item in obj.ClientList())
+                                foreach (var item in obj.displayClientList())
                                 {
                                     Console.WriteLine(item);
                                     Console.WriteLine(" ");

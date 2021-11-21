@@ -920,6 +920,40 @@ namespace BL
             }
         
         }
+        public IEnumerable<ParcelDescription> displayParcelsNotAssigned()
+        {
+            List<ParcelDescription> PDList = new List<ParcelDescription>();
+            foreach (var item in p.ParcelList())
+            {
+                if (item.Scheduled == DateTime.Now)
+                {
+                    ParcelDescription tempPD = new ParcelDescription();
+                    tempPD.Id = item.ID;
+                    tempPD.SenderName = Name(item.SenderId);
+                    tempPD.TargetName= Name(item.TargetId);
+                    tempPD.weight = (WeightCategories)item.Weight;
+                    if (item.Requested == DateTime.Now)
+                    {
+                        tempPD.Status = ParcelStatus.requested;
+                    }
+                    else if (item.Scheduled == DateTime.Now)
+                    {
+                        tempPD.Status = ParcelStatus.scheduled;
+                    }
+                    else if (item.PickedUp == DateTime.Now)
+                    {
+                        tempPD.Status = ParcelStatus.pickedup;
+                    }
+                    else if (item.Delivered == DateTime.Now)
+                    {
+                        tempPD.Status = ParcelStatus.delivered;
+                    }
+                    PDList.Add(tempPD);
+                }
+            }
+            return PDList;
+        }
+         public void printFreeStations() { }
         #endregion
 
         //Distance
@@ -932,7 +966,6 @@ namespace BL
 
             return 12742 * Math.Asin(Math.Sqrt(a)); // 2 * R; R = 6371 km
         }
-
         public Station NearestStation(Localisation l,bool flag)
         {
             Station s = new Station();
@@ -963,7 +996,6 @@ namespace BL
             }
             return s;
         }
-
         public double DistanceAccToBattery(double battery)
         {
             //Le drone perd 1% en 7 min  et la vitesse du drone de 50 km/h
@@ -975,7 +1007,6 @@ namespace BL
             return distance;
 
         }
-
         public double BatteryAccToTime(double time)
         {
             double batt = time * 7;
@@ -988,7 +1019,6 @@ namespace BL
             double batteryLost = time / (7 / 60);
             return batteryLost;
         }
-
         public string Name(int id)
         {
             IDAL.DO.Client c = p.ClientById(id);
