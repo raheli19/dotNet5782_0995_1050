@@ -56,7 +56,7 @@ namespace BL
                 {
                     dr.Status = DroneStatuses.shipping;
                     if (ParcelInClient.Status == ParcelStatus.scheduled && ParcelInClient.Status != ParcelStatus.pickedup)
-                    {// la station la plus proche
+                    {
                         Station s = NearestStation(dr.loc, true);
                         dr.loc = s.loc;
                     }
@@ -77,11 +77,11 @@ namespace BL
                 {
                     // random localisation entre les differentes stations
                     List<int> helplist = p.IdStation();
-                    int index = rand.Next(helplist.Count);
-                    Station s = p.StationList()[index];
+                    int index = rand.Next(helplist.Count);//yaeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeelllllllllll
+                    Station s =( p.StationList()).get(index);
                     // recuperer la station selon son makom
                     // prendre sa loc et la mettre dans le drone
-
+                    dr.loc = s.loc;
                     dr.battery = h.getRandomNumber(0, 20);
 
                 }
@@ -195,6 +195,7 @@ namespace BL
 
         //-----------------------------------ADD-FUNCTIONS----------------------------------------
 
+        #region ADDFunctions
         public void addStation(IBL.BO.Station s)   
         {
             //IDAL.DO.Station stat = new IDAL.DO.Station();
@@ -310,10 +311,10 @@ namespace BL
             }
         
         }
-
+        #endregion
 
         //-----------------------------------UPDATE-FUNCTIONS----------------------------------------
-
+        #region UPDATING
         public void updateDroneName(int Id, string newModel) 
         {
             try
@@ -380,7 +381,9 @@ namespace BL
                 bool canGoToCharge = false;
                 if (DistanceAccToBattery(myDrone.battery) >= d)
                     canGoToCharge = true;
-                if(canGoToCharge==true)
+                else
+                    throw new DroneException("Can not send the drone to the station, it doesn't have enough battery!");
+                if (canGoToCharge == true)
                 {
                     myDrone.battery -= BatteryAccToDistance(DistanceAccToBattery(myDrone.battery));// substract the account of percetn from the battery to go to the nearest station
                     DroneDescription tempDD = new DroneDescription();//UPDATE DroneDescriptionLIST IN BL
@@ -391,12 +394,23 @@ namespace BL
                     DroneList.Add(tempDD);
 
                     p.AddFromBLDroneCharging(myDrone.Id, nearestStation.ID);//ADD The DroneCharge(drone+station) to DAL 
-                    DroneCharge CD = new DroneCharge();
-                    CD.DroneId = DroneId;
-                    CD.StationId = nearestStation.ID;
-                    nearestStation.DroneCharging.Add(CD);
+                    //DroneCharge CD = new DroneCharge();
+                    //CD.DroneId = DroneId;
+                    //CD.StationId = nearestStation.ID;
+                    //nearestStation.DroneCharging.Add(CD);
+                    IDAL.DO.Station s = new IDAL.DO.Station();
+                    s.ID = nearestStation.ID;
+                    s.Name = nearestStation.Name;
+                    s.Latitude = nearestStation.loc.latitude;
+                    s.Longitude = nearestStation.loc.longitude;
+                    s.ChargeSlots = nearestStation.ChargeSlots -1;
+                    p.UpdateStation(s);// update the station in the dal list
+
                 }
+
             }
+            else
+                throw new DroneException("The drone isn't avaiblable!");
         }
 
         public void DroneCharged(int ID, double time)
@@ -404,7 +418,7 @@ namespace BL
             DroneDescription myDr = new DroneDescription();
             myDr.Id = ID;
             myDr.Status = DroneStatuses.free; // signs if we don't find it
-            foreach(var item in DroneList)// get al the information about this drone from the dronelist
+            foreach(var item in DroneList)// get all the information about this drone from the dronelist
             {
                 if(item.Id==ID)
                 {
@@ -452,7 +466,12 @@ namespace BL
             }
             stat.ChargeSlots++;
             p.UpdateStation(stat); // puts back the station with one more chargeSlot free
-            foreach (var item in stat.)
+            foreach (var item in p.DroneChargeList())
+            {
+                if (item.DroneId == myDr.Id && item.StationId == stat.ID)
+                    p.updateDroneChargeList(myDr.Id, stat.ID);
+
+            }
 
 
 
@@ -522,6 +541,7 @@ namespace BL
             // attiver chez le sender, arriver jusqu(au target, voir si il a besoin de recharger arriver a une station la plus proche;
             
         }
+        #endregion
         //---------------------------------------ACTIONS------------------------------------------------
        
         #region Assignement
@@ -597,6 +617,7 @@ namespace BL
 
         //-----------------------------------PRINT-FUNCTIONS----------------------------------------
         #region PRINTING
+
         public Station displayStation(int stationId) 
         {
             Station s = GetStation(stationId);  //recupere les donnees de la DAL
@@ -853,9 +874,47 @@ namespace BL
                 tempPar.TargetName = Name(item.TargetId);
                 tempPar.weight = (WeightCategories)item.Weight;
                 tempPar.priority = (Priorities)item.Priority;
-
+                if (item.Requested == DateTime.Now)
+                {
+                    tempPar.Status = ParcelStatus.requested;
+                }
+                else if (item.Scheduled == DateTime.Now)
+                {
+                    tempPar.Status = ParcelStatus.scheduled;
+                }
+                else if (item.PickedUp == DateTime.Now)
+                {
+                    tempPar.Status = ParcelStatus.pickedup;
+                }
+                else if (item.Delivered == DateTime.Now)
+                {
+                    tempPar.Status = ParcelStatus.delivered;
+                }
+                parList.Add(tempPar);
             }
-
+            return parList;
+        }
+        public void printParcelsNotAssigned() { }
+        public void printFreeStations() 
+        {
+            List<StationDescription> statList = new List<StationDescription>();
+            StationDescription tempStat = new StationDescription();
+            foreach(var item in p.StationList())
+            {
+                if(item.ChargeSlots>0)
+                {
+                    tempStat.Id = item.ID;
+                    tempStat.name = item.Name;
+                    tempStat.freeChargeSlots = item.ChargeSlots;
+                    foreach (var item2 in p.DroneChargeList())// full chargeSlots
+                    {
+                        if (item2.StationId == item.ID)
+                            tempStat.fullChargeSlots++;
+                    }
+                }
+                statList.Add(tempStat);
+            }
+        
         }
         public IEnumerable<ParcelDescription> displayParcelsNotAssigned()
         {

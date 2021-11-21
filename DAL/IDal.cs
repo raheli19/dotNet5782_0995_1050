@@ -58,7 +58,7 @@ namespace IDAL
         double FindLong(int myID);
         double FindLat(int myID);
         void AddParcelFromBL(Parcel p);
-
+        public void updateDroneChargeList(int droneId, int statId);
 
     }
 }
