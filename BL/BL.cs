@@ -447,10 +447,33 @@ namespace BL
 
         //-----------------------------------PRINT-FUNCTIONS----------------------------------------
         #region PRINTING
-        public void printStation() { }
-        public void printDrone() { }
-        public void printClient() { }
-        public void printParcel() { }
+        public Station displayStation(int stationId) 
+        {
+            Station s = GetStation(stationId);  //recupere les donnees de la DAL
+             //the only missing is the list of drones
+            List<int> DronesID = new List<int>();
+            foreach(var item in p.DroneChargeList())
+            {
+                if (item.StationId == stationId)
+                {
+                    DronesID.Add(item.DroneId);
+                }
+            }
+            int i = 0,j=0;
+            foreach(var item in DroneList)
+            {
+                if (item.Id == DronesID[i])
+                {
+                    s.DroneCharging[j].ID = item.Id;
+                    s.DroneCharging[j].battery = item.battery;
+                }
+            }
+            
+            return s;
+        }
+        public void displayDrone() { }
+        public void displayClient() { }
+        public void displayParcel() { }
         public void printStationList() { }
         public void printDroneList() { }
         public void printClientList() { }

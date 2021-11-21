@@ -689,6 +689,12 @@ namespace DalObject
         }
         #endregion
 
+        public IEnumerable<DroneCharge> DroneChargeList()
+        {
+            List<DroneCharge> DroneChargeLst = new List<DroneCharge>();
+            DroneChargeLst = DataSource.DroneChargesList;
+            return DroneChargeLst;
+        }
         #region ClientList
         /// <summary>
         /// Returns the clients' list

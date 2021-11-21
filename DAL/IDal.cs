@@ -47,10 +47,11 @@ namespace IDAL
        IEnumerable<Drone> DroneList();
        IEnumerable<Client> ClientList();
        IEnumerable<Parcel> ParcelList();
-       
 
-      
-        
+        IEnumerable<DroneCharge> DroneChargeList();
+
+
+
         List<int> IdStation();
         Station FoundStation(int id);
         Parcel FindParcelAssociatedWithDrone(int droneId);
