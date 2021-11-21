@@ -792,10 +792,7 @@ namespace BL
         public void displayParcel() { }
         public IEnumerable<StationDescription> DisplayStationList() 
         {
-            //id
-            //name
-            //freeslots
-            //fullslots
+            
             List<StationDescription> statList = new List<StationDescription>();
             StationDescription statD = new StationDescription();
             
@@ -842,7 +839,25 @@ namespace BL
             }
             return LstCA;
         }
-        public void printParcelList() { }
+        public IEnumerable<ParcelDescription> printParcelList() 
+        {
+            //id 
+            //sendername
+            //targetname
+            //weight
+            //time
+            //matsav havila
+            List<ParcelDescription> parList = new List<ParcelDescription>();
+            ParcelDescription tempPar = new ParcelDescription();
+            foreach(var item in p.ParcelList())
+            {
+                tempPar.Id = item.ID;
+                tempPar.SenderName = Name(item.SenderId);
+                tempPar.TargetName = Name(item.TargetId);
+                tempPar.weight = (WeightCategories)item.Weight;
+
+            }
+        }
         public void printParcelsNotAssigned() { }
         public void printFreeStations() { }
         #endregion
@@ -912,6 +927,12 @@ namespace BL
             double time = distance / 50;
             double batteryLost = time / (7 / 60);
             return batteryLost;
+        }
+
+        public string Name(int id)
+        {
+            IDAL.DO.Client c = p.ClientById(id);
+            return c.Name;
         }
     }
 }
