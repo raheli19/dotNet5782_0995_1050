@@ -639,7 +639,7 @@ namespace DalObject
                 if (item.ID == id) return item;
             }
             throw new IDAL.DO.ClientException("Client not found");
-           
+            //return new Client();
         }
         #endregion
 
