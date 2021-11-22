@@ -1036,6 +1036,7 @@ namespace BL
 
         //------------------------------------------HELP------------------------------------------
         //Distance
+        #region helpFunctions
         public double distance(double lat1, double lon1, double lat2, double lon2)
         {
             var myPI = 0.017453292519943295;    // Math.PI / 180
@@ -1114,7 +1115,6 @@ namespace BL
         {
             double minDist = double.MaxValue;
             IDAL.DO.Parcel tempParcel = new IDAL.DO.Parcel();
-            IDAL.DO.Parcel closestP = new IDAL.DO.Parcel();
             foreach(var item in list)
             {
                 double dist = distance(p.ClientById(item.SenderId).Latitude, p.ClientById(item.SenderId).Longitude, droneLoc.latitude, droneLoc.longitude);
@@ -1127,19 +1127,8 @@ namespace BL
             }
             return tempParcel;
         }
-        //public ParcelInDelivering Converting(IDAL.DO.Parcel parcem) // receives a DALparcel and returns a parcelIndelivering
-        //{
-        //    ParcelInDelivering parD = new ParcelInDelivering();
-        //    parD.ID = parcem.ID;
-        //    parD.picking.latitude = p.FindLat(parcem.SenderId) ;
-        //    parD.picking.longitude = p.FindLong(parcem.SenderId);
-        //    parD.delivered.longitude = p.FindLong(parcem.TargetId);
-        //    parD.delivered.latitude = p.FindLat(parcem.TargetId);
-        //    parD.priority = (Priorities)parcem.Priority;
-        //    parD.weight = (WeightCategories)parcem.Weight;
-        //    return parD;
-        //}
+        #endregion
 
-      
+
     }
 }
