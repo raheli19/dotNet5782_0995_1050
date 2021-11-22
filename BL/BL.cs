@@ -240,9 +240,17 @@ namespace BL
             if (d.Battery < 0 || d.Battery > 100)
                 throw new BatException("Battery is not valid");
             //dr.Battery = d.Battery;
-            
+            d.Status = DroneStatuses.maintenance;
             d.initialLoc = s.loc;// his location is the same than the station
-            s.DroneCharging.Add(d);// add the drone to the station's list (BL)
+            //s.DroneCharging.Add(d);// add the drone to the station's list (BL)
+            DroneDescription DP = new DroneDescription();
+            DP.Id = d.ID;
+            DP.Model = d.Model;
+            DP.weight = d.MaxWeight;
+            DP.battery = d.Battery;
+            DP.Status = DroneStatuses.maintenance;
+            DP.loc = d.initialLoc;
+            DroneList.Add(DP);
             s.ChargeSlots--;// one more is full
             try
             {
