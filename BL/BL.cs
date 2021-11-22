@@ -70,10 +70,7 @@ namespace BL
                     throw new IBL.BO.NotFound("Not found", ex);
                 }
 
-                catch (IBL.BO.NotFound ex)
-                {
-                    throw new IBL.BO.NotFound("Not found", ex);
-                }
+               
                 // the drone is shipping
                 if (ParcelInClient.Status != ParcelStatus.delivered)// the parcel has not been delivered yet.
                     {
