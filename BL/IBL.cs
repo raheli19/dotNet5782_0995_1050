@@ -37,7 +37,7 @@ namespace IBL
 
         void DroneCharged(int DroneId,double timeInCharge);
 
-        void Assignement(int DroneId);
+        void Assignement(int DroneId, int i);
 
         void PickedUp(int DroneId);
 

@@ -540,50 +540,21 @@ namespace BL
         #endregion
 
         #region Assignement
-        public void Assignement(int ID)
+        public void Assignement(int ID, int i=2)
         {
             IDAL.DO.Drone Daldrone = p.DroneById(ID); //from the dal
-            DroneDescription BLd = new DroneDescription(); //from the bl
-            foreach (var item in DroneList)// searches the drone in the bllist
-            {
-                if (item.Id == ID)
-                {
-
-                    BLd.Id = item.Id;
-                    BLd.Model = item.Model;
-                    BLd.weight = item.weight;
-                    BLd.battery = item.battery;
-                    BLd.Status = item.Status;
-                    BLd.loc = item.loc;
-                    BLd.DeliveredParcels = item.DeliveredParcels;
-                    DroneList.Remove(item);
-                }
-            }
+            DroneDescription BLd = DroneList.First(x => x.Id == ID);// finds the drone
+            
             if (BLd.Status != DroneStatuses.free)
                 throw new DroneException("The drone is not free!");
             IDAL.DO.Parcel parcel = new IDAL.DO.Parcel(); // dalparcel
             bool flag = false;
-            double senderLat = p.FindLat(parcel.SenderId);
-            double senderLong = p.FindLong(parcel.SenderId);
-            double targetLat = p.FindLat(parcel.TargetId);
-            double targetLong = p.FindLong(parcel.TargetId);
 
             foreach (var item in p.ParcelList())
             {
-                double distToSender = distance(BLd.loc.latitude, BLd.loc.longitude, senderLat, senderLong);
-                BLd.battery -= BatteryAccToDistance(distToSender);
-                double distToTarget = distance(BLd.loc.latitude, BLd.loc.longitude, targetLat, targetLong);
-                if (distToTarget > DistanceAccToBattery(BLd.battery))
+                if (item.Priority != IDAL.DO.Priorities.emergency - i)
                     continue;
-                BLd.battery -= BatteryAccToDistance(distToTarget);
-                // besoin de recharger a partir de combien????
-                double parcelLat = senderLat;
-                double parcelLong = senderLong;
-                // trouve la station la plus proche
-
-                if (item.Priority != IDAL.DO.Priorities.emergency)
-                    continue;
-                if (item.Weight != (IDAL.DO.WeightCategories)BLd.weight)
+                if (item.Weight == (IDAL.DO.WeightCategories)BLd.weight)///////////////
                     continue;
                 parcel.DroneId = BLd.Id;
                 parcel.ID = item.ID;
@@ -592,17 +563,54 @@ namespace BL
                 parcel.TargetId = item.TargetId;
                 parcel.Weight = item.Weight;
                 parcel.Requested = DateTime.Now;
-                flag = true;
-            }
-            if (flag == false) // we didn't find one
-                throw new ParcelException("We didn't find a parcel");
-            BLd.Status = DroneStatuses.free;
-            DroneList.Add(BLd);
-            p.Assignement(parcel.ID, BLd.Id); //
-            
 
-            // attiver chez le sender, arriver jusqu(au target, voir si il a besoin de recharger arriver a une station la plus proche;
-            
+                List<IDAL.DO.Parcel> parcelLst = p.ParcelList().ToList().FindAll(x => (int)x.Priority == i && x.Scheduled == DateTime.MinValue);// list with all the emergency ones
+                parcelLst = parcelLst.FindAll(x => (int)x.Weight == (int)BLd.weight);  //list with all the same weights
+
+                IDAL.DO.Parcel closestParcel = ClosestParcel(parcelLst, BLd.loc);
+
+
+                //trouver la parcel la plus proche verifier toutes les conditions
+                // si fais pas / rappelle pour chercher avec mishkal different
+                // si trouve pas / moins urgente avec mishkal le mieux adapte
+                //si trouve pas / mishkal 
+
+                double senderLat = p.FindLat(closestParcel.SenderId);
+                double senderLong = p.FindLong(closestParcel.SenderId);
+                double targetLat = p.FindLat(closestParcel.TargetId);
+                double targetLong = p.FindLong(closestParcel.TargetId);
+                //trouver la plus proche
+                // has to be able to make it
+                double distToSender = distance(BLd.loc.latitude, BLd.loc.longitude, senderLat, senderLong);
+                BLd.battery -= BatteryAccToDistance(distToSender);
+                if (distToSender >= DistanceAccToBattery(BLd.battery))
+                    continue;
+                //doit repartir
+
+                double distToTarget = distance(BLd.loc.latitude, BLd.loc.longitude, targetLat, targetLong);
+                BLd.battery -= BatteryAccToDistance(distToTarget);
+                if (distToTarget >= DistanceAccToBattery(BLd.battery))
+                    continue;
+                BLd.battery -= BatteryAccToDistance(distToTarget);
+                // if drone's battery less than 25 has to go to charge
+                if (BLd.battery <= 25)
+                {
+                    Localisation targLoc = location(targetLat, targetLong);
+                    Station nearStat = NearestStation(targLoc, false); //finds the nearest station if need to charge
+                    double distToStat = distance(BLd.loc.latitude, BLd.loc.longitude, nearStat.loc.latitude, nearStat.loc.longitude);
+                    if (distToStat > BatteryAccToDistance(distToStat))
+                        continue;
+                }
+                flag = true;
+
+                if (flag == false && i == 3) // we didn't find one
+                    throw new ParcelException("We didn't find a parcel");
+                else if (flag == false)
+                    Assignement(ID, i - 1); // calls back the function to check with an other status
+                BLd.Status = DroneStatuses.shipping;
+                DroneList.Add(BLd);
+                p.Assignement(closestParcel.ID, BLd.Id); //update the dronelist in the dal
+            }
         }
         #endregion
         #endregion
@@ -1102,5 +1110,36 @@ namespace BL
             l.latitude = lat1;
             return l;
         }
+        IDAL.DO.Parcel ClosestParcel(List<IDAL.DO.Parcel> list, Localisation droneLoc)
+        {
+            double minDist = double.MaxValue;
+            IDAL.DO.Parcel tempParcel = new IDAL.DO.Parcel();
+            IDAL.DO.Parcel closestP = new IDAL.DO.Parcel();
+            foreach(var item in list)
+            {
+                double dist = distance(p.ClientById(item.SenderId).Latitude, p.ClientById(item.SenderId).Longitude, droneLoc.latitude, droneLoc.longitude);
+                if (dist < minDist)
+                { 
+                    minDist = dist;
+                    tempParcel = item;
+                }
+
+            }
+            return tempParcel;
+        }
+        //public ParcelInDelivering Converting(IDAL.DO.Parcel parcem) // receives a DALparcel and returns a parcelIndelivering
+        //{
+        //    ParcelInDelivering parD = new ParcelInDelivering();
+        //    parD.ID = parcem.ID;
+        //    parD.picking.latitude = p.FindLat(parcem.SenderId) ;
+        //    parD.picking.longitude = p.FindLong(parcem.SenderId);
+        //    parD.delivered.longitude = p.FindLong(parcem.TargetId);
+        //    parD.delivered.latitude = p.FindLat(parcem.TargetId);
+        //    parD.priority = (Priorities)parcem.Priority;
+        //    parD.weight = (WeightCategories)parcem.Weight;
+        //    return parD;
+        //}
+
+      
     }
 }
