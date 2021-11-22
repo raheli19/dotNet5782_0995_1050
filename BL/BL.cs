@@ -95,8 +95,6 @@ namespace BL
                 dr.weight = ParcelInClient.weight;
                 dr.Status = (DroneStatuses)ParcelInClient.Status;
                 
-                //dr.loc.latitude
-                //dr.loc.longitude
                 
                 
 
@@ -242,8 +240,6 @@ namespace BL
             //dr.Battery = d.Battery;
             
             d.initialLoc = s.loc;// his location is the same than the station
-            s.DroneCharging.Add(d);// add the drone to the station's list (BL)
-            s.ChargeSlots--;// one more is full
             try
             {
                 p.AddDrone((IDAL.DO.Drone)d.CopyPropertiesToNew(typeof(IDAL.DO.Drone)));
