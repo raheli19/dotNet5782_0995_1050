@@ -95,8 +95,6 @@ namespace BL
                 dr.weight = ParcelInClient.weight;
                 dr.Status = (DroneStatuses)ParcelInClient.Status;
                 
-                //dr.loc.latitude
-                //dr.loc.longitude
                 
                 
 
