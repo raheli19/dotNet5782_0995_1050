@@ -254,13 +254,13 @@ namespace BL
             IDAL.DO.Station stat = new IDAL.DO.Station();
             stat.Name = s.Name;
             if (!(s.ID <= 99999999 && s.ID > 9999999))
-                throw new InputNotValid("ID not valid");
+                throw new IBL.BO.InputNotValid("ID not valid");
             stat.ID = s.ID;
             if (s.loc.latitude< 31||s.loc.latitude>33.3)/////////////// a verifier
-                throw new InputNotValid("latitude is not valid");
+                throw new IBL.BO.InputNotValid("latitude is not valid");
             stat.Latitude = s.loc.latitude;
             if (s.loc.longitude<34.3||s.loc.longitude>35.5)
-                throw new InputNotValid("longitude is not valid");
+                throw new IBL.BO.InputNotValid("longitude is not valid");
             stat.Longitude = s.loc.longitude;
             stat.ChargeSlots = s.ChargeSlots;
             try
@@ -270,7 +270,8 @@ namespace BL
             }
             catch(IDAL.DO.StationException ex)
             {
-                throw new AlreadyExist("Station already exists ", ex);
+                throw new IBL.BO.AlreadyExist("Station already exists ", ex);
+
             }
             
         }
@@ -467,7 +468,7 @@ namespace BL
                 if (DistanceAccToBattery(blDrone.battery) >= d)
                     canGoToCharge = true;
                 else
-                    throw new NotEoughBattery("Can not send the drone to the station, it doesn't have enough battery!");
+                    throw new IBL.BO.NotEoughBattery("Can not send the drone to the station, it doesn't have enough battery!");
                 if (canGoToCharge == true) 
                 {
                     blDrone.battery -= BatteryAccToDistance(DistanceAccToBattery(blDrone.battery));// substract the account of percetn from the battery to go to the nearest station
@@ -617,13 +618,7 @@ namespace BL
                 List<IDAL.DO.Parcel> parcelLst = p.ParcelList().ToList().FindAll(x => (int)x.Priority == i && x.Scheduled == DateTime.MinValue);// list with all the emergency ones
                 parcelLst = parcelLst.FindAll(x => (int)x.Weight == (int)BLd.weight);  //list with all the same weights
 
-                IDAL.DO.Parcel closestParcel = ClosestParcel(parcelLst, BLd.loc);
-
-
-                //trouver la parcel la plus proche verifier toutes les conditions
-                // si fais pas / rappelle pour chercher avec mishkal different
-                // si trouve pas / moins urgente avec mishkal le mieux adapte
-                //si trouve pas / mishkal 
+                IDAL.DO.Parcel closestParcel = ClosestParcel(parcelLst, BLd.loc); 
 
                 double senderLat = p.FindLat(closestParcel.SenderId);
                 double senderLong = p.FindLong(closestParcel.SenderId);
