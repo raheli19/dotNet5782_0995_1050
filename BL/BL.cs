@@ -227,20 +227,22 @@ namespace BL
         #region ADDFunctions
         public void addStation(IBL.BO.Station s)   
         {
-            //IDAL.DO.Station stat = new IDAL.DO.Station();
-            //stat.Name = s.Name;
+            IDAL.DO.Station stat = new IDAL.DO.Station();
+            stat.Name = s.Name;
             if (!(s.ID <= 99999999 && s.ID > 9999999))
                 throw new IDException("ID not valid");
-            //stat.ID = s.ID;
+            stat.ID = s.ID;
             if (s.loc.latitude< 31||s.loc.latitude>33.3)/////////////// a verifier
                 throw new LatException("latitude is not valid");
-            //stat.Latitude = s.loc.latitude;
+            stat.Latitude = s.loc.latitude;
             if (s.loc.longitude<34.3||s.loc.longitude>35.5)
                 throw new LongException("longitude is not valid");
-            //stat.Longitude = s.loc.longitude;
+            stat.Longitude = s.loc.longitude;
+            stat.ChargeSlots = s.ChargeSlots;
             try
             {
-                p.addStation((IDAL.DO.Station)s.CopyPropertiesToNew(typeof(IDAL.DO.Station)));
+                p.addStation(stat);
+                //p.addStation((IDAL.DO.Station)s.CopyPropertiesToNew(typeof(IDAL.DO.Station)));
             }
             catch(StationException ex)
             {
@@ -251,25 +253,26 @@ namespace BL
 
         public  void addDrone(Drone d, int StationID) 
         {
+            //Add the drone To Add and check if the inputs are correct
+            IDAL.DO.Drone DALdr = new IDAL.DO.Drone();
             d.Battery = rand.Next(20, 40);// initialize the battery
-            //Station s = StationById(StationID);// find the station
-                
             Station s = GetStation(StationID);
-            //IDAL.DO.Drone dr = new IDAL.DO.Drone();
             if (!(d.ID <= 99999999 && d.ID > 9999999)) //ID not Valid
                 throw new IDException("ID is not valid");
-            //dr.ID = d.ID;
+            DALdr.ID = d.ID;
             if (d.MaxWeight != WeightCategories.low && d.MaxWeight != WeightCategories.middle && d.MaxWeight != WeightCategories.heavy)
-                throw new WeightException("The category of your weight is not valid");
+               throw new WeightException("The category of your weight is not valid");
             if (d.Status != DroneStatuses.free && d.Status != DroneStatuses.maintenance && d.Status != DroneStatuses.shipping)
                 throw new StatusException("The status of your drone is not valid");
-                //dr.Model = d.Model;
+            DALdr.Model = d.Model;
             if (d.Battery < 0 || d.Battery > 100)
                 throw new BatException("Battery is not valid");
-            //dr.Battery = d.Battery;
+            DALdr.Battery = d.Battery;
+            
             d.Status = DroneStatuses.maintenance;
             d.initialLoc = s.loc;// his location is the same than the station
-            //s.DroneCharging.Add(d);// add the drone to the station's list (BL)
+          
+            //Create a new DroneDescription and add it TO BL
             DroneDescription DP = new DroneDescription();
             DP.Id = d.ID;
             DP.Model = d.Model;
@@ -281,7 +284,8 @@ namespace BL
             s.ChargeSlots--;// one more is full
             try
             {
-                p.AddDrone((IDAL.DO.Drone)d.CopyPropertiesToNew(typeof(IDAL.DO.Drone)));
+                p.AddDrone(DALdr);//ADD TO DAL
+                //p.AddDrone((IDAL.DO.Drone)d.CopyPropertiesToNew(typeof(IDAL.DO.Drone)));
             } 
             catch(Exception ex)
             {
@@ -291,23 +295,24 @@ namespace BL
 
         public void addClient(Client c) 
         {
-            //IDAL.DO.Client cl= new IDAL.DO.Client();
+            IDAL.DO.Client cl= new IDAL.DO.Client();
             if (!(c.ID <= 99999999 && c.ID > 9999999))
                 throw new IDException("ID not valid");
-            //cl.ID = c.ID;
-            //cl.Name = c.Name;
+            cl.ID = c.ID;
+            cl.Name = c.Name;
             if (c.Phone.Length!=11)
                 throw new PhoneException("Phone not valid");
-            //cl.Phone = c.Phone;
+            cl.Phone = c.Phone;
             if (c.ClientLoc.latitude < 31 || c.ClientLoc.latitude > 33.3)/////////////// a verifier
                 throw new LatException("latitude is not valid");
-            //cl.Latitude = c.ClientLoc.latitude;
+            cl.Latitude = c.ClientLoc.latitude;
             if (c.ClientLoc.longitude < 34.3 || c.ClientLoc.longitude > 35.5)
                 throw new LatException("longitude is not valid");
-
+            cl.Longitude = c.ClientLoc.longitude;
             try
             {
-                p.addClient((IDAL.DO.Client)c.CopyPropertiesToNew(typeof(IDAL.DO.Client)));
+                p.addClient(cl);
+                //p.addClient((IDAL.DO.Client)c.CopyPropertiesToNew(typeof(IDAL.DO.Client)));
             }
             catch (ClientException ex)
             {
@@ -319,16 +324,16 @@ namespace BL
 
         public void addParcel(Parcel pack) 
         {
-
+            IDAL.DO.Parcel DALParcel = new IDAL.DO.Parcel();
             if (!(pack.ID <= 99999999 && pack.ID > 9999999))
                 throw new IDException("ID not valid");
-           
+            DALParcel.ID = pack.ID;
             if (!(pack.Sender.ID <= 99999999 && pack.Sender.ID > 9999999))
                 throw new IDException("SenderID not valid");
-    
+            DALParcel.SenderId = pack.Sender.ID;
             if (!(pack.Target.ID <= 99999999 && pack.Target.ID > 9999999))
                 throw new IDException("TargetID not valid");
-            
+            DALParcel.TargetId = pack.Target.ID;
             pack.Scheduled = DateTime.MinValue;
             pack.PickedUp = DateTime.MinValue;
             pack.Delivered = DateTime.MinValue;
@@ -336,11 +341,19 @@ namespace BL
             pack.Drone = null;
             if (pack.Weight != WeightCategories.low && pack.Weight != WeightCategories.middle && pack.Weight != WeightCategories.heavy)
                 throw new WeightException("The category of your weight is not valid");
+            DALParcel.Weight = (IDAL.DO.WeightCategories)pack.Weight;
             if (pack.Priority != Priorities.regular && pack.Priority != Priorities.fast && pack.Priority != Priorities.emergency)
                 throw new PriorityException("The time delivery is not valid");
+            DALParcel.Priority = (IDAL.DO.Priorities)pack.Priority;
+            DALParcel.Scheduled = pack.Scheduled;
+            DALParcel.PickedUp = pack.PickedUp;
+            DALParcel.Delivered = pack.Delivered;
+            DALParcel.Requested = pack.Requested;
+            DALParcel.DroneId = pack.Drone.ID;
             try
             {
-                p.addParcel((IDAL.DO.Parcel)pack.CopyPropertiesToNew(typeof(IDAL.DO.Parcel)));
+                p.addParcel(DALParcel);
+                //p.addParcel((IDAL.DO.Parcel)pack.CopyPropertiesToNew(typeof(IDAL.DO.Parcel)));
             }
             catch(Exception ex)
             {
