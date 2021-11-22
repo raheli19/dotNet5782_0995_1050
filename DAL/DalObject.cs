@@ -315,7 +315,6 @@ namespace DalObject
             myStation.Longitude = stationToUpdate.Longitude;
             myStation.Latitude = stationToUpdate.Latitude;
             myStation.ChargeSlots = stationToUpdate.ChargeSlots;
-            // listeeeee
             DataSource.StationList.Add(myStation);
 
 
@@ -807,6 +806,17 @@ namespace DalObject
             }
             return IdStation;
 
+        }
+        public List<int> clientReceivedParcel() // return list of id of the clients that have received 
+        {
+            List<int> list = new List<int>();
+            //list.Add(DataSource.ParcelList.Find(x=> x.Delivered != DateTime.MinValue),x.id)
+            foreach(var item in ParcelList())
+            {
+                if (item.Delivered != DateTime.MinValue)
+                    list.Add(item.TargetId);       
+            }
+            return list;
         }
 
        

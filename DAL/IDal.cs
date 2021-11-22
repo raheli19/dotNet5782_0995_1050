@@ -39,7 +39,6 @@ namespace IDAL
 
        void DroneCharged(int droneId, int stationId);
 
-       
 
 
        Station StationById(int id);
@@ -61,6 +60,8 @@ namespace IDAL
         void AddParcelFromBL(Parcel p);
 
         List<int> IdStation();
+        public List<int> clientReceivedParcel();
+
         //public Station FoundStation(int id);
 
     }
