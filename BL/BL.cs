@@ -270,7 +270,7 @@ namespace BL
             }
             catch(IDAL.DO.StationException ex)
             {
-                throw new IBL.BO.AlreadyExist("Station already exists ", ex);
+                throw new AlreadyExist("Station already exists ", ex);
             }
             
         }
@@ -313,7 +313,7 @@ namespace BL
             } 
             catch(IDAL.DO.DroneException ex)
             {
-                throw new IBL.BO.AlreadyExist("Can't add this drone", ex);
+                throw new AlreadyExist("Can't add this drone", ex);
             }
         }
 
@@ -340,7 +340,7 @@ namespace BL
             }
             catch (IDAL.DO.ClientException ex)
             {
-                throw new IBL.BO.AlreadyExist("This Client already exists", ex);
+                throw new AlreadyExist("This Client already exists", ex);
             }
             
            
@@ -381,7 +381,7 @@ namespace BL
             }
             catch(IDAL.DO.ParcelException ex)
             {
-                throw new IBL.BO.AlreadyExist("This package already exists", ex);
+                throw new AlreadyExist("This package already exists", ex);
             }
         
         }
@@ -596,7 +596,7 @@ namespace BL
             DroneDescription BLd = DroneList.First(x => x.Id == ID);// finds the drone
             
             if (BLd.Status != DroneStatuses.free)
-                throw new IBL.BO.NotAvailable("The drone is not free!");
+                throw new NotAvailable("The drone is not free!");
             IDAL.DO.Parcel parcel = new IDAL.DO.Parcel(); // dalparcel
             bool flag = false;
 
@@ -918,7 +918,7 @@ namespace BL
                     }
                     catch (IDAL.DO.ClientException ex)
                     {
-                        throw new IBL.BO.IDNotFound("The client doesnt exist", ex);
+                        throw new IDNotFound("The client doesnt exist", ex);
                     }
                     PCT.client = myClient;
                     TempParcLstToClient.Add(PCT);
@@ -1199,7 +1199,7 @@ namespace BL
             }
             catch (IDAL.DO.ClientException custEX)
             {
-                throw new IBL.BO.NotFound("Didn't find",custEX);
+                throw new NotFound("Didn't find",custEX);
             
             }
 
