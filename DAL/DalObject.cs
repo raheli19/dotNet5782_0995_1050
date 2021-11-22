@@ -67,7 +67,7 @@ namespace DalObject
                 ClientList.Add(new Client()
                 {
                     ID = rand.Next(1000000, 10000000),
-                    Name = $"Client {Config.NumOfClients}",
+                    //Name = $"Client {Config.NumOfClients}",
                     Phone = $"0{rand.Next(50, 58)} - {rand.Next(1000000, 10000000)}",
                     Latitude = DataSource.GetrandomCoordinate(31.37),
                     Longitude = DataSource.GetrandomCoordinate(35.16),
@@ -148,7 +148,7 @@ namespace DalObject
             {
                 ParcelList.Add(new Parcel()
                 {
-                    ID = Config.ParceId++,
+                    //ID = Config.ParceId++,
                     SenderId = rand.Next(1000000, 1000000),
                     TargetId = rand.Next(1000000, 1000000),
                     Weight = (WeightCategories)rand.Next(3),

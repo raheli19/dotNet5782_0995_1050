@@ -883,7 +883,7 @@ namespace BL
             }
             return LstCA;
         }
-        public IEnumerable<ParcelDescription> printParcelList() 
+        public IEnumerable<ParcelDescription> displayParcelList() 
         {
             //id 
             //sendername
@@ -982,7 +982,7 @@ namespace BL
 
         //------------------------------------------HELP------------------------------------------
         //Distance
-        static double distance(double lat1, double lon1, double lat2, double lon2)
+        public double distance(double lat1, double lon1, double lat2, double lon2)
         {
             var myPI = 0.017453292519943295;    // Math.PI / 180
             var a = 0.5 - Math.Cos((lat2 - lat1) * myPI) / 2 +

@@ -61,7 +61,7 @@ namespace IDAL
         void AddParcelFromBL(Parcel p);
 
         List<int> IdStation();
-        public Station FoundStation(int id);
+        //public Station FoundStation(int id);
 
     }
 }
