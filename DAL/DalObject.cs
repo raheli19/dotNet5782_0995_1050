@@ -359,7 +359,7 @@ namespace DalObject
             IDAL.DO.Parcel p = new IDAL.DO.Parcel();
             IDAL.DO.Drone d = new IDAL.DO.Drone();
             bool flag = false, flag2 = false;
-            foreach (var item in DataSource.ParcelList)//search in the list of Parcels where the ID we received is
+            foreach (var item in DataSource.ParcelList)//search in the list of Parcels where the ID we received is not
             {
                 if (item.ID == parcelId)
                 {
