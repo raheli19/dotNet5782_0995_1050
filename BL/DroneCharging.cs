@@ -14,7 +14,7 @@ namespace IBL
             public override string ToString()
             {
                 String result = "";
-                result += $"The DroneCharging's id id {ID},\n";
+                result += $"The DroneCharging's id is {ID},\n";
                 result += $"The battery of the Drone is at {battery}%.\n";
 
                 return result;

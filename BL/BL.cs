@@ -316,6 +316,10 @@ namespace BL
             
             d.Status = DroneStatuses.maintenance;
             d.initialLoc = s.Loc;// his location is the same than the station
+            IDAL.DO.DroneCharge DalDC = new IDAL.DO.DroneCharge();
+            DalDC.StationId = StationID;
+            DalDC.DroneId = d.ID;
+            p.AddFromBLDroneCharging(DalDC.DroneId,DalDC.StationId);
           
             //Create a new DroneDescription and add it TO BL
             DroneDescription DP = new DroneDescription();
@@ -781,28 +785,36 @@ namespace BL
                                                 //the only field missing is the list of drones
             List<DroneCharging> droneCharging = new List<DroneCharging>();
             List<int> DronesID = new List<int>();
-            foreach(var item in p.DroneChargeList())
+           
+            //List<IDAL.DO.DroneCharge> DalList = new List<IDAL.DO.DroneCharge>();
+            //foreach (var item in DalList)
+            //{
+            //    if (item.StationId == stationId)
+            //    {
+            //        DroneCharging tempDC = new DroneCharging();
+            //        tempDC.ID = item.DroneId;
+            //        try
+            //        {
+            //            tempDC.battery = (p.DroneById(item.DroneId)).Battery;
+            //        }
+            //        catch (IDAL.DO.DroneException ex)
+            //        {
+            //            throw new IBL.BO.IDNotFound("Not found", ex);
+            //        }
+            //        droneCharging.Add(tempDC);
+            //    }
+            //}
+
+
+            IEnumerable<IDAL.DO.DroneCharge> droneCharges = p.DroneChargeList();
+            foreach (var item in droneCharges)
             {
-                if (item.StationId == stationId)
+                if (item.StationId == s.ID)
                 {
-                    DronesID.Add(item.DroneId);
+                    Drone drone = GetDrone(item.DroneId);
+                    s.DroneCharging.Add(new DroneCharging() { ID = item.DroneId, battery = drone.Battery });
                 }
             }
-            int i = 0,j=0;
-            foreach(var item in DroneList)
-            {
-                if (item.Id == DronesID[i])
-                {
-                    i++;
-                    //s.DroneCharging[j].ID = item.Id;
-                    //s.DroneCharging[j].battery = item.battery;
-                    droneCharging[j].ID= item.Id;
-                    droneCharging[j].battery = item.battery;
-                    j++;
-                }
-             
-            }
-            s.DroneCharging = droneCharging;
             return s;
         }
         #endregion
