@@ -602,8 +602,8 @@ namespace DalObject
         /// <returns></returns>
         public Station StationById(int id)
         {
-            Station sToReturn = default;
-            if (DataSource.StationList.Exists(station => station.ID == id))
+            Station sToReturn = new Station();
+            if (!DataSource.StationList.Exists(station => station.ID == id))
             {
                 throw new StationException($"id {id} doesn't exist!!");
 
@@ -622,7 +622,7 @@ namespace DalObject
         public Drone DroneById(int id)
         {
             Drone dToReturn = default;
-            if (DataSource.DroneChargeList.Exists(drone => drone.ID == id))
+            if (!DataSource.DroneChargeList.Exists(drone => drone.ID == id))
             {
                 throw new DroneException($"id {id} doesn't exist!!");
 
@@ -641,7 +641,7 @@ namespace DalObject
         public Client ClientById(int id)
         {
             Client cToReturn = default;
-            if (DataSource.ClientList.Exists(client => client.ID == id))
+            if (!DataSource.ClientList.Exists(client => client.ID == id))
             {
                 throw new ClientException($"id {id} doesn't exist!!");
 
@@ -660,7 +660,7 @@ namespace DalObject
         public Parcel ParcelById(int id)
         {
             Parcel pToReturn = default;
-            if (DataSource.ParcelList.Exists(parcel => parcel.ID == id))
+            if (!DataSource.ParcelList.Exists(parcel => parcel.ID == id))
             {
                 throw new ParcelException($"id {id} doesn't exist!!");
 

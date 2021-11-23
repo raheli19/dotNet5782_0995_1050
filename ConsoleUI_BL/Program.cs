@@ -14,6 +14,14 @@ namespace ConsoleUI_BL
         public static void Main()
         {
             IBL.IBL obj = new BL.BL();
+            //try
+            //{
+                //obj= new BL.BL();
+            //}
+            //catch (Exception ex)
+            //{
+            //    Console.WriteLine(ex);
+            //}
 
 
             option options;
@@ -39,6 +47,7 @@ namespace ConsoleUI_BL
                                     break;
                                 case entities.STATION:
                                     IBL.BO.Station myStation = new IBL.BO.Station();
+                                    myStation.Loc = new Localisation();
                                     int myId;
                                     int myName;
                                     Console.WriteLine("You chose to add a Station.\nPlease enter its Id, Name, Longitude, Latitude and ChargeSlots:");
@@ -49,8 +58,8 @@ namespace ConsoleUI_BL
                                     int.TryParse(Console.ReadLine(), out int myCs);
                                     myStation.ID = myId;
                                     myStation.Name = myName;
-                                    myStation.loc.longitude = myLongitude;
-                                    myStation.loc.latitude = myLatitude;
+                                    myStation.Loc.longitude = myLongitude;
+                                    myStation.Loc.latitude = myLatitude;
                                     myStation.ChargeSlots = myCs;
                                     obj.addStation(myStation);
                                     myStation.DroneCharging = null;
@@ -279,6 +288,7 @@ namespace ConsoleUI_BL
                 }
                 Console.WriteLine("To add an entity please press 1\nTo update an entity please press 2\nTo print an entity please press 3\nTo print a list please press 4\nTo exit please press 0\n");
                 options = (option)int.Parse(Console.ReadLine());
+            
             } while (options != 0);
         }
     }

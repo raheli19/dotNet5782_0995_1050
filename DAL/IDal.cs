@@ -61,7 +61,7 @@ namespace IDAL
 
         List<int> IdStation();
         public List<int> clientReceivedParcel();
-        void Assignement(object iD, int id);
+        //void Assignement(object iD, int id);
 
         //public Station FoundStation(int id);
 
