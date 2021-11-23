@@ -181,6 +181,7 @@ namespace BL
             try
             { 
                 IDAL.DO.Client dalClient = p.ClientById(id);
+                c.ClientLoc = new Localisation();
                 c.ID = dalClient.ID;
                 c.Name = dalClient.Name;
                 c.Phone = dalClient.Phone;
@@ -399,7 +400,7 @@ namespace BL
             DALParcel.PickedUp = pack.PickedUp;
             DALParcel.Delivered = pack.Delivered;
             DALParcel.Requested = pack.Requested;
-            DALParcel.DroneId = pack.Drone.ID;
+            //DALParcel.DroneId = pack.Drone.ID;
             try
             {
                 p.addParcel(DALParcel);

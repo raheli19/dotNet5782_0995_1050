@@ -81,6 +81,7 @@ namespace ConsoleUI_BL
 
                                 case entities.CLIENT:
                                     IBL.BO.Client client = new Client();
+                                    client.ClientLoc = new Localisation();
                                     Console.WriteLine("You chose to add a Client.\nPlease enter his ID, Name, Phone, and his location: latitude and longitude:\n");
                                     int.TryParse(Console.ReadLine(), out int CID);//ClientID
                                     string Cname, Cphone;
@@ -98,12 +99,15 @@ namespace ConsoleUI_BL
 
                                 case entities.PARCEL:
                                     IBL.BO.Parcel myParcel = new Parcel();
-                                    Console.WriteLine("You chose to add a Parcel.\nPlease enter SenderId, TargetId, MaxWeight, Priority:");
+                                    myParcel.Sender = new ClientInParcel();
+                                    myParcel.Target = new ClientInParcel();
+                                    Console.WriteLine("You chose to add a Parcel.\nPlease enter its ID, SenderId, TargetId, MaxWeight, Priority:");
+                                    int.TryParse(Console.ReadLine(), out int ID);
                                     int.TryParse(Console.ReadLine(), out int senderId);
                                     int.TryParse(Console.ReadLine(), out int targetId);
                                     myParcel.Weight = (IBL.BO.WeightCategories)int.Parse(Console.ReadLine());
                                     myParcel.Priority = (IBL.BO.Priorities)int.Parse(Console.ReadLine());
-                                    int.TryParse(Console.ReadLine(), out int droneId);
+                                    myParcel.ID = ID;
                                     myParcel.Sender.ID = senderId;
                                     myParcel.Target.ID = targetId;
                                     myParcel.Requested = DateTime.Now; //A verifier
