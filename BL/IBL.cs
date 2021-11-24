@@ -23,7 +23,7 @@ namespace IBL
 
         void addClient(Client c);
 
-        void addParcel(Parcel p);
+        int addParcel(Parcel p);
 
         //functions UPDATE
 

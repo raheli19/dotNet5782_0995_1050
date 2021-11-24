@@ -44,12 +44,20 @@ namespace DalObject
         /// </summary>
         internal class Config
         {
-            internal static bool statut;/// 1 if free, 0 if not
-            internal static WeightCategories light;
-            internal static WeightCategories middle;
-            internal static WeightCategories heavy;
-            internal static int charging; // chargement % per hour
-  
+            //internal static bool statut;/// 1 if free, 0 if not
+            //internal static WeightCategories light;
+            //internal static WeightCategories middle;
+            //internal static WeightCategories heavy;
+            //internal static int charging; // chargement % per hour
+            public static int RunnerIDnumber = 1000;
+
+            public static double BatteryFree = 0.0005; // % of battery per km.
+            public static double BatteryLightWeight = 0.001;
+            public static double BatteryMiddleWeight = 0.0015;
+            public static double BatteryHeavyWeight = 0.002;
+            public static double ChargeDroneRate = 10;
+
+
         }
         #endregion
         
@@ -66,8 +74,8 @@ namespace DalObject
             {
                 ClientList.Add(new Client()
                 {
-                    ID = rand.Next(1000000, 10000000),
-                    //Name = $"Client {Config.NumOfClients}",
+                    ID = rand.Next(10000000, 100000000),
+                    Name = $"Client {i}",
                     Phone = $"0{rand.Next(50, 58)} - {rand.Next(1000000, 10000000)}",
                     Latitude = DataSource.GetrandomCoordinate(31.37),
                     Longitude = DataSource.GetrandomCoordinate(35.16),
@@ -148,12 +156,13 @@ namespace DalObject
             {
                 ParcelList.Add(new Parcel()
                 {
-                    //ID = Config.ParceId++,
-                    SenderId = rand.Next(1000000, 1000000),
-                    TargetId = rand.Next(1000000, 1000000),
+                    ID = Config.RunnerIDnumber++,
+                    SenderId = ClientList[rand.Next(0,10)].ID,
+                    TargetId = ClientList[rand.Next(0, 10)].ID,
                     Weight = (WeightCategories)rand.Next(3),
                     Priority = (Priorities)rand.Next(3),
                     Requested = DateTime.Now,
+                    
                 }) ;
             }
         }
@@ -220,13 +229,14 @@ namespace DalObject
         #endregion
 
         #region addParcel
-        public void addParcel(Parcel parcel)
+        public void addParcel(Parcel pl)
         {
-            if (DataSource.ParcelList.Exists(parcel => parcel.ID == parcel.ID))
-            {
-                throw new ParcelException($"id {parcel.ID} already exists!!");
-            }
-            DataSource.ParcelList.Add(parcel);
+            //if (DataSource.ParcelList.Exists(parcel => parcel.ID == pl.ID))
+            //{
+            //    throw new ParcelException($"id {pl.ID} already exists!!");
+            //}
+            DataSource.ParcelList.Add(pl);
+            DataSource.Config.RunnerIDnumber++;
         }
         #endregion
 

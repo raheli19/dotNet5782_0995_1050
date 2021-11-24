@@ -241,6 +241,9 @@ namespace BL
         public Parcel GetParcel(int id)
         {
             Parcel myParcel = new Parcel();
+            myParcel.Sender = new ClientInParcel();
+            myParcel.Target = new ClientInParcel();
+            myParcel.Drone = new DroneWithParcel();
             try
             {
                 IDAL.DO.Parcel dalParcel = p.ParcelById(id);
@@ -377,11 +380,11 @@ namespace BL
            
         }
 
-        public void addParcel(Parcel pack) 
+        public int addParcel(Parcel pack) 
         {
             IDAL.DO.Parcel DALParcel = new IDAL.DO.Parcel();
-            if (!(pack.ID <= 99999999 && pack.ID > 9999999))
-                throw new IBL.BO.InputNotValid("ID not valid");
+            //if (!(pack.ID <= 99999999 && pack.ID > 9999999))
+            //    throw new IBL.BO.InputNotValid("ID not valid");
             DALParcel.ID = pack.ID;
             if (!(pack.Sender.ID <= 99999999 && pack.Sender.ID > 9999999))
                 throw new IBL.BO.InputNotValid("SenderID not valid");
@@ -402,7 +405,7 @@ namespace BL
             DALParcel.Priority = (IDAL.DO.Priorities)pack.Priority;
             DALParcel.Scheduled = pack.Scheduled;
             DALParcel.PickedUp = pack.PickedUp;
-            DALParcel.Delivered = pack.Delivered;
+            DALParcel.Delivered = pack.Delivered;   
             DALParcel.Requested = pack.Requested;
             //DALParcel.DroneId = pack.Drone.ID;
             try
@@ -414,6 +417,7 @@ namespace BL
             {
                 throw new AlreadyExist("This package already exists", ex);
             }
+            return DALParcel.ID;
         
         }
         #endregion
@@ -981,13 +985,13 @@ namespace BL
         #region displayParcel
         public Parcel displayParcel(int parcelId) 
         {
-
             Parcel prcl = GetParcel(parcelId);
             //The missing fields are Sender(ClientInParcel),Target(ClientInParcel) and Drone(droneWithParcel)
 
             ClientInParcel tempSender = new ClientInParcel();
             ClientInParcel tempTarget = new ClientInParcel();
             DroneWithParcel tempDrone = new DroneWithParcel();
+
             tempDrone.departureLoc = new Localisation();
             tempSender.ID = prcl.Sender.ID;
             try
@@ -1015,7 +1019,6 @@ namespace BL
             }
             prcl.Drone = tempDrone;
             return prcl;
-
 
         }
         #endregion
@@ -1086,12 +1089,20 @@ namespace BL
             //time
             //matsav havila
             List<ParcelDescription> parList = new List<ParcelDescription>();
-            ParcelDescription tempPar = new ParcelDescription();
+            
             foreach(var item in p.ParcelList())
             {
+                ParcelDescription tempPar = new ParcelDescription();
                 tempPar.Id = item.ID;
-                tempPar.SenderName = Name(item.SenderId);
-                tempPar.TargetName = Name(item.TargetId);
+                try
+                {
+                    tempPar.SenderName = p.ClientById(item.SenderId).Name;
+                    tempPar.TargetName = p.ClientById(item.TargetId).Name;
+                }
+                catch (IDAL.DO.ClientException ex)
+                {
+                    throw new IBL.BO.IDNotFound("not found", ex);
+                }
                 tempPar.weight = (WeightCategories)item.Weight;
                 tempPar.priority = (Priorities)item.Priority;
                 if (item.Requested == DateTime.Now)
