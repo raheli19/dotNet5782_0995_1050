@@ -119,7 +119,10 @@ namespace ConsoleUI_BL
                             }
                             break;
                         case option.UPDATE:
-                            Console.WriteLine("You chose to update an entity.\nTo assign a Parcel to a Drone please press 1;\nTo pick up a parcel please press 2;\nTo plug in a Drone please press 3;\nTo remove a Drone from the ChargeSlot please press 4,\nTo exit please press 0:\n ");
+                            Console.WriteLine("You chose to update an entity.\nTo update a Drone please press 1;\n To update a Station please press 2;\n To update a Client please press 3\n" +
+                                "To plug in a Drone please press 4;\nTo remove a Drone from the ChargeSlot please press 5;\nTo assign a Parcel to a Drone please press 6;" +
+                                "\nTo pick up a parcel please press 7;\nTo deliver a Parcel please press 8\n" +
+                                "To exit please press 0:\n ");
                             update updating;
                             updating = (update)int.Parse(Console.ReadLine());
                             switch (updating)
