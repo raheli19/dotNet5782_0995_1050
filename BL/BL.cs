@@ -567,7 +567,9 @@ namespace BL
             // upadte the drone in the bl DroneList
             myDr.Status = DroneStatuses.free;
             myDr.battery = BatteryAccToTime(time);
-            DroneList.updateBlDroneList(myDr);
+            DroneList.Remove(myDr);
+            DroneList.Add(myDr);
+            
 
             //update the drone in the droneList from the DAL
             try
@@ -1300,7 +1302,10 @@ namespace BL
                 return true;
             return false;
         }
-        
+        void updateBlDroneList(DroneDescription droneToUpdate)
+        {
+
+        }
         #endregion
 
 
