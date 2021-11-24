@@ -304,7 +304,7 @@ namespace BL
             d.Battery = rand.Next(20, 40);// initialize the battery
             Station s = GetStation(StationID);
             
-            if (!(CheckId(d.ID))) //ID not Valid
+            if (!(d.ID <= 99999999 && d.ID > 9999999)) //ID not Valid
                 throw new IBL.BO.InputNotValid("ID is not valid");
             DALdr.ID = d.ID;
             if (d.MaxWeight != WeightCategories.low && d.MaxWeight != WeightCategories.middle && d.MaxWeight != WeightCategories.heavy)
@@ -351,7 +351,7 @@ namespace BL
         public void addClient(Client c) 
         {
             IDAL.DO.Client cl= new IDAL.DO.Client();
-            if (!(CheckId( c.ID )))
+            if (!(c.ID <= 99999999 && c.ID > 9999999))
                 throw new IBL.BO.InputNotValid("ID not valid");
             cl.ID = c.ID;
             cl.Name = c.Name;
