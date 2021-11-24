@@ -306,6 +306,7 @@ namespace BL
             IDAL.DO.Drone DALdr = new IDAL.DO.Drone();
             d.Battery = rand.Next(20, 40);// initialize the battery
             Station s = GetStation(StationID);
+            
             if (!(d.ID <= 99999999 && d.ID > 9999999)) //ID not Valid
                 throw new IBL.BO.InputNotValid("ID is not valid");
             DALdr.ID = d.ID;
@@ -345,6 +346,9 @@ namespace BL
             {
                 throw new AlreadyExist("Can't add this drone", ex);
             }
+            IDAL.DO.Station dalS= new IDAL.DO.Station();
+            dalS = ConvertStationToDal(s);
+            p.UpdateStation(dalS);
         }
 
         public void addClient(Client c) 
@@ -558,7 +562,7 @@ namespace BL
                     myDr.loc = item.loc;
                     myDr.DeliveredParcels = item.DeliveredParcels;
                     // don't copy the battery
-                    DroneList.Remove(item);// delete the drone from the list
+                    //DroneList.Remove(item);// delete the drone from the list
                 }
             }
             if (myDr.Status != DroneStatuses.maintenance)// if the drone is not charging
@@ -566,8 +570,8 @@ namespace BL
 
             // upadte the drone in the bl DroneList
             myDr.Status = DroneStatuses.free;
-            myDr.battery = BatteryAccToDistance(time);
-            DroneList.Add(myDr);
+            myDr.battery = BatteryAccToTime(time);
+            DroneList.updateBlDroneList(myDr);
 
             //update the drone in the droneList from the DAL
             try
@@ -817,7 +821,9 @@ namespace BL
                 if (item.StationId == s.ID)
                 {
                     Drone drone = GetDrone(item.DroneId);
-                    s.DroneCharging.Add(new DroneCharging() { ID = item.DroneId, battery = drone.Battery });
+                    s.DroneCharging.Add(new DroneCharging() { ID = item.DroneId, battery = drone.Battery, });
+                    
+
                 }
             }
             return s;
@@ -1027,8 +1033,12 @@ namespace BL
                 statD.name = item.Name;
                 foreach( var item2 in p.DroneChargeList())// full chargeSlots
                 {
-                    if (item2.StationId == item.ID)
+                    if (item2.StationId == item.ID) // if the drone is in the station
+                    { 
                         statD.fullChargeSlots++;
+                        
+                    }
+
                 }
 
                 statD.freeChargeSlots = item.ChargeSlots;// free ones
@@ -1277,6 +1287,31 @@ namespace BL
             }
             return tempParcel;
         }
+        IDAL.DO.Station ConvertStationToDal (IBL.BO.Station s)
+        {
+            IDAL.DO.Station stat = new IDAL.DO.Station();
+            stat.ID = s.ID;
+            stat.Name = s.Name;
+            stat.Latitude = s.Loc.latitude;
+            stat.Longitude = s.Loc.longitude;
+            stat.ChargeSlots = s.ChargeSlots;
+            return stat;
+
+        }
+        bool CheckId(int id)
+        {
+            int i = 0;
+            while(id>0)
+            {
+                ++i;
+                id /= 10;
+
+            }
+            if (i == 8)
+                return true;
+            return false;
+        }
+        
         #endregion
 
 
