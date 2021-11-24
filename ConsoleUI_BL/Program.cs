@@ -101,20 +101,19 @@ namespace ConsoleUI_BL
                                     IBL.BO.Parcel myParcel = new Parcel();
                                     myParcel.Sender = new ClientInParcel();
                                     myParcel.Target = new ClientInParcel();
-                                    Console.WriteLine("You chose to add a Parcel.\nPlease enter its ID, SenderId, TargetId, MaxWeight, Priority:");
-                                    int.TryParse(Console.ReadLine(), out int ID);
+                                    Console.WriteLine("You chose to add a Parcel.\nPlease enter its SenderId, TargetId, MaxWeight, Priority:");
                                     int.TryParse(Console.ReadLine(), out int senderId);
                                     int.TryParse(Console.ReadLine(), out int targetId);
                                     myParcel.Weight = (IBL.BO.WeightCategories)int.Parse(Console.ReadLine());
                                     myParcel.Priority = (IBL.BO.Priorities)int.Parse(Console.ReadLine());
-                                    myParcel.ID = ID;
                                     myParcel.Sender.ID = senderId;
                                     myParcel.Target.ID = targetId;
                                     myParcel.Requested = DateTime.Now; //A verifier
                                     myParcel.PickedUp = DateTime.MinValue;
                                     myParcel.Delivered = DateTime.MinValue;
                                     myParcel.Scheduled = DateTime.MinValue;
-                                    obj.addParcel(myParcel);
+                                    int id = obj.addParcel(myParcel);
+                                    Console.WriteLine($"package id is {id}");
                                     break;
                             }
                             break;
