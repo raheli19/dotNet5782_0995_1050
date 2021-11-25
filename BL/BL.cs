@@ -1416,7 +1416,10 @@ namespace BL
                 return true;
             return false;
         }
-        
+        void updateBlDroneList(DroneDescription droneToUpdate)
+        {
+
+        }
         #endregion
 
 
