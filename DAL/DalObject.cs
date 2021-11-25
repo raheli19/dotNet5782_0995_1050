@@ -353,7 +353,29 @@ namespace DalObject
         }
         #endregion
 
+        public void UpdateParcelFromBL(Parcel ParcelToUpdate)
+        {
+            Parcel myParcel = new Parcel();
+            myParcel.ID = -1;
+            myParcel = DataSource.ParcelList.Find(x => x.ID == ParcelToUpdate.ID);
+            if (myParcel.ID == -1)
+            {
+                throw new ParcelException("This Parcel doesn't exist in the system.");
 
+            }
+            DataSource.ParcelList.Remove(myParcel);
+            myParcel.ID = ParcelToUpdate.ID;
+            myParcel.SenderId = ParcelToUpdate.SenderId;
+            myParcel.TargetId = ParcelToUpdate.TargetId;
+            myParcel.Weight = ParcelToUpdate.Weight;
+            myParcel.Priority = ParcelToUpdate.Priority;
+            myParcel.Requested = ParcelToUpdate.Requested;
+            myParcel.DroneId = ParcelToUpdate.DroneId;
+            myParcel.Scheduled = ParcelToUpdate.Scheduled;
+            myParcel.PickedUp = ParcelToUpdate.PickedUp;
+            myParcel.Delivered = ParcelToUpdate.Delivered;
+            DataSource.ParcelList.Add(myParcel);
+        }
         #endregion
 
         //-----------------------------------ACTIONS-------------------------------------------

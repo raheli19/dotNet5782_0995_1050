@@ -25,6 +25,8 @@ namespace IDAL
 
         void updateDroneChargeList(int droneId, int statId);
 
+        void UpdateParcelFromBL(Parcel ParcelToUpdate);
+
         void UpdateStation(Station stationToUpdate);
 
         void UpdateClient(Client clientToUpdate);

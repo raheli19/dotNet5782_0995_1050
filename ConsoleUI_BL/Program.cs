@@ -138,7 +138,7 @@ namespace ConsoleUI_BL
                                     int.TryParse(Console.ReadLine(), out int StatID);
                                     Console.WriteLine("Do you want to update the station's name? Enter yes or no\n");
                                     string ans = "yes";
-                                    int newNam = 0;
+                                    int newNam=-1;
                                     if (ans == Console.ReadLine())
                                     {
                                         Console.WriteLine("Enter the new name\n");
@@ -146,7 +146,7 @@ namespace ConsoleUI_BL
                                     }
                                     Console.WriteLine("Do you want to update the station's chargeSlots? Enter yes or no\n");
 
-                                    int newCs = 0;
+                                    int newCs = -1;
                                     if (ans == Console.ReadLine())
                                     {
                                         Console.WriteLine("Enter the number of chargeSlots\n");

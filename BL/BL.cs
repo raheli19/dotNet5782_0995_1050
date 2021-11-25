@@ -1,4 +1,7 @@
-﻿using System;
+﻿//Tania:DroneToCharge, DroneCharged et Assignment verifier
+
+
+using System;
 using System.Collections.Generic;
 using System.Text;
 using IBL.BO;
@@ -20,6 +23,7 @@ namespace BL
 
         public BL() 
         { 
+            //constructor of the BL file
             p= new DalObject.DalObject();
             ////List <Drone> Dlist =new List<Drone> (p.DroneList().CopyPropertiesToNew(typeof(IBL.BO)));
             //IBL.BO.DroneDescription Bldr=new IBL.BO.DroneDescription();  // drone from the bl
@@ -173,96 +177,119 @@ namespace BL
             //}
 
         }
-       
+       //-----------------------------------RETRIEVE-FUNCTIONS--------------------------------------
+
         #region GetClient
+        /// <summary>
+        /// This function receives an ID of a client,search for this client in DAL and returns a BL type client
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public Client GetClient(int id)
         {
-            Client c = new Client();
+            Client clientBL = new Client();
             try
             { 
-                IDAL.DO.Client dalClient = p.ClientById(id);
-                c.ClientLoc = new Localisation();
-                c.ID = dalClient.ID;
-                c.Name = dalClient.Name;
-                c.Phone = dalClient.Phone;
-                c.ClientLoc.longitude = dalClient.Longitude;
-                c.ClientLoc.latitude = dalClient.Latitude;
+                IDAL.DO.Client dalClient = p.ClientById(id);//search it in the clients'list from DAL
+                clientBL.ClientLoc = new Localisation();
+                clientBL.ID = dalClient.ID; //copies all the fields 
+                clientBL.Name = dalClient.Name;
+                clientBL.Phone = dalClient.Phone;
+                clientBL.ClientLoc.longitude = dalClient.Longitude;
+                clientBL.ClientLoc.latitude = dalClient.Latitude;
             }
-            catch(IDAL.DO.ClientException custEX)
+            catch(IDAL.DO.ClientException custEX)  //catches if there is an exception in DAL
             {
-                throw new IBL.BO.IDNotFound($"Client ID {id} was not found", custEX);
+                throw new IBL.BO.IDNotFound($"Client ID {id} was not found", custEX); //throws if there is an exception in BL
             }
-            return c;
+            return clientBL; //returns the BL type client
         }
         #endregion
+
         #region GetStation
+        /// <summary>
+        /// This function receives a Station ID, searches it in the station List from DAL and returns a BL station
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public Station GetStation(int id)
         {
-            Station s = new Station();
-            s.Loc = new Localisation();
+            Station stationBL = new Station(); //creates a new station in BL file
+            stationBL.Loc = new Localisation();
             try
             {
-                IDAL.DO.Station dalStat = p.StationById(id);
-                s.ID = dalStat.ID;
-                s.Name = dalStat.Name;
-                s.Loc.longitude = dalStat.Longitude;
-                s.Loc.latitude = dalStat.Latitude;
-                s.ChargeSlots = dalStat.ChargeSlots;
+                IDAL.DO.Station dalStat = p.StationById(id);  //search the station from DAL
+                stationBL.ID = dalStat.ID;  //Copies all the fields from the DAL station
+                stationBL.Name = dalStat.Name;
+                stationBL.Loc.longitude = dalStat.Longitude;
+                stationBL.Loc.latitude = dalStat.Latitude;
+                stationBL.ChargeSlots = dalStat.ChargeSlots;
             }
-            catch (IDAL.DO.StationException statEX)
+            catch (IDAL.DO.StationException statEX) //catches the DAL exception
             {
-                throw new IBL.BO.IDNotFound($"Station ID {id} was not found", statEX);
+                throw new IBL.BO.IDNotFound($"Station ID {id} was not found", statEX); //throws an BL exception
             }
-            return s;
+            return stationBL;
         }
         #endregion
+
         #region GetDrone
+        /// <summary>
+        /// This function receives a drone ID, searches it in the drone list in DAL and returns a BL drone
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public Drone GetDrone(int id)
         {
-            Drone d = new Drone();
+            Drone droneBL = new Drone();
             try
             {
-                IDAL.DO.Drone dalDrone = p.DroneById(id);
-                d.ID = dalDrone.ID;
-                d.Model = dalDrone.Model;
-                d.Battery = dalDrone.Battery;
+                IDAL.DO.Drone dalDrone = p.DroneById(id);  //search the drone from DAL
+                droneBL.ID = dalDrone.ID;  //copies field by field
+                droneBL.Model = dalDrone.Model;
+                droneBL.Battery = dalDrone.Battery;
                
             }
-            catch (IDAL.DO.DroneException drEX)
+            catch (IDAL.DO.DroneException drEX) //catches DAL exception
             {
-                throw new IBL.BO.IDNotFound($"Drone ID {id} was not found", drEX);
+                throw new IBL.BO.IDNotFound($"Drone ID {id} was not found", drEX);  //throws an BL exception
             }
-            return d;
+            return droneBL;
 
         }
         #endregion
-        #region GetParcel
 
+        #region GetParcel
+        /// <summary>
+        /// This function receives a parcel ID,searches this parcel in the list from DAL and returns a BL parcel
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public Parcel GetParcel(int id)
         {
-            Parcel myParcel = new Parcel();
-            myParcel.Sender = new ClientInParcel();
-            myParcel.Target = new ClientInParcel();
-            myParcel.Drone = new DroneWithParcel();
+            Parcel parcelBL = new Parcel();
+            parcelBL.Sender = new ClientInParcel();
+            parcelBL.Target = new ClientInParcel();
+            parcelBL.Drone = new DroneWithParcel();
             try
             {
-                IDAL.DO.Parcel dalParcel = p.ParcelById(id);
-                myParcel.ID = dalParcel.ID;
-                myParcel.Sender.ID = dalParcel.SenderId;
-                myParcel.Target.ID = dalParcel.TargetId;
-                myParcel.Weight = (WeightCategories)dalParcel.Weight;
-                myParcel.Priority = (Priorities)dalParcel.Priority;
-                myParcel.Requested = dalParcel.Requested;
-                myParcel.Scheduled = dalParcel.Scheduled;
-                myParcel.PickedUp = dalParcel.PickedUp;
-                myParcel.Delivered = dalParcel.Delivered;
-                myParcel.Drone.ID = dalParcel.DroneId;
+                IDAL.DO.Parcel dalParcel = p.ParcelById(id);  //search the Parcel in the list from DAL
+                parcelBL.ID = dalParcel.ID;  //copies all the fields
+                parcelBL.Sender.ID = dalParcel.SenderId;
+                parcelBL.Target.ID = dalParcel.TargetId;
+                parcelBL.Weight = (WeightCategories)dalParcel.Weight;
+                parcelBL.Priority = (Priorities)dalParcel.Priority;
+                parcelBL.Requested = dalParcel.Requested;
+                parcelBL.Scheduled = dalParcel.Scheduled;
+                parcelBL.PickedUp = dalParcel.PickedUp;
+                parcelBL.Delivered = dalParcel.Delivered;
+                parcelBL.Drone.ID = dalParcel.DroneId;
             }
-            catch (IDAL.DO.ParcelException prEX)
+            catch (IDAL.DO.ParcelException prEX)  //catches the exception from Dal
             {
-                throw new IBL.BO.IDNotFound($"Parcel ID {id} was not found", prEX);
+                throw new IBL.BO.IDNotFound($"Parcel ID {id} was not found", prEX);  //throws the BL exception
             }
-            return myParcel;
+            return parcelBL;   //returns a BL type parcel 
         }
 
 
@@ -270,76 +297,87 @@ namespace BL
 
         //-----------------------------------ADD-FUNCTIONS----------------------------------------
 
-        #region ADDFunctions
-        public void addStation(IBL.BO.Station s)   
+        #region addStation
+        /// <summary>
+        /// This function receives a BL type station, creates a new station in DAL with the same values int the commun fields and adds it in the stationList in DAL
+        /// </summary>
+        /// <param name="stationBL"></param>
+        public void addStation(IBL.BO.Station stationBL)   
         {
-            IDAL.DO.Station stat = new IDAL.DO.Station();
-            
-            stat.Name = s.Name;
-            if (!(s.ID <= 99999999 && s.ID > 9999999))
+            IDAL.DO.Station stationDAL = new IDAL.DO.Station();  //creates a station from DAL
+
+            stationDAL.Name = stationBL.Name;  //copies the commun fields
+            if (!(stationBL.ID <= 99999999 && stationBL.ID > 9999999))
                 throw new IBL.BO.InputNotValid("ID not valid");
-            stat.ID = s.ID;
-            if (s.Loc.latitude< 31||s.Loc.latitude>33.3)/////////////// a verifier
+            stationDAL.ID = stationBL.ID;
+            if (stationBL.Loc.latitude< 31|| stationBL.Loc.latitude>33.3)
                 throw new IBL.BO.InputNotValid("latitude is not valid");
-            stat.Latitude = s.Loc.latitude;
-            if (s.Loc.longitude<34.3||s.Loc.longitude>35.5)
+            stationDAL.Latitude = stationBL.Loc.latitude;
+            if (stationBL.Loc.longitude<34.3|| stationBL.Loc.longitude>35.5)
                 throw new IBL.BO.InputNotValid("longitude is not valid");
-            stat.Longitude = s.Loc.longitude;
-            stat.ChargeSlots = s.ChargeSlots;
+            stationDAL.Longitude = stationBL.Loc.longitude;
+            stationDAL.ChargeSlots = stationBL.ChargeSlots;
             try
             {
-                p.addStation(stat);
+                p.addStation(stationDAL);
                 //p.addStation((IDAL.DO.Station)s.CopyPropertiesToNew(typeof(IDAL.DO.Station)));
             }
-            catch(IDAL.DO.StationException ex)
+            catch(IDAL.DO.StationException ex)  //catches the exception from DAL
             {
-                throw new IBL.BO.AlreadyExist("Station already exists ", ex);
+                throw new IBL.BO.AlreadyExist("Station already exists ", ex);  //throws a BL exception (if needed)
 
             }
             
         }
+        #endregion
 
-        public  void addDrone(Drone d, int StationID) 
+        #region addDrone
+        /// <summary>
+        /// This function receives a BL drone and a station ID. Adds the drone to the droneList in DAL, to the droneList in BL and associates the drone to its station
+        /// </summary>
+        /// <param name="d"></param>
+        /// <param name="StationID"></param>
+        public void addDrone(Drone droneBL, int StationID) 
         
         {
             //Add the drone To Add and check if the inputs are correct
-            IDAL.DO.Drone DALdr = new IDAL.DO.Drone();
-            d.Battery = rand.Next(20, 40);// initialize the battery
-            Station s = GetStation(StationID);
+            IDAL.DO.Drone droneDAL = new IDAL.DO.Drone();  //creates a new drone (from DAL)
+            droneBL.Battery = rand.Next(20, 40);// initialize the battery
+            Station stationBL = GetStation(StationID);  //finds the station according to its ID
             
-            if (!(d.ID <= 99999999 && d.ID > 9999999)) //ID not Valid
+            if (!(droneBL.ID <= 99999999 && droneBL.ID > 9999999)) //ID not Valid
                 throw new IBL.BO.InputNotValid("ID is not valid");
-            DALdr.ID = d.ID;
-            if (d.MaxWeight != WeightCategories.low && d.MaxWeight != WeightCategories.middle && d.MaxWeight != WeightCategories.heavy)
+            droneDAL.ID = droneBL.ID;  //copies all the fields to the DAL drone
+            if (droneBL.MaxWeight != WeightCategories.low && droneBL.MaxWeight != WeightCategories.middle && droneBL.MaxWeight != WeightCategories.heavy)
                throw new IBL.BO.InputNotValid("The category of your weight is not valid");
-            if (d.Status != DroneStatuses.free && d.Status != DroneStatuses.maintenance && d.Status != DroneStatuses.shipping)
+            if (droneBL.Status != DroneStatuses.free && droneBL.Status != DroneStatuses.maintenance && droneBL.Status != DroneStatuses.shipping)
                 throw new IBL.BO.InputNotValid("The status of your drone is not valid");
-            DALdr.Model = d.Model;
-            if (d.Battery < 0 || d.Battery > 100)
+            droneDAL.Model = droneBL.Model;
+            if (droneBL.Battery < 0 || droneBL.Battery > 100)
                 throw new IBL.BO.InputNotValid("Battery is not valid");
-            DALdr.Battery = d.Battery;
-            
-            d.Status = DroneStatuses.maintenance;
-            d.initialLoc = s.Loc;// his location is the same than the station
+            droneDAL.Battery = droneBL.Battery;
+
+            droneBL.Status = DroneStatuses.maintenance;
+            droneBL.initialLoc = stationBL.Loc;// his location is the same than the station
             IDAL.DO.DroneCharge DalDC = new IDAL.DO.DroneCharge();
             DalDC.StationId = StationID;
-            DalDC.DroneId = d.ID;
+            DalDC.DroneId = droneBL.ID;
             p.AddFromBLDroneCharging(DalDC.DroneId,DalDC.StationId);
           
             //Create a new DroneDescription and add it TO BL
             DroneDescription DP = new DroneDescription();
             DP.loc = new Localisation();
-            DP.Id = d.ID;
-            DP.Model = d.Model;
-            DP.weight = d.MaxWeight;
-            DP.battery = d.Battery;
+            DP.Id = droneBL.ID;
+            DP.Model = droneBL.Model;
+            DP.weight = droneBL.MaxWeight;
+            DP.battery = droneBL.Battery;
             DP.Status = DroneStatuses.maintenance;
-            DP.loc = d.initialLoc;
+            DP.loc = droneBL.initialLoc;
             DroneList.Add(DP);
-            s.ChargeSlots--;// one more is full
+            stationBL.ChargeSlots--;// one more is full
             try
             {
-                p.AddDrone(DALdr);//ADD TO DAL
+                p.AddDrone(droneDAL);//ADD TO DAL
                 //p.AddDrone((IDAL.DO.Drone)d.CopyPropertiesToNew(typeof(IDAL.DO.Drone)));
             } 
             catch(IDAL.DO.DroneException ex)
@@ -347,70 +385,82 @@ namespace BL
                 throw new AlreadyExist("Can't add this drone", ex);
             }
             IDAL.DO.Station dalS= new IDAL.DO.Station();
-            dalS = ConvertStationToDal(s);
+            dalS = ConvertStationToDal(stationBL);
             p.UpdateStation(dalS);
         }
+        #endregion
 
-        public void addClient(Client c) 
+        #region addClient
+        /// <summary>
+        /// This function receives a BL client and add it to DAL
+        /// </summary>
+        /// <param name="c"></param>
+        public void addClient(Client clientBL) 
         {
-            IDAL.DO.Client cl= new IDAL.DO.Client();
-            if (!(c.ID <= 99999999 && c.ID > 9999999))
+            IDAL.DO.Client clientDAL= new IDAL.DO.Client();  //creates a DAL client
+            if (!(clientBL.ID <= 99999999 && clientBL.ID > 9999999))  //check the validity of the fields: if one of them is not valid, throws an exception
                 throw new IBL.BO.InputNotValid("ID not valid");
-            cl.ID = c.ID;
-            cl.Name = c.Name;
-            if (c.Phone.Length!=11)
+            clientDAL.ID = clientBL.ID;  //copies all the fieldsto the DAL client
+            clientDAL.Name = clientBL.Name;
+            if (clientBL.Phone.Length!=11)
                 throw new IBL.BO.InputNotValid("Phone not valid");
-            cl.Phone = c.Phone;
-            if (c.ClientLoc.latitude < 31 || c.ClientLoc.latitude > 33.3)/////////////// a verifier
+            clientDAL.Phone = clientBL.Phone;
+            if (clientBL.ClientLoc.latitude < 31 || clientBL.ClientLoc.latitude > 33.3)
                 throw new IBL.BO.InputNotValid("latitude is not valid");
-            cl.Latitude = c.ClientLoc.latitude;
-            if (c.ClientLoc.longitude < 34.3 || c.ClientLoc.longitude > 35.5)
+            clientDAL.Latitude = clientBL.ClientLoc.latitude;
+            if (clientBL.ClientLoc.longitude < 34.3 || clientBL.ClientLoc.longitude > 35.5)
                 throw new IBL.BO.InputNotValid("longitude is not valid");
-            cl.Longitude = c.ClientLoc.longitude;
+            clientDAL.Longitude = clientBL.ClientLoc.longitude;
             try
             {
-                p.addClient(cl);
+                p.addClient(clientDAL);  //ADD it to DAL
                 //p.addClient((IDAL.DO.Client)c.CopyPropertiesToNew(typeof(IDAL.DO.Client)));
             }
-            catch (IDAL.DO.ClientException ex)
+            catch (IDAL.DO.ClientException ex)  //catches a DAL exception
             {
-                throw new AlreadyExist("This Client already exists", ex);
+                throw new AlreadyExist("This Client already exists", ex); //throws a BL exception
             }
             
            
         }
 
-        public int addParcel(Parcel pack) 
+        #endregion
+
+        #region addParcel
+        /// <summary>
+        /// This function receives a BL parcel and add it to Dal
+        /// </summary>
+        /// <param name="pack"></param>
+        /// <returns></returns>
+        public int addParcel(Parcel parcelBL) 
         {
-            IDAL.DO.Parcel DALParcel = new IDAL.DO.Parcel();
-            //if (!(pack.ID <= 99999999 && pack.ID > 9999999))
-            //    throw new IBL.BO.InputNotValid("ID not valid");
-            DALParcel.ID = pack.ID;
-            if (!(pack.Sender.ID <= 99999999 && pack.Sender.ID > 9999999))
+            IDAL.DO.Parcel DALParcel = new IDAL.DO.Parcel(); // creates a new parcel from DAL
+            DALParcel.ID = parcelBL.ID;  //copies all the fields from the parcel he received
+            if (!(parcelBL.Sender.ID <= 99999999 && parcelBL.Sender.ID > 9999999))//check the validity of the fields received
                 throw new IBL.BO.InputNotValid("SenderID not valid");
-            DALParcel.SenderId = pack.Sender.ID;
-            if (!(pack.Target.ID <= 99999999 && pack.Target.ID > 9999999))
+            DALParcel.SenderId = parcelBL.Sender.ID;
+            if (!(parcelBL.Target.ID <= 99999999 && parcelBL.Target.ID > 9999999))
                 throw new IBL.BO.InputNotValid("TargetID not valid");
-            DALParcel.TargetId = pack.Target.ID;
-            pack.Scheduled = DateTime.MinValue;
-            pack.PickedUp = DateTime.MinValue;
-            pack.Delivered = DateTime.MinValue;
-            pack.Requested = DateTime.Now;
-            pack.Drone = null;
-            if (pack.Weight != WeightCategories.low && pack.Weight != WeightCategories.middle && pack.Weight != WeightCategories.heavy)
+            DALParcel.TargetId = parcelBL.Target.ID;
+            parcelBL.Scheduled = DateTime.MinValue; //All the dateTimes are initialized with min values except from the dateTime of its creation
+            parcelBL.PickedUp = DateTime.MinValue;
+            parcelBL.Delivered = DateTime.MinValue;
+            parcelBL.Requested = DateTime.Now;
+            parcelBL.Drone = null;
+            if (parcelBL.Weight != WeightCategories.low && parcelBL.Weight != WeightCategories.middle && parcelBL.Weight != WeightCategories.heavy)
                 throw new IBL.BO.InputNotValid("The category of your weight is not valid");
-            DALParcel.Weight = (IDAL.DO.WeightCategories)pack.Weight;
-            if (pack.Priority != Priorities.regular && pack.Priority != Priorities.fast && pack.Priority != Priorities.emergency)
+            DALParcel.Weight = (IDAL.DO.WeightCategories)parcelBL.Weight;
+            if (parcelBL.Priority != Priorities.regular && parcelBL.Priority != Priorities.fast && parcelBL.Priority != Priorities.emergency)
                 throw new IBL.BO.InputNotValid("The time delivery is not valid");
-            DALParcel.Priority = (IDAL.DO.Priorities)pack.Priority;
-            DALParcel.Scheduled = pack.Scheduled;
-            DALParcel.PickedUp = pack.PickedUp;
-            DALParcel.Delivered = pack.Delivered;   
-            DALParcel.Requested = pack.Requested;
-            //DALParcel.DroneId = pack.Drone.ID;
+            DALParcel.Priority = (IDAL.DO.Priorities)parcelBL.Priority;
+            DALParcel.Scheduled = parcelBL.Scheduled;
+            DALParcel.PickedUp = parcelBL.PickedUp;
+            DALParcel.Delivered = parcelBL.Delivered;   
+            DALParcel.Requested = parcelBL.Requested;
+            DALParcel.DroneId = 0;
             try
             {
-                p.addParcel(DALParcel);
+                p.addParcel(DALParcel);  //Add it to DAL
                 //p.addParcel((IDAL.DO.Parcel)pack.CopyPropertiesToNew(typeof(IDAL.DO.Parcel)));
             }
             catch(IDAL.DO.ParcelException ex)
@@ -420,66 +470,93 @@ namespace BL
             return DALParcel.ID;
         
         }
+
         #endregion
 
-        //-----------------------------------UPDATE-FUNCTIONS-------------------------------------
-        #region UPDATING
-
+        //----------------------------------UPDATE-FUNCTIONS-------------------------------------
+       
         #region Update DroneName
-        public void updateDroneName(int Id, string newModel) 
+        /// <summary>
+        /// This function receives a drone ID and a new Model. Associates this new model to the drone
+        /// </summary>
+        /// <param name="droneId"></param>
+        /// <param name="newModel"></param>
+        public void updateDroneName(int droneId, string newModel) 
         {
             try
             {
-                IDAL.DO.Drone d = p.DroneById(Id); // DALdrone
-                d.Model = newModel;
-                p.UpdateDrone(d); // this function update the DALlist
+                IDAL.DO.Drone droneDAL = p.DroneById(droneId); // find the DALdrone
+                droneDAL.Model = newModel;  //changes its model
+                p.UpdateDrone(droneDAL); // this function update the DAL drones' list
 
             }
-            catch(IDAL.DO.DroneException ex)
+            catch(IDAL.DO.DroneException ex)  //catches the DAL exception if there is one
             {
-                throw new IBL.BO.IDNotFound("Can't update the name", ex);
+                throw new IBL.BO.IDNotFound("Can't update the name", ex); //throws a BL exception
             }
         
         }
         #endregion
 
         #region Update StationName
-        public void updateStationName_CS(int Id, int newName = -1, int newCS = -1)
+        /// <summary>
+        /// This function receives a station ID, a new name and a new number of chargeSlots. Updates one or both of them according to the user
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <param name="newName"></param>
+        /// <param name="newCS"></param>
+        public void updateStationName_CS(int stationId, int newName = -1, int newCS = -1)
         {
             try
             {
-                IDAL.DO.Station s = p.StationById(Id);
-                if (newName != -1)
-                    s.Name = newName;
-                if (newCS != -1)
-                    s.ChargeSlots = newCS;
-                p.UpdateStation(s);
+                IDAL.DO.Station stationDAL = p.StationById(stationId);  //finds the station according to its ID
+                if (newName != -1)  //if the user wants to update the station's name
+                    stationDAL.Name = newName;
+                if (newCS != -1)    //if the user wants to update the station's number of chargeSlots
+                    stationDAL.ChargeSlots = newCS;
+                int notFreeChargeSlot = 0;
+                IEnumerable<IDAL.DO.DroneCharge> listDroneCharge = p.DroneChargeList();
+                foreach(var item in listDroneCharge) // calculates the charge slot that not free.
+                {
+                    if (item.StationId == stationId)
+                        notFreeChargeSlot++;
+                }
+                if (notFreeChargeSlot > newCS) // if new all charge slot count lower then the catch slots that alraedy exist.
+                    throw new IBL.BO.WrongDetailsUpdateException("All charge slot is to low");
+                stationDAL.ChargeSlots = newCS - notFreeChargeSlot;
+
+                p.UpdateStation(stationDAL);  // updates the station in the stations' list (DAL)
             }
-            catch (IDAL.DO.StationException ex)
+            catch (IDAL.DO.StationException ex)   //catches the Dal exception
             {
-                throw new IBL.BO.IDNotFound ("Can't update the station name and/or the number of chargeSlots", ex);
+                throw new IBL.BO.IDNotFound ("Can't update the station name and/or the number of chargeSlots", ex);  //throws a BL exception
             }
             
-            //Enlever de la list puis le remettre
 
         }
         #endregion
 
         #region Update ClientName_Phone
-        public void updateClientName_Phone(int Id, string newName = " ", string newTel = " ") 
+        /// <summary>
+        /// This function receives a client ID, a new name and a new phone number. The user decides if he want to update those fields or not
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <param name="newName"></param>
+        /// <param name="newTel"></param>
+        public void updateClientName_Phone(int clientId, string newName = "n", string newTel = "n") 
         {
             try
             {
-                IDAL.DO.Client c = p.ClientById(Id);
-                if (newName != " ")
+                IDAL.DO.Client clientDAL = p.ClientById(clientId);  //search the client in dal
+                if (newName != "n")  //if the user wants to update the client's name
                 {
-                    c.Name = newName;
+                    clientDAL.Name = newName;
                 }
-                p.UpdateClient(c);
+                p.UpdateClient(clientDAL);  //updates the client in dal
             }
-            catch(IDAL.DO.ClientException ex)
+            catch(IDAL.DO.ClientException ex)  //catches DAL exception
             {
-                throw new IBL.BO.IDNotFound("Can't update the client name",ex);
+                throw new IBL.BO.IDNotFound("Can't update the client name",ex);  //throw a BL exception
             }
         
         }
@@ -522,14 +599,14 @@ namespace BL
                     {
                         throw new IBL.BO.CannotAdd("The droneCharge cannot be added to DAL", ex);
                     }
-                    IDAL.DO.Station s = new IDAL.DO.Station();
-                    s.ID = nearestStation.ID;
-                    s.Name = nearestStation.Name;
-                    s.Latitude = nearestStation.Loc.latitude;
-                    s.Longitude = nearestStation.Loc.longitude;
-                    s.ChargeSlots = nearestStation.ChargeSlots -1;
+                    IDAL.DO.Station stationDAL = new IDAL.DO.Station();
+                    stationDAL.ID = nearestStation.ID;
+                    stationDAL.Name = nearestStation.Name;
+                    stationDAL.Latitude = nearestStation.Loc.latitude;
+                    stationDAL.Longitude = nearestStation.Loc.longitude;
+                    stationDAL.ChargeSlots = nearestStation.ChargeSlots -1;
                     try { 
-                    p.UpdateStation(s);// update the station in the dal list
+                    p.UpdateStation(stationDAL);// update the station in the dal list
                      }
                     catch(IDAL.DO.StationException ex)
                     {
@@ -548,37 +625,37 @@ namespace BL
         #region DroneCharged
         public void DroneCharged(int ID, double time)
         {
-            DroneDescription myDr = new DroneDescription();
-            myDr.loc = new Localisation();
-            myDr.Id = ID;
-            myDr.Status = DroneStatuses.free; // signs if we don't find it
+            DroneDescription droneBL = new DroneDescription();
+            droneBL.loc = new Localisation();
+            droneBL.Id = ID;
+            droneBL.Status = DroneStatuses.free; // signs if we don't find it
             foreach(var item in DroneList)// get all the information about this drone from the dronelist
             {
                 if(item.Id==ID)
                 {
-                    myDr.Status = item.Status;
-                    myDr.Model = item.Model;
-                    myDr.weight = item.weight;
-                    myDr.loc = item.loc;
-                    myDr.DeliveredParcels = item.DeliveredParcels;
+                    droneBL.Status = item.Status;
+                    droneBL.Model = item.Model;
+                    droneBL.weight = item.weight;
+                    droneBL.loc = item.loc;
+                    droneBL.DeliveredParcels = item.DeliveredParcels;
                     // don't copy the battery
                     //DroneList.Remove(item);// delete the drone from the list
                 }
             }
-            if (myDr.Status != DroneStatuses.maintenance)// if the drone is not charging
+            if (droneBL.Status != DroneStatuses.maintenance)// if the drone is not charging
                 throw new IBL.BO.InputNotValid("This drone isn't charging");
 
             // upadte the drone in the bl DroneList
-            myDr.Status = DroneStatuses.free;
-            myDr.battery = BatteryAccToTime(time);
-            DroneList.updateBlDroneList(myDr);
+            droneBL.Status = DroneStatuses.free;
+            droneBL.battery = BatteryAccToTime(time);
+            //DroneList.updateBlDroneList(myDr);
 
             //update the drone in the droneList from the DAL
             try
             {
-                IDAL.DO.Drone drone = p.DroneById(ID);
-                drone.Battery = BatteryAccToTime(time);
-                p.UpdateDrone(drone);
+                IDAL.DO.Drone droneDAL = p.DroneById(ID);
+                droneDAL.Battery = BatteryAccToTime(time);
+                p.UpdateDrone(droneDAL);
             }
             catch(IDAL.DO.DroneException)
             {
@@ -586,10 +663,10 @@ namespace BL
             }
 
             //update station
-            IDAL.DO.Station stat = default;
+            IDAL.DO.Station stationDAL = new IDAL.DO.Station();
             try
             {
-               stat = p.StationById(ID);
+               stationDAL = p.StationById(ID);
             }
             catch (IDAL.DO.StationException ex)
             {
@@ -597,19 +674,19 @@ namespace BL
             }
             foreach (var item in p.StationList())
             {
-                if (item.Longitude == myDr.loc.longitude && item.Latitude == myDr.loc.latitude)
+                if (item.Longitude == droneBL.loc.longitude && item.Latitude == droneBL.loc.latitude)
                 {
-                    stat.ID = item.ID;
-                    stat.Name = item.Name;
-                    stat.Latitude = item.Latitude;
-                    stat.Longitude = item.Longitude;
-                    stat.ChargeSlots = item.ChargeSlots;
+                    stationDAL.ID = item.ID;
+                    stationDAL.Name = item.Name;
+                    stationDAL.Latitude = item.Latitude;
+                    stationDAL.Longitude = item.Longitude;
+                    stationDAL.ChargeSlots = item.ChargeSlots;
                 }                   
             }
-            stat.ChargeSlots++;
+            stationDAL.ChargeSlots++;
             try
             {
-                p.UpdateStation(stat); // puts back the station with one more chargeSlot free
+                p.UpdateStation(stationDAL); // puts back the station with one more chargeSlot free
             }
             catch (IDAL.DO.StationException ex)
             {
@@ -617,8 +694,8 @@ namespace BL
             }
             foreach (var item in p.DroneChargeList())
             {
-                if (item.DroneId == myDr.Id && item.StationId == stat.ID)
-                    p.updateDroneChargeList(myDr.Id, stat.ID);
+                if (item.DroneId == droneBL.Id && item.StationId == stationDAL.ID)
+                    p.updateDroneChargeList(droneBL.Id, stationDAL.ID);
 
             }
 
@@ -630,33 +707,33 @@ namespace BL
         #region Assignement
         public void Assignement(int ID, int i=2)
         {
-            IDAL.DO.Drone Daldrone = p.DroneById(ID); //from the dal
-            DroneDescription BLd = DroneList.First(x => x.Id == ID);// finds the drone
-            BLd.loc = new Localisation();
+            IDAL.DO.Drone droneDAL = p.DroneById(ID); //from the dal
+            DroneDescription droneBL = DroneList.First(x => x.Id == ID);// finds the drone
+            droneBL.loc = new Localisation();
 
-            if (BLd.Status != DroneStatuses.free)
+            if (droneBL.Status != DroneStatuses.free)
                 throw new NotAvailable("The drone is not free!");
-            IDAL.DO.Parcel parcel = new IDAL.DO.Parcel(); // dalparcel
+            IDAL.DO.Parcel parcelDAL = new IDAL.DO.Parcel(); // dalparcel
             bool flag = false;
 
             foreach (var item in p.ParcelList())
             {
                 if (item.Priority != IDAL.DO.Priorities.emergency - i)
                     continue;
-                if (item.Weight == (IDAL.DO.WeightCategories)BLd.weight)///////////////
+                if (item.Weight == (IDAL.DO.WeightCategories)droneBL.weight)///////////////
                     continue;
-                parcel.DroneId = BLd.Id;
-                parcel.ID = item.ID;
-                parcel.Priority = item.Priority;
-                parcel.SenderId = item.SenderId;
-                parcel.TargetId = item.TargetId;
-                parcel.Weight = item.Weight;
-                parcel.Requested = DateTime.Now;
+                parcelDAL.DroneId = droneBL.Id;
+                parcelDAL.ID = item.ID;
+                parcelDAL.Priority = item.Priority;
+                parcelDAL.SenderId = item.SenderId;
+                parcelDAL.TargetId = item.TargetId;
+                parcelDAL.Weight = item.Weight;
+                parcelDAL.Requested = DateTime.Now;
 
                 List<IDAL.DO.Parcel> parcelLst = p.ParcelList().ToList().FindAll(x => (int)x.Priority == i && x.Scheduled == DateTime.MinValue);// list with all the emergency ones
-                parcelLst = parcelLst.FindAll(x => (int)x.Weight == (int)BLd.weight);  //list with all the same weights
+                parcelLst = parcelLst.FindAll(x => (int)x.Weight == (int)droneBL.weight);  //list with all the same weights
 
-                IDAL.DO.Parcel closestParcel = ClosestParcel(parcelLst, BLd.loc); 
+                IDAL.DO.Parcel closestParcel = ClosestParcel(parcelLst, droneBL.loc); 
 
                 double senderLat = p.FindLat(closestParcel.SenderId);
                 double senderLong = p.FindLong(closestParcel.SenderId);
@@ -664,23 +741,23 @@ namespace BL
                 double targetLong = p.FindLong(closestParcel.TargetId);
                 //trouver la plus proche
                 // has to be able to make it
-                double distToSender = distance(BLd.loc.latitude, BLd.loc.longitude, senderLat, senderLong);
-                BLd.battery -= BatteryAccToDistance(distToSender);
-                if (distToSender >= DistanceAccToBattery(BLd.battery))
+                double distToSender = distance(droneBL.loc.latitude, droneBL.loc.longitude, senderLat, senderLong);
+                droneBL.battery -= BatteryAccToDistance(distToSender);
+                if (distToSender >= DistanceAccToBattery(droneBL.battery))
                     continue;
                 //doit repartir
 
-                double distToTarget = distance(BLd.loc.latitude, BLd.loc.longitude, targetLat, targetLong);
-                BLd.battery -= BatteryAccToDistance(distToTarget);
-                if (distToTarget >= DistanceAccToBattery(BLd.battery))
+                double distToTarget = distance(droneBL.loc.latitude, droneBL.loc.longitude, targetLat, targetLong);
+                droneBL.battery -= BatteryAccToDistance(distToTarget);
+                if (distToTarget >= DistanceAccToBattery(droneBL.battery))
                     continue;
-                BLd.battery -= BatteryAccToDistance(distToTarget);
+                droneBL.battery -= BatteryAccToDistance(distToTarget);
                 // if drone's battery less than 25 has to go to charge
-                if (BLd.battery <= 25)
+                if (droneBL.battery <= 25)
                 {
                     Localisation targLoc = location(targetLat, targetLong);
                     Station nearStat = NearestStation(targLoc, false); //finds the nearest station if need to charge
-                    double distToStat = distance(BLd.loc.latitude, BLd.loc.longitude, nearStat.Loc.latitude, nearStat.Loc.longitude);
+                    double distToStat = distance(droneBL.loc.latitude, droneBL.loc.longitude, nearStat.Loc.latitude, nearStat.Loc.longitude);
                     if (distToStat > BatteryAccToDistance(distToStat))
                         continue;
                 }
@@ -690,46 +767,74 @@ namespace BL
                     throw new ParcelException("We didn't find a parcel");
                 else if (flag == false)
                     Assignement(ID, i - 1); // calls back the function to check with an other status
-                BLd.Status = DroneStatuses.shipping;
-                DroneList.Add(BLd);
-                p.Assignement(closestParcel.ID, BLd.Id); //update the dronelist in the dal
+                droneBL.Status = DroneStatuses.shipping;
+                DroneList.Add(droneBL);
+                p.Assignement(closestParcel.ID, droneBL.Id); //update the dronelist in the dal
             }
         }
         #endregion
-        #endregion
+        
         //---------------------------------------ACTIONS------------------------------------------
 
         #region PickedUp
-        public void PickedUp(int DroneId)
+        /// <summary>
+        /// This function gets a droneId,finds the drone and this drone picks the parcel associated to it
+        /// </summary>
+        /// <param name="DroneId"></param>
+        public void PickedUp(int droneId)
         {
-            DroneDescription myDrone = DroneList.Find(Drone => Drone.Id == DroneId);
-            myDrone.loc = new Localisation();
-            if (myDrone == null)
+            Drone collectDrone = new Drone();
+            try
             {
-                throw new IBL.BO.IDNotFound("Drone not found");
+                collectDrone = GetDrone(droneId);
+            }
+            catch (IDAL.DO.DroneException ex)
+            {
+                throw new IDAL.DO.DroneException("" + ex);
+            }
+
+            if (collectDrone.Status != DroneStatuses.shipping) //if the drone is not scheduled
+                throw new WrongDetailsUpdateException("Drone is not scheduled to any parcel");
+            if (collectDrone.myParcel.deliveringStatus == true) //if parcel is already on the drone
+                throw new WrongDetailsUpdateException("Drone in the middle of shipping");
+
+            DroneDescription myDrone = DroneList.Find(Drone => Drone.Id == droneId);  //finds the drone in the droneList in BL
+            int index= DroneList.FindIndex(Drone => Drone.Id == droneId);
+            myDrone.loc = new Localisation();
+            collectDrone.initialLoc = new Localisation();
+            if (myDrone == null)  //the drone is not among the drone List
+            {
+                throw new IBL.BO.IDNotFound("Drone not found");  //throws a BL exception
             }
             try
             {
-                IDAL.DO.Parcel prcel = p.FindParcelAssociatedWithDrone(DroneId);
-                if ((prcel.Requested == DateTime.Now || prcel.Scheduled == DateTime.Now) && (prcel.PickedUp == DateTime.MinValue))
-                {
-                    int senderId = prcel.SenderId;
-                    Localisation senderLoc = new Localisation();
-                    senderLoc.latitude = p.FindLat(senderId);
-                    senderLoc.longitude = p.FindLong(senderId);
-                    double myDistance = distance(myDrone.loc.latitude, myDrone.loc.longitude, senderLoc.latitude, senderLoc.longitude);
-                    DroneDescription tempDD = new DroneDescription();//UPDATE DroneDescriptionLIST IN BL
-                    tempDD.loc = new Localisation();
-                    tempDD = myDrone;
-                    tempDD.battery -= BatteryAccToDistance(myDistance);
-                    tempDD.loc = senderLoc;
-                    DroneList.Remove(myDrone);
-                    DroneList.Add(tempDD);
-                    IDAL.DO.Parcel tempParcel = new IDAL.DO.Parcel();
-                    tempParcel = prcel;
-                    tempParcel.PickedUp = DateTime.Now;
-                    p.AddParcelFromBL(tempParcel);
-                }
+                DroneDescription updateDrone = DroneList[index];
+                updateDrone.battery -= BatteryAccToDistance(distance(collectDrone.initialLoc.latitude, collectDrone.initialLoc.longitude,collectDrone.myParcel.picking.latitude,collectDrone.myParcel.picking.longitude) );
+                updateDrone.loc= collectDrone.myParcel.picking;
+                DroneList[index] = updateDrone;
+
+                IDAL.DO.Parcel parcelDal = p.ParcelById(collectDrone.myParcel.ID);
+                parcelDal.PickedUp = DateTime.Now;
+                p.UpdateParcelFromBL(parcelDal);
+                //if ((parcelDal.Requested == DateTime.Now || parcelDal.Scheduled == DateTime.Now) && (parcelDal.PickedUp == DateTime.MinValue))
+                //{
+                //    int senderId = parcelDal.SenderId;
+                //    Localisation senderLoc = new Localisation();
+                //    senderLoc.latitude = p.FindLat(senderId);
+                //    senderLoc.longitude = p.FindLong(senderId);
+                //    double myDistance = distance(myDrone.loc.latitude, myDrone.loc.longitude, senderLoc.latitude, senderLoc.longitude);
+                //    DroneDescription tempDD = new DroneDescription();//UPDATE DroneDescriptionLIST IN BL
+                //    tempDD.loc = new Localisation();
+                //    tempDD = myDrone;
+                //    tempDD.battery -= BatteryAccToDistance(myDistance);
+                //    tempDD.loc = senderLoc;
+                //    DroneList.Remove(myDrone);
+                //    DroneList.Add(tempDD);
+                //    IDAL.DO.Parcel tempParcel = new IDAL.DO.Parcel();
+                //    tempParcel = parcelDal;
+                //    tempParcel.PickedUp = DateTime.Now;
+                //    p.AddParcelFromBL(tempParcel);
+                //}
             }
             catch(Exception ex)
             {
