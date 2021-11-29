@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace IBL.BO
 {
     [Serializable]
-    internal class InputNotValid : Exception
+    public class InputNotValid : Exception
     {
         public InputNotValid()
         {
