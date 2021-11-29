@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using IBL.BO;
-using DAL;
+
 using DalObject;
 using System.Linq;
 
@@ -23,12 +23,12 @@ namespace IBL
         {
 
             List<StationDescription> statList = new List<StationDescription>();
-            foreach (var item in p.StationList())
+            foreach (var item in p.IEStationList())
             {
                 StationDescription statD = new StationDescription();
                 statD.Id = item.ID;
                 statD.name = item.Name;
-                foreach (var item2 in p.DroneChargeList())// full chargeSlots
+                foreach (var item2 in p.IEDroneChargeList())// full chargeSlots
                 {
                     if (item2.StationId == item.ID) // if the drone is in the station
                     {
@@ -59,16 +59,16 @@ namespace IBL
         {
             List<ClientActions> LstCA = new List<ClientActions>();
 
-            foreach (var item in p.ClientList())
+            foreach (var item in p.IEClientList())
             {
                 ClientActions tempCA = new ClientActions();
                 tempCA.Id = item.ID;
                 tempCA.name = item.Name;
                 tempCA.phone = item.Phone;
-                IEnumerable<IDAL.DO.Parcel> sent_and_delivLst = p.ParcelList().Where(x => x.SenderId == item.ID && x.Delivered != DateTime.MinValue);
-                IEnumerable<IDAL.DO.Parcel> sent_and_notDelivLst = p.ParcelList().Where(x => x.SenderId == item.ID && x.Delivered == DateTime.MinValue);
-                IEnumerable<IDAL.DO.Parcel> receivLst = p.ParcelList().Where(x => x.TargetId == item.ID && x.Delivered != DateTime.MinValue);
-                IEnumerable<IDAL.DO.Parcel> receivingLst = p.ParcelList().Where(x => x.TargetId == item.ID && x.Delivered == DateTime.Now);
+                IEnumerable<IDAL.DO.Parcel> sent_and_delivLst = p.IEParcelList().Where(x => x.SenderId == item.ID && x.Delivered != DateTime.MinValue);
+                IEnumerable<IDAL.DO.Parcel> sent_and_notDelivLst = p.IEParcelList().Where(x => x.SenderId == item.ID && x.Delivered == DateTime.MinValue);
+                IEnumerable<IDAL.DO.Parcel> receivLst = p.IEParcelList().Where(x => x.TargetId == item.ID && x.Delivered != DateTime.MinValue);
+                IEnumerable<IDAL.DO.Parcel> receivingLst = p.IEParcelList().Where(x => x.TargetId == item.ID && x.Delivered == DateTime.Now);
                 int sent_and_delivLstCount = sent_and_delivLst.Count();
                 int sent_and_notDelivLstCount = sent_and_notDelivLst.Count();
                 int receivLstCount = receivLst.Count();
@@ -94,7 +94,7 @@ namespace IBL
             //matsav havila
             List<ParcelDescription> parList = new List<ParcelDescription>();
 
-            foreach (var item in p.ParcelList())
+            foreach (var item in p.IEParcelList())
             {
                 ParcelDescription tempPar = new ParcelDescription();
                 tempPar.Id = item.ID;
@@ -135,14 +135,14 @@ namespace IBL
         {
             List<StationDescription> statList = new List<StationDescription>();
             StationDescription tempStat = new StationDescription();
-            foreach (var item in p.StationList())
+            foreach (var item in p.IEStationList())
             {
                 if (item.ChargeSlots > 0)
                 {
                     tempStat.Id = item.ID;
                     tempStat.name = item.Name;
                     tempStat.freeChargeSlots = item.ChargeSlots;
-                    foreach (var item2 in p.DroneChargeList())// full chargeSlots
+                    foreach (var item2 in p.IEDroneChargeList())// full chargeSlots
                     {
                         if (item2.StationId == item.ID)
                             tempStat.fullChargeSlots++;
@@ -155,7 +155,7 @@ namespace IBL
         public IEnumerable<ParcelDescription> displayParcelsNotAssigned()
         {
             List<ParcelDescription> PDList = new List<ParcelDescription>();
-            foreach (var item in p.ParcelList())
+            foreach (var item in p.IEParcelList())
             {
                 if (item.Scheduled == DateTime.Now)
                 {

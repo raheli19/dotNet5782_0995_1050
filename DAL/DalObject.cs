@@ -1,8 +1,4 @@
-﻿/*
- update
-region
-hagrala sur une liste pour la localisation du drone
-*/
+﻿
 
 using System;
 using System.Collections.Generic;

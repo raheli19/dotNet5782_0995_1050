@@ -13,7 +13,7 @@ namespace ConsoleUI_BL
 
         public static void Main()
         {
-            IBL.IBL obj = new BL.BL();
+            IBL.IBL obj = new IBL.BL();
             //try
             //{
                 //obj= new BL.BL();

@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using IBL.BO;
-using DAL;
+
 using DalObject;
 using System.Linq;
 
@@ -58,7 +58,7 @@ namespace IBL
                 if (newCS != -1)    //if the user wants to update the station's number of chargeSlots
                     stationDAL.ChargeSlots = newCS;
                 int notFreeChargeSlot = 0;
-                IEnumerable<IDAL.DO.DroneCharge> listDroneCharge = p.DroneChargeList();
+                IEnumerable<IDAL.DO.DroneCharge> listDroneCharge = p.IEDroneChargeList();
                 foreach (var item in listDroneCharge) // calculates the charge slot that not free.
                 {
                     if (item.StationId == stationId)
@@ -216,7 +216,7 @@ namespace IBL
             {
                 throw new IDNotFound("ID Not found", ex);
             }
-            foreach (var item in p.StationList())
+            foreach (var item in p.IEStationList())
             {
                 if (item.Longitude == droneBL.loc.longitude && item.Latitude == droneBL.loc.latitude)
                 {
@@ -236,7 +236,7 @@ namespace IBL
             {
                 throw new CannotUpdate("The station cannot be updated", ex);
             }
-            foreach (var item in p.DroneChargeList())
+            foreach (var item in p.IEDroneChargeList())
             {
                 if (item.DroneId == droneBL.Id && item.StationId == stationDAL.ID)
                     p.updateDroneChargeList(droneBL.Id, stationDAL.ID);
@@ -260,7 +260,7 @@ namespace IBL
             IDAL.DO.Parcel parcelDAL = new IDAL.DO.Parcel(); // dalparcel
             bool flag = false;
 
-            foreach (var item in p.ParcelList())
+            foreach (var item in p.IEParcelList())
             {
                 if (item.Priority != IDAL.DO.Priorities.emergency - i)
                     continue;
@@ -274,7 +274,7 @@ namespace IBL
                 parcelDAL.Weight = item.Weight;
                 parcelDAL.Requested = DateTime.Now;
 
-                List<IDAL.DO.Parcel> parcelLst = p.ParcelList().ToList().FindAll(x => (int)x.Priority == i && x.Scheduled == DateTime.MinValue);// list with all the emergency ones
+                List<IDAL.DO.Parcel> parcelLst = p.IEParcelList().ToList().FindAll(x => (int)x.Priority == i && x.Scheduled == DateTime.MinValue);// list with all the emergency ones
                 parcelLst = parcelLst.FindAll(x => (int)x.Weight == (int)droneBL.weight);  //list with all the same weights
 
                 IDAL.DO.Parcel closestParcel = ClosestParcel(parcelLst, droneBL.loc);

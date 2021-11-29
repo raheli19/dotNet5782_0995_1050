@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using IBL.BO;
-using DAL;
+
 using DalObject;
 using System.Linq;
 
@@ -47,7 +47,7 @@ namespace IBL
             //}
 
 
-            IEnumerable<IDAL.DO.DroneCharge> droneCharges = p.DroneChargeList();
+            IEnumerable<IDAL.DO.DroneCharge> droneCharges = p.IEDroneChargeList();
             foreach (var item in droneCharges)
             {
                 if (item.StationId == s.ID)
@@ -75,7 +75,7 @@ namespace IBL
             ParcelInDelivering PID = new ParcelInDelivering();
             if (d.Status == DroneStatuses.shipping)
             {
-                foreach (var item in p.ParcelList())
+                foreach (var item in p.IEParcelList())
                 {
                     try
                     {
@@ -121,7 +121,7 @@ namespace IBL
 
             List<ParcelToClient> TempParcLstFromClient = new List<ParcelToClient>();
 
-            foreach (var item in p.ParcelList())
+            foreach (var item in p.IEParcelList())
             {
                 if (item.SenderId == clientId)  //The parcel has been sent by this client
                 {
@@ -165,7 +165,7 @@ namespace IBL
 
             List<ParcelToClient> TempParcLstToClient = new List<ParcelToClient>();
 
-            foreach (var item in p.ParcelList())
+            foreach (var item in p.IEParcelList())
             {
                 if (item.TargetId == clientId)  //The parcel has been sent by this client
                 {

@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using IBL.BO;
-using DAL;
+
 using DalObject;
 using System.Linq;
 
@@ -18,7 +18,7 @@ namespace IBL
         static Random rand = new Random();
 
         readonly IDAL.IDal p;
-        Help h = new Help();
+        //Help h = new Help();
 
         List<DroneDescription> DroneList = new List<DroneDescription>();
 

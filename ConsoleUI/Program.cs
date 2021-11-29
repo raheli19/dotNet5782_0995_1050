@@ -179,7 +179,7 @@ namespace ConsoleUI
                         {
                             case entities.STATION:
                                 Console.WriteLine("Stations' List:\n");
-                                foreach (var item in myDalObject.StationList() )
+                                foreach (var item in myDalObject.IEStationList() )
                                 {
                                     Console.WriteLine(item);
                                     Console.WriteLine(" ");
@@ -187,7 +187,7 @@ namespace ConsoleUI
                                 break;
                             case entities.DRONE:
                                 Console.WriteLine("Drones' List:\n");
-                                foreach (var item in myDalObject.DroneList())
+                                foreach (var item in myDalObject.IEDroneList())
                                 {
                                     Console.WriteLine(item);
                                     Console.WriteLine(" ");
@@ -195,7 +195,7 @@ namespace ConsoleUI
                                 break;
                             case entities.PARCEL:
                                 Console.WriteLine("Parcels' List:\n");
-                                foreach (var item in myDalObject.ParcelList())
+                                foreach (var item in myDalObject.IEParcelList())
                                 {
                                     Console.WriteLine(item);
                                     Console.WriteLine(" ");
@@ -203,7 +203,7 @@ namespace ConsoleUI
                                 break;
                             case entities.CLIENT:
                                 Console.WriteLine("Clients' List:\n");
-                                foreach (var item in myDalObject.ClientList())
+                                foreach (var item in myDalObject.IEClientList())
                                 {
                                     Console.WriteLine(item);
                                     Console.WriteLine(" ");

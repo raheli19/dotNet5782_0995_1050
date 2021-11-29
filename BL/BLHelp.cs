@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using IBL.BO;
-using DAL;
 using DalObject;
 using System.Linq;
 
@@ -37,7 +36,7 @@ namespace IBL
             double minDistance = 99999999;
             double tempDistance = 0;
 
-            foreach (var item in p.StationList())
+            foreach (var item in p.IEStationList())
             {
                 if (flag == true)
                 {
