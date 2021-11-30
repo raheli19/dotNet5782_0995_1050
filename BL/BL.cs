@@ -17,7 +17,7 @@ namespace IBL
     {
         static Random rand = new Random();
 
-        readonly IDAL.IDal p;
+        private IDAL.IDal p;
         //Help h = new Help();
 
         List<DroneDescription> DroneList = new List<DroneDescription>();
@@ -182,119 +182,7 @@ namespace IBL
 
         //---------------------------------------ACTIONS------------------------------------------
 
-        #region PickedUp
-        /// <summary>
-        /// This function gets a droneId,finds the drone and this drone picks the parcel associated to it
-        /// </summary>
-        /// <param name="DroneId"></param>
-        public void PickedUp(int droneId)
-        {
-            Drone collectDrone = new Drone();
-            try
-            {
-                collectDrone = GetDrone(droneId);
-            }
-            catch (IDAL.DO.DroneException ex)
-            {
-                throw new IDAL.DO.DroneException("" + ex);
-            }
-
-            if (collectDrone.Status != DroneStatuses.shipping) //if the drone is not scheduled
-                throw new WrongDetailsUpdateException("Drone is not scheduled to any parcel");
-            if (collectDrone.myParcel.deliveringStatus == true) //if parcel is already on the drone
-                throw new WrongDetailsUpdateException("Drone in the middle of shipping");
-
-            DroneDescription myDrone = DroneList.Find(Drone => Drone.Id == droneId);  //finds the drone in the droneList in BL
-            int index = DroneList.FindIndex(Drone => Drone.Id == droneId);
-            myDrone.loc = new Localisation();
-            collectDrone.initialLoc = new Localisation();
-            if (myDrone == null)  //the drone is not among the drone List
-            {
-                throw new IDNotFound("Drone not found");  //throws a BL exception
-            }
-            try
-            {
-                DroneDescription updateDrone = DroneList[index];
-                updateDrone.battery -= BatteryAccToDistance(distance(collectDrone.initialLoc.latitude, collectDrone.initialLoc.longitude, collectDrone.myParcel.picking.latitude, collectDrone.myParcel.picking.longitude));
-                updateDrone.loc = collectDrone.myParcel.picking;
-                DroneList[index] = updateDrone;
-
-                IDAL.DO.Parcel parcelDal = p.ParcelById(collectDrone.myParcel.ID);
-                parcelDal.PickedUp = DateTime.Now;
-                p.UpdateParcelFromBL(parcelDal);
-                //if ((parcelDal.Requested == DateTime.Now || parcelDal.Scheduled == DateTime.Now) && (parcelDal.PickedUp == DateTime.MinValue))
-                //{
-                //    int senderId = parcelDal.SenderId;
-                //    Localisation senderLoc = new Localisation();
-                //    senderLoc.latitude = p.FindLat(senderId);
-                //    senderLoc.longitude = p.FindLong(senderId);
-                //    double myDistance = distance(myDrone.loc.latitude, myDrone.loc.longitude, senderLoc.latitude, senderLoc.longitude);
-                //    DroneDescription tempDD = new DroneDescription();//UPDATE DroneDescriptionLIST IN BL
-                //    tempDD.loc = new Localisation();
-                //    tempDD = myDrone;
-                //    tempDD.battery -= BatteryAccToDistance(myDistance);
-                //    tempDD.loc = senderLoc;
-                //    DroneList.Remove(myDrone);
-                //    DroneList.Add(tempDD);
-                //    IDAL.DO.Parcel tempParcel = new IDAL.DO.Parcel();
-                //    tempParcel = parcelDal;
-                //    tempParcel.PickedUp = DateTime.Now;
-                //    p.AddParcelFromBL(tempParcel);
-                //}
-            }
-            catch (Exception ex)
-            {
-                throw new InputNotValid("The parcel doesn't fit the requirements", ex);
-            }
-
-
-        }
-        #endregion
-
-        #region Delivered
-        public void delivered(int DroneId)
-        {
-            DroneDescription myDrone = DroneList.Find(Drone => Drone.Id == DroneId);
-            if (myDrone == null)
-            {
-                throw new NotFound("Drone not found");
-            }
-            try
-            {
-                IDAL.DO.Parcel prcel = p.FindParcelAssociatedWithDrone(DroneId);
-
-
-                if (prcel.PickedUp == DateTime.Now && prcel.Delivered == DateTime.MinValue)
-                {
-
-                    int targetId = prcel.TargetId;
-                    Localisation targetLoc = new Localisation();
-                    targetLoc.latitude = p.FindLat(targetId);
-                    targetLoc.longitude = p.FindLong(targetId);
-                    double myDistance = distance(myDrone.loc.latitude, myDrone.loc.longitude, targetLoc.latitude, targetLoc.longitude);
-                    DroneDescription tempDD = new DroneDescription();//UPDATE DroneDescriptionLIST IN BL
-                    tempDD.loc = new Localisation();
-                    tempDD = myDrone;
-                    tempDD.battery -= BatteryAccToDistance(myDistance);
-                    tempDD.loc = targetLoc;
-                    tempDD.Status = DroneStatuses.free;
-                    DroneList.Remove(myDrone);
-                    DroneList.Add(tempDD);
-                    IDAL.DO.Parcel tempParcel = new IDAL.DO.Parcel();
-                    tempParcel = prcel;
-                    tempParcel.Delivered = DateTime.Now;
-                    p.AddParcelFromBL(tempParcel);
-
-                }
-
-            }
-            catch (Exception ex)
-            {
-                throw new InputNotValid("The drone doesn't fit the requirements", ex);
-            }
-        }
-        #endregion
-
+       
 
 
    

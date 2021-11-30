@@ -19,8 +19,8 @@ namespace DalObject
             //{
             //    throw new ParcelException($"id {pl.ID} already exists!!");
             //}
-            ParcelList.Add(pl);
-            Config.RunnerIDnumber++;
+            DataSource.ParcelList.Add(pl);
+            DataSource.Config.RunnerIDnumber++;
         }
         #endregion
 
@@ -28,12 +28,12 @@ namespace DalObject
 
         public void UpdateParcel(Parcel parcel)
         {
-            if (!(ParcelList.Exists(p => p.ID == parcel.ID)))
+            if (!(DataSource.ParcelList.Exists(p => p.ID == parcel.ID)))
             {
                 throw new ParcelException($"id {parcel.ID} is not valid!!");
             }
-            int index = ParcelList.FindIndex(item => item.ID == parcel.ID);
-            ParcelList[index] = parcel;
+            int index = DataSource.ParcelList.FindIndex(item => item.ID == parcel.ID);
+            DataSource.ParcelList[index] = parcel;
         }
         #region UPDATING
 
@@ -42,13 +42,13 @@ namespace DalObject
         {
             Parcel myParcel = new Parcel();
             myParcel.ID = -1;
-            myParcel = ParcelList.Find(x => x.ID == ParcelToUpdate.ID);
+            myParcel = DataSource.ParcelList.Find(x => x.ID == ParcelToUpdate.ID);
             if (myParcel.ID == -1)
             {
                 throw new ParcelException("This Parcel doesn't exist in the system.");
 
             }
-            ParcelList.Remove(myParcel);
+            DataSource.ParcelList.Remove(myParcel);
             myParcel.ID = ParcelToUpdate.ID;
             myParcel.SenderId = ParcelToUpdate.SenderId;
             myParcel.TargetId = ParcelToUpdate.TargetId;
@@ -59,7 +59,7 @@ namespace DalObject
             myParcel.Scheduled = ParcelToUpdate.Scheduled;
             myParcel.PickedUp = ParcelToUpdate.PickedUp;
             myParcel.Delivered = ParcelToUpdate.Delivered;
-            ParcelList.Add(myParcel);
+            DataSource.ParcelList.Add(myParcel);
         }
         #endregion
         #endregion
@@ -199,12 +199,12 @@ namespace DalObject
         public Parcel ParcelById(int id)
         {
             Parcel pToReturn = default;
-            if (!ParcelList.Exists(parcel => parcel.ID == id))
+            if (!DataSource.ParcelList.Exists(parcel => parcel.ID == id))
             {
                 throw new ParcelException($"id {id} doesn't exist!!");
 
             };
-            pToReturn = ParcelList.Find(p => p.ID == id);
+            pToReturn = DataSource.ParcelList.Find(p => p.ID == id);
             return pToReturn;
         }
         #endregion
@@ -218,7 +218,7 @@ namespace DalObject
         public IEnumerable<Parcel> IEParcelList()
         {
             List<Parcel> ParcelLst = new List<Parcel>();
-            ParcelLst = ParcelList;
+            ParcelLst = DataSource.ParcelList;
             return ParcelLst;
         }
         #endregion

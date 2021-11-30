@@ -4,189 +4,276 @@ using System.Runtime.Serialization;
 namespace IBL.BO
 {
     [Serializable]
-    public class StationException : Exception
+    internal class AlreadyExist : Exception
     {
-        public StationException()
+        public AlreadyExist()
         {
         }
 
-        public StationException(string message) : base(message)
+        public AlreadyExist(string message) : base(message)
         {
         }
 
-        public StationException(string message, Exception innerException) : base(message, innerException)
+        public AlreadyExist(string message, Exception innerException) : base(message, innerException)
         {
         }
 
-        protected StationException(SerializationInfo info, StreamingContext context) : base(info, context)
+
+
+        protected AlreadyExist(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
+        }
+    }
+
+        [Serializable]
+        internal class CannotAdd : Exception
+        {
+            public CannotAdd()
+            {
+            }
+
+            public CannotAdd(string message) : base(message)
+            {
+            }
+
+            public CannotAdd(string message, Exception innerException) : base(message, innerException)
+            {
+            }
+
+            protected CannotAdd(SerializationInfo info, StreamingContext context) : base(info, context)
+            {
+            }
+        }
+
+        [Serializable]
+        internal class CannotUpdate : Exception
+        {
+            public CannotUpdate()
+            {
+            }
+
+            public CannotUpdate(string message) : base(message)
+            {
+            }
+
+            public CannotUpdate(string message, Exception innerException) : base(message, innerException)
+            {
+            }
+
+
+            protected CannotUpdate(SerializationInfo info, StreamingContext context) : base(info, context)
+            {
+            }
+        }
+
+
+    [Serializable]
+    internal class DroneChargedException : Exception
+    {
+        public DroneChargedException()
+        {
+        }
+
+        public DroneChargedException(string message) : base(message)
+        {
+        }
+
+        public DroneChargedException(string message, Exception innerException) : base(message, innerException)
+        {
+        }
+
+        protected DroneChargedException(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
+        }
+    }
+
+    [Serializable]
+    internal class IDNotFound : Exception
+    {
+        public IDNotFound()
+        {
+        }
+
+        public IDNotFound(string message) : base(message)
+        {
+        }
+
+        public IDNotFound(string message, Exception innerException) : base(message, innerException)
+        {
+        }
+
+
+
+        protected IDNotFound(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
+        }
+    }
+
+    [Serializable]
+    public class InputNotValid : Exception
+    {
+        public InputNotValid()
+        {
+        }
+
+        public InputNotValid(string message) : base(message)
+        {
+        }
+
+        public InputNotValid(string message, Exception innerException) : base(message, innerException)
+        {
+        }
+
+        protected InputNotValid(SerializationInfo info, StreamingContext context) : base(info, context)
         {
         }
     }
 
 
     [Serializable]
-    public class ParcelException : Exception
+    internal class NotAvailable : Exception
     {
-        public ParcelException()
+        public NotAvailable()
         {
         }
 
-        public ParcelException(string message) : base(message)
+        public NotAvailable(string message) : base(message)
         {
         }
 
-        public ParcelException(string message, Exception innerException) : base(message, innerException)
+        protected NotAvailable(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
+        }
+    }
+
+    [Serializable]
+    internal class NotEoughBattery : Exception
+    {
+        public NotEoughBattery()
         {
         }
 
-        protected ParcelException(SerializationInfo info, StreamingContext context) : base(info, context)
+        public NotEoughBattery(string message) : base(message)
+        {
+        }
+
+        public NotEoughBattery(string message, Exception innerException) : base(message, innerException)
+        {
+        }
+
+        protected NotEoughBattery(SerializationInfo info, StreamingContext context) : base(info, context)
         {
         }
     }
 
 
     [Serializable]
-    public class DroneException : Exception
+    public class NotFound : Exception
     {
-        public DroneException()
+        public NotFound()
         {
         }
 
-        public DroneException(string message) : base(message)
+        public NotFound(string message) : base(message)
         {
         }
 
-        public DroneException(string message, Exception innerException) : base(message, innerException)
+        public NotFound(string message, Exception innerException) : base(message, innerException)
         {
         }
 
-        protected DroneException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
-    }
 
-
-
-    [Serializable]
-    public class ClientException : Exception
-    {
-        public ClientException()
-        {
-        }
-
-        public ClientException(string message) : base(message)
-        {
-        }
-
-        public ClientException(string message, Exception innerException) : base(message, innerException)
-        {
-        }
-
-        protected ClientException(SerializationInfo info, StreamingContext context) : base(info, context)
+        protected NotFound(SerializationInfo info, StreamingContext context) : base(info, context)
         {
         }
     }
 
     [Serializable]
-    public class BatException : Exception
+    internal class PriorityException : Exception
     {
-        public BatException()
+        public PriorityException()
         {
         }
 
-        public BatException(string message) : base(message)
+        public PriorityException(string message) : base(message)
         {
         }
 
-        public BatException(string message, Exception innerException) : base(message, innerException)
+        public PriorityException(string message, Exception innerException) : base(message, innerException)
         {
         }
 
-        protected BatException(SerializationInfo info, StreamingContext context) : base(info, context)
+        protected PriorityException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
         }
     }
 
     [Serializable]
-    public class IDException : Exception
+    internal class StatusException : Exception
     {
-        public IDException()
+        public StatusException()
         {
         }
 
-        public IDException(string message) : base(message)
+        public StatusException(string message) : base(message)
         {
         }
 
-        public IDException(string message, Exception innerException) : base(message, innerException)
+        public StatusException(string message, Exception innerException) : base(message, innerException)
         {
         }
 
-        protected IDException(SerializationInfo info, StreamingContext context) : base(info, context)
+        protected StatusException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
         }
     }
 
 
     [Serializable]
-    public class LatException : Exception
+    internal class WeightException : Exception
     {
-        public LatException()
+        public WeightException()
         {
         }
 
-        public LatException(string message) : base(message)
+        public WeightException(string message) : base(message)
         {
         }
 
-        public LatException(string message, Exception innerException) : base(message, innerException)
+        public WeightException(string message, Exception innerException) : base(message, innerException)
         {
         }
 
-        protected LatException(SerializationInfo info, StreamingContext context) : base(info, context)
+        protected WeightException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
         }
     }
 
 
     [Serializable]
-    public class LongException : Exception
+    internal class WrongDetailsUpdateException : Exception
     {
-        public LongException()
+        public WrongDetailsUpdateException()
         {
         }
 
-        public LongException(string message) : base(message)
+        public WrongDetailsUpdateException(string message) : base(message)
         {
         }
 
-        public LongException(string message, Exception innerException) : base(message, innerException)
+        public WrongDetailsUpdateException(string message, Exception innerException) : base(message, innerException)
         {
         }
 
-        protected LongException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
-    }
-
-
-    [Serializable]
-    public class PhoneException : Exception
-    {
-        public PhoneException()
-        {
-        }
-
-        public PhoneException(string message) : base(message)
-        {
-        }
-
-        public PhoneException(string message, Exception innerException) : base(message, innerException)
-        {
-        }
-
-        protected PhoneException(SerializationInfo info, StreamingContext context) : base(info, context)
+        protected WrongDetailsUpdateException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
         }
     }
 }
+
+
+
+
+
+
+

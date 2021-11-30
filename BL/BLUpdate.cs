@@ -29,9 +29,13 @@ namespace IBL
             try
             {
                 IDAL.DO.Drone droneDAL = p.DroneById(droneId); // find the DALdrone
+                DroneDescription droneBL = DroneList.Find(x => x.Id == droneId);
+                DroneList.Remove(droneBL);
                 droneDAL.Model = newModel;  //changes its model
+                droneBL.Model = newModel;
+                DroneList.Add(droneBL);
                 p.UpdateDrone(droneDAL); // this function update the DAL drones' list
-
+                
             }
             catch (IDAL.DO.DroneException ex)  //catches the DAL exception if there is one
             {
@@ -56,19 +60,21 @@ namespace IBL
                 if (newName != -1)  //if the user wants to update the station's name
                     stationDAL.Name = newName;
                 if (newCS != -1)    //if the user wants to update the station's number of chargeSlots
-                    stationDAL.ChargeSlots = newCS;
-                int notFreeChargeSlot = 0;
-                IEnumerable<IDAL.DO.DroneCharge> listDroneCharge = p.IEDroneChargeList();
-                foreach (var item in listDroneCharge) // calculates the charge slot that not free.
                 {
-                    if (item.StationId == stationId)
-                        notFreeChargeSlot++;
+                    stationDAL.ChargeSlots = newCS;
+                    int notFreeChargeSlot = 0;
+                    IEnumerable<IDAL.DO.DroneCharge> listDroneCharge = p.IEDroneChargeList();
+                    foreach (var item in listDroneCharge) // calculates the charge slot that not free.
+                    {
+                        if (item.StationId == stationId)
+                            notFreeChargeSlot++;
+                    }
+                    if (notFreeChargeSlot > newCS) // if new all charge slot count lower then the catch slots that alraedy exist.
+                        throw new WrongDetailsUpdateException("All charge slot is to low");
+                    stationDAL.ChargeSlots = newCS - notFreeChargeSlot;
                 }
-                if (notFreeChargeSlot > newCS) // if new all charge slot count lower then the catch slots that alraedy exist.
-                    throw new WrongDetailsUpdateException("All charge slot is to low");
-                stationDAL.ChargeSlots = newCS - notFreeChargeSlot;
-
                 p.UpdateStation(stationDAL);  // updates the station in the stations' list (DAL)
+                
             }
             catch (IDAL.DO.StationException ex)   //catches the Dal exception
             {
@@ -94,6 +100,10 @@ namespace IBL
                 if (newName != "n")  //if the user wants to update the client's name
                 {
                     clientDAL.Name = newName;
+                }
+                if (newName != "n")
+                {
+                    clientDAL.Phone = newTel;
                 }
                 p.UpdateClient(clientDAL);  //updates the client in dal
             }
@@ -308,12 +318,125 @@ namespace IBL
                 flag = true;
 
                 if (flag == false && i == 3) // we didn't find one
-                    throw new ParcelException("We didn't find a parcel");
+                    throw new NotFound("We didn't find a parcel");
                 else if (flag == false)
                     Assignement(ID, i - 1); // calls back the function to check with an other status
                 droneBL.Status = DroneStatuses.shipping;
                 DroneList.Add(droneBL);
                 p.Assignement(closestParcel.ID, droneBL.Id); //update the dronelist in the dal
+            }
+        }
+        #endregion
+
+        #region PickedUp
+        /// <summary>
+        /// This function gets a droneId,finds the drone and this drone picks the parcel associated to it
+        /// </summary>
+        /// <param name="DroneId"></param>
+        public void PickedUp(int droneId)
+        {
+            Drone collectDrone = new Drone();
+            try
+            {
+                collectDrone = GetDrone(droneId);
+            }
+            catch (IDAL.DO.DroneException ex)
+            {
+                throw new IDAL.DO.DroneException("" + ex);
+            }
+
+            if (collectDrone.Status != DroneStatuses.shipping) //if the drone is not scheduled
+                throw new WrongDetailsUpdateException("Drone is not scheduled to any parcel");
+            if (collectDrone.myParcel.deliveringStatus == true) //if parcel is already on the drone
+                throw new WrongDetailsUpdateException("Drone in the middle of shipping");
+
+            DroneDescription myDrone = DroneList.Find(Drone => Drone.Id == droneId);  //finds the drone in the droneList in BL
+            int index = DroneList.FindIndex(Drone => Drone.Id == droneId);
+            myDrone.loc = new Localisation();
+            collectDrone.initialLoc = new Localisation();
+            if (myDrone == null)  //the drone is not among the drone List
+            {
+                throw new IDNotFound("Drone not found");  //throws a BL exception
+            }
+            try
+            {
+                DroneDescription updateDrone = DroneList[index];
+                updateDrone.battery -= BatteryAccToDistance(distance(collectDrone.initialLoc.latitude, collectDrone.initialLoc.longitude, collectDrone.myParcel.picking.latitude, collectDrone.myParcel.picking.longitude));
+                updateDrone.loc = collectDrone.myParcel.picking;
+                DroneList[index] = updateDrone;
+
+                IDAL.DO.Parcel parcelDal = p.ParcelById(collectDrone.myParcel.ID);
+                parcelDal.PickedUp = DateTime.Now;
+                p.UpdateParcelFromBL(parcelDal);
+                //if ((parcelDal.Requested == DateTime.Now || parcelDal.Scheduled == DateTime.Now) && (parcelDal.PickedUp == DateTime.MinValue))
+                //{
+                //    int senderId = parcelDal.SenderId;
+                //    Localisation senderLoc = new Localisation();
+                //    senderLoc.latitude = p.FindLat(senderId);
+                //    senderLoc.longitude = p.FindLong(senderId);
+                //    double myDistance = distance(myDrone.loc.latitude, myDrone.loc.longitude, senderLoc.latitude, senderLoc.longitude);
+                //    DroneDescription tempDD = new DroneDescription();//UPDATE DroneDescriptionLIST IN BL
+                //    tempDD.loc = new Localisation();
+                //    tempDD = myDrone;
+                //    tempDD.battery -= BatteryAccToDistance(myDistance);
+                //    tempDD.loc = senderLoc;
+                //    DroneList.Remove(myDrone);
+                //    DroneList.Add(tempDD);
+                //    IDAL.DO.Parcel tempParcel = new IDAL.DO.Parcel();
+                //    tempParcel = parcelDal;
+                //    tempParcel.PickedUp = DateTime.Now;
+                //    p.AddParcelFromBL(tempParcel);
+                //}
+            }
+            catch (Exception ex)
+            {
+                throw new InputNotValid("The parcel doesn't fit the requirements", ex);
+            }
+
+
+        }
+        #endregion
+
+        #region Delivered
+        public void delivered(int DroneId)
+        {
+            DroneDescription myDrone = DroneList.Find(Drone => Drone.Id == DroneId);
+            if (myDrone == null)
+            {
+                throw new NotFound("Drone not found");
+            }
+            try
+            {
+                IDAL.DO.Parcel prcel = p.FindParcelAssociatedWithDrone(DroneId);
+
+
+                if (prcel.PickedUp == DateTime.Now && prcel.Delivered == DateTime.MinValue)
+                {
+
+                    int targetId = prcel.TargetId;
+                    Localisation targetLoc = new Localisation();
+                    targetLoc.latitude = p.FindLat(targetId);
+                    targetLoc.longitude = p.FindLong(targetId);
+                    double myDistance = distance(myDrone.loc.latitude, myDrone.loc.longitude, targetLoc.latitude, targetLoc.longitude);
+                    DroneDescription tempDD = new DroneDescription();//UPDATE DroneDescriptionLIST IN BL
+                    tempDD.loc = new Localisation();
+                    tempDD = myDrone;
+                    tempDD.battery -= BatteryAccToDistance(myDistance);
+                    tempDD.loc = targetLoc;
+                    tempDD.Status = DroneStatuses.free;
+                    DroneList.Remove(myDrone);
+                    DroneList.Add(tempDD);
+                    IDAL.DO.Parcel tempParcel = new IDAL.DO.Parcel();
+                    tempParcel = prcel;
+                    tempParcel.Delivered = DateTime.Now;
+                    p.AddParcelFromBL(tempParcel);
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw new InputNotValid("The drone doesn't fit the requirements", ex);
             }
         }
         #endregion

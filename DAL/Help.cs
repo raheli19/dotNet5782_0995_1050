@@ -23,9 +23,9 @@ namespace DalObject
         {
             Parcel myParcel = new Parcel();
 
-            if (ParcelList.Exists(x => x.DroneId == droneId))
+            if (DataSource.ParcelList.Exists(x => x.DroneId == droneId))
             {
-                myParcel = ParcelList.Find(x => x.DroneId == droneId);
+                myParcel = DataSource.ParcelList.Find(x => x.DroneId == droneId);
             }
             else
             {
@@ -38,9 +38,9 @@ namespace DalObject
         {
             Client myClient = new Client();
 
-            if (ClientList.Exists(x => x.ID == myID))
+            if (DataSource.ClientList.Exists(x => x.ID == myID))
             {
-                myClient = ClientList.Find(x => x.ID == myID);
+                myClient = DataSource.ClientList.Find(x => x.ID == myID);
 
             }
             else
@@ -53,9 +53,9 @@ namespace DalObject
         {
             Client myClient = new Client();
 
-            if (ClientList.Exists(x => x.ID == myID))
+            if (DataSource.ClientList.Exists(x => x.ID == myID))
             {
-                myClient = ClientList.Find(x => x.ID == myID);
+                myClient = DataSource.ClientList.Find(x => x.ID == myID);
 
             }
             else
@@ -77,8 +77,8 @@ namespace DalObject
 
         public void AddParcelFromBL(Parcel p)
         {
-            Parcel myParcel = ParcelList.Find(x => x.ID == p.ID);
-            ParcelList.Remove(myParcel);
+            Parcel myParcel = DataSource.ParcelList.Find(x => x.ID == p.ID);
+            DataSource.ParcelList.Remove(myParcel);
             addParcel(p);
 
         }

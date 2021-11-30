@@ -15,11 +15,11 @@ namespace DalObject
         public void addClient(Client c)
         {
 
-            if (ClientList.Exists(client => client.ID == c.ID))
+            if (DataSource.ClientList.Exists(client => client.ID == c.ID))
             {
                 throw new ClientException($"id {c.ID} already exists!!");
             }
-            ClientList.Add(c);
+            DataSource.ClientList.Add(c);
         }
         #endregion
         //-----------------------------------UPDATE-FUNCTIONS-------------------------------------------
@@ -30,20 +30,20 @@ namespace DalObject
         {
             Client myClient = new Client();
             myClient.ID = -1;
-            myClient = ClientList.Find(x => x.ID == ClientToUpdate.ID);
+            myClient = DataSource.ClientList.Find(x => x.ID == ClientToUpdate.ID);
 
             if (myClient.ID == -1)
             {
                 throw new ClientException("This Client doesn't exist in the system.");
 
             }
-            ClientList.Remove(myClient);
+            DataSource.ClientList.Remove(myClient);
             myClient.ID = ClientToUpdate.ID;
             myClient.Name = ClientToUpdate.Name;
             myClient.Phone = ClientToUpdate.Phone;
             myClient.Latitude = ClientToUpdate.Latitude;
             myClient.Longitude = ClientToUpdate.Longitude;
-            ClientList.Add(myClient);
+            DataSource.ClientList.Add(myClient);
         }
         #endregion
         #endregion
@@ -59,12 +59,12 @@ namespace DalObject
         public Client ClientById(int id)
         {
             Client cToReturn = default;
-            if (!ClientList.Exists(client => client.ID == id))
+            if (!DataSource.ClientList.Exists(client => client.ID == id))
             {
                 throw new ClientException($"id {id} doesn't exist!!");
 
             };
-            cToReturn = ClientList.Find(c => c.ID == id);
+            cToReturn = DataSource.ClientList.Find(c => c.ID == id);
             return cToReturn;
         }
         #endregion
@@ -80,7 +80,7 @@ namespace DalObject
         public IEnumerable<Client> IEClientList()
         {
             List<Client> ClientLst = new List<Client>();
-            ClientLst = ClientList;
+            ClientLst = DataSource.ClientList;
             return ClientLst;
         }
         #endregion

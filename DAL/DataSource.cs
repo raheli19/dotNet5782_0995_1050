@@ -5,9 +5,11 @@ using IDAL.DO;
 
 namespace DalObject
 {
-    public partial class DalObject : IDAL.IDal
+    public partial class DataSource : DalObject
 
     {
+        static Random rand = new Random();
+
         //creation of all the list
         internal static List<IDAL.DO.Client> ClientList = new List<Client>(); 
         internal static List<IDAL.DO.Drone> DroneChargeList = new List<Drone>();

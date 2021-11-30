@@ -17,46 +17,72 @@ namespace IBL
     {
         //-----------------------------------PRINT-FUNCTIONS--------------------------------------
         #region PRINTING
-        #region IENUMERABLE 
+       
         #region DisplayStationList
+        /// <summary>
+        /// This function gets all the stations with their details
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<StationDescription> DisplayStationList()
         {
-
-            List<StationDescription> statList = new List<StationDescription>();
+            IEnumerable<IDAL.DO.Station> stationsFromDal = p.IEStationList();   //gets the station list from DAL
+            List<StationDescription> statList = new List<StationDescription>();  //creates a new list of station description
             foreach (var item in p.IEStationList())
             {
-                StationDescription statD = new StationDescription();
-                statD.Id = item.ID;
-                statD.name = item.Name;
-                foreach (var item2 in p.IEDroneChargeList())// full chargeSlots
+                //StationDescription statD = new StationDescription();
+                //statD.Id = item.ID;
+                //statD.name = item.Name;
+                //foreach( var item2 in p.DroneChargeList())// full chargeSlots
+                //{
+                //    if (item2.StationId == item.ID) // if the drone is in the station
+                //    { 
+                //        statD.fullChargeSlots++;
+
+                //    }
+
+                //}
+
+                //statD.freeChargeSlots = item.ChargeSlots;// free ones
+                //statList.Add(statD);// add it to the list
+
+                Station station = GetStation(item.ID);      //copies the fields 
+                statList.Add(new StationDescription()
                 {
-                    if (item2.StationId == item.ID) // if the drone is in the station
-                    {
-                        statD.fullChargeSlots++;
-
-                    }
-
-                }
-
-                statD.freeChargeSlots = item.ChargeSlots;// free ones
-                statList.Add(statD);// add it to the list
+                    Id = item.ID,
+                    name = item.Name,
+                    freeChargeSlots = item.ChargeSlots,
+                    fullChargeSlots = station.DroneCharging.Count()
+                });
 
             }
             return statList;
         }
+
         #endregion
 
-        #region DisplayDroneList
+        #region displayDroneList
+
+        /// <summary>
+        /// This function returns the list of drones
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<DroneDescription> displayDroneList()
         {
             return DroneList;
 
         }
+
         #endregion
 
-        #region DisplayClientList
+        #region displayClientList
+
+        /// <summary>
+        /// This function returns the list of clients with their details
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<ClientActions> displayClientList()
         {
+            IEnumerable<IDAL.DO.Client> customersFromDal = p.IEClientList();
             List<ClientActions> LstCA = new List<ClientActions>();
 
             foreach (var item in p.IEClientList())
@@ -83,15 +109,15 @@ namespace IBL
         }
         #endregion
 
-        #region DisplayParcelList
+        #region displayParcelList
+
+        /// <summary>
+        /// This function returns the list of parcels with their details
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<ParcelDescription> displayParcelList()
         {
-            //id 
-            //sendername
-            //targetname
-            //weight
-            //time
-            //matsav havila
+            IEnumerable<IDAL.DO.Parcel> parcelsFromDal = p.IEParcelList();
             List<ParcelDescription> parList = new List<ParcelDescription>();
 
             foreach (var item in p.IEParcelList())
@@ -109,19 +135,19 @@ namespace IBL
                 }
                 tempPar.weight = (WeightCategories)item.Weight;
                 tempPar.priority = (Priorities)item.Priority;
-                if (item.Requested == DateTime.Now)
+                if (item.Requested != DateTime.MinValue)
                 {
                     tempPar.Status = ParcelStatus.requested;
                 }
-                else if (item.Scheduled == DateTime.Now)
+                else if (item.Scheduled != DateTime.MinValue)
                 {
                     tempPar.Status = ParcelStatus.scheduled;
                 }
-                else if (item.PickedUp == DateTime.Now)
+                else if (item.PickedUp != DateTime.MinValue)
                 {
                     tempPar.Status = ParcelStatus.pickedup;
                 }
-                else if (item.Delivered == DateTime.Now)
+                else if (item.Delivered != DateTime.MinValue)
                 {
                     tempPar.Status = ParcelStatus.delivered;
                 }
@@ -130,7 +156,6 @@ namespace IBL
             return parList;
         }
         #endregion
-        public void printParcelsNotAssigned() { }
         public void printFreeStations()
         {
             List<StationDescription> statList = new List<StationDescription>();
@@ -185,9 +210,9 @@ namespace IBL
             }
             return PDList;
         }
-        #endregion
 
         #endregion
+
 
 
 
