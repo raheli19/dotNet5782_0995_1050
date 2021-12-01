@@ -29,11 +29,19 @@ namespace DalObject
             #region UPDATING
             public void updateDroneChargeList(int droneId, int statId)
             {
+            IDAL.DO.DroneCharge dalDr = new DroneCharge(); 
                 foreach (var item in IEDroneChargeList())
                 {
-                    if (item.DroneId == droneId && item.StationId == statId)
-                    DataSource.DroneChargesList.Remove(item);
+                  if (item.DroneId == droneId && item.StationId == statId)
+                  {
+                    dalDr.DroneId = item.DroneId;
+                    dalDr.StationId = item.StationId;
+                  }
+              
+
+               
                 }
+                DataSource.DroneChargesList.Remove(dalDr);
             }
 
             #endregion
@@ -48,14 +56,14 @@ namespace DalObject
             /// <param name="stationId"></param>
             public void DroneToCharge(int droneId, int stationId)
             {
-                IDAL.DO.Drone d = new IDAL.DO.Drone();
+                IDAL.DO.Drone dalDrone = new IDAL.DO.Drone(); //drone from the dal
                 bool flag = false, flag2 = false;
                 for (int i = 0; i < DataSource.DroneChargeList.Count; i++)
                 {
                     if (DataSource.DroneChargeList[i].ID == droneId)
                     {
                         flag = true;
-                        d = DataSource.DroneChargeList[i];
+                        dalDrone = DataSource.DroneChargeList[i]; // gets all the info from the dal
                     DataSource.DroneChargeList.Remove(DataSource.DroneChargeList[i]);
                         break;
                     }
@@ -66,7 +74,7 @@ namespace DalObject
 
                 }
                 //d.Status = DroneStatuses.maintenance;// plug in the drone to charge
-                AddDrone(d);// add it back to the list
+                AddDrone(dalDrone);// add it back to the list
                 IDAL.DO.Station s = new IDAL.DO.Station();
                 for (int i = 0; i < DataSource.StationList.Count; i++)
                 {
@@ -109,7 +117,8 @@ namespace DalObject
                         if (item.StationId == stationId)
                         {
                             flag2 = true;
-                        DataSource.DroneChargesList.Remove(item);// delete the item; the drone is not charging anymore
+                            updateDroneChargeList(item.DroneId, item.StationId);// delete the item; the drone is not charging anymore
+                                         //DataSource.DroneChargesList.Remove(item);
                         }
                     }
 
@@ -131,6 +140,7 @@ namespace DalObject
                     {
                         flag3 = true;
                         d = DataSource.DroneChargeList[i];// the drone is charged; he's free for shipping
+
                     DataSource.DroneChargeList.Remove(DataSource.DroneChargeList[i]);
                         break;
                     }
@@ -168,7 +178,7 @@ namespace DalObject
 
             public IEnumerable<DroneCharge> IEDroneChargeList()
             {
-                List<DroneCharge> DroneChargeLst = new List<DroneCharge>();
+                        List<DroneCharge> DroneChargeLst = new List<DroneCharge>();
                 DroneChargeLst = DataSource.DroneChargesList;
                 return DroneChargeLst;
             }

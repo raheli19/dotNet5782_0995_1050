@@ -118,9 +118,10 @@ namespace IBL
         #region DroneToCharge
         public void DroneToCharge(int DroneId)
         {
-
-            DroneDescription blDrone = DroneList.Find(Drone => Drone.Id == DroneId);
+            
+            DroneDescription blDrone = new DroneDescription();
             blDrone.loc = new Localisation();
+            blDrone = DroneList.Find(Drone => Drone.Id == DroneId);
 
             if (blDrone == null)
             {
@@ -141,6 +142,7 @@ namespace IBL
                     DroneDescription tempDD = new DroneDescription();//UPDATE DroneDescriptionLIST IN BL
                     tempDD = blDrone;
                     tempDD.loc = nearestStation.Loc;
+                    tempDD.battery = blDrone.battery;
                     tempDD.Status = DroneStatuses.maintenance;
                     DroneList.Remove(blDrone);
                     DroneList.Add(tempDD);
@@ -181,34 +183,26 @@ namespace IBL
         {
             DroneDescription droneBL = new DroneDescription();
             droneBL.loc = new Localisation();
-            droneBL.Id = ID;
-            droneBL.Status = DroneStatuses.free; // signs if we don't find it
-            foreach (var item in DroneList)// get all the information about this drone from the dronelist
-            {
-                if (item.Id == ID)
-                {
-                    droneBL.Status = item.Status;
-                    droneBL.Model = item.Model;
-                    droneBL.weight = item.weight;
-                    droneBL.loc = item.loc;
-                    droneBL.DeliveredParcels = item.DeliveredParcels;
-                    // don't copy the battery
-                    //DroneList.Remove(item);// delete the drone from the list
-                }
-            }
+            //droneBL.Id = ID;
+            //droneBL.Status = DroneStatuses.free; // signs if we don't find it
+            droneBL = DroneList.Find(x => ID == x.Id);
+            
+            if (droneBL == null)
+                throw new IDNotFound("This drone doesn't exists!");
             if (droneBL.Status != DroneStatuses.maintenance)// if the drone is not charging
                 throw new InputNotValid("This drone isn't charging");
+            DroneList.Remove(droneBL);
 
             // upadte the drone in the bl DroneList
             droneBL.Status = DroneStatuses.free;
-            droneBL.battery = BatteryAccToTime(time);
-            //DroneList.updateBlDroneList(myDr);
+            droneBL.battery = BatteryAccToTime(time, droneBL.battery);
+            DroneList.Add(droneBL);
 
             //update the drone in the droneList from the DAL
+            IDAL.DO.Drone droneDAL = p.DroneById(ID);
             try
-            {
-                IDAL.DO.Drone droneDAL = p.DroneById(ID);
-                droneDAL.Battery = BatteryAccToTime(time);
+            { 
+                droneDAL.Battery = BatteryAccToTime(time, droneDAL.Battery);                
                 p.UpdateDrone(droneDAL);
             }
             catch (IDAL.DO.DroneException)
@@ -218,14 +212,14 @@ namespace IBL
 
             //update station
             IDAL.DO.Station stationDAL = new IDAL.DO.Station();
-            try
-            {
-                stationDAL = p.StationById(ID);
-            }
-            catch (IDAL.DO.StationException ex)
-            {
-                throw new IDNotFound("ID Not found", ex);
-            }
+            //try
+            //{
+            //    stationDAL = p.StationById(droneDAL.st);
+            //}
+            //catch (IDAL.DO.StationException ex)
+            //{
+            //    throw new IDNotFound("ID Not found", ex);
+            //}
             foreach (var item in p.IEStationList())
             {
                 if (item.Longitude == droneBL.loc.longitude && item.Latitude == droneBL.loc.latitude)
@@ -246,12 +240,14 @@ namespace IBL
             {
                 throw new CannotUpdate("The station cannot be updated", ex);
             }
+            bool flag = false;
             foreach (var item in p.IEDroneChargeList())
             {
                 if (item.DroneId == droneBL.Id && item.StationId == stationDAL.ID)
-                    p.updateDroneChargeList(droneBL.Id, stationDAL.ID);
-
+                    flag = true;
             }
+            if(flag==true)
+                p.updateDroneChargeList(droneBL.Id, stationDAL.ID); // delete it from the dalDroneChargeList
 
 
 

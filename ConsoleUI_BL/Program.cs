@@ -241,6 +241,7 @@ namespace ConsoleUI_BL
                                     Console.WriteLine(obj.displayClient(ClientId));// calls the function to print the asked drone
                                     break;
 
+
                             }
 
                             break;
@@ -282,6 +283,8 @@ namespace ConsoleUI_BL
                                         Console.WriteLine(" ");
                                     }
                                     break;
+                                
+
 
                             }
                             break;

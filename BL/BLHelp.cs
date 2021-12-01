@@ -18,6 +18,8 @@ namespace IBL
         //------------------------------------------HELP------------------------------------------
         //Distance
         #region helpFunctions
+
+        #region distance
         public double distance(double lat1, double lon1, double lat2, double lon2)
         {
             var myPI = 0.017453292519943295;    // Math.PI / 180
@@ -27,6 +29,9 @@ namespace IBL
 
             return 12742 * Math.Asin(Math.Sqrt(a)); // 2 * R; R = 6371 km
         }
+        #endregion
+
+        #region NearestStation
         public Station NearestStation(Localisation l, bool flag)
         {
             Station s = new Station();
@@ -58,29 +63,44 @@ namespace IBL
             }
             return s;
         }
+        #endregion
+
+        #region DistanceAccToBattery
         public double DistanceAccToBattery(double battery)
         {
             //Le drone perd 1% en 7 min  et la vitesse du drone de 50 km/h
             // le drone gagne 1% en 7 min
-            double timeInHours = 7 / 60;
+            double timeInHours = (7 / 60);
             double speed = 50;  //50km/h
             double totalTime = timeInHours * battery;
             double distance = totalTime * speed;
             return distance;
 
         }
-        public double BatteryAccToTime(double time)
+        #endregion
+
+        #region BatteryAccToTime
+        public double BatteryAccToTime(double time, double battery)
         {
-            double batt = time * 7;
-            return batt;
+            battery+= time*7;
+            if (battery >= 100)
+                return 100;
+            return battery;
 
         }
+        #endregion
+
+        #region BatteryAccToDistance
         public double BatteryAccToDistance(double distance)
         {
             double time = distance / 50;
             double batteryLost = time / (7 / 60);
             return batteryLost;
         }
+        #endregion
+
+        //return the client's name according to his id
+        #region ClientName 
         public string Name(int id)
         {
             try
@@ -96,6 +116,9 @@ namespace IBL
 
 
         }
+        #endregion
+
+        #region Location
         public Localisation location(double lat1, double long1)
         {
             Localisation l = new Localisation();
@@ -103,6 +126,9 @@ namespace IBL
             l.latitude = lat1;
             return l;
         }
+        #endregion
+
+        #region ClosestParcel
         IDAL.DO.Parcel ClosestParcel(List<IDAL.DO.Parcel> list, Localisation droneLoc)
         {
             double minDist = double.MaxValue;
@@ -119,6 +145,9 @@ namespace IBL
             }
             return tempParcel;
         }
+        #endregion
+
+        #region ConvertStationToDal
         IDAL.DO.Station ConvertStationToDal(Station s)
         {
             IDAL.DO.Station stat = new IDAL.DO.Station();
@@ -130,21 +159,16 @@ namespace IBL
             return stat;
 
         }
-        bool CheckId(int id)
-        {
-            int i = 0;
-            while (id > 0)
-            {
-                ++i;
-                id /= 10;
+        #endregion
 
-            }
-            if (i == 8)
-                return true;
-            return false;
-        }
-        void updateBlDroneList(DroneDescription droneToUpdate)
+        public void updateBlDroneList(DroneDescription droneToUpdate)
         {
+            
+            DroneDescription blD = new DroneDescription();
+            blD=DroneList.Find(x => droneToUpdate.Id == x.Id);
+            DroneList.Remove(blD);
+            DroneList.Add(droneToUpdate);
+            
 
         }
         #endregion

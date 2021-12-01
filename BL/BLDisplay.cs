@@ -57,10 +57,12 @@ namespace IBL
         /// <returns></returns>
         public Drone displayDrone(int droneId)
         {
-            Drone droneBL = GetDrone(droneId); //Copies the fields from DAL
+            Drone droneBL = new Drone();
+            droneBL = GetDrone(droneId); //Copies the fields from DAL
             //the missing fields are:MaxWeight,Status,initialLoc,ParcelIndelivering
-            DroneDescription tmp = DroneList.Find(x => x.Id == droneId);
-            droneBL.initialLoc = new Localisation();
+            DroneDescription tmp = new DroneDescription();
+            tmp.loc = new Localisation();
+            tmp   = DroneList.Find(x => x.Id == droneId);
             droneBL.MaxWeight = tmp.weight;
             droneBL.Status = tmp.Status;
             droneBL.initialLoc = tmp.loc;

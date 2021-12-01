@@ -131,7 +131,7 @@ namespace IBL
                 throw new InputNotValid("ID not valid");
             clientDAL.ID = clientBL.ID;  //copies all the fieldsto the DAL client
             clientDAL.Name = clientBL.Name;
-            if (clientBL.Phone.Length != 11)
+            if (clientBL.Phone.Length != 10)
                 throw new InputNotValid("Phone not valid");
             clientDAL.Phone = clientBL.Phone;
             if (clientBL.ClientLoc.latitude < 31 || clientBL.ClientLoc.latitude > 33.3)
