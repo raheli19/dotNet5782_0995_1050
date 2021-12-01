@@ -8,7 +8,7 @@ namespace IBL
     {
        public class StationDescription
         {
-            public int Id { get; set; }
+            public int Id { get; set;}
             public int name { get; set; }
 
             public int freeChargeSlots { get; set; }

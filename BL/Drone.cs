@@ -23,6 +23,8 @@ namespace IBL
                 result += $"MaxWeight is: {MaxWeight},\n";
                 result += $"Status is: {Status},\n";
                 result += $"Battery is: {Battery}%,\n";
+                result += $"Location is: {initialLoc}\n";
+                result += $"Amount of packages in delivering is: {myParcel}\n";
                 return result;
             }
         }
