@@ -123,7 +123,7 @@ namespace IBL
 
             foreach (var parcel in p.IEParcelList())
             {
-                if (parcel.SenderId == clientId)  //The parcel has been sent by this client
+                if (parcel.SenderId == clientId)  //The parcel has been sent by this client so get the info 
                 {
                     ParcelToClient PCT = new ParcelToClient();
                     PCT.ID = parcel.ID;
@@ -147,7 +147,7 @@ namespace IBL
                     }
                     ClientInParcel myClient = new ClientInParcel();
                     myClient.ID = clientId;
-                    try
+                    try //checks if the clients exists
                     {
                         myClient.name = p.ClientById(clientId).Name;
                     }
@@ -160,7 +160,7 @@ namespace IBL
 
                 }
             }
-            clientBL.ParcLstFromClient = TempParcLstFromClient;
+            clientBL.ParcLstFromClient = TempParcLstFromClient; // copies the lists which contains the parcels he sent into the field
 
 
             List<ParcelToClient> TempParcLstToClient = new List<ParcelToClient>();
@@ -205,7 +205,7 @@ namespace IBL
                 }
             }
 
-            clientBL.ParcLstToClient = TempParcLstToClient;
+            clientBL.ParcLstToClient = TempParcLstToClient; // gets the lists withall the parcels the client received
 
             return clientBL;
 
