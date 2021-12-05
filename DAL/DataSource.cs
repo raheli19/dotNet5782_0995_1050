@@ -70,7 +70,7 @@ namespace DalObject
                 {
                     ID = rand.Next(10000000, 100000000),
                     Name = $"Client {i}",
-                    Phone = $"0{rand.Next(50, 58)} - {rand.Next(1000000, 10000000)}",
+                    Phone = $"0{rand.Next(50, 58)}{rand.Next(1000000, 10000000)}",
                     Latitude = GetrandomCoordinate(31.37),
                     Longitude = GetrandomCoordinate(35.16),
 

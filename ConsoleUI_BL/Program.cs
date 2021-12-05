@@ -8,7 +8,7 @@ namespace ConsoleUI_BL
     {
 
         enum option { EXIT, ADD, UPDATE, PRINT, PRINT_LIST, };
-        enum entities { EXIT, STATION, DRONE, CLIENT, PARCEL, DRONECHARGES, };
+        enum entities { EXIT, STATION, DRONE, CLIENT, PARCEL, DRONECHARGES, PARCELS_NOT_ASSGNED};
         enum update { EXIT, DRONE, STAT, CLIENT, CHARGING, CHARGED, ASSIGNEMENT, PICKEDUP, DELIVERED, };
 
         public static void Main()
@@ -53,7 +53,8 @@ namespace ConsoleUI_BL
                                     Console.WriteLine("You chose to add a Station.\nPlease enter its Id, Name, Longitude, Latitude and ChargeSlots:");
                                     myId = int.Parse(Console.ReadLine());
                                     myName = Console.ReadLine();
-                                    double.TryParse(Console.ReadLine(), out double myLongitude);
+                                    double myLongitude;
+                                    myLongitude = Convert.ToDouble(Console.ReadLine());
                                     double.TryParse(Console.ReadLine(), out double myLatitude);
                                     int.TryParse(Console.ReadLine(), out int myCs);
                                     myStation.ID = myId;
@@ -67,7 +68,7 @@ namespace ConsoleUI_BL
 
                                 case entities.DRONE:
                                     IBL.BO.Drone myDrone = new IBL.BO.Drone();
-                                    Console.WriteLine("You chose to add a Drone.\nPlease enter its ID, Model, MaxWeight,Number of station :");
+                                    Console.WriteLine("You chose to add a Drone.\nPlease enter its ID, Model, MaxWeight,ID of station :");
                                     int.TryParse(Console.ReadLine(), out int DID); //DroneID
                                     string myModel;
                                     myModel = Console.ReadLine();
@@ -118,7 +119,7 @@ namespace ConsoleUI_BL
                             }
                             break;
                         case option.UPDATE:
-                            Console.WriteLine("You chose to update an entity.\nTo update a Drone please press 1;\n To update a Station please press 2;\n To update a Client please press 3\n" +
+                            Console.WriteLine("You chose to update an entity.\nTo update a Drone please press 1;\nTo update a Station please press 2;\nTo update a Client please press 3\n" +
                                 "To plug in a Drone please press 4;\nTo remove a Drone from the ChargeSlot please press 5;\nTo assign a Parcel to a Drone please press 6;" +
                                 "\nTo pick up a parcel please press 7;\nTo deliver a Parcel please press 8\n" +
                                 "To exit please press 0:\n ");
@@ -247,7 +248,7 @@ namespace ConsoleUI_BL
                             break;
                         case option.PRINT_LIST:
                             Console.WriteLine("You chose to print an entity's list.\n");
-                            Console.WriteLine("To print a Station's list please press 1;\nTo print a Drone's list please press 2;\nTo print a Client's list please press 3;\nTo print a Parcel's list please press 4;\nTo print a DroneCharge's list please press 5;\nTo exit please press 0:\n");
+                            Console.WriteLine("To print a Station's list please press 1;\nTo print a Drone's list please press 2;\nTo print a Client's list please press 3;\nTo print a Parcel's list please press 4;\nTo print the parcels not assigned please press 5;\nTo exit please press 0:\n");
                             entity = (entities)int.Parse(Console.ReadLine());
                             switch (entity)
                             {
@@ -283,7 +284,16 @@ namespace ConsoleUI_BL
                                         Console.WriteLine(" ");
                                     }
                                     break;
-                                
+                                case entities.PARCELS_NOT_ASSGNED:
+                                    Console.WriteLine("Parcels not assigned:\n");
+                                    foreach (var item in obj.displayParcelsNotAssigned())
+                                    {
+                                        Console.WriteLine(item);
+                                        Console.WriteLine(" ");
+                                    }
+                                    break;
+
+
 
 
                             }

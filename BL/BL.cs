@@ -3,7 +3,6 @@
 // nouveau case dans le main pour imprimer la list des dronescharges
 // tostring du drone si doit tout imprimer
 // ajout d'un package dans les 2 clients concernés
-// localisation a virgule
 // id de la parcel
 // banai
 // toutes les help en pv
