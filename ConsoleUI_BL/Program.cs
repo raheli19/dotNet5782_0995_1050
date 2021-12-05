@@ -47,13 +47,14 @@ namespace ConsoleUI_BL
                                     break;
                                 case entities.STATION:
                                     IBL.BO.Station myStation = new IBL.BO.Station();
-                                    myStation.Loc = new Localisation();
+                                    myStation.Loc = new ();
                                     int myId;
                                     int myName;
+                                    double myLongitude;
                                     Console.WriteLine("You chose to add a Station.\nPlease enter its Id, Name, Longitude, Latitude and ChargeSlots:");
                                     myId = int.Parse(Console.ReadLine());
                                     myName = int.Parse(Console.ReadLine());
-                                    double.TryParse(Console.ReadLine(), out double myLongitude);
+                                    double.TryParse(Console.ReadLine(), out myLongitude);
                                     double.TryParse(Console.ReadLine(), out double myLatitude);
                                     int.TryParse(Console.ReadLine(), out int myCs);
                                     myStation.ID = myId;

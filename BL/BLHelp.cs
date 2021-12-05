@@ -18,7 +18,7 @@ namespace IBL
         //------------------------------------------HELP------------------------------------------
         //Distance
         #region helpFunctions
-        public double distance(double lat1, double lon1, double lat2, double lon2)
+        private double distance(double lat1, double lon1, double lat2, double lon2)
         {
             var myPI = 0.017453292519943295;    // Math.PI / 180
             var a = 0.5 - Math.Cos((lat2 - lat1) * myPI) / 2 +
@@ -27,7 +27,7 @@ namespace IBL
 
             return 12742 * Math.Asin(Math.Sqrt(a)); // 2 * R; R = 6371 km
         }
-        public Station NearestStation(Localisation l, bool flag)
+        private Station NearestStation(Localisation l, bool flag)
         {
             Station s = new Station();
             s.Loc = new Localisation();
@@ -58,7 +58,7 @@ namespace IBL
             }
             return s;
         }
-        public double DistanceAccToBattery(double battery)
+        private double DistanceAccToBattery(double battery)
         {
             //Le drone perd 1% en 7 min  et la vitesse du drone de 50 km/h
             // le drone gagne 1% en 7 min
@@ -69,19 +69,19 @@ namespace IBL
             return distance;
 
         }
-        public double BatteryAccToTime(double time)
+        private double BatteryAccToTime(double time)
         {
             double batt = time * 7;
             return batt;
 
         }
-        public double BatteryAccToDistance(double distance)
+        private double BatteryAccToDistance(double distance)
         {
             double time = distance / 50;
             double batteryLost = time / (7 / 60);
             return batteryLost;
         }
-        public string Name(int id)
+        private string Name(int id)
         {
             try
             {
@@ -96,7 +96,7 @@ namespace IBL
 
 
         }
-        public Localisation location(double lat1, double long1)
+        private Localisation location(double lat1, double long1)
         {
             Localisation l = new Localisation();
             l.longitude = long1;
