@@ -16,7 +16,7 @@ namespace IBL
 
             public List<ParcelToClient> ParcLstFromClient = new List<ParcelToClient>();
 
-           public  List<ParcelToClient> ParcLstToClient = new List<ParcelToClient>();
+            public  List<ParcelToClient> ParcLstToClient = new List<ParcelToClient>();
 
 
             public override string ToString()

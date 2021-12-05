@@ -1,4 +1,4 @@
-﻿//Tania:DroneToCharge, DroneCharged et Assignment verifier
+﻿
 
 
 using System;
@@ -164,6 +164,7 @@ namespace IBL
         public int addParcel(Parcel parcelBL)
         {
             IDAL.DO.Parcel DALParcel = new IDAL.DO.Parcel(); // creates a new parcel from DAL
+
             DALParcel.ID = parcelBL.ID;  //copies all the fields from the parcel he received
             if (!(parcelBL.Sender.ID <= 99999999 && parcelBL.Sender.ID > 9999999))//check the validity of the fields received
                 throw new InputNotValid("SenderID not valid");
@@ -187,6 +188,7 @@ namespace IBL
             DALParcel.Delivered = parcelBL.Delivered;
             DALParcel.Requested = parcelBL.Requested;
             DALParcel.DroneId = 0;
+
             try
             {
                 p.addParcel(DALParcel);  //Add it to DAL
