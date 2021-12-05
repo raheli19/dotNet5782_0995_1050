@@ -194,7 +194,7 @@ namespace ConsoleUI_BL
                             case update.ASSIGNEMENT:
                                 Console.WriteLine("You chose to assign a Parcel to a Drone.\nPlease enter the Drone's Id:\n");               
                                 int.TryParse(Console.ReadLine(), out int droneID);
-                                obj.Assignement(droneID, 0);
+                                obj.Assignement(droneID);
                                 break;
 
                                 case update.PICKEDUP:

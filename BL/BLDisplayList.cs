@@ -76,8 +76,8 @@ namespace IBL
                 {
                     Id = item.ID,
                     Model = item.Model,
-                    //weight =item.w
-                });
+                    weight = (WeightCategories)item.weight,
+                }) ;
             }
             return DroneList;
 

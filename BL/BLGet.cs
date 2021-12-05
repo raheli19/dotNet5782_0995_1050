@@ -86,8 +86,7 @@ namespace IBL
                 IDAL.DO.Drone dalDrone = p.DroneById(id);  //search the drone from DAL
                 droneBL.ID = dalDrone.ID;  //copies field by field
                 droneBL.Model = dalDrone.Model;
-                droneBL.Battery = dalDrone.Battery;
-
+                droneBL.MaxWeight = (WeightCategories)dalDrone.weight;
             }
             catch (IDAL.DO.DroneException drEX) //catches DAL exception
             {
