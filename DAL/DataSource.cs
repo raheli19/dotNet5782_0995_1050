@@ -132,7 +132,7 @@ namespace DalObject
                     Name = $"Bahnhof {stationNum++}",
                     Longitude = GetrandomCoordinate(26.2),
                     Latitude = GetrandomCoordinate(25.4),
-                    ChargeSlots = rand.Next(0, 10),
+                    ChargeSlots = rand.Next(1, 10),
                 });
                 }
         }

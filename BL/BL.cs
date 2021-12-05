@@ -125,7 +125,7 @@ namespace IBL
                     drone.loc = new Localisation()
                     {
                         latitude = listStationsFromIdal.ElementAt(stationIndex).Latitude,
-                        longitude = listStationsFromIdal.ElementAt(stationIndex).Longitude
+                        longitude = listStationsFromIdal.ElementAt(stationIndex).Longitude,
 
                     };
                     foreach (var itemStation in listStationsFromIdal)

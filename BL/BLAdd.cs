@@ -61,7 +61,7 @@ namespace IBL
         {
             //Add the drone To Add and check if the inputs are correct
             IDAL.DO.Drone droneDAL = new IDAL.DO.Drone();  //creates a new drone (from DAL)
-            droneBL.Battery = rand.Next(20, 40);// initialize the battery
+            double battery = rand.Next(20, 40);// initialize the battery
             Station stationBL = GetStation(StationID);  //finds the station according to its ID
 
             if (!(droneBL.ID <= 99999999 && droneBL.ID > 9999999)) //ID not Valid
@@ -72,9 +72,10 @@ namespace IBL
             if (droneBL.Status != DroneStatuses.free && droneBL.Status != DroneStatuses.maintenance && droneBL.Status != DroneStatuses.shipping)
                 throw new InputNotValid("The status of your drone is not valid");
             droneDAL.Model = droneBL.Model;
-            if (droneBL.Battery < 0 || droneBL.Battery > 100)
+            if (battery < 0 || battery > 100)
                 throw new InputNotValid("Battery is not valid");
 
+            droneBL.Battery = battery;
             droneBL.Status = DroneStatuses.maintenance;
             droneBL.initialLoc = stationBL.Loc;// his location is the same than the station
             IDAL.DO.DroneCharge DalDC = new IDAL.DO.DroneCharge();
