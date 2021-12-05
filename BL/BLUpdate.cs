@@ -1,6 +1,4 @@
-﻿
-//Tania:DroneToCharge, DroneCharged et Assignment verifier
-
+﻿//Tania:DroneToCharge, DroneCharged et Assignment verifier
 
 using System;
 using System.Collections.Generic;

@@ -130,7 +130,7 @@ namespace DalObject
                 {
                     StationList.Add(new Station()
                     { ID = rand.Next(1000000, 10000000),
-                    Name = rand.Next(1000000,10000000),
+                    Name = "Bahnhof1",
                     Longitude = GetrandomCoordinate(26.2),
                     Latitude = GetrandomCoordinate(25.4),
                     ChargeSlots = rand.Next(0, 10),
