@@ -12,7 +12,7 @@ using System.Linq;
 namespace IBL
 {
 
-    public partial class BL : IBL
+    private partial class BL : IBL
     {
 
         //------------------------------------------HELP------------------------------------------
@@ -30,7 +30,7 @@ namespace IBL
         #endregion
 
         #region NearestStation
-        public Station NearestStation(Localisation l, bool flag)
+        private Station NearestStation(Localisation l, bool flag)
         {
             Station s = new Station();
             s.Loc = new Localisation();
@@ -64,7 +64,7 @@ namespace IBL
         #endregion
 
         #region DistanceAccToBattery
-        public double DistanceAccToBattery(double battery)
+        private double DistanceAccToBattery(double battery)
         {
             //Le drone perd 1% en 7 min  et la vitesse du drone de 50 km/h
             // le drone gagne 1% en 7 min
@@ -78,7 +78,7 @@ namespace IBL
         #endregion
 
         #region BatteryAccToTime
-        public double BatteryAccToTime(double time, double battery)
+        private double BatteryAccToTime(double time, double battery)
         {
             battery+= time*7;
             if (battery >= 100)
@@ -89,7 +89,7 @@ namespace IBL
         #endregion
 
         #region BatteryAccToDistance
-        public double BatteryAccToDistance(double distance)
+        private double BatteryAccToDistance(double distance)
         {
             double time = distance / 50;
             double batteryLost = time / (7 / 60);
@@ -99,7 +99,7 @@ namespace IBL
 
         //return the client's name according to his id
         #region ClientName 
-        public string Name(int id)
+        private string Name(int id)
         {
             try
             {
@@ -117,7 +117,7 @@ namespace IBL
         #endregion
 
         #region Location
-        public Localisation location(double lat1, double long1)
+        private Localisation location(double lat1, double long1)
         {
             Localisation l = new Localisation();
             l.longitude = long1;
@@ -169,7 +169,7 @@ namespace IBL
             
 
         }
-        #endregion
+        
 
 
     }
