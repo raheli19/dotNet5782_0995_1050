@@ -52,12 +52,12 @@ namespace IBL
         /// <param name="Id"></param>
         /// <param name="newName"></param>
         /// <param name="newCS"></param>
-        public void updateStationName_CS(int stationId, int newName = -1, int newCS = -1)
+        public void updateStationName_CS(int stationId, string newName = "n", int newCS = -1)
         {
             try
             {
                 IDAL.DO.Station stationDAL = p.StationById(stationId);  //finds the station according to its ID
-                if (newName != -1)  //if the user wants to update the station's name
+                if (newName != "n")  //if the user wants to update the station's name
                     stationDAL.Name = newName;
                 if (newCS != -1)    //if the user wants to update the station's number of chargeSlots
                 {

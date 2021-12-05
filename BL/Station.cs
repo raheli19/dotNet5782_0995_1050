@@ -9,7 +9,7 @@ namespace IBL
         public class Station
         {
             public int ID { get; set; }
-            public int Name { get; set; }
+            public string Name { get; set; }
             public Localisation Loc { get; set; }
             public int ChargeSlots { get; set; }
 

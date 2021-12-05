@@ -49,10 +49,10 @@ namespace ConsoleUI_BL
                                     IBL.BO.Station myStation = new IBL.BO.Station();
                                     myStation.Loc = new Localisation();
                                     int myId;
-                                    int myName;
+                                    string myName;
                                     Console.WriteLine("You chose to add a Station.\nPlease enter its Id, Name, Longitude, Latitude and ChargeSlots:");
                                     myId = int.Parse(Console.ReadLine());
-                                    myName = int.Parse(Console.ReadLine());
+                                    myName = Console.ReadLine();
                                     double.TryParse(Console.ReadLine(), out double myLongitude);
                                     double.TryParse(Console.ReadLine(), out double myLatitude);
                                     int.TryParse(Console.ReadLine(), out int myCs);
@@ -138,11 +138,11 @@ namespace ConsoleUI_BL
                                     int.TryParse(Console.ReadLine(), out int StatID);
                                     Console.WriteLine("Do you want to update the station's name? Enter yes or no\n");
                                     string ans = "yes";
-                                    int newNam=-1;
+                                    string newNam="n";
                                     if (ans == Console.ReadLine())
                                     {
                                         Console.WriteLine("Enter the new name\n");
-                                        int.TryParse(Console.ReadLine(), out newNam);
+                                         newNam= Console.ReadLine();
                                     }
                                     Console.WriteLine("Do you want to update the station's chargeSlots? Enter yes or no\n");
 
