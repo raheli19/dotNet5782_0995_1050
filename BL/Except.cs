@@ -3,6 +3,7 @@ using System.Runtime.Serialization;
 
 namespace IBL.BO
 {
+    #region Alreadyexists
     [Serializable]
     internal class AlreadyExist : Exception
     {
@@ -24,8 +25,10 @@ namespace IBL.BO
         {
         }
     }
+    #endregion
 
-        [Serializable]
+    #region CannotAdd
+    [Serializable]
         internal class CannotAdd : Exception
         {
             public CannotAdd()
@@ -44,8 +47,10 @@ namespace IBL.BO
             {
             }
         }
+    #endregion
 
-        [Serializable]
+    #region CannotUpdate
+    [Serializable]
         internal class CannotUpdate : Exception
         {
             public CannotUpdate()
@@ -65,8 +70,9 @@ namespace IBL.BO
             {
             }
         }
-
-
+    #endregion
+   
+    #region DroneChargedExcept
     [Serializable]
     internal class DroneChargedException : Exception
     {
@@ -86,7 +92,9 @@ namespace IBL.BO
         {
         }
     }
+    #endregion
 
+    #region IdNotFound
     [Serializable]
     internal class IDNotFound : Exception
     {
@@ -108,7 +116,9 @@ namespace IBL.BO
         {
         }
     }
+    #endregion
 
+    #region InputNotValid
     [Serializable]
     public class InputNotValid : Exception
     {
@@ -128,8 +138,9 @@ namespace IBL.BO
         {
         }
     }
+    #endregion
 
-
+    #region NotAvailable
     [Serializable]
     internal class NotAvailable : Exception
     {
@@ -145,7 +156,9 @@ namespace IBL.BO
         {
         }
     }
+    #endregion
 
+    #region NotEnoughBattery
     [Serializable]
     internal class NotEoughBattery : Exception
     {
@@ -165,8 +178,9 @@ namespace IBL.BO
         {
         }
     }
+    #endregion
 
-
+    #region NotFound
     [Serializable]
     public class NotFound : Exception
     {
@@ -187,7 +201,9 @@ namespace IBL.BO
         {
         }
     }
+    #endregion
 
+    #region Priority
     [Serializable]
     internal class PriorityException : Exception
     {
@@ -227,8 +243,9 @@ namespace IBL.BO
         {
         }
     }
+    #endregion
 
-
+    #region WeightExcept
     [Serializable]
     internal class WeightException : Exception
     {
@@ -248,8 +265,10 @@ namespace IBL.BO
         {
         }
     }
+    #endregion
 
 
+    #region UpdateError
     [Serializable]
     internal class WrongDetailsUpdateException : Exception
     {
@@ -269,6 +288,7 @@ namespace IBL.BO
         {
         }
     }
+    #endregion
 }
 
 

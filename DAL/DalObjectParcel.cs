@@ -19,6 +19,7 @@ namespace DalObject
             //{
             //    throw new ParcelException($"id {pl.ID} already exists!!");
             //}
+            pl.ID = DataSource.Config.RunnerIDnumber;
             DataSource.ParcelList.Add(pl);
             DataSource.Config.RunnerIDnumber++;
         }

@@ -29,7 +29,7 @@ namespace IBL
 
         void updateDroneName(int Id,string newName);
 
-        void updateStationName_CS(int Id, int newName=-1,int newCS=-1);
+        void updateStationName_CS(int Id, string newName=" ",int newCS=-1);
 
         void updateClientName_Phone(int Id, string newName =" ", string newTel=" ");
 

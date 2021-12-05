@@ -16,9 +16,21 @@ namespace DalObject
         public static int DroneId { get; private set; }
 
 
-        //-----------------------------------ACTIONS-------------------------------------------
+        public int RunnerNumber()
+        {
+            return DataSource.Config.RunnerIDnumber;
+        }
 
-
+        public double[] ElectricityUse()
+        {
+            double[] arr = new double[5];
+            arr[0] = DataSource.Config.BatteryFree;
+            arr[1] = DataSource.Config.BatteryLightWeight;
+            arr[2] = DataSource.Config.BatteryMiddleWeight;
+            arr[3] = DataSource.Config.BatteryHeavyWeight;
+            arr[4] = DataSource.Config.ChargeDroneRate;
+            return arr;
+        }
 
 
 

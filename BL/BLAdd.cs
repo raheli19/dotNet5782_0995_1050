@@ -1,4 +1,4 @@
-﻿//Tania:DroneToCharge, DroneCharged et Assignment verifier
+﻿
 
 
 using System;
@@ -7,23 +7,13 @@ using System.Text;
 using IBL.BO;
 using DalObject;
 using System.Linq;
+using DalObject;
 
 namespace IBL
 {
 
     public partial class BL : IBL
     {
-        //static Random rand = new Random();
-
-        //readonly IDAL.IDal p;
-        //help h = new help();
-
-        //List<DroneDescription> DroneList = new List<DroneDescription>();
-
-        //-----------------------------------RETRIEVE-FUNCTIONS--------------------------------------
-
-
-
         //-----------------------------------ADD-FUNCTIONS----------------------------------------
 
         #region addStation
@@ -131,7 +121,7 @@ namespace IBL
                 throw new InputNotValid("ID not valid");
             clientDAL.ID = clientBL.ID;  //copies all the fieldsto the DAL client
             clientDAL.Name = clientBL.Name;
-            if (clientBL.Phone.Length != 11)
+            if (clientBL.Phone.Length != 10)
                 throw new InputNotValid("Phone not valid");
             clientDAL.Phone = clientBL.Phone;
             if (clientBL.ClientLoc.latitude < 31 || clientBL.ClientLoc.latitude > 33.3)
@@ -164,7 +154,8 @@ namespace IBL
         public int addParcel(Parcel parcelBL)
         {
             IDAL.DO.Parcel DALParcel = new IDAL.DO.Parcel(); // creates a new parcel from DAL
-            DALParcel.ID = parcelBL.ID;  //copies all the fields from the parcel he received
+
+            DALParcel.ID = p.RunnerNumber();  //copies all the fields from the parcel he received
             if (!(parcelBL.Sender.ID <= 99999999 && parcelBL.Sender.ID > 9999999))//check the validity of the fields received
                 throw new InputNotValid("SenderID not valid");
             DALParcel.SenderId = parcelBL.Sender.ID;
@@ -187,6 +178,7 @@ namespace IBL
             DALParcel.Delivered = parcelBL.Delivered;
             DALParcel.Requested = parcelBL.Requested;
             DALParcel.DroneId = 0;
+
             try
             {
                 p.addParcel(DALParcel);  //Add it to DAL

@@ -57,10 +57,12 @@ namespace IBL
         /// <returns></returns>
         public Drone displayDrone(int droneId)
         {
-            Drone droneBL = GetDrone(droneId); //Copies the fields from DAL
+            Drone droneBL = new Drone();
+            droneBL = GetDrone(droneId); //Copies the fields from DAL
             //the missing fields are:MaxWeight,Status,initialLoc,ParcelIndelivering
-            DroneDescription tmp = DroneList.Find(x => x.Id == droneId);
-            droneBL.initialLoc = new Localisation();
+            DroneDescription tmp = new DroneDescription();
+            tmp.loc = new Localisation();
+            tmp   = DroneList.Find(x => x.Id == droneId);
             droneBL.MaxWeight = tmp.weight;
             droneBL.Status = tmp.Status;
             droneBL.initialLoc = tmp.loc;
@@ -121,7 +123,7 @@ namespace IBL
 
             foreach (var parcel in p.IEParcelList())
             {
-                if (parcel.SenderId == clientId)  //The parcel has been sent by this client
+                if (parcel.SenderId == clientId)  //The parcel has been sent by this client so get the info 
                 {
                     ParcelToClient PCT = new ParcelToClient();
                     PCT.ID = parcel.ID;
@@ -145,7 +147,7 @@ namespace IBL
                     }
                     ClientInParcel myClient = new ClientInParcel();
                     myClient.ID = clientId;
-                    try
+                    try //checks if the clients exists
                     {
                         myClient.name = p.ClientById(clientId).Name;
                     }
@@ -158,7 +160,7 @@ namespace IBL
 
                 }
             }
-            clientBL.ParcLstFromClient = TempParcLstFromClient;
+            clientBL.ParcLstFromClient = TempParcLstFromClient; // copies the lists which contains the parcels he sent into the field
 
 
             List<ParcelToClient> TempParcLstToClient = new List<ParcelToClient>();
@@ -203,7 +205,7 @@ namespace IBL
                 }
             }
 
-            clientBL.ParcLstToClient = TempParcLstToClient;
+            clientBL.ParcLstToClient = TempParcLstToClient; // gets the lists withall the parcels the client received
 
             return clientBL;
 

@@ -27,7 +27,7 @@ namespace IBL
 
             return 12742 * Math.Asin(Math.Sqrt(a)); // 2 * R; R = 6371 km
         }
-        private Station NearestStation(Localisation l, bool flag)
+        public Station NearestStation(Localisation l, bool flag)
         {
             Station s = new Station();
             s.Loc = new Localisation();
@@ -58,30 +58,32 @@ namespace IBL
             }
             return s;
         }
-        private double DistanceAccToBattery(double battery)
+        public double DistanceAccToBattery(double battery)
         {
             //Le drone perd 1% en 7 min  et la vitesse du drone de 50 km/h
             // le drone gagne 1% en 7 min
-            double timeInHours = 7 / 60;
+            double timeInHours = (7 / 60);
             double speed = 50;  //50km/h
             double totalTime = timeInHours * battery;
             double distance = totalTime * speed;
             return distance;
 
         }
-        private double BatteryAccToTime(double time)
+        public double BatteryAccToTime(double time)
         {
-            double batt = time * 7;
-            return batt;
+            battery+= time*7;
+            if (battery >= 100)
+                return 100;
+            return battery;
 
         }
-        private double BatteryAccToDistance(double distance)
+        public double BatteryAccToDistance(double distance)
         {
             double time = distance / 50;
             double batteryLost = time / (7 / 60);
             return batteryLost;
         }
-        private string Name(int id)
+        public string Name(int id)
         {
             try
             {
@@ -96,13 +98,16 @@ namespace IBL
 
 
         }
-        private Localisation location(double lat1, double long1)
+        public Localisation location(double lat1, double long1)
         {
             Localisation l = new Localisation();
             l.longitude = long1;
             l.latitude = lat1;
             return l;
         }
+        #endregion
+
+        #region ClosestParcel
         IDAL.DO.Parcel ClosestParcel(List<IDAL.DO.Parcel> list, Localisation droneLoc)
         {
             double minDist = double.MaxValue;
@@ -119,6 +124,9 @@ namespace IBL
             }
             return tempParcel;
         }
+        #endregion
+
+        #region ConvertStationToDal
         IDAL.DO.Station ConvertStationToDal(Station s)
         {
             IDAL.DO.Station stat = new IDAL.DO.Station();
@@ -130,21 +138,16 @@ namespace IBL
             return stat;
 
         }
-        bool CheckId(int id)
-        {
-            int i = 0;
-            while (id > 0)
-            {
-                ++i;
-                id /= 10;
+        #endregion
 
-            }
-            if (i == 8)
-                return true;
-            return false;
-        }
-        void updateBlDroneList(DroneDescription droneToUpdate)
+        public void updateBlDroneList(DroneDescription droneToUpdate)
         {
+            
+            DroneDescription blD = new DroneDescription();
+            blD=DroneList.Find(x => droneToUpdate.Id == x.Id);
+            DroneList.Remove(blD);
+            DroneList.Add(droneToUpdate);
+            
 
         }
         #endregion
