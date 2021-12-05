@@ -47,7 +47,7 @@ namespace ConsoleUI_BL
                                     break;
                                 case entities.STATION:
                                     IBL.BO.Station myStation = new IBL.BO.Station();
-                                    myStation.Loc = new Localisation();
+                                    myStation.Loc = new ();
                                     int myId;
                                     string myName;
                                     Console.WriteLine("You chose to add a Station.\nPlease enter its Id, Name, Longitude, Latitude and ChargeSlots:");

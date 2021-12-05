@@ -18,8 +18,6 @@ namespace IBL
         //------------------------------------------HELP------------------------------------------
         //Distance
         #region helpFunctions
-
-        #region distance
         private double distance(double lat1, double lon1, double lat2, double lon2)
         {
             var myPI = 0.017453292519943295;    // Math.PI / 180
@@ -32,7 +30,7 @@ namespace IBL
         #endregion
 
         #region NearestStation
-        private Station NearestStation(Localisation l, bool flag)
+        public Station NearestStation(Localisation l, bool flag)
         {
             Station s = new Station();
             s.Loc = new Localisation();
@@ -66,7 +64,7 @@ namespace IBL
         #endregion
 
         #region DistanceAccToBattery
-        private double DistanceAccToBattery(double battery)
+        public double DistanceAccToBattery(double battery)
         {
             //Le drone perd 1% en 7 min  et la vitesse du drone de 50 km/h
             // le drone gagne 1% en 7 min
@@ -80,7 +78,7 @@ namespace IBL
         #endregion
 
         #region BatteryAccToTime
-        private double BatteryAccToTime(double time, double battery)
+        public double BatteryAccToTime(double time, double battery)
         {
             battery+= time*7;
             if (battery >= 100)
@@ -91,7 +89,7 @@ namespace IBL
         #endregion
 
         #region BatteryAccToDistance
-        private double BatteryAccToDistance(double distance)
+        public double BatteryAccToDistance(double distance)
         {
             double time = distance / 50;
             double batteryLost = time / (7 / 60);
@@ -101,7 +99,7 @@ namespace IBL
 
         //return the client's name according to his id
         #region ClientName 
-        private string Name(int id)
+        public string Name(int id)
         {
             try
             {
@@ -119,7 +117,7 @@ namespace IBL
         #endregion
 
         #region Location
-        private Localisation location(double lat1, double long1)
+        public Localisation location(double lat1, double long1)
         {
             Localisation l = new Localisation();
             l.longitude = long1;

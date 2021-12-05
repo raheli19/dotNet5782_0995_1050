@@ -10,7 +10,7 @@ namespace IDAL
             
             public int ID { get; set; }
             public String Model { get; set; }
-          
+            public WeightCategories weight { get; set; }
             public double Battery { get; set; }
 
             public override string ToString()

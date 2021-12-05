@@ -37,6 +37,7 @@ namespace DalObject
         /// </summary>
         internal class Config
         {
+            public Config() { }
             //internal static bool statut;/// 1 if free, 0 if not
             //internal static WeightCategories light;
             //internal static WeightCategories middle;

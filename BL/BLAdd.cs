@@ -7,23 +7,13 @@ using System.Text;
 using IBL.BO;
 using DalObject;
 using System.Linq;
+using DalObject;
 
 namespace IBL
 {
 
     public partial class BL : IBL
     {
-        //static Random rand = new Random();
-
-        //readonly IDAL.IDal p;
-        //help h = new help();
-
-        //List<DroneDescription> DroneList = new List<DroneDescription>();
-
-        //-----------------------------------RETRIEVE-FUNCTIONS--------------------------------------
-
-
-
         //-----------------------------------ADD-FUNCTIONS----------------------------------------
 
         #region addStation
@@ -165,7 +155,7 @@ namespace IBL
         {
             IDAL.DO.Parcel DALParcel = new IDAL.DO.Parcel(); // creates a new parcel from DAL
 
-            DALParcel.ID = parcelBL.ID;  //copies all the fields from the parcel he received
+            DALParcel.ID = p.RunnerNumber();  //copies all the fields from the parcel he received
             if (!(parcelBL.Sender.ID <= 99999999 && parcelBL.Sender.ID > 9999999))//check the validity of the fields received
                 throw new InputNotValid("SenderID not valid");
             DALParcel.SenderId = parcelBL.Sender.ID;

@@ -15,7 +15,7 @@ namespace IBL
             public double battery { get; set; }
             public DroneStatuses Status { get; set; }
             public Localisation loc { get; set; }
-            public int DeliveredParcels { get; set; }
+            public int parcelId { get; set; }
 
             public override string ToString()
             {
@@ -27,7 +27,7 @@ namespace IBL
                 result += $"Drone's statut is: {Status},\n";
                 result += $"Longitude is: {(int)(this.loc.longitude)}°{(int)((this.loc.longitude - (int)(this.loc.longitude)) * 60)}' {((this.loc.longitude - (int)(this.loc.longitude)) * 60 - (int)((this.loc.longitude - (int)(this.loc.longitude)) * 60)) * 60}'',\n";
                 result += $"Latitude is: {(int)(this.loc.latitude)}°{(int)((this.loc.latitude - (int)(this.loc.latitude)) * 60)}' {((this.loc.latitude - (int)(this.loc.latitude)) * 60 - (int)((this.loc.latitude - (int)(this.loc.latitude)) * 60)) * 60}'',\n";
-                result += $"Number of delivered parcels: {DeliveredParcels}.\n";
+                result += $"ID of delivering parcel: {parcelId}.\n";
                 return result;
             }
 
