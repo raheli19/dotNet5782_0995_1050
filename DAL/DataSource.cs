@@ -113,8 +113,6 @@ namespace DalObject
                     Model = $"Nebula {i}",
                     //MaxWeight = (WeightCategories)rand.Next(3),
                     //Status = (DroneStatuses)rand.Next(3),
-                    Battery = rand.Next(0, 101),
-
                 });
             }
         }
@@ -131,7 +129,7 @@ namespace DalObject
                 {
                     StationList.Add(new Station()
                     { ID = rand.Next(1000000, 10000000),
-                    Name = "Bahnhof1",
+                    Name = $"Bahnhof {stationNum++}",
                     Longitude = GetrandomCoordinate(26.2),
                     Latitude = GetrandomCoordinate(25.4),
                     ChargeSlots = rand.Next(0, 10),

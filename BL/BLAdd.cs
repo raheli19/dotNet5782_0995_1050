@@ -74,7 +74,6 @@ namespace IBL
             droneDAL.Model = droneBL.Model;
             if (droneBL.Battery < 0 || droneBL.Battery > 100)
                 throw new InputNotValid("Battery is not valid");
-            droneDAL.Battery = droneBL.Battery;
 
             droneBL.Status = DroneStatuses.maintenance;
             droneBL.initialLoc = stationBL.Loc;// his location is the same than the station

@@ -196,28 +196,9 @@ namespace IBL
             droneBL.battery = BatteryAccToTime(time, droneBL.battery);
             DroneList.Add(droneBL);
 
-            //update the drone in the droneList from the DAL
-            IDAL.DO.Drone droneDAL = p.DroneById(ID);
-            try
-            { 
-                droneDAL.Battery = BatteryAccToTime(time, droneDAL.Battery);                
-                p.UpdateDrone(droneDAL);
-            }
-            catch (IDAL.DO.DroneException)
-            {
-                throw new CannotUpdate("Can't update the drone");
-            }
-
             //update station
             IDAL.DO.Station stationDAL = new IDAL.DO.Station();
-            //try
-            //{
-            //    stationDAL = p.StationById(droneDAL.st);
-            //}
-            //catch (IDAL.DO.StationException ex)
-            //{
-            //    throw new IDNotFound("ID Not found", ex);
-            //}
+            
             foreach (var item in p.IEStationList())
             {
                 if (item.Longitude == droneBL.loc.longitude && item.Latitude == droneBL.loc.latitude)
@@ -253,73 +234,114 @@ namespace IBL
         #endregion
 
         #region Assignement
-        public void Assignement(int ID, int i = 2)
+        /// <summary>
+        /// connect parcel with drone if drone is free and parcel is defined.
+        /// </summary>
+        /// <param name="id"></param>
+        public void Assignement(int id)
         {
-            IDAL.DO.Drone droneDAL = p.DroneById(ID); //from the dal
-            DroneDescription droneBL = DroneList.First(x => x.Id == ID);// finds the drone
-            droneBL.loc = new Localisation();
-
-            if (droneBL.Status != DroneStatuses.free)
-                throw new NotAvailable("The drone is not free!");
-            IDAL.DO.Parcel parcelDAL = new IDAL.DO.Parcel(); // dalparcel
-            bool flag = false;
-
-            foreach (var item in p.IEParcelList())
+            Drone connectDrone = new Drone();
+            try
             {
-                if (item.Priority != IDAL.DO.Priorities.emergency - i)
-                    continue;
-                if (item.Weight == (IDAL.DO.WeightCategories)droneBL.weight)///////////////
-                    continue;
-                parcelDAL.DroneId = droneBL.Id;
-                parcelDAL.ID = item.ID;
-                parcelDAL.Priority = item.Priority;
-                parcelDAL.SenderId = item.SenderId;
-                parcelDAL.TargetId = item.TargetId;
-                parcelDAL.Weight = item.Weight;
-                parcelDAL.Requested = DateTime.Now;
-
-                List<IDAL.DO.Parcel> parcelLst = p.IEParcelList().ToList().FindAll(x => (int)x.Priority == i && x.Scheduled == DateTime.MinValue);// list with all the emergency ones
-                parcelLst = parcelLst.FindAll(x => (int)x.Weight == (int)droneBL.weight);  //list with all the same weights
-
-                IDAL.DO.Parcel closestParcel = ClosestParcel(parcelLst, droneBL.loc);
-
-                double senderLat = p.FindLat(closestParcel.SenderId);
-                double senderLong = p.FindLong(closestParcel.SenderId);
-                double targetLat = p.FindLat(closestParcel.TargetId);
-                double targetLong = p.FindLong(closestParcel.TargetId);
-                //trouver la plus proche
-                // has to be able to make it
-                double distToSender = distance(droneBL.loc.latitude, droneBL.loc.longitude, senderLat, senderLong);
-                droneBL.battery -= BatteryAccToDistance(distToSender);
-                if (distToSender >= DistanceAccToBattery(droneBL.battery))
-                    continue;
-                //doit repartir
-
-                double distToTarget = distance(droneBL.loc.latitude, droneBL.loc.longitude, targetLat, targetLong);
-                droneBL.battery -= BatteryAccToDistance(distToTarget);
-                if (distToTarget >= DistanceAccToBattery(droneBL.battery))
-                    continue;
-                droneBL.battery -= BatteryAccToDistance(distToTarget);
-                // if drone's battery less than 25 has to go to charge
-                if (droneBL.battery <= 25)
-                {
-                    Localisation targLoc = location(targetLat, targetLong);
-                    Station nearStat = NearestStation(targLoc, false); //finds the nearest station if need to charge
-                    double distToStat = distance(droneBL.loc.latitude, droneBL.loc.longitude, nearStat.Loc.latitude, nearStat.Loc.longitude);
-                    if (distToStat > BatteryAccToDistance(distToStat))
-                        continue;
-                }
-                flag = true;
-
-                if (flag == false && i == 3) // we didn't find one
-                    throw new NotFound("We didn't find a parcel");
-                else if (flag == false)
-                    Assignement(ID, i - 1); // calls back the function to check with an other status
-                droneBL.Status = DroneStatuses.shipping;
-                DroneList.Add(droneBL);
-                p.Assignement(closestParcel.ID, droneBL.Id); //update the dronelist in the dal
+                connectDrone = GetDrone(id);
             }
+            catch (IDAL.DO.DroneException s)
+            {
+                throw new IDAL.DO.DroneException("" + s);
+            }
+            if (connectDrone.Status != DroneStatuses.free)
+                throw new WrongDetailsUpdateException("Drone not free");
+            Parcel parcelConnect = new Parcel();
+            IEnumerable<ParcelDescription> parcelWithNoDrones = displayParcelsNotAssigned();
+            ParcelDescription parcel = new ParcelDescription();
+            List<ParcelDescription> priorityLevelList = new List<ParcelDescription>();
+            List<ParcelDescription> weightLevelList = new List<ParcelDescription>();
+            bool checkFoundParcel = false;
+            bool checkAnyParcel = false;
+            double batteryNeeded = 0;
+            for (int i = (int)Priorities.emergency; i >= (int)Priorities.regular; i--)
+            {
+                priorityLevelList = parcelWithNoDrones.ToList().FindAll(parcel => parcel.priority == (Priorities)i);
+                for (int j = (int)connectDrone.MaxWeight; j >= (int)WeightCategories.low; j--)
+                {
+                    weightLevelList = priorityLevelList.ToList().FindAll(parcel => parcel.weight == (WeightCategories)j);
+                    while (checkFoundParcel == false && weightLevelList.Count() != 0)//stop search when you found approciate parcel, or when you didnt found - go over the next level of priority.
+                    {
+                        try // if the parcel exist makes calculates, if not go for next level of priority.
+                        {
+                            parcelConnect = ClosestParcelToLocation(connectDrone.initialLoc, weightLevelList);
+                            checkAnyParcel = true;
+                            double distance = Distance(connectDrone.initialLoc, GetClient(GetParcel(parcelConnect.ID).Sender.ID).ClientLoc);
+                            batteryNeeded = distance * BatteryFree; // battery needed to go to sender
+                            distance = Distance(GetClient(GetParcel(parcelConnect.ID).Sender.ID).ClientLoc, GetClient(GetParcel(parcelConnect.ID).Target.ID).ClientLoc);
+                            if (parcelConnect.Weight == WeightCategories.heavy) //battery += battery needed to go to target.
+                                batteryNeeded += distance * BatteryHeavyWeight;
+                            if (parcelConnect.Weight == WeightCategories.low)
+                                batteryNeeded += distance * BatteryLightWeight;
+                            if (parcelConnect.Weight == WeightCategories.middle)
+                                batteryNeeded += distance * BatteryMiddleWeight;
+                            connectDrone.initialLoc = GetClient(GetParcel(parcelConnect.ID).Target.ID).ClientLoc; // update the dronelocation to the target location
+                            IEnumerable<IDAL.DO.Station> listStationsFromIdal = p.IEStationList();
+                            Localisation checkL = new Localisation(); // the location of closest station to the drone
+
+                            try
+                            {
+                                {
+                                    Station temp = NearestStation(connectDrone.initialLoc, true);
+                                    checkL = temp.Loc;
+                                }
+                                distance = Distance(GetClient(GetParcel(parcelConnect.ID).Target.ID).ClientLoc, checkL); // if station exist - calculate the distance between her and the drone.
+                            }
+                            catch (IDAL.DO.StationException s)
+                            {
+                                throw new IDAL.DO.StationException("" + s); // if there is no free station to send the drone to
+                            }
+
+                            batteryNeeded += distance * BatteryFree; // battery +=battery needed from target to closest free station
+                            if (connectDrone.Battery >= batteryNeeded)//if the battery is enough - stop search.
+                            {
+                                checkFoundParcel = true;
+                                break;
+                            }
+
+                            else
+                                weightLevelList.RemoveAll(parcel => parcel.Id == parcelConnect.ID); // if battery is not enough - go over all the left parcels.
+                        }
+                        catch (WrongDetailsUpdateException s) // if parcel not exist, just go to next level of priority.
+                        {
+                            throw new WrongDetailsUpdateException("" + s);
+                        }
+
+
+                    }
+                    if (checkFoundParcel == true)
+                        break;
+                }
+            }
+            if (checkAnyParcel == false)
+                throw new WrongDetailsUpdateException("All parcels are in scheduled or weight is too high for the drone");
+            if (checkFoundParcel == true) // if we found approciate parcel - do the changes
+            {
+                IDAL.DO.Parcel updateParcel = p.ParcelById(parcelConnect.ID); // update the droneid and scheduled time of the parcel.
+                updateParcel.DroneId = connectDrone.ID;
+                updateParcel.Scheduled = DateTime.Now;
+                p.UpdateParcelFromBL(updateParcel);
+                foreach (var droneItem in DroneList) // when we found the parcel to deliver.
+                {
+                    if (droneItem.Id == connectDrone.ID)
+                    {
+                        droneItem.Status = DroneStatuses.shipping; // change drone to be delivered
+                        droneItem.Id = updateParcel.ID;
+                    }
+
+                }
+
+            }
+            else // if we didnt found approciate parcel - throw approciate message.
+                throw new WrongDetailsUpdateException("Drone have not enough battery to reach to the parcels.");
+
         }
+
         #endregion
 
         #region PickedUp

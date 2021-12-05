@@ -105,7 +105,7 @@ namespace DalObject
             }
             return list;
         }
-
+        public static int stationNum;
 
     }
 

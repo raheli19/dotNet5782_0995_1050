@@ -391,6 +391,7 @@ namespace IBL
             else
                 throw new WrongDetailsUpdateException("No parcel exist for shipping");
         }
+        #region distance between2Locations
         /// <summary>
         /// The function gets to location and calculates the distance between them
         /// </summary>
@@ -412,7 +413,9 @@ namespace IBL
             double d = R * c / 1000;
             return d;
         }
+        #endregion
 
+        #region clientInParcel
         /// <summary>
         /// Gets the list of customers, and create list of the customers with parcels
         /// </summary>
@@ -434,7 +437,7 @@ namespace IBL
             }
             return customerWithParcel;
         }
-
+        #endregion
 
     }
 }

@@ -56,7 +56,7 @@ namespace DalObject
             DataSource.DroneChargeList.Remove(myDrone);
                 myDrone.ID = droneToUpdate.ID;
                 myDrone.Model = droneToUpdate.Model;
-                myDrone.Battery = droneToUpdate.Battery;
+                myDrone.weight = droneToUpdate.weight;
             DataSource.DroneChargeList.Add(myDrone);
 
             }
