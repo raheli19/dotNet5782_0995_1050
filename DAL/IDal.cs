@@ -11,7 +11,7 @@ namespace IDAL
     {
        void AddDrone(Drone drone);// add a new drone to the dronelist
 
-       void addClient(Client client);
+        void addClient(Client client);
 
        void addStation(Station station);
 
@@ -39,9 +39,11 @@ namespace IDAL
 
        void DroneToCharge(int droneId, int stationId);
 
-       void DroneCharged(int droneId, int stationId);
+        void DroneCharged(int droneId, int stationId);
 
+        int RunnerNumber();
 
+        double[] ElectricityUse();
 
        Station StationById(int id);
        Drone DroneById(int id);

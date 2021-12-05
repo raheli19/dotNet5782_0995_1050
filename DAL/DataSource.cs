@@ -37,6 +37,7 @@ namespace DalObject
         /// </summary>
         internal class Config
         {
+            public Config() { }
             //internal static bool statut;/// 1 if free, 0 if not
             //internal static WeightCategories light;
             //internal static WeightCategories middle;
@@ -70,7 +71,7 @@ namespace DalObject
                 {
                     ID = rand.Next(10000000, 100000000),
                     Name = $"Client {i}",
-                    Phone = $"0{rand.Next(50, 58)} - {rand.Next(1000000, 10000000)}",
+                    Phone = $"0{rand.Next(50, 58)}{rand.Next(1000000, 10000000)}",
                     Latitude = GetrandomCoordinate(31.37),
                     Longitude = GetrandomCoordinate(35.16),
 
