@@ -55,7 +55,7 @@ namespace IBL
         IEnumerable<ClientActions> displayClientList();
         IEnumerable<ParcelDescription> displayParcelList();
         IEnumerable<ParcelDescription> displayParcelsNotAssigned();
-        void printFreeStations();
+        IEnumerable <StationDescription> printFreeStations();
        
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using IDAL.DO;
 
 namespace DalObject
@@ -78,17 +79,24 @@ namespace DalObject
         /// Returns the stations' list
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Station> IEStationList()
+        public IEnumerable<Station> IEStationList(Func<Station,bool> predicate=null)
         {
             List<Station> StationLst = new List<Station>();
-            StationLst = DataSource.StationList;
-            return StationLst;
+
+            if (predicate == null)
+            {
+                StationLst = DataSource.StationList;
+                return StationLst;
+            }
+            return DataSource.StationList.Where(predicate).ToList();
         }
         #endregion
+
+
 
         #endregion
 
     }
 
-  
+
 }

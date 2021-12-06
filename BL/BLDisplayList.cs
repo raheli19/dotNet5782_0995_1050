@@ -167,26 +167,41 @@ namespace IBL
             return parList;
         }
         #endregion
-        public void printFreeStations()
+        public IEnumerable<StationDescription> printFreeStations()
         {
             List<StationDescription> statList = new List<StationDescription>();
             StationDescription tempStat = new StationDescription();
-            foreach (var item in p.IEStationList())
-            {
-                if (item.ChargeSlots > 0)
-                {
-                    tempStat.Id = item.ID;
-                    tempStat.name = item.Name;
-                    tempStat.freeChargeSlots = item.ChargeSlots;
-                    foreach (var item2 in p.IEDroneChargeList())// full chargeSlots
-                    {
-                        if (item2.StationId == item.ID)
-                            tempStat.fullChargeSlots++;
-                    }
-                }
-                statList.Add(tempStat);
-            }
+            IEnumerable<IDAL.DO.Station> dalFreeStations = new List<IDAL.DO.Station>();
+            dalFreeStations = p.IEStationList(x => x.ChargeSlots > 0);
+           
 
+            foreach (var item in dalFreeStations)
+            {
+                statList.Add(new StationDescription
+                {
+                    Id = item.ID,
+                    name = item.Name,
+                    freeChargeSlots = item.ChargeSlots,
+                    fullChargeSlots = p.IEDroneChargeList().Where(x => x.StationId == item.ID).Count(),
+                }) ;
+            }
+            return statList;
+
+            //foreach (var item in p.IEStationList())
+            //{
+            //    if (item.ChargeSlots > 0)
+            //    {
+            //        tempStat.Id = item.ID;
+            //        tempStat.name = item.Name;
+            //        tempStat.freeChargeSlots = item.ChargeSlots;
+            //        foreach (var item2 in p.IEDroneChargeList())// full chargeSlots
+            //        {
+            //            if (item2.StationId == item.ID)
+            //                tempStat.fullChargeSlots++;
+            //        }
+            //    }
+            //    statList.Add(tempStat);
+            //}
         }
         public IEnumerable<ParcelDescription> displayParcelsNotAssigned()
         {

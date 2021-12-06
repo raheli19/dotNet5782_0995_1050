@@ -111,7 +111,7 @@ namespace DalObject
                 { 
                     ID = rand.Next(1000000, 10000000),
                     Model = $"Nebula {i}",
-                    //MaxWeight = (WeightCategories)rand.Next(3),
+                    weight = (WeightCategories)rand.Next(3),
                     //Status = (DroneStatuses)rand.Next(3),
                 });
             }
@@ -154,8 +154,7 @@ namespace DalObject
                     TargetId = ClientList[rand.Next(0, 10)].ID,
                     Weight = (WeightCategories)rand.Next(3),
                     Priority = (Priorities)rand.Next(3),
-                    Requested = DateTime.Now,
-                    
+                    Requested = null,                  
                 }) ;
             }
         }
