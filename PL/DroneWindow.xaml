@@ -5,8 +5,160 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="DroneWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="DroneWindow" Height="450" Width="800" Icon="/drone.png">
+
+    <Grid x:Name="MainGrid">
+        <Grid x:Name="AddDroneGrid">
+
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="Black" Offset="0"/>
+                <GradientStop Color="White" Offset="0.9"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <!--ID -->
+        <Button Content="Drone Id" Margin="64,34,608,328" Background="#FF3B3BBA" Click="Button_Click" FontFamily="Cambria" FontWeight="Bold" FontSize="13">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Ellipse Stroke="Black"  
+                       StrokeThickness="0">
+                            <Ellipse.Fill>
+                                <RadialGradientBrush>
+                                    <GradientStop Offset="0"  
+                                        Color="#FF4B00FF" />
+                                    <GradientStop Offset="1"  
+                                        Color="Gray" />
+                                    <GradientStop Offset="1"  
+                                        Color="DarkGray" />
+                                    <RadialGradientBrush.Transform>
+                                        <TransformGroup>
+                                            <ScaleTransform ScaleY="0.65" />
+                                        </TransformGroup>
+                                    </RadialGradientBrush.Transform>
+                                </RadialGradientBrush>
+                            </Ellipse.Fill>
+                        </Ellipse>
+                        <ContentPresenter HorizontalAlignment="Center"  
+                                VerticalAlignment="Center"/>
+                    </Grid>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+
+        <!--Model -->
+        <Button Content="Drone Model"  Margin="64,135,608,224" Background="#FF1C1C1C" FontFamily="Cambria" FontWeight="Bold" FontSize="13" BorderThickness="1,4,1,1" Click="Button_Click">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Ellipse Stroke="Black"  
+                       StrokeThickness="0">
+                            <Ellipse.Fill>
+                                <RadialGradientBrush>
+                                    <GradientStop Offset="0"  
+                                        Color="#FF4B00FF" />
+                                    <GradientStop Offset="1"  
+                                        Color="Gray" />
+                                    <GradientStop Offset="1"  
+                                        Color="DarkGray" />
+                                    <RadialGradientBrush.Transform>
+                                        <TransformGroup>
+                                            <ScaleTransform ScaleY="0.65" />
+                                        </TransformGroup>
+                                    </RadialGradientBrush.Transform>
+                                </RadialGradientBrush>
+                            </Ellipse.Fill>
+                        </Ellipse>
+                        <ContentPresenter HorizontalAlignment="Center"  
+                                VerticalAlignment="Center"/>
+                    </Grid>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+        <!--Weight -->
+        <Button Content="Drone Weight" Margin="64,230,608,126" Background="#FF3B3BBA" FontFamily="Cambria" FontWeight="Bold" FontSize="13" Click="Button_Click_1">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Ellipse Stroke="Black"  
+                       StrokeThickness="0">
+                            <Ellipse.Fill>
+                                <RadialGradientBrush>
+                                    <GradientStop Offset="0"  
+                                        Color="#FF4B00FF" />
+                                    <GradientStop Offset="1"  
+                                        Color="Gray" />
+                                    <GradientStop Offset="1"  
+                                        Color="DarkGray" />
+                                    <RadialGradientBrush.Transform>
+                                        <TransformGroup>
+                                            <ScaleTransform ScaleY="0.65" />
+                                        </TransformGroup>
+                                    </RadialGradientBrush.Transform>
+                                </RadialGradientBrush>
+                            </Ellipse.Fill>
+                        </Ellipse>
+                        <ContentPresenter HorizontalAlignment="Center"  
+                                VerticalAlignment="Center"/>
+                    </Grid>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+        <!--StationID -->
+        <Button Content="Station Id" Margin="64,329,608,30" FontFamily="Cambria" FontSize="13" FontWeight="Bold" Click="Button_Click_2" Foreground="Black">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Ellipse Stroke="Black"  
+                       StrokeThickness="0">
+                            <Ellipse.Fill>
+                                <RadialGradientBrush>
+                                    <GradientStop Offset="0"  
+                                        Color="#FF4B00FF" />
+                                    <GradientStop Offset="1"  
+                                        Color="Gray" />
+                                    <GradientStop Offset="1"  
+                                        Color="DarkGray" />
+                                    <RadialGradientBrush.Transform>
+                                        <TransformGroup>
+                                            <ScaleTransform ScaleY="0.65" />
+                                        </TransformGroup>
+                                    </RadialGradientBrush.Transform>
+                                </RadialGradientBrush>
+                            </Ellipse.Fill>
+                        </Ellipse>
+                        <ContentPresenter HorizontalAlignment="Center"  
+                                VerticalAlignment="Center"/>
+                    </Grid>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <ComboBox Name="comboWeightSelector" HorizontalAlignment="Left" Margin="488,244,0,0" VerticalAlignment="Top" Width="181" Height="50" ToolTip="Drone Weight" SelectionChanged="ComboBox_WeightSelection"/>
+        <ComboBox Name="comboStationSelector" HorizontalAlignment="Left" Margin="488,344,0,0" VerticalAlignment="Top" Width="181" Height="51" SelectionChanged="ComboBox_SelectionChanged"/>
+        <TextBox x:Name="Drone_Id" HorizontalAlignment="Left" Height="44" Margin="488,49,0,0" Text="" ToolTip="Enter Drone Id" TextWrapping="Wrap" VerticalAlignment="Top" Width="181"/>
+        <TextBox x:Name="Drone_Model" HorizontalAlignment="Left" Height="50" Margin="488,148,0,0" Text="" ToolTip="Enter Drone Model" TextWrapping="Wrap" VerticalAlignment="Top" Width="181"/>
+
+        <Label Content="Add" HorizontalAlignment="Left" Margin="325,82,0,0" VerticalAlignment="Top" FontFamily="Cambria" FontWeight="Bold" FontStyle="Italic" FontSize="16" Background="Transparent"/>
+
+
+        <!--DroneButton-->
+        <!--<Button Name="ImageDrone" Click="OnClick5" Margin="271,34,383,318" ToolTip="Add">
+            <Image Source="drone.png" Height="87" RenderTransformOrigin="0.5,0.595"></Image>
+        </Button>
+        <Button Name="Add_Drone" BorderBrush="Black" Margin="271,34,383,318" Click="AddDrone_Click" Visibility="Hidden">Click the picture.</Button>-->
+        <Button Content="CLOSE" HorizontalAlignment="Left" ToolTip="Close" Height="35" Margin="290,346,0,0" VerticalAlignment="Top" Width="120" Click="Button_Close" Background="White" FontFamily="Cambria" FontWeight="Bold" Foreground="Red" FontSize="22" FontStyle="Normal" BorderThickness="1,1,1,1" SnapsToDevicePixels="True"/>
+        <Button Content="Button" HorizontalAlignment="Left" Height="33" Margin="290,49,0,0" VerticalAlignment="Top" Click="AddDrone_Click" Width="120"/>
+
+
+    </Grid>
+
+        <Grid Name="UpdateDroneGrid">
+            
+        </Grid>
+
     </Grid>
 </Window>

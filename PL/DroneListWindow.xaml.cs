@@ -1,4 +1,10 @@
-﻿using System;
+﻿// double clique ne marche pas
+// pk filtration que par le qeight fait beuguer
+//add avec la photo
+
+
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,6 +27,7 @@ namespace PL
     public partial class DroneListWindow : Window
     {
         private IBL.IBL bl;
+        
         IEnumerable<DroneDescription> IEDrones = new List<DroneDescription>();
         public DroneListWindow(IBL.IBL bl)
         {
@@ -43,6 +50,20 @@ namespace PL
         {
             WeightCategories weight = (WeightCategories)comboWeightSelector.SelectedItem;
             this.DronesListView.ItemsSource = IEDrones.Where(x => x.weight == weight);
+        }
+
+        private void button_addDrone(object sender, RoutedEventArgs e)
+        {
+            DroneWindow subWindow = new DroneWindow(bl, DronesListView);
+            subWindow.Show();
+
+        }
+
+        private void DroneListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            new DroneWindow(DronesListView.SelectedItem, bl, DronesListView).Show();
+            comboStatusSelector.SelectedItem = null;
+            comboWeightSelector.SelectedItem = null;
         }
     }
 }
