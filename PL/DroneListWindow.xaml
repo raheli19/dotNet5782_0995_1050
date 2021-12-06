@@ -1,0 +1,32 @@
+﻿<Window x:Name="___No_Name_" x:Class="PL.DroneListWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL"
+        mc:Ignorable="d"
+        Title="DroneListWindow" Height="450" Width="800">
+    <Grid Name="MainGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="8*"/>
+        </Grid.RowDefinitions>
+        <Grid Name="UpGrid" HorizontalAlignment="Stretch" Height="auto" VerticalAlignment="Stretch" Width="auto">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions >
+            <ComboBox Name="comboStatusSelector" ToolTip="Choose a Status" Grid.Column="1" HorizontalAlignment= "Left" Width="190" AutomationProperties.Name="Drone's Statut" SelectionChanged="comboStatusSelector_SelectionChanged" BorderThickness="1,1,1,1" FontStretch="Normal" FontStyle="Italic" FontWeight="ExtraBlack" OpacityMask="#FF3E3E40" />
+            <Label x:Name="lblTBD" Content="Drone status: " HorizontalAlignment="Center" VerticalAlignment="Center" Height="48" Width="180"/>
+            <ComboBox  Name="comboWeightSelector" Grid.Column="3" ToolTip="Choose a Weight" HorizontalAlignment="Left" VerticalAlignment="Center" Width="195" Height="48" SelectionChanged="comboWeightSelector_SelectionChanged"/>
+            <Label Content="Drone Max Weight: " Grid.Column="2" HorizontalAlignment="Center" Height="48" VerticalAlignment="Center" Width="200"/>
+
+        </Grid>
+        <ListView Grid.Row="1" x:Name="DronesListView" Margin="0,0,0,20"/>
+
+
+
+    </Grid>
+</Window>

@@ -55,7 +55,7 @@ namespace IBL
                 DroneDescription drone = new DroneDescription();
                 drone.Id = itemDrone.ID;
                 drone.Model = itemDrone.Model;
-               // drone.weight = (WeightCategories)itemDrone.w;
+                drone.weight = (WeightCategories)itemDrone.weight;
                 drone.Status = DroneStatuses.free; // drone is not shipping if he has parcel that scheduled and delivered or if he never scheduled to any parcel.
                 foreach (var itemParcel in listParcelsFromIdal)
                 {
