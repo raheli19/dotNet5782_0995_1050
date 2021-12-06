@@ -68,17 +68,17 @@ namespace IBL
         /// <returns></returns>
         public IEnumerable<DroneDescription> displayDroneList()
         {
-            IEnumerable<IDAL.DO.Drone> dronesFromDal = p.IEDroneList();   //gets the station list from DAL
-            foreach (var item in p.IEDroneList())
-            {
-                Drone drone = GetDrone(item.ID);
-                DroneList.Add(new DroneDescription()
-                {
-                    Id = item.ID,
-                    Model = item.Model,
-                    weight = (WeightCategories)item.weight,
-                }) ;
-            }
+            //IEnumerable<IDAL.DO.Drone> dronesFromDal = p.IEDroneList();   //gets the station list from DAL
+            //foreach (var item in p.IEDroneList())
+            //{
+            //    Drone drone = GetDrone(item.ID);
+            //    DroneList.Add(new DroneDescription()
+            //    {
+            //        Id = item.ID,
+            //        Model = item.Model,
+            //        weight = (WeightCategories)item.weight,
+            //    }) ;
+            //}
             return DroneList;
 
         }
