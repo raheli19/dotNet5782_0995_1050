@@ -38,7 +38,7 @@ namespace PL
             ListViewDrone = (ListView)DroneListWindow;
 
         }
-
+        
         #region add_Click
         private void AddDrone_Click(object sender, RoutedEventArgs e)
         {
@@ -71,9 +71,9 @@ namespace PL
             ListViewDrone.ItemsSource = bl.displayDroneList();
             this.Close();
         }
-        #endregion
-        #endregion
 
+        #endregion
+        #endregion  
         //ctor to upgrade the drone
         public DroneWindow(object selectedItem, IBL.IBL bl, object dronesListView)
         {

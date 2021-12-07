@@ -32,7 +32,7 @@
             <Button Content="CLEAR" Grid.Column="4" Background="Red" HorizontalAlignment="Left" Margin="19,0,0,0" VerticalAlignment="Center" Height="26" Width="60" FontWeight="Bold" FontStyle="Italic" BorderBrush="#FFE01515" Foreground="#FFF7F1F1" FontSize="15" FontFamily="Arial Black" Click="Button_Clear"/>
 
         </Grid>
-        <ListView x:Name="DronesListView" Margin="0,25,0,0" Visibility="Visible" MouseDoubleClick="DroneListView_MouseDoubleClick" Grid.Row="1"/>
+        <ListView x:Name="DronesListView" Margin="0,46,0,0" Visibility="Visible" MouseDoubleClick="DroneListView_MouseDoubleClick" Grid.RowSpan="2"/>
         <!-- <Button Content="Add a Drone" HorizontalAlignment="Left" Margin="640,0,0,0" VerticalAlignment="Center" Width="150" Height="48" Click="button_addDrone"/>-->
         <Button Content="Add a Drone" Margin="671,5,19,5" Click="button_addDrone" Background="#FF004CFF" FontWeight="Bold" FontFamily="Georgia Pro">
             <Button.Template>
@@ -62,6 +62,7 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
+        <Button Content="Close" HorizontalAlignment="Left" Margin="626,13,0,13"/>
 
 
 
