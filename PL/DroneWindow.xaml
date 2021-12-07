@@ -8,7 +8,11 @@
         Title="DroneWindow" Height="450" Width="800" Icon="/drone.png">
 
     <Grid x:Name="MainGrid">
-        <Grid x:Name="AddDroneGrid" Visibility="Hidden">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="31*"/>
+            <ColumnDefinition Width="69*"/>
+        </Grid.ColumnDefinitions>
+        <Grid x:Name="AddDroneGrid" Visibility="Hidden" Grid.ColumnSpan="2">
 
             <Grid.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -166,27 +170,22 @@
             </Grid.Background>
 
             <!--Update Button-->
-            <Button Content="UPDATE" HorizontalAlignment="Left" Background="Transparent" Margin="669,122,0,0" VerticalAlignment="Top" ToolTip="UPDATE" Height="52" Width="109" BorderBrush="Transparent" Click="Button_Update" Opacity="100" FontFamily="Cambria" FontSize="22" FontWeight="Bold" FontStyle="Italic">
+            <Button Content="UPDATE" HorizontalAlignment="Left" Background="Transparent" Margin="124,301,0,0" VerticalAlignment="Top" ToolTip="UPDATE" Height="74" Width="109" BorderBrush="Transparent" Click="Button_Update" Opacity="100" FontFamily="Cambria" FontSize="22" FontWeight="Bold" FontStyle="Italic">
 
             </Button>
 
             <!--Send drone to charge Button-->
-            <Button Content="BATTERY LOW?" HorizontalAlignment="Left" Background="Transparent" Margin="486,239,0,0" VerticalAlignment="Top" ToolTip="Send Drone To Charge" Height="48" Width="214" BorderBrush="Transparent" Click="Button_SendToCharge" Opacity="100" FontFamily="Cambria" FontSize="22" FontWeight="Bold" FontStyle="Italic">
+            <Button Content="BATTERY LOW?" HorizontalAlignment="Left" Background="Transparent" Margin="379,264,0,0" VerticalAlignment="Top" ToolTip="Send Drone To Charge" Height="74" Width="187" BorderBrush="Transparent" Click="Button_SendToCharge" Opacity="100" FontFamily="Cambria" FontSize="22" FontWeight="Bold" FontStyle="Italic">
 
             </Button>
 
             <!--Get the drone out of its station-->
-            <Button Content="FULLY CHARGED?" HorizontalAlignment="Left" Background="Transparent" Margin="460,10,0,0" VerticalAlignment="Top" ToolTip="Fully charged" Height="51" Width="186" BorderBrush="Transparent" Click="Button_FullyCharged" Opacity="100" FontFamily="Cambria" FontWeight="Bold" FontStyle="Italic" FontSize="22">
+            <Button Content="FULLY CHARGED?" HorizontalAlignment="Left" Background="Transparent" Margin="534,26,0,0" VerticalAlignment="Top" ToolTip="Fully charged" Height="74" Width="187" BorderBrush="Transparent" Click="Button_FullyCharged" Opacity="100" FontFamily="Cambria" FontWeight="Bold" FontStyle="Italic" FontSize="22">
 
             </Button>
 
             <!--Get the drone out of its station-->
-            <Button Content="READY FOR PICKING!" HorizontalAlignment="Left" Background="Transparent" Margin="565,179,0,0" VerticalAlignment="Top" ToolTip="Send the drone to a new mission" Height="60" Width="225" BorderBrush="Transparent" Click="Button_GoPicking" Opacity="100" FontFamily="Cambria" FontWeight="Bold" FontStyle="Italic" FontSize="22">
-
-            </Button>
-
-            <!--Collect a package-->
-            <Button Content="COLLECT PACKAGE" HorizontalAlignment="Left" Background="Transparent" Margin="553,58,0,0" VerticalAlignment="Top" ToolTip="Collect a parcel" Height="48" Width="225" BorderBrush="Transparent" Click="Button_CollectParcel" Opacity="100" FontFamily="Cambria" FontWeight="Bold" FontStyle="Italic" FontSize="22">
+            <Button Content="READY FOR PICKING!" HorizontalAlignment="Left" Background="Transparent" Margin="534,185,0,0" VerticalAlignment="Top" ToolTip="Fully charged" Height="74" Width="225" BorderBrush="Transparent" Click="Button_FullyCharged" Opacity="100" FontFamily="Cambria" FontWeight="Bold" FontStyle="Italic" FontSize="22">
 
             </Button>
 
@@ -198,7 +197,6 @@
 
             <Label x:Name="Drone_Label"  HorizontalAlignment="Left" Margin="10,139,0,0" VerticalAlignment="Top" Height="285" Width="259"/>
             <!--  <Label Content="UPDATE" Width="109" FontSize="22" FontStyle="Italic" FontWeight="Bold" Margin="187,286,504,74"/>-->
-
 
 
 

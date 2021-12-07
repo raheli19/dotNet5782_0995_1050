@@ -1,5 +1,4 @@
 ﻿// double clique ne marche pas
-// pk filtration que par le qeight fait beuguer
 //add avec la photo
 
 
@@ -79,6 +78,18 @@ namespace PL
             new DroneWindow(DronesListView.SelectedItem, bl, DronesListView).Show();
             comboStatusSelector.SelectedItem = null;
             comboWeightSelector.SelectedItem = null;
+        }
+
+        private void Button_Clear(object sender, RoutedEventArgs e)
+        {
+            droneStat = 0;
+            weightStat = 0;
+            weightFlag = false;
+            statusFlag = false;
+            DronesListView.ItemsSource = IEDrones;
+            
+            //comboStatusSelector.SetCurrentValue(" ");
+           // comboWeightSelector.;
         }
     }
 }
