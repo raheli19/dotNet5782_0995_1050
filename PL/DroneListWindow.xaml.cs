@@ -39,17 +39,32 @@ namespace PL
             this.comboStatusSelector.ItemsSource = Enum.GetValues(typeof(IBL.BO.DroneStatuses));
             this.comboWeightSelector.ItemsSource = Enum.GetValues(typeof(IBL.BO.WeightCategories));
         }
-
+        static DroneStatuses droneStat = 0;
+        static WeightCategories weightStat = 0;
+        bool weightFlag= false;
+        bool statusFlag = false;
+        
         private void comboStatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             DroneStatuses status = (DroneStatuses)comboStatusSelector.SelectedItem;
-            this.DronesListView.ItemsSource = IEDrones.Where(x => x.Status == status);
+            droneStat = status;
+            statusFlag = true;
+            if (weightFlag)
+                this.DronesListView.ItemsSource = IEDrones.Where(x => x.Status == status && x.weight == weightStat);
+            else
+                this.DronesListView.ItemsSource = IEDrones.Where(x => x.Status == status);
         }
 
         private void comboWeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             WeightCategories weight = (WeightCategories)comboWeightSelector.SelectedItem;
-            this.DronesListView.ItemsSource = IEDrones.Where(x => x.weight == weight);
+            weightStat = weight;
+            weightFlag = true;
+            if (statusFlag)
+                this.DronesListView.ItemsSource = IEDrones.Where(x => x.weight == weight && x.Status==droneStat);
+            else
+                this.DronesListView.ItemsSource = IEDrones.Where(x => x.weight == weight);
+
         }
 
         private void button_addDrone(object sender, RoutedEventArgs e)
