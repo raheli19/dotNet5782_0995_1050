@@ -9,8 +9,8 @@
 
     <Grid x:Name="MainGrid">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="51*"/>
-            <ColumnDefinition Width="109*"/>
+            <ColumnDefinition Width="31*"/>
+            <ColumnDefinition Width="69*"/>
         </Grid.ColumnDefinitions>
         <Grid x:Name="AddDroneGrid" Visibility="Hidden" Grid.ColumnSpan="2">
 
@@ -195,9 +195,6 @@
 
 
             <!--  <Label Content="UPDATE" Width="109" FontSize="22" FontStyle="Italic" FontWeight="Bold" Margin="187,286,504,74"/>-->
-            <ListView x:Name="Drone_caracteristics" Grid.Row="0" Background="Transparent" BorderBrush="Transparent">
-                
-            </ListView>
 
 
         </Grid>

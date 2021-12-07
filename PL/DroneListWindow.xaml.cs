@@ -79,5 +79,17 @@ namespace PL
             comboStatusSelector.SelectedItem = null;
             comboWeightSelector.SelectedItem = null;
         }
+
+        private void Button_Clear(object sender, RoutedEventArgs e)
+        {
+            droneStat = 0;
+            weightStat = 0;
+            weightFlag = false;
+            statusFlag = false;
+            DronesListView.ItemsSource = IEDrones;
+            
+            //comboStatusSelector.SetCurrentValue(" ");
+           // comboWeightSelector.;
+        }
     }
 }
