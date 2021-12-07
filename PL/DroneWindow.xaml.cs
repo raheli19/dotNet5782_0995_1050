@@ -129,5 +129,15 @@ namespace PL
         {
             MessageBox.Show("ca marche", "success");
         }
+
+        private void Button_SendToCharge(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_FullyCharged(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
