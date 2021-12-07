@@ -20,13 +20,14 @@
                 <ColumnDefinition Width="*"/>
 
             </Grid.ColumnDefinitions >
-            <ComboBox Name="comboStatusSelector" ToolTip="Choose a Status" Grid.Column="1" HorizontalAlignment= "Left" Width="160" AutomationProperties.Name="Drone's Statut" SelectionChanged="comboStatusSelector_SelectionChanged" BorderThickness="1,1,1,1" FontStretch="Normal" FontStyle="Italic" FontWeight="ExtraBlack" OpacityMask="#FF3E3E40" />
-            <Label x:Name="lblTBD" Content="Drone status: " Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Height="48" Width="160"/>
-            <ComboBox  Name="comboWeightSelector" Grid.Column="3" ToolTip="Choose a Weight" HorizontalAlignment="Left" 
+            <ComboBox Name="comboStatusSelector" ToolTip="Choose a Status" Grid.Column="1" HorizontalAlignment= "Left" Width="160" AutomationProperties.Name="Drone's Statut" SelectionChanged="comboStatusSelector_SelectionChanged" 
+                      BorderThickness="1,1,1,1" FontStretch="Normal" FontStyle="Italic" FontWeight="ExtraBlack" OpacityMask="#FF3E3E40" />
+            <ComboBox  Name="comboWeightSelector" SelectionChanged="comboWeightSelector_SelectionChanged" Grid.Column="3" ToolTip="Choose a Weight" HorizontalAlignment="Left" 
                        VerticalAlignment="Center" Width="171" Height="48" Grid.ColumnSpan="2">
                 
             </ComboBox>
             <Label Content="Drone Max Weight: " Grid.Column="2" HorizontalAlignment="Center" Height="48" VerticalAlignment="Center" Width="160"/>
+            <Label x:Name="lblTBD" Content="Drone status: " Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Height="48" Width="160"/>
 
         </Grid>
         <ListView Grid.Row="1" x:Name="DronesListView" Margin="0,0,0,20" Visibility="Visible" MouseDoubleClick="DroneListView_MouseDoubleClick"/>
