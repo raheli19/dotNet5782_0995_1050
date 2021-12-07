@@ -21,7 +21,8 @@ namespace PL
     public partial class DroneWindow : Window
     {
         private IBL.IBL bl;
-        
+        private DroneDescription droneDescription = new DroneDescription();
+
         ListView ListViewDrone;
 
         #region AddDrone
@@ -30,6 +31,8 @@ namespace PL
         {
             InitializeComponent();
             this.bl = bl;
+            AddDroneGrid.Visibility = Visibility.Visible;
+            UpdateDroneGrid.Visibility = Visibility.Hidden;
             this.comboWeightSelector.ItemsSource = Enum.GetValues(typeof(IBL.BO.WeightCategories));
             this.comboStationSelector.ItemsSource = bl.DisplayStationList();
             ListViewDrone = (ListView)DroneListWindow;
@@ -76,8 +79,11 @@ namespace PL
         {
             InitializeComponent();
             this.bl = bl;
+            this.droneDescription = (DroneDescription)selectedItem;
+            AddDroneGrid.Visibility = Visibility.Hidden;
+            UpdateDroneGrid.Visibility = Visibility.Visible;
+            Drone_Label.Content = bl.displayDrone(droneDescription.Id);
 
-            
         }
 
         #region buttonsNotNeeded
@@ -127,17 +133,42 @@ namespace PL
 
         private void Button_Update(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("ca marche", "success");
+
+            MessageBox.Show("The model of your drone is being updated.", "Success!");
         }
 
         private void Button_SendToCharge(object sender, RoutedEventArgs e)
-        {
-
-        }
+        {//We send the drone to the closest station only if its status is FREE
+            if (droneDescription.Status == DroneStatuses.free)
+            {
+                MessageBox.Show("We are sending your drone to the closest base station.\n It will ready in a few moments. ", "Don't worry!");
+                //Envoyer le drone a la station de chargement
+            }
+            else
+            {
+                MessageBox.Show("We regret to announce you that the status of your drone doesn't fill the requested caracteristics", "Aie aie aie...");
+            }
+            }
 
         private void Button_FullyCharged(object sender, RoutedEventArgs e)
         {
+            MessageBox.Show("Your drone is fully charged. We are going to unplug it", "Success!");
+        }
 
+        private void Button_GoPicking(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Your drone is going to pick the parcel attached to it","On it's way!");
+        }
+
+        private void Button_CollectParcel(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Your drone is going to collect the parcel attached to it", "On it's way!");
+
+        }
+
+        private void Button_DeliveringParcel(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Your drone is delivering the parcel attached to it", "Mission almost accomplished");
         }
     }
 }
