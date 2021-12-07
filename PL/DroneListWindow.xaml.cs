@@ -1,5 +1,4 @@
 ﻿// double clique ne marche pas
-// pk filtration que par le qeight fait beuguer
 //add avec la photo
 
 
