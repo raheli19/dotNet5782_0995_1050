@@ -124,5 +124,10 @@ namespace PL
 
             this.Close();
         }
+
+        private void Button_Update(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("ca marche", "success");
+        }
     }
 }
