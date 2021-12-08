@@ -10,7 +10,7 @@
         <ImageBrush ImageSource="/mainwinddrone.png"/> 
     </Window.Background>
 
-    <Grid x:Name="MainGrid" Height="440" Width="780">
+    <Grid x:Name="MainGrid" Height="430" Width="780">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
