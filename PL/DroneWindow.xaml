@@ -11,7 +11,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Grid x:Name="AddDroneGrid" Visibility="Hidden">
+        <Grid x:Name="AddDroneGrid" Visibility="Visible">
 
             <Grid.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -82,7 +82,7 @@
             </Button>
 
             <!--Weight -->
-            <Button Content="Drone Weight" Margin="64,230,608,126" Background="#FF3B3BBA" FontFamily="Cambria" FontWeight="Bold" FontSize="13" Click="Button_Click_1">
+            <Button Content="Drone Weight" Margin="64,230,608,126" Background="#FF3B3BBA" FontFamily="Cambria" FontWeight="Bold" FontSize="13" Click="Button_Click">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
                         <Grid>
@@ -112,7 +112,7 @@
             </Button>
 
             <!--StationID -->
-            <Button Content="Station Id" Margin="64,329,608,30" FontFamily="Cambria" FontSize="13" FontWeight="Bold" Click="Button_Click_2" Foreground="Black">
+            <Button Content="Station Id" Margin="64,329,608,30" FontFamily="Cambria" FontSize="13" FontWeight="Bold" Click="Button_Click" Foreground="Black">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
                         <Grid>
@@ -145,6 +145,7 @@
             <TextBox x:Name="Drone_Id" HorizontalAlignment="Left" Height="44" Margin="488,49,0,0" Text="" ToolTip="Enter Drone Id" TextWrapping="Wrap" VerticalAlignment="Top" Width="181"/>
             <TextBox x:Name="Drone_Model" HorizontalAlignment="Left" Height="50" Margin="488,148,0,0" Text="" ToolTip="Enter Drone Model" TextWrapping="Wrap" VerticalAlignment="Top" Width="181"/>
 
+            
             <!--<Label Content="Add" HorizontalAlignment="Left" Margin="325,82,0,0" VerticalAlignment="Top" FontFamily="Cambria" FontWeight="Bold" FontStyle="Italic" FontSize="16" Background="Transparent"/>-->
 
 
@@ -157,13 +158,17 @@
                     <DropShadowEffect/>
                 </Button.Effect> ADD
             </Button>
-            <Button Content="CLOSE" HorizontalAlignment="Left" ToolTip="Close" Height="35" Margin="290,346,0,0" VerticalAlignment="Top" Width="120" Click="Button_Close" Background="White" FontFamily="Cambria" FontWeight="Bold" Foreground="Red" FontSize="22" FontStyle="Normal" BorderThickness="1,1,1,1" SnapsToDevicePixels="True"/>
+            <Button Content="" HorizontalAlignment="Left" ToolTip="Close" Height="49" Margin="290,346,0,0" VerticalAlignment="Top" Width="120" Click="Button_Close" FontFamily="Cambria" FontWeight="Bold" Foreground="Red" FontSize="22" FontStyle="Normal" BorderThickness="1,1,1,1" SnapsToDevicePixels="True">
+                <Button.Background>
+                    <ImageBrush ImageSource="/close.png"/>
+                </Button.Background>
+            </Button>
             <!--<Button Content="Button" HorizontalAlignment="Left" Height="33" Margin="290,49,0,0" VerticalAlignment="Top" Click="AddDrone_Click" Width="120"/>-->
 
 
         </Grid>
 
-        <Grid Name="UpdateDroneGrid" Visibility="Visible" Opacity="0.745" Margin="-10,0,0,0">
+        <Grid Name="UpdateDroneGrid" Visibility="Hidden" Opacity="0.745" Margin="-10,0,0,0">
             <Grid.Background>
                 <ImageBrush ImageSource="/fond.png"/>
             </Grid.Background>
