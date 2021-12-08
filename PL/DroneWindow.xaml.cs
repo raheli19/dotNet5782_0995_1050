@@ -42,6 +42,9 @@ namespace PL
         #region add_Click
         private void AddDrone_Click(object sender, RoutedEventArgs e)
         {
+            Drone_Id.Background = Brushes.White;
+            Drone_Model.Background = Brushes.White;
+
             if (comboWeightSelector.SelectedItem == null || comboStationSelector.SelectedItem == null || Drone_Id.Text == "" || Drone_Model.Text == "")
             {
                 MessageBox.Show("Please fill al the fields", "WARNING");
@@ -51,6 +54,7 @@ namespace PL
             int droneIdInt;
             if (!int.TryParse(droneIdString, out droneIdInt))
             {
+                Drone_Id.Background = Brushes.Red;
                 MessageBox.Show("Please enter an integer Id", "ERROR");
                 return;
             }
@@ -64,7 +68,10 @@ namespace PL
             }
             catch (Exception ex)
             {
+                if(ex.Message=="ID is not valid")
+                    Drone_Id.Background = Brushes.Red;
                 MessageBox.Show(ex.Message, "ERROR");
+                return;
 
             }
             MessageBox.Show("Success!", "Added the drone");
@@ -83,6 +90,7 @@ namespace PL
             AddDroneGrid.Visibility = Visibility.Hidden;
             UpdateDroneGrid.Visibility = Visibility.Visible;
             Drone_Label.Content = bl.displayDrone(droneDescription.Id);
+            ListViewDrone = (ListView)dronesListView;
 
         }
 
