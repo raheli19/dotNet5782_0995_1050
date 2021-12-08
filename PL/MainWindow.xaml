@@ -5,16 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="473" Width="800">
     <Window.Background>
         <ImageBrush ImageSource="/mainwinddrone.png"/> 
     </Window.Background>
 
-    <Grid>
+    <Grid x:Name="MainGrid" Height="440" Width="780">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Button Content="Show DroneList" Click="MainButton_OpenDroneList" Height="47" HorizontalAlignment="Center" Margin="0,387,0,0" x:Name="openDroneList" VerticalAlignment="Center" Width="800" FontSize="33" FontWeight="Normal" FontStyle="Normal" Background="#FF9389C3" BorderThickness="3,3,3,3" BorderBrush="#FF191616"/>
+        <Button Content="Show DroneList" Click="MainButton_OpenDroneList" Height="49" HorizontalAlignment="Center" Margin="0,385,0,0" x:Name="openDroneList" VerticalAlignment="Center" Width="780" FontSize="33" FontWeight="Normal" FontStyle="Normal" Background="#FF9389C3" BorderThickness="4,4,4,4" BorderBrush="#FF150E36"/>
         <Label x:Name="label" Content="Welcome to our Nebula Drone delivery System!&#xD;&#xA;" HorizontalAlignment="Center" Margin="0,21,0,0" VerticalAlignment="Top" Width="552" Height="55" FontSize="24" FontWeight="Bold" FontStyle="Italic" BorderThickness="5,5,5,5">
             <Label.BorderBrush>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
