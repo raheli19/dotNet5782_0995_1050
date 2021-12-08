@@ -26,7 +26,8 @@ namespace PL
     public partial class DroneListWindow : Window
     {
         private IBL.IBL bl;
-        
+        DroneStatuses status = new DroneStatuses();
+        WeightCategories weight = new WeightCategories();
         IEnumerable<DroneDescription> IEDrones = new List<DroneDescription>();
         public DroneListWindow(IBL.IBL bl)
         {
@@ -45,7 +46,7 @@ namespace PL
         
         private void comboStatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            DroneStatuses status = (DroneStatuses)comboStatusSelector.SelectedItem;
+            /*DroneStatuses*/ status = (DroneStatuses)comboStatusSelector.SelectedItem;
             droneStat = status;
             statusFlag = true;
             if (weightFlag)
@@ -56,7 +57,7 @@ namespace PL
 
         private void comboWeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            WeightCategories weight = (WeightCategories)comboWeightSelector.SelectedItem;
+            /*WeightCategories*/ weight = (WeightCategories)comboWeightSelector.SelectedItem;
             weightStat = weight;
             weightFlag = true;
             if (statusFlag)

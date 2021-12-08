@@ -21,7 +21,7 @@
             </Grid.Background>
 
             <!--ID -->
-            <Button Content="Drone Id" Margin="64,34,608,328" Background="#FF3B3BBA" Click="Button_Click" FontFamily="Cambria" FontWeight="Bold" FontSize="13">
+            <Button  Content="Drone Id" Margin="64,34,608,328" Background="#FF3B3BBA" Click="Button_Click" FontFamily="Cambria" FontWeight="Bold" FontSize="13">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
                         <Grid>
