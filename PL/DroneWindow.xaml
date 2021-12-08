@@ -12,7 +12,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Grid x:Name="AddDroneGrid" Visibility="Hidden">
+        <Grid x:Name="AddDroneGrid" Visibility="Visible">
 
             <Grid.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -144,7 +144,7 @@
             <ComboBox Name="comboWeightSelector" HorizontalAlignment="Left" Margin="345,230,0,0" VerticalAlignment="Top" Width="181" Height="50" ToolTip="Drone Weight" SelectionChanged="ComboBox_WeightSelection"/>
             <ComboBox Name="comboStationSelector" HorizontalAlignment="Left" Margin="436,316,0,0" VerticalAlignment="Top" Width="180" Height="51" SelectionChanged="ComboBox_SelectionChanged"/>
             <TextBox x:Name="Drone_Id" HorizontalAlignment="Left" Height="44" Margin="180,28,0,0" Text="" ToolTip="Enter Drone Id" TextWrapping="Wrap" VerticalAlignment="Top" Width="181" />
-            <TextBox x:Name="Drone_Model" HorizontalAlignment="Left" Height="52" Margin="270,118,0,0" Text="" ToolTip="Enter Drone Model" TextWrapping="Wrap" VerticalAlignment="Top" Width="190" TextChanged="Drone_Model_TextChanged"/>
+            <TextBox x:Name="Drone_Model" HorizontalAlignment="Left" Height="52" Margin="270,118,0,0" Text="" ToolTip="Enter Drone Model" TextWrapping="Wrap" VerticalAlignment="Top" Width="190" />
 
 
             <!--<Label Content="Add" HorizontalAlignment="Left" Margin="325,82,0,0" VerticalAlignment="Top" FontFamily="Cambria" FontWeight="Bold" FontStyle="Italic" FontSize="16" Background="Transparent"/>-->
@@ -166,12 +166,12 @@
             </Button>
             <Label x:Name="label"  Content="Please enter the details&#xA;of the drone you want&#xD;&#xA;to add.&#xA;&#xA;To close the window,&#xA;press the button below.&#xA; " HorizontalAlignment="Left" Margin="516,66,0,0" VerticalAlignment="Top" Height="159" Width="230" FontFamily="Century" FontStyle="Normal" FontWeight="Bold" FontSize="18" BorderBrush="Black" BorderThickness="5,5,5,5" />
             <Label x:Name="label1" Content="Fill out the form:" HorizontalAlignment="Left" Margin="516,14,0,0" VerticalAlignment="Top" Width="244" Height="44" FontFamily="FrankRuehl" FontSize="32" FontWeight="Bold" FontStyle="Normal" Foreground="#FF3423B6"/>
+            <Button Content="CLEAR" HorizontalAlignment="Left" Height="34" Margin="634,281,0,0" VerticalAlignment="Top" Width="96" Click="Button_Click_1"/>
             <!--<Button Content="Button" HorizontalAlignment="Left" Height="33" Margin="290,49,0,0" VerticalAlignment="Top" Click="AddDrone_Click" Width="120"/>-->
-
 
         </Grid>
 
-        <Grid Name="UpdateDroneGrid" Visibility="Visible" Opacity="0.745" Margin="-10,0,0,0">
+        <Grid Name="UpdateDroneGrid" Visibility="Hidden" Opacity="0.745" Margin="-10,0,0,0">
             <Grid.Background>
                 <ImageBrush ImageSource="/fond.png"/>
             </Grid.Background>

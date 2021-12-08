@@ -49,7 +49,7 @@ namespace PL
 
             if (comboWeightSelector.SelectedItem == null || comboStationSelector.SelectedItem == null || Drone_Id.Text == "" || Drone_Model.Text == "")
             {
-                MessageBox.Show("Please fill al the fields", "WARNING");
+                MessageBox.Show("Please fill al the fields" , "WARNING", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
             string droneIdString = Drone_Id.Text;
@@ -57,7 +57,7 @@ namespace PL
             if (!int.TryParse(droneIdString, out droneIdInt))
             {
                 Drone_Id.Background = Brushes.Red;
-                MessageBox.Show("Please enter an integer Id", "ERROR");
+                MessageBox.Show("Please enter an integer Id", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             string droneModel = Drone_Model.Text;
@@ -72,7 +72,7 @@ namespace PL
             {
                 if(ex.Message=="ID is not valid")
                     Drone_Id.Background = Brushes.Red;
-                MessageBox.Show(ex.Message, "ERROR");
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
 
             }
@@ -186,18 +186,13 @@ namespace PL
         {
             Update.Visibility = Visibility.Visible;
 
-            MessageBox.Show("The model of your drone is being updated.", "Success!");
+            MessageBox.Show("The model of your drone is being updated.", "Success!", MessageBoxButton.OK, MessageBoxImage.Information);
 
             //updater le model du drone
         }
         #endregion
 
-        private void button5_Click()
-        {
-            TextBox dynamicTextBox = new TextBox();
-            dynamicTextBox.Text = "Type Partnumber";
-            
-        }
+     
 
         #region FirstButton_Click
         /// <summary>
@@ -212,7 +207,7 @@ namespace PL
             if (droneDescription.Status == DroneStatuses.free)
             {
 
-                MessageBox.Show("We are sending your drone to the closest base station.\n It will ready in a few moments. ", "Don't worry!");
+                MessageBox.Show("We are sending your drone to the closest base station.\n It will ready in a few moments. ", "Don't worry!", MessageBoxButton.OK, MessageBoxImage.Information);
                 bl.DroneToCharge(droneDescription.Id);
                 ListViewDrone.ItemsSource = bl.displayDroneList();
                 Drone_Label.Content = bl.displayDrone(droneDescription.Id);
@@ -223,7 +218,7 @@ namespace PL
         //We release the drone from its base station only if its status is MAINTENANCE
         else if (droneDescription.Status == DroneStatuses.maintenance)
             {
-                MessageBox.Show("Your drone is fully charged. We are going to unplug it", "Success!");
+                MessageBox.Show("Your drone is fully charged. We are going to unplug it", "Success!", MessageBoxButton.OK, MessageBoxImage.Information);
                 //Prendre le temps de chargement du mishtamesh:bl.DroneCharged(droneDescription.Id);
                 ListViewDrone.ItemsSource = bl.displayDroneList();
                 Drone_Label.Content = bl.displayDrone(droneDescription.Id);
@@ -233,7 +228,7 @@ namespace PL
          //The drone is going to collect a package
          else if(droneDescription.Status==DroneStatuses.shipping)
             {
-                MessageBox.Show("Your drone is going to collect the parcel attached to it", "On it's way!");
+                MessageBox.Show("Your drone is going to collect the parcel attached to it", "On it's way!", MessageBoxButton.OK, MessageBoxImage.Information);
                 bl.Assignement(droneDescription.Id);
                 ListViewDrone.ItemsSource = bl.displayDroneList();
                 Drone_Label.Content = bl.displayDrone(droneDescription.Id);
@@ -304,9 +299,14 @@ namespace PL
 
         #endregion
 
-        private void Drone_Model_TextChanged(object sender, TextChangedEventArgs e)
-        {
+      
 
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            Drone_Id.Text = "";
+            Drone_Model.Text = "";
+            comboStationSelector.SelectedItem = null;
+            comboWeightSelector.SelectedItem = null;
         }
     }
 }

@@ -15,12 +15,11 @@ using System.Windows.Shapes;
 
 
 
-// button qui annule l'ajout
+
 // garde le sinoun apres avoir ajoute un dronert
 // ii => vii voir que tout marche comme il se doitttt
 
 // design de toute les fenetres qui ne sont pas designées SANS FAIRE UNE TRUC MOOOOCHE NI TROP GNAGNAN
-// image croix dans error / V dans c est bon
 
 namespace PL
 {
