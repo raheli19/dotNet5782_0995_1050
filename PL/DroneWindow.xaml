@@ -21,7 +21,7 @@
             </Grid.Background>
 
             <!--ID -->
-            <Button  Content="Drone Id" Margin="64,34,608,328" Background="#FF3B3BBA" Click="Button_Click" FontFamily="Cambria" FontWeight="Bold" FontSize="13">
+            <Button  Content="Drone Id" Margin="20,14,652,348" Background="#FF3B3BBA" Click="Button_Click" FontFamily="Cambria" FontWeight="Bold" FontSize="13">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
                         <Grid>
@@ -52,7 +52,7 @@
 
 
             <!--Model -->
-            <Button Content="Drone Model"  Margin="64,135,608,224" Background="#FF1C1C1C" FontFamily="Cambria" FontWeight="Bold" FontSize="13" BorderThickness="1,4,1,1" Click="Button_Click">
+            <Button Content="Drone Model"  Margin="109,106,563,253" Background="#FF1C1C1C" FontFamily="Cambria" FontWeight="Bold" FontSize="13" BorderThickness="1,4,1,1" Click="Button_Click">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
                         <Grid>
@@ -82,7 +82,7 @@
             </Button>
 
             <!--Weight -->
-            <Button Content="Drone Weight" Margin="64,230,608,126" Background="#FF3B3BBA" FontFamily="Cambria" FontWeight="Bold" FontSize="13" Click="Button_Click">
+            <Button Content="Drone Weight" Margin="191,216,481,140" Background="#FF3B3BBA" FontFamily="Cambria" FontWeight="Bold" FontSize="13" Click="Button_Click">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
                         <Grid>
@@ -112,7 +112,7 @@
             </Button>
 
             <!--StationID -->
-            <Button Content="Station Id" Margin="64,329,608,30" FontFamily="Cambria" FontSize="13" FontWeight="Bold" Click="Button_Click" Foreground="Black">
+            <Button Content="Station Id" Margin="281,303,391,56" FontFamily="Cambria" FontSize="13" FontWeight="Bold" Click="Button_Click" Foreground="Black">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
                         <Grid>
@@ -140,29 +140,31 @@
                     </ControlTemplate>
                 </Button.Template>
             </Button>
-            <ComboBox Name="comboWeightSelector" HorizontalAlignment="Left" Margin="488,244,0,0" VerticalAlignment="Top" Width="181" Height="50" ToolTip="Drone Weight" SelectionChanged="ComboBox_WeightSelection"/>
-            <ComboBox Name="comboStationSelector" HorizontalAlignment="Left" Margin="488,344,0,0" VerticalAlignment="Top" Width="181" Height="51" SelectionChanged="ComboBox_SelectionChanged"/>
-            <TextBox x:Name="Drone_Id" HorizontalAlignment="Left" Height="44" Margin="488,49,0,0" Text="" ToolTip="Enter Drone Id" TextWrapping="Wrap" VerticalAlignment="Top" Width="181"/>
-            <TextBox x:Name="Drone_Model" HorizontalAlignment="Left" Height="50" Margin="488,148,0,0" Text="" ToolTip="Enter Drone Model" TextWrapping="Wrap" VerticalAlignment="Top" Width="181"/>
+            <ComboBox Name="comboWeightSelector" HorizontalAlignment="Left" Margin="345,230,0,0" VerticalAlignment="Top" Width="181" Height="50" ToolTip="Drone Weight" SelectionChanged="ComboBox_WeightSelection"/>
+            <ComboBox Name="comboStationSelector" HorizontalAlignment="Left" Margin="436,316,0,0" VerticalAlignment="Top" Width="180" Height="51" SelectionChanged="ComboBox_SelectionChanged"/>
+            <TextBox x:Name="Drone_Id" HorizontalAlignment="Left" Height="44" Margin="180,28,0,0" Text="" ToolTip="Enter Drone Id" TextWrapping="Wrap" VerticalAlignment="Top" Width="181" />
+            <TextBox x:Name="Drone_Model" HorizontalAlignment="Left" Height="52" Margin="270,118,0,0" Text="" ToolTip="Enter Drone Model" TextWrapping="Wrap" VerticalAlignment="Top" Width="190" TextChanged="Drone_Model_TextChanged"/>
 
-            
+
             <!--<Label Content="Add" HorizontalAlignment="Left" Margin="325,82,0,0" VerticalAlignment="Top" FontFamily="Cambria" FontWeight="Bold" FontStyle="Italic" FontSize="16" Background="Transparent"/>-->
 
 
             <!--DroneButton-->
-            <Button Name="ImageDrone" Click="OnClick5" Margin="271,34,383,318" ToolTip="Add">
-                <Image Source="drone.png" Height="87" RenderTransformOrigin="0.5,0.595"></Image>
+            <Button Name="ImageDrone" Click="OnClick5" Margin="27,294,586,20" ToolTip="Add">
+                <Image Source="/drone.png" Height="118" RenderTransformOrigin="0.5,0.595"/>
             </Button>
-            <Button Name="Add_Drone" BorderBrush="Black" Margin="271,34,474,359" Click="AddDrone_Click" Visibility="Visible" FontFamily="Cambria" FontWeight="Bold" Background="{x:Null}" Opacity="100">
+            <Button Name="Add_Drone" BorderBrush="Black" Margin="29,294,716,99" Click="AddDrone_Click" Visibility="Visible" FontFamily="Cambria" FontWeight="Bold" Background="{x:Null}" Opacity="100" FontSize="18">
                 <Button.Effect>
                     <DropShadowEffect/>
                 </Button.Effect> ADD
             </Button>
-            <Button Content="" HorizontalAlignment="Left" ToolTip="Close" Height="49" Margin="290,346,0,0" VerticalAlignment="Top" Width="120" Click="Button_Close" FontFamily="Cambria" FontWeight="Bold" Foreground="Red" FontSize="22" FontStyle="Normal" BorderThickness="1,1,1,1" SnapsToDevicePixels="True">
+            <Button Content="" HorizontalAlignment="Left" ToolTip="Close" Height="49" Margin="631,353,0,0" VerticalAlignment="Top" Width="120" Click="Button_Close" FontFamily="Cambria" FontWeight="Bold" Foreground="Red" FontSize="22" FontStyle="Normal" BorderThickness="1,1,1,1" SnapsToDevicePixels="True">
                 <Button.Background>
                     <ImageBrush ImageSource="/close.png"/>
                 </Button.Background>
             </Button>
+            <Label x:Name="label"  Content="Please enter the details&#xA;of the drone you want&#xD;&#xA;to add.&#xA;&#xA;To close the window,&#xA;press the button below.&#xA; " HorizontalAlignment="Left" Margin="516,66,0,0" VerticalAlignment="Top" Height="159" Width="230" FontFamily="Century" FontStyle="Normal" FontWeight="Bold" FontSize="18" BorderBrush="Black" BorderThickness="5,5,5,5" />
+            <Label x:Name="label1" Content="Fill out the form:" HorizontalAlignment="Left" Margin="516,14,0,0" VerticalAlignment="Top" Width="244" Height="44" FontFamily="FrankRuehl" FontSize="32" FontWeight="Bold" FontStyle="Normal" Foreground="#FF3423B6"/>
             <!--<Button Content="Button" HorizontalAlignment="Left" Height="33" Margin="290,49,0,0" VerticalAlignment="Top" Click="AddDrone_Click" Width="120"/>-->
 
 

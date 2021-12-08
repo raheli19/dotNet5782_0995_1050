@@ -281,8 +281,14 @@ namespace PL
             this.Close();
             //    MessageBox.Show("Your drone is fully charged. We are going to unplug it", "Success!");
         }
+
+
+
         #endregion
 
+        private void Drone_Model_TextChanged(object sender, TextChangedEventArgs e)
+        {
 
+        }
     }
 }

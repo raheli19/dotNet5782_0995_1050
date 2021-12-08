@@ -7,11 +7,22 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/MainDrone.png"/>
+        </Grid.Background>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Button Content="Show DroneList" Click="MainButton_OpenDroneList" Height="168" HorizontalAlignment="Center" Margin="0,128,0,0" x:Name="openDroneList" VerticalAlignment="Top" Width="248" FontSize="33"/>
+        <Button Content="Show DroneList" Click="MainButton_OpenDroneList" Height="47" HorizontalAlignment="Center" Margin="0,387,0,0" x:Name="openDroneList" VerticalAlignment="Center" Width="800" FontSize="33" FontWeight="Normal" FontStyle="Normal" Background="#FF9389C3" BorderThickness="3,3,3,3" BorderBrush="#FF191616"/>
+        <Label x:Name="label" Content="Welcome to our Nebula Drone delivery System!&#xD;&#xA;" HorizontalAlignment="Center" Margin="0,21,0,0" VerticalAlignment="Top" Width="552" Height="55" FontSize="24" FontWeight="Bold" FontStyle="Italic" BorderThickness="5,5,5,5">
+            <Label.BorderBrush>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="#FF5C63A7" Offset="1"/>
+                </LinearGradientBrush>
+            </Label.BorderBrush>
+        </Label>
+        <Label x:Name="label1" Content="To start, please press the button below" HorizontalAlignment="Center" Margin="0,76,0,0" VerticalAlignment="Top" Width="429" Height="50" FontSize="22" FontWeight="Bold" FontStyle="Italic"/>
 
     </Grid>
 </Window>

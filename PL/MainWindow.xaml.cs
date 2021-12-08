@@ -17,12 +17,11 @@ using System.Windows.Shapes;
 
 // button qui annule l'ajout
 // garde le sinoun apres avoir ajoute un dronert
-// dans la droneWindow une possibilité de fermer la fenetre
 // ii => vii voir que tout marche comme il se doitttt
 // ajouter le bonus dans les autres fenetres
-
 // design de toute les fenetres qui ne sont pas designées SANS FAIRE UNE TRUC MOOOOCHE NI TROP GNAGNAN
 // image croix dans error / V dans c est bon
+
 namespace PL
 {
     /// <summary>
