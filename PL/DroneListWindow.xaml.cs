@@ -46,6 +46,10 @@ namespace PL
         
         private void comboStatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (comboStatusSelector.SelectedItem == null)
+            {
+                return;
+            }
             /*DroneStatuses*/ status = (DroneStatuses)comboStatusSelector.SelectedItem;
             droneStat = status;
             statusFlag = true;
@@ -57,7 +61,12 @@ namespace PL
 
         private void comboWeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            /*WeightCategories*/ weight = (WeightCategories)comboWeightSelector.SelectedItem;
+            if (comboWeightSelector.SelectedItem == null)
+            {
+                return;
+            }
+            /*WeightCategories*/
+            weight = (WeightCategories)comboWeightSelector.SelectedItem;
             weightStat = weight;
             weightFlag = true;
             if (statusFlag)

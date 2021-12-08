@@ -90,6 +90,8 @@ namespace PL
             AddDroneGrid.Visibility = Visibility.Hidden;
             UpdateDroneGrid.Visibility = Visibility.Visible;
             Drone_Label.Content = bl.displayDrone(droneDescription.Id);
+            DroneStatuses statusDrone = droneDescription.Status;
+
             ListViewDrone = (ListView)dronesListView;
 
         }
