@@ -88,6 +88,24 @@ namespace IBL
                 droneBL.Model = dalDrone.Model;
                 droneBL.MaxWeight = (WeightCategories)dalDrone.weight;
                 droneBL.Battery = DroneList.Find(x => x.Id == id).battery;
+                droneBL.initialLoc = DroneList.Find(x => x.Id == id).loc;
+                
+                //if (DroneList.Find(x => x.Id == id).parcelId != 0)
+                //{
+                //    Parcel tempParcel = GetParcel(DroneList.Find(x => x.Id == id).parcelId);
+                //    droneBL.myParcel.ID = tempParcel.ID ;
+                //    if(tempParcel.PickedUp!=DateTime.MinValue) // the drone picked up the parcel
+                //        droneBL.myParcel.deliveringStatus = true;  //parcel is in delivering
+                //    if (tempParcel.Delivered != DateTime.MinValue)
+                //        droneBL.myParcel.deliveringStatus = false;
+                //    if(tempParcel.Scheduled!=DateTime.MinValue)
+                //        droneBL.myParcel.deliveringStatus = false;
+                //    if (tempParcel.Requested != DateTime.MinValue)
+                //        droneBL.myParcel.deliveringStatus = false;
+                //    droneBL.myParcel.weight = tempParcel.Weight;
+                //    droneBL.myParcel.priority = tempParcel.Priority;
+                //    droneBL.
+                //}
             }
             catch (IDAL.DO.DroneException drEX) //catches DAL exception
             {

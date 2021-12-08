@@ -18,13 +18,15 @@ namespace IBL
             public override string ToString()
             {
                 String result = "";
-                result += $"ID is: {ID},\n";
-                result += $"Model is: {Model},\n";
-                result += $"MaxWeight is: {MaxWeight},\n";
-                result += $"Status is: {Status},\n";
-                result += $"Battery is: {Battery}%,\n";
-                result += $"Location is: {initialLoc}\n";
-                result += $"Amount of packages in delivering is: {myParcel}\n";
+                result += $"ID: {ID},\n";
+                result += $"Model: {Model},\n";
+                result += $"MaxWeight: {MaxWeight},\n";
+                result += $"Status: {Status},\n";
+                result += $"Battery: {Battery}%,\n";
+                result += $"Location: {initialLoc}";
+                result += $"Parcel in transfer:";
+                if(myParcel.ID!=0)
+                   result+= $" {myParcel}\n";
                 return result;
             }
         }

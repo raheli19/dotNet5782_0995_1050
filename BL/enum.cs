@@ -20,7 +20,7 @@ namespace IBL
         };
         public enum ParcelStatus
         {
-           requested,scheduled, pickedup, delivered
+            requested, scheduled, pickedup, delivered
         };
 
     }

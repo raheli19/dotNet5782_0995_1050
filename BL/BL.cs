@@ -249,6 +249,7 @@ namespace IBL
         /// <returns>Returns the distance between the 2 locations</returns>
         private double Distance(Localisation from, Localisation to)
         {
+            
             int R = 6371 * 1000;
             double phi1 = from.latitude * Math.PI / 180;
             double phi2 = to.latitude * Math.PI / 180;

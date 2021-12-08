@@ -178,11 +178,20 @@ namespace PL
         /// <param name="e"></param>
         private void ClickUpdate(object sender, RoutedEventArgs e)
         {
-
+            this.button5_Click();
+ 
             MessageBox.Show("The model of your drone is being updated.", "Success!");
+
             //updater le model du drone
         }
         #endregion
+
+        private void button5_Click()
+        {
+            TextBox dynamicTextBox = new TextBox();
+            dynamicTextBox.Text = "Type Partnumber";
+            
+        }
 
         #region FirstButton_Click
         /// <summary>

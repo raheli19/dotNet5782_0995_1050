@@ -243,7 +243,7 @@ namespace IBL
             Drone connectDrone = new Drone();
             try
             {
-                connectDrone = GetDrone(id);
+                connectDrone = displayDrone(id);
             }
             catch (IDAL.DO.DroneException s)
             {
@@ -331,7 +331,7 @@ namespace IBL
                     if (droneItem.Id == connectDrone.ID)
                     {
                         droneItem.Status = DroneStatuses.shipping; // change drone to be delivered
-                        droneItem.Id = updateParcel.ID;
+                        droneItem.parcelId = updateParcel.ID;
                     }
 
                 }
@@ -354,7 +354,7 @@ namespace IBL
             Drone collectDrone = new Drone();
             try
             {
-                collectDrone = GetDrone(droneId);
+                collectDrone = displayDrone(droneId);
             }
             catch (IDAL.DO.DroneException ex)
             {
