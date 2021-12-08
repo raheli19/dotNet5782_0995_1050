@@ -200,28 +200,37 @@ namespace PL
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void ClickFirstButton(object sender, RoutedEventArgs e)
-        {//First case:The status of the drone is FREE, the button is BATTERY LOW?
+        {
+         //First case:The status of the drone is FREE, the button is BATTERY LOW?
          //We send the drone to the closest station only if its status is FREE
             if (droneDescription.Status == DroneStatuses.free)
             {
 
                 MessageBox.Show("We are sending your drone to the closest base station.\n It will ready in a few moments. ", "Don't worry!");
-                //Envoyer le drone a la station de chargement
+                bl.DroneToCharge(droneDescription.Id);
+                ListViewDrone.ItemsSource = bl.displayDroneList();
+                Drone_Label.Content = bl.displayDrone(droneDescription.Id);
+               // this.droneDescription = bl.dron
+              
             }
         //Second case:The status of the drone is MAINTENANCE,the button is FULLY CHARGED?
         //We release the drone from its base station only if its status is MAINTENANCE
         else if (droneDescription.Status == DroneStatuses.maintenance)
             {
                 MessageBox.Show("Your drone is fully charged. We are going to unplug it", "Success!");
-                //Debrancher le drone
+                //Prendre le temps de chargement du mishtamesh:bl.DroneCharged(droneDescription.Id);
+                ListViewDrone.ItemsSource = bl.displayDroneList();
+                Drone_Label.Content = bl.displayDrone(droneDescription.Id);
+
             }
          //Third Case:The status of the drone is SHIPPING,the button is COLLECT PACKAGE
          //The drone is going to collect a package
          else if(droneDescription.Status==DroneStatuses.shipping)
             {
                 MessageBox.Show("Your drone is going to collect the parcel attached to it", "On it's way!");
-                //envoyer le drone collecter sa parcel
-
+                bl.Assignement(droneDescription.Id);
+                ListViewDrone.ItemsSource = bl.displayDroneList();
+                Drone_Label.Content = bl.displayDrone(droneDescription.Id);
             }
         }
         #endregion
@@ -241,14 +250,18 @@ namespace PL
             if (droneDescription.Status == DroneStatuses.free)
             {
                 MessageBox.Show("Your drone is going to pick the parcel attached to it", "On it's way!");
-                //Aller chercher parcel
+                bl.PickedUp(droneDescription.Id);
+                ListViewDrone.ItemsSource = bl.displayDroneList();
+                Drone_Label.Content = bl.displayDrone(droneDescription.Id);
             }
 
             //Second case:The status of the drone is shipping,the button is DELIVERING THE PACKAGE
             else if (droneDescription.Status == DroneStatuses.shipping)
             {
                 MessageBox.Show("Your drone is delivering the parcel attached to it", "Mission almost accomplished");
-                //Aller delivrer parcel
+                bl.delivered(droneDescription.Id);
+                ListViewDrone.ItemsSource = bl.displayDroneList();
+                Drone_Label.Content = bl.displayDrone(droneDescription.Id);
             }
             else
             {
