@@ -46,7 +46,7 @@ namespace PL
         bool statusFlag = false;
         //private object isDataDirty;
         private bool checkFlag= false;
-        private bool FLAd = false;
+
         #region SelectStatut
         private void comboStatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

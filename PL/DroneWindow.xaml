@@ -5,13 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="DroneWindow" Height="450" Width="800" Icon="/drone.png">
+        Title="DroneWindow" Height="450" Width="800" Icon="/drone.png"
+        Closing="OnClosing">
 
     <Grid x:Name="MainGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Grid x:Name="AddDroneGrid" Visibility="Visible">
+        <Grid x:Name="AddDroneGrid" Visibility="Hidden">
 
             <Grid.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -170,7 +171,7 @@
 
         </Grid>
 
-        <Grid Name="UpdateDroneGrid" Visibility="Hidden" Opacity="0.745" Margin="-10,0,0,0">
+        <Grid Name="UpdateDroneGrid" Visibility="Visible" Opacity="0.745" Margin="-10,0,0,0">
             <Grid.Background>
                 <ImageBrush ImageSource="/fond.png"/>
             </Grid.Background>
@@ -183,9 +184,12 @@
       Content="DELIVERING THE PACKAGE"-->
 
             <!--Update Button-->
-            <Button x:Name="UpdateButton" Content="UPDATE" HorizontalAlignment="Left" Background="Transparent" Margin="648,166,0,0" VerticalAlignment="Top" ToolTip="UPDATE" Height="51" Width="133" BorderBrush="Black" Click="ClickUpdate" Opacity="100" FontFamily="Cambria" FontSize="30" FontWeight="Bold" FontStyle="Italic">
+            <Button x:Name="UpdateButton" Content="UPDATE" HorizontalAlignment="Left" 
+                   
+                    Background="Transparent" Margin="648,166,0,0" VerticalAlignment="Top" ToolTip="UPDATE" Height="51" Width="133" BorderBrush="Black" Click="ClickUpdate" Opacity="100" FontFamily="Cambria" FontSize="30" FontWeight="Bold" FontStyle="Italic">
 
             </Button>
+
 
             <!--FirstButton:Can be:1)Release from charge(FULLY CHARGED?) 2)Send drone to charge Button (BATTERY LOW?) 3)Collect delivery (COLLECT PACKAGE)-->
             <Button Name="FirstButton"  HorizontalAlignment="Left" Background="Transparent" Margin="522,84,0,0" VerticalAlignment="Top"  Height="57" Width="245" BorderBrush="Black" Click="ClickFirstButton" Opacity="100" FontFamily="Cambria" FontSize="30" FontWeight="Bold" FontStyle="Italic">
@@ -217,6 +221,7 @@
             </Button>-->
 
             <Label x:Name="Drone_Label"  HorizontalAlignment="Left" Margin="10,140,0,0" VerticalAlignment="Top" Height="284" Width="259"/>
+            <TextBox x:Name="Update" Visibility="Hidden" HorizontalAlignment="Left" Height="51" Margin="506,166,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="137"/>
             <!--  <Label Content="UPDATE" Width="109" FontSize="22" FontStyle="Italic" FontWeight="Bold" Margin="187,286,504,74"/>-->
 
 

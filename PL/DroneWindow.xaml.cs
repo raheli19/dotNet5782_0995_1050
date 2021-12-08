@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -38,7 +39,8 @@ namespace PL
             ListViewDrone = (ListView)DroneListWindow;
 
         }
-        
+        private bool checkFlag = false;
+
         #region add_Click
         private void AddDrone_Click(object sender, RoutedEventArgs e)
         {
@@ -76,6 +78,7 @@ namespace PL
             }
             MessageBox.Show("Success!", "Added the drone");
             ListViewDrone.ItemsSource = bl.displayDroneList();
+            
             this.Close();
         }
 
@@ -112,7 +115,10 @@ namespace PL
         }
 
         private void Button_Close(object sender, RoutedEventArgs e)
-       => Close();
+        { 
+             this.checkFlag = true; // will allow us to close the window from the button and not from the "X"
+            this.Close();
+        }
 
         // -------------------------------------------------------UPGRADE------------------------------------------------------------------------------
 
@@ -178,8 +184,8 @@ namespace PL
         /// <param name="e"></param>
         private void ClickUpdate(object sender, RoutedEventArgs e)
         {
-            this.button5_Click();
- 
+            Update.Visibility = Visibility.Visible;
+
             MessageBox.Show("The model of your drone is being updated.", "Success!");
 
             //updater le model du drone
@@ -276,8 +282,20 @@ namespace PL
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+
+        private void OnClosing(object sender, CancelEventArgs e)
+        {
+
+            if (this.checkFlag)// call from the button
+                e.Cancel = false;
+            else
+                e.Cancel = true;// call from the "X", we don't want to close
+
+        }
         private void ClickCloseDroneWindow(object sender, RoutedEventArgs e)
         {
+            this.checkFlag = true; // will allow us to close the window from the button and not from the "X"
+
             this.Close();
             //    MessageBox.Show("Your drone is fully charged. We are going to unplug it", "Success!");
         }
