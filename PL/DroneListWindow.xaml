@@ -21,8 +21,17 @@
                 <ColumnDefinition Width="*"/>
 
             </Grid.ColumnDefinitions >
-            <ComboBox Name="comboStatusSelector" ToolTip="Choose a Status" Grid.Column="1" HorizontalAlignment= "Center" Width="133" AutomationProperties.Name="Drone's Statut" SelectionChanged="comboStatusSelector_SelectionChanged" 
-                      BorderThickness="1,1,1,1" FontStretch="Normal" FontStyle="Italic" FontWeight="ExtraBlack" OpacityMask="#FF3E3E40" />
+            <ComboBox Name="comboStatusSelector"  ToolTip="Choose a Status" Grid.Column="1" HorizontalAlignment= "Center" Width="133" AutomationProperties.Name="Drone's Statut" SelectionChanged="comboStatusSelector_SelectionChanged" 
+                      BorderThickness="1,1,1,1" FontStretch="Normal" 
+                      FontStyle="Italic" FontWeight="ExtraBlack" OpacityMask="#FF3E3E40" >
+                <ComboBox.Background>
+                    <LinearGradientBrush EndPoint="0,1">
+                        <GradientStop Color="Blue"/>
+                        <GradientStop Color="#FF871313" Offset="1"/>
+                    </LinearGradientBrush>
+                </ComboBox.Background>
+            </ComboBox>
+
             <ComboBox  Name="comboWeightSelector" SelectionChanged="comboWeightSelector_SelectionChanged" Grid.Column="3" ToolTip="Choose a Weight" HorizontalAlignment="Left" 
                        VerticalAlignment="Center" Width="133" Height="48" Grid.ColumnSpan="2">
 
@@ -32,7 +41,7 @@
             <Button Content="CLEAR" Grid.Column="4" Background="Red" HorizontalAlignment="Left" Margin="19,0,0,0" VerticalAlignment="Center" Height="26" Width="60" FontWeight="Bold" FontStyle="Italic" BorderBrush="#FFE01515" Foreground="#FFF7F1F1" FontSize="15" FontFamily="Arial Black" Click="Button_Clear"/>
 
         </Grid>
-        <ListView x:Name="DronesListView" Margin="0,25,0,0" Visibility="Visible" MouseDoubleClick="DroneListView_MouseDoubleClick" Grid.Row="1"/>
+        <ListView x:Name="DronesListView" Margin="0,46,0,0" Visibility="Visible" MouseDoubleClick="DroneListView_MouseDoubleClick" Grid.RowSpan="2"/>
         <!-- <Button Content="Add a Drone" HorizontalAlignment="Left" Margin="640,0,0,0" VerticalAlignment="Center" Width="150" Height="48" Click="button_addDrone"/>-->
         <Button Content="Add a Drone" Margin="671,5,19,5" Click="button_addDrone" Background="#FF004CFF" FontWeight="Bold" FontFamily="Georgia Pro">
             <Button.Template>
@@ -62,6 +71,7 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
+        <Button Content="Close" HorizontalAlignment="Left" Margin="626,13,0,13"/>
 
 
 

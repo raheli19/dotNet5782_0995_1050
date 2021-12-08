@@ -43,7 +43,8 @@ namespace PL
         static WeightCategories weightStat = 0;
         bool weightFlag= false;
         bool statusFlag = false;
-        
+
+        #region SelectStatut
         private void comboStatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (comboStatusSelector.SelectedItem == null)
@@ -58,7 +59,9 @@ namespace PL
             else
                 this.DronesListView.ItemsSource = IEDrones.Where(x => x.Status == status);
         }
+        #endregion
 
+        #region WeightSelector
         private void comboWeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (comboWeightSelector.SelectedItem == null)
@@ -75,13 +78,16 @@ namespace PL
                 this.DronesListView.ItemsSource = IEDrones.Where(x => x.weight == weight);
 
         }
+        #endregion
 
+        #region AddDroneOpenWindow
         private void button_addDrone(object sender, RoutedEventArgs e)
         {
             DroneWindow subWindow = new DroneWindow(bl, DronesListView);
             subWindow.Show();
 
         }
+        #endregion
 
         private void DroneListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
