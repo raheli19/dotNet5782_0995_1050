@@ -99,18 +99,7 @@ namespace PL
             comboWeightSelector.SelectedItem = null;
         }
 
-        private void Button_Clear(object sender, RoutedEventArgs e)
-        {
-            droneStat = 0;
-            weightStat = 0;
-            weightFlag = false;
-            statusFlag = false;
-            DronesListView.ItemsSource = IEDrones;
-            //effacer le composant
-
-            //comboStatusSelector.SetCurrentValue(" ");
-           // comboWeightSelector.;
-        }
+       
 
         #region closeFunctions
         private void Button_Close(object sender, RoutedEventArgs e)
@@ -128,5 +117,23 @@ namespace PL
 
         }
         #endregion
+
+        private void ClearStatus_Click(object sender, RoutedEventArgs e)
+        {
+            comboStatusSelector.SelectedItem = null;
+            weightFlag = false;
+            weightStat = 0;
+            DronesListView.ItemsSource = IEDrones;
+
+        }
+
+        private void ClearWeight_Click(object sender, RoutedEventArgs e)
+        {
+            comboWeightSelector.SelectedItem = null;
+            droneStat = 0;
+            statusFlag = false;
+            DronesListView.ItemsSource = IEDrones;
+
+        }
     }
 }
