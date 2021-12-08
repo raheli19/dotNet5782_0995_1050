@@ -11,6 +11,7 @@
     <None Remove="closebutton.png" />
     <None Remove="drone.png" />
     <None Remove="fond.png" />
+    <None Remove="mainwinddrone.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,6 +23,7 @@
     <Resource Include="closebutton.png" />
     <Resource Include="drone.png" />
     <Resource Include="fond.png" />
+    <Resource Include="mainwinddrone.png" />
   </ItemGroup>
 
 </Project>

@@ -22,7 +22,8 @@
                 <ColumnDefinition Width="*"/>
 
             </Grid.ColumnDefinitions >
-            <ComboBox Name="comboStatusSelector"  ToolTip="Choose a Status" Grid.Column="1" HorizontalAlignment= "Center" Width="133" AutomationProperties.Name="Drone's Statut" SelectionChanged="comboStatusSelector_SelectionChanged" 
+            <ComboBox Name="comboStatusSelector"  ToolTip="Choose a Status" Grid.Column="1" HorizontalAlignment= "Center" Width="133" AutomationProperties.Name="Drone's Statut" 
+                      SelectionChanged="comboStatusSelector_SelectionChanged" 
                       BorderThickness="1,1,1,1" FontStretch="Normal" 
                       FontStyle="Italic" FontWeight="ExtraBlack" OpacityMask="#FF3E3E40" >
                 <ComboBox.Background>
