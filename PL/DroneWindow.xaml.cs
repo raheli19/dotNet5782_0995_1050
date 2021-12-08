@@ -81,21 +81,7 @@ namespace PL
 
         #endregion
         #endregion  
-        //ctor to upgrade the drone
-        public DroneWindow(object selectedItem, IBL.IBL bl, object dronesListView)
-        {
-            InitializeComponent();
-            this.bl = bl;
-            this.droneDescription = (DroneDescription)selectedItem;
-            AddDroneGrid.Visibility = Visibility.Hidden;
-            UpdateDroneGrid.Visibility = Visibility.Visible;
-            Drone_Label.Content = bl.displayDrone(droneDescription.Id);
-            DroneStatuses statusDrone = droneDescription.Status;
-
-            ListViewDrone = (ListView)dronesListView;
-
-        }
-
+       
         #region buttonsNotNeeded
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -141,44 +127,153 @@ namespace PL
             this.Close();
         }
 
-        private void Button_Update(object sender, RoutedEventArgs e)
+        // -------------------------------------------------------UPGRADE------------------------------------------------------------------------------
+
+        #region constructorUPGRADE
+        //ctor to upgrade the drone
+        public DroneWindow(object selectedItem, IBL.IBL bl, object dronesListView)
         {
-
-            MessageBox.Show("The model of your drone is being updated.", "Success!");
-        }
-
-        private void Button_SendToCharge(object sender, RoutedEventArgs e)
-        {//We send the drone to the closest station only if its status is FREE
-            if (droneDescription.Status == DroneStatuses.free)
+            InitializeComponent();
+            this.bl = bl;
+            this.droneDescription = (DroneDescription)selectedItem;
+            AddDroneGrid.Visibility = Visibility.Hidden;
+            UpdateDroneGrid.Visibility = Visibility.Visible;
+            Drone_Label.Content = bl.displayDrone(droneDescription.Id);
+            DroneStatuses statusDrone = droneDescription.Status;
+            if (statusDrone == DroneStatuses.maintenance)
             {
-                MessageBox.Show("We are sending your drone to the closest base station.\n It will ready in a few moments. ", "Don't worry!");
-                //Envoyer le drone a la station de chargement
+                FirstButton.Content = "FULLY CHARGED?";
+                FirstButton.ToolTip = "Release drone from charge";
+            }
+            else if (statusDrone == DroneStatuses.free)
+            {
+                FirstButton.Content = "BATTERY LOW?";
+                FirstButton.ToolTip = "Send drone to charge";
             }
             else
             {
-                MessageBox.Show("We regret to announce you that the status of your drone doesn't fill the requested caracteristics", "Aie aie aie...");
+                FirstButton.Content = "COLLECT PACKAGE";
+                FirstButton.ToolTip = "Collect delivery";
             }
+
+            if (statusDrone == DroneStatuses.free)
+            {
+                SecondButton.Content = "READY FOR PICKING!";
+                SecondButton.ToolTip = "Send drone to delivery";
+            }
+            else if (statusDrone == DroneStatuses.shipping)
+            {
+                SecondButton.Content = "DELIVERING THE PACKAGE";
+                SecondButton.ToolTip = "Deliver Parcel";
+            }
+            else
+            {
+                SecondButton.Visibility = Visibility.Hidden;
+            }
+            ListViewDrone = (ListView)dronesListView;
+
+        }
+
+        #endregion
+
+        //Here is the list of the buttons which allow us to upgrade a specific drone.
+        //There are 4 buttons: 
+        //1)UPDATE
+        //2)FIRST_BUTTON:Can be:1)Release from charge(FULLY CHARGED?) if status:maintenance 2)Send drone to charge Button(BATTERY LOW?) if status:free 3)Collect delivery(COLLECT PACKAGE) if status:shipping
+        //3)SECOND_BUTTON:Can be:1)Deliver Parcel(DELIVERING THE PACKAGE) if status:shipping 2)Send Drone To Delivery(READY FOR PICKING!) if status:free
+        //4)CLOSE
+
+        #region Update_Drone_Click
+        /// <summary>
+        /// This button updates the name of the drone
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ClickUpdate(object sender, RoutedEventArgs e)
+        {
+
+            MessageBox.Show("The model of your drone is being updated.", "Success!");
+            //updater le model du drone
+        }
+        #endregion
+
+        #region FirstButton_Click
+        /// <summary>
+        /// FirstButton:Can be:1)Release from charge(FULLY CHARGED?) if status:maintenance 2)Send drone to charge Button(BATTERY LOW?) if status:free 3)Collect delivery(COLLECT PACKAGE) if status:shipping
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ClickFirstButton(object sender, RoutedEventArgs e)
+        {//First case:The status of the drone is FREE, the button is BATTERY LOW?
+         //We send the drone to the closest station only if its status is FREE
+            if (droneDescription.Status == DroneStatuses.free)
+            {
+
+                MessageBox.Show("We are sending your drone to the closest base station.\n It will ready in a few moments. ", "Don't worry!");
+                //Envoyer le drone a la station de chargement
+            }
+        //Second case:The status of the drone is MAINTENANCE,the button is FULLY CHARGED?
+        //We release the drone from its base station only if its status is MAINTENANCE
+        else if (droneDescription.Status == DroneStatuses.maintenance)
+            {
+                MessageBox.Show("Your drone is fully charged. We are going to unplug it", "Success!");
+                //Debrancher le drone
+            }
+         //Third Case:The status of the drone is SHIPPING,the button is COLLECT PACKAGE
+         //The drone is going to collect a package
+         else if(droneDescription.Status==DroneStatuses.shipping)
+            {
+                MessageBox.Show("Your drone is going to collect the parcel attached to it", "On it's way!");
+                //envoyer le drone collecter sa parcel
+
+            }
+        }
+        #endregion
+
+        #region SecondButton_Click
+
+        /// <summary>
+        /// SECOND_BUTTON:Can be:1)Deliver Parcel(DELIVERING THE PACKAGE) if status:shipping 2)Send Drone To Delivery(READY FOR PICKING!) if status:free
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SecondButton_Click(object sender, RoutedEventArgs e)
+        {
+            //SECOND_BUTTON: Can be:1)Deliver Parcel(DELIVERING THE PACKAGE) if status:shipping 2)Send Drone To Delivery(READY FOR PICKING!) if status:free
+
+            //First Case:The status of the drone is free, the button is READY FOR PICKING!
+            if (droneDescription.Status == DroneStatuses.free)
+            {
+                MessageBox.Show("Your drone is going to pick the parcel attached to it", "On it's way!");
+                //Aller chercher parcel
             }
 
-        private void Button_FullyCharged(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Your drone is fully charged. We are going to unplug it", "Success!");
+            //Second case:The status of the drone is shipping,the button is DELIVERING THE PACKAGE
+            else if (droneDescription.Status == DroneStatuses.shipping)
+            {
+                MessageBox.Show("Your drone is delivering the parcel attached to it", "Mission almost accomplished");
+                //Aller delivrer parcel
+            }
+            else
+            {
+                return;
+            }
         }
+        #endregion
 
-        private void Button_GoPicking(object sender, RoutedEventArgs e)
+        #region Close_Click
+        /// <summary>
+        /// This button closes the window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ClickCloseDroneWindow(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Your drone is going to pick the parcel attached to it","On it's way!");
+            this.Close();
+            //    MessageBox.Show("Your drone is fully charged. We are going to unplug it", "Success!");
         }
+        #endregion
 
-        private void Button_CollectParcel(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Your drone is going to collect the parcel attached to it", "On it's way!");
 
-        }
-
-        private void Button_DeliveringParcel(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Your drone is delivering the parcel attached to it", "Mission almost accomplished");
-        }
     }
 }

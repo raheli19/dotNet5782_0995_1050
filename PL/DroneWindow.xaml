@@ -167,36 +167,47 @@
             <Grid.Background>
                 <ImageBrush ImageSource="/fond.png"/>
             </Grid.Background>
+            <!--Contents:
+      Content="UPDATE"     
+      Content="BATTERY LOW?"
+      Content="COLLECT PACKAGE"
+      Content="FULLY CHARGED?"
+      Content="READY FOR PICKING!"
+      Content="DELIVERING THE PACKAGE"-->
 
             <!--Update Button-->
-            <Button Content="UPDATE" HorizontalAlignment="Left" Background="Transparent" Margin="667,140,0,0" VerticalAlignment="Top" ToolTip="UPDATE" Height="41" Width="109" BorderBrush="Transparent" Click="Button_Update" Opacity="100" FontFamily="Cambria" FontSize="22" FontWeight="Bold" FontStyle="Italic">
+            <Button x:Name="UpdateButton" Content="UPDATE" HorizontalAlignment="Left" Background="Transparent" Margin="648,166,0,0" VerticalAlignment="Top" ToolTip="UPDATE" Height="51" Width="133" BorderBrush="Black" Click="ClickUpdate" Opacity="100" FontFamily="Cambria" FontSize="30" FontWeight="Bold" FontStyle="Italic">
 
             </Button>
 
-            <!--Send drone to charge Button-->
-            <Button Content="BATTERY LOW?" HorizontalAlignment="Left" Background="Transparent" Margin="509,249,0,0" VerticalAlignment="Top" ToolTip="Send Drone To Charge" Height="49" Width="187" BorderBrush="Transparent" Click="Button_SendToCharge" Opacity="100" FontFamily="Cambria" FontSize="22" FontWeight="Bold" FontStyle="Italic">
+            <!--FirstButton:Can be:1)Release from charge(FULLY CHARGED?) 2)Send drone to charge Button (BATTERY LOW?) 3)Collect delivery (COLLECT PACKAGE)-->
+            <Button Name="FirstButton"  HorizontalAlignment="Left" Background="Transparent" Margin="522,84,0,0" VerticalAlignment="Top"  Height="57" Width="245" BorderBrush="Black" Click="ClickFirstButton" Opacity="100" FontFamily="Cambria" FontSize="30" FontWeight="Bold" FontStyle="Italic">
 
             </Button>
 
-            <!--Collect a parcel-->
-            <Button Content="COLLECT PACKAGE" HorizontalAlignment="Left" Background="Transparent" Margin="566,69,0,0" VerticalAlignment="Top" ToolTip="Collect a parcel" Height="51" Width="186" BorderBrush="Transparent" Click="Button_CollectParcel" Opacity="100" FontFamily="Cambria" FontSize="22" FontWeight="Bold" FontStyle="Italic">
+            <!--SecondButton:Can be:1)Deliver Parcel(DELIVERING THE PACKAGE) 2)Send Drone To Delivery(READY FOR PICKING!)-->
+            <Button x:Name="SecondButton"  HorizontalAlignment="Left" Background="Transparent" Margin="446,237,0,0" VerticalAlignment="Top"  Height="61" Width="298" BorderBrush="Black" Click="SecondButton_Click" Opacity="100" FontFamily="Cambria" FontSize="30" FontWeight="Bold" FontStyle="Italic">
 
             </Button>
+
+            <!--CloseButton-->
+            <Button Name="CloseButton" Content="CLOSE" HorizontalAlignment="Left" Background="Transparent" Margin="472,10,0,0" VerticalAlignment="Top" ToolTip="Close the Window" Height="59" Width="130" BorderBrush="Black" Click="ClickCloseDroneWindow" Opacity="100" FontFamily="Cambria" FontWeight="Bold" FontStyle="Italic" FontSize="30">
+
+            </Button>
+
             <!--Get the drone out of its station-->
-            <Button Content="FULLY CHARGED?" HorizontalAlignment="Left" Background="Transparent" Margin="472,10,0,0" VerticalAlignment="Top" ToolTip="Fully charged" Height="59" Width="188" BorderBrush="Transparent" Click="Button_FullyCharged" Opacity="100" FontFamily="Cambria" FontWeight="Bold" FontStyle="Italic" FontSize="22">
-
-            </Button>
-
-            <!--Get the drone out of its station-->
-            <Button Content="READY FOR PICKING!" HorizontalAlignment="Left" Background="Transparent" Margin="566,0,0,0" VerticalAlignment="Center" ToolTip="Fully charged" Height="53" Width="225" BorderBrush="Transparent" Click="Button_FullyCharged" Opacity="100" FontFamily="Cambria" FontWeight="Bold" FontStyle="Italic" FontSize="22">
+            <!--
+            <Button x:Name="GoPickingButton"  HorizontalAlignment="Left" Background="Transparent" Margin="566,0,0,0" VerticalAlignment="Center" ToolTip="Fully charged" Height="53" Width="225" BorderBrush="Transparent" Click="Button_FullyCharged" Opacity="100" FontFamily="Cambria" FontWeight="Bold" FontStyle="Italic" FontSize="22">
 
             </Button>
 
 
+            -->
             <!--Delivering a package-->
-            <Button Content="DELIVERING THE PACKAGE" HorizontalAlignment="Left" Background="Transparent" Margin="347,298,0,0" VerticalAlignment="Top" ToolTip="Delivering the parcel" Height="48" Width="279" BorderBrush="Transparent" Click="Button_DeliveringParcel" Opacity="100" FontFamily="Cambria" FontWeight="Bold" FontStyle="Italic" FontSize="22">
+            <!--
+            <Button Name="DeliveringButton" HorizontalAlignment="Left" Background="Transparent" Margin="347,298,0,0" VerticalAlignment="Top" ToolTip="Delivering the parcel" Height="48" Width="279" BorderBrush="Transparent" Click="Button_DeliveringParcel" Opacity="100" FontFamily="Cambria" FontWeight="Bold" FontStyle="Italic" FontSize="22">
 
-            </Button>
+            </Button>-->
 
             <Label x:Name="Drone_Label"  HorizontalAlignment="Left" Margin="10,140,0,0" VerticalAlignment="Top" Height="284" Width="259"/>
             <!--  <Label Content="UPDATE" Width="109" FontSize="22" FontStyle="Italic" FontWeight="Bold" Margin="187,286,504,74"/>-->
