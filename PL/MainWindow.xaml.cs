@@ -16,7 +16,7 @@ using System.Windows.Shapes;
 //filtration avant adding obligatoire?
 // button close dans droneList window (a completer) et droneLIst pour upgrade
 // button qui annule l'ajout
-// garde le sinoun apres avoir ajoute un drone
+// garde le sinoun apres avoir ajoute un dronert
 // dans la droneWindow une possibilité de fermer la fenetre
 // ii => vii voir que tout marche comme il se doitttt
 // il faut diminuer le nb de buttons dans la upgrade drone
