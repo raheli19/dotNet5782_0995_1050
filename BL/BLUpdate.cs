@@ -371,8 +371,8 @@ namespace IBL
 
             DroneDescription myDrone = DroneList.Find(Drone => Drone.Id == droneId);  //finds the drone in the droneList in BL
             int index = DroneList.FindIndex(Drone => Drone.Id == droneId);
-            myDrone.loc = new Localisation();
-            collectDrone.initialLoc = new Localisation();
+            //myDrone.loc = new Localisation();
+           // collectDrone.initialLoc = new Localisation();
             if (myDrone == null)  //the drone is not among the drone List
             {
                 throw new IDNotFound("Drone not found");  //throws a BL exception
@@ -382,10 +382,13 @@ namespace IBL
                 DroneDescription updateDrone = DroneList[index];
                 updateDrone.battery -= BatteryAccToDistance(distance(collectDrone.initialLoc.latitude, collectDrone.initialLoc.longitude, collectDrone.myParcel.picking.latitude, collectDrone.myParcel.picking.longitude));
                 updateDrone.loc = collectDrone.myParcel.picking;
+                
                 DroneList[index] = updateDrone;
 
+                
                 IDAL.DO.Parcel parcelDal = p.ParcelById(collectDrone.myParcel.ID);
                 parcelDal.PickedUp = DateTime.Now;
+                
                 p.UpdateParcelFromBL(parcelDal);
                 //if ((parcelDal.Requested == DateTime.Now || parcelDal.Scheduled == DateTime.Now) && (parcelDal.PickedUp == DateTime.MinValue))
                 //{

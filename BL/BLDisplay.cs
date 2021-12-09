@@ -62,7 +62,9 @@ namespace IBL
             //the missing fields are:MaxWeight,Status,initialLoc,ParcelIndelivering
             DroneDescription tmp = new DroneDescription();
             tmp.loc = new Localisation();
-            tmp   = DroneList.Find(x => x.Id == droneId);
+           //IDAL.DO.DroneCharge droneChargeDAL= p.IEDroneChargeList().ToList().Find(x => x.DroneId == droneId);
+           // droneChargeDAL
+            tmp = DroneList.Find(x => x.Id == droneId);
             droneBL.MaxWeight = tmp.weight;
             droneBL.Status = tmp.Status;
             droneBL.initialLoc = tmp.loc;
@@ -95,7 +97,9 @@ namespace IBL
                             PID.picking = pickLoc;
                             PID.delivered = delLoc;
                             PID.distance = distance(PID.picking.latitude, PID.picking.longitude, PID.delivered.latitude, PID.delivered.longitude);
-                        }
+                            if (item.PickedUp != null)
+                                PID.deliveringStatus = true;
+                                    }
                     }
                     catch (Exception ex)
                     {

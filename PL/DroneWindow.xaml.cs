@@ -23,7 +23,7 @@ namespace PL
     {
         private IBL.IBL bl;
         private DroneDescription droneDescription = new DroneDescription();
-
+        //DroneListWindow dlw;
         ListView ListViewDrone;
 
         #region AddDrone
@@ -32,6 +32,7 @@ namespace PL
         {
             InitializeComponent();
             this.bl = bl;
+            //dlw = new DroneListWindow(bl);
             AddDroneGrid.Visibility = Visibility.Visible;
             UpdateDroneGrid.Visibility = Visibility.Hidden;
             this.comboWeightSelector.ItemsSource = Enum.GetValues(typeof(IBL.BO.WeightCategories));
@@ -78,8 +79,8 @@ namespace PL
             }
             MessageBox.Show("Success!", "Added the drone");
             ListViewDrone.ItemsSource = bl.displayDroneList();
-
-            this.Close();
+            //dlw.CheckFields();
+             this.Close();
         }
 
         #endregion
