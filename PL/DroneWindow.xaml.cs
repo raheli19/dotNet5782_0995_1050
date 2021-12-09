@@ -49,7 +49,7 @@ namespace PL
 
             if (comboWeightSelector.SelectedItem == null || comboStationSelector.SelectedItem == null || Drone_Id.Text == "" || Drone_Model.Text == "")
             {
-                MessageBox.Show("Please fill al the fields" , "WARNING", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Please fill al the fields", "WARNING", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
             string droneIdString = Drone_Id.Text;
@@ -70,7 +70,7 @@ namespace PL
             }
             catch (Exception ex)
             {
-                if(ex.Message=="ID is not valid")
+                if (ex.Message == "ID is not valid")
                     Drone_Id.Background = Brushes.Red;
                 MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
@@ -78,13 +78,13 @@ namespace PL
             }
             MessageBox.Show("Success!", "Added the drone");
             ListViewDrone.ItemsSource = bl.displayDroneList();
-            
+
             this.Close();
         }
 
         #endregion
-        #endregion  
-       
+        #endregion
+
         #region buttonsNotNeeded
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -107,16 +107,16 @@ namespace PL
         {
 
         }
-       
-            
+
+
         void OnClick6(object sender, RoutedEventArgs e)
         {
 
         }
 
         private void Button_Close(object sender, RoutedEventArgs e)
-        { 
-             this.checkFlag = true; // will allow us to close the window from the button and not from the "X"
+        {
+            this.checkFlag = true; // will allow us to close the window from the button and not from the "X"
             this.Close();
         }
 
@@ -182,17 +182,46 @@ namespace PL
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        /// 
+        string newName = "";
         private void ClickUpdate(object sender, RoutedEventArgs e)
         {
-            Update.Visibility = Visibility.Visible;
+            MessageBox.Show(/*"The model of your drone is being updated.*/"Please close this window and enter the new name.", "Success!", MessageBoxButton.OK, MessageBoxImage.Information);
+            UpdateTextBox.Visibility = Visibility.Visible;
+            UpdateLabel.Visibility = Visibility.Visible;
+            CheckUpdate.Visibility = Visibility.Visible;
 
-            MessageBox.Show("The model of your drone is being updated.", "Success!", MessageBoxButton.OK, MessageBoxImage.Information);
 
-            //updater le model du drone
+            UpdateLabel.Content = "Enter the new name:";
+
+
+
+        }
+
+        private void Check_Click_Update(object sender, RoutedEventArgs e)
+        {
+            newName = UpdateTextBox.Text;
+            if (newName == "")
+            {
+                MessageBox.Show("Please enter a name", "ERROR", MessageBoxButton.OK, MessageBoxImage.Information);
+
+            }
+            try
+            {
+                bl.updateDroneName(droneDescription.Id, newName);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            ListViewDrone.ItemsSource = bl.displayDroneList();
+            Drone_Label.Content = bl.displayDrone(droneDescription.Id);
+            UpdateTextBox.Visibility = Visibility.Hidden;
+            UpdateLabel.Visibility = Visibility.Hidden;
+            CheckUpdate.Visibility = Visibility.Hidden;
         }
         #endregion
-
-     
 
         #region FirstButton_Click
         /// <summary>
@@ -200,41 +229,87 @@ namespace PL
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+
+       
         private void ClickFirstButton(object sender, RoutedEventArgs e)
         {
-         //First case:The status of the drone is FREE, the button is BATTERY LOW?
-         //We send the drone to the closest station only if its status is FREE
+            //First case:The status of the drone is FREE, the button is BATTERY LOW?
+            //We send the drone to the closest station only if its status is FREE
             if (droneDescription.Status == DroneStatuses.free)
             {
 
                 MessageBox.Show("We are sending your drone to the closest base station.\n It will ready in a few moments. ", "Don't worry!", MessageBoxButton.OK, MessageBoxImage.Information);
-                bl.DroneToCharge(droneDescription.Id);
-                ListViewDrone.ItemsSource = bl.displayDroneList();
-                Drone_Label.Content = bl.displayDrone(droneDescription.Id);
-               // this.droneDescription = bl.dron
-              
-            }
-        //Second case:The status of the drone is MAINTENANCE,the button is FULLY CHARGED?
-        //We release the drone from its base station only if its status is MAINTENANCE
-        else if (droneDescription.Status == DroneStatuses.maintenance)
-            {
-                MessageBox.Show("Your drone is fully charged. We are going to unplug it", "Success!", MessageBoxButton.OK, MessageBoxImage.Information);
-                //Prendre le temps de chargement du mishtamesh:bl.DroneCharged(droneDescription.Id);
+                try
+                {
+                    bl.DroneToCharge(droneDescription.Id);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
                 ListViewDrone.ItemsSource = bl.displayDroneList();
                 Drone_Label.Content = bl.displayDrone(droneDescription.Id);
 
+
             }
-         //Third Case:The status of the drone is SHIPPING,the button is COLLECT PACKAGE
-         //The drone is going to collect a package
-         else if(droneDescription.Status==DroneStatuses.shipping)
+            //Second case:The status of the drone is MAINTENANCE,the button is FULLY CHARGED?
+            //We release the drone from its base station only if its status is MAINTENANCE
+            else if (droneDescription.Status == DroneStatuses.maintenance)
+            {
+                MessageBox.Show("Your drone is fully charged. We are going to unplug it.\nPlease close the window and enter the time of chargement", "Success!", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                UpdateTextBox.Visibility = Visibility.Visible;
+                UpdateLabel.Visibility = Visibility.Visible;
+                CheckFullyCharged.Visibility = Visibility.Visible;
+                UpdateLabel.Content = "Enter the new time of chargement:";
+              
+
+            }
+            //Third Case:The status of the drone is SHIPPING,the button is COLLECT PACKAGE
+            //The drone is going to collect a package
+            else if (droneDescription.Status == DroneStatuses.shipping)
             {
                 MessageBox.Show("Your drone is going to collect the parcel attached to it", "On it's way!", MessageBoxButton.OK, MessageBoxImage.Information);
-                bl.Assignement(droneDescription.Id);
+                try
+                {
+                    bl.Assignement(droneDescription.Id);
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
                 ListViewDrone.ItemsSource = bl.displayDroneList();
                 Drone_Label.Content = bl.displayDrone(droneDescription.Id);
             }
         }
         #endregion
+
+        private void Check_Click_FullyCharged(object sender, RoutedEventArgs e)
+        {
+            string chargeTimeString= UpdateTextBox.Text;
+            double chargeTime;
+            if(!double.TryParse(chargeTimeString,out chargeTime))
+            {
+                MessageBox.Show("Please enter an integer Id", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            try
+            {
+                bl.DroneCharged(droneDescription.Id, chargeTime);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            ListViewDrone.ItemsSource = bl.displayDroneList();
+            Drone_Label.Content = bl.displayDrone(droneDescription.Id);
+            UpdateTextBox.Visibility = Visibility.Hidden;
+            UpdateLabel.Visibility = Visibility.Hidden;
+            CheckFullyCharged.Visibility = Visibility.Hidden;
+        }
 
         #region SecondButton_Click
 
@@ -251,7 +326,15 @@ namespace PL
             if (droneDescription.Status == DroneStatuses.free)
             {
                 MessageBox.Show("Your drone is going to pick the parcel attached to it", "On it's way!");
-                bl.PickedUp(droneDescription.Id);
+                try
+                {
+                    bl.PickedUp(droneDescription.Id);
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
                 ListViewDrone.ItemsSource = bl.displayDroneList();
                 Drone_Label.Content = bl.displayDrone(droneDescription.Id);
             }
@@ -260,7 +343,15 @@ namespace PL
             else if (droneDescription.Status == DroneStatuses.shipping)
             {
                 MessageBox.Show("Your drone is delivering the parcel attached to it", "Mission almost accomplished");
-                bl.delivered(droneDescription.Id);
+                try
+                {
+                    bl.delivered(droneDescription.Id);
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
                 ListViewDrone.ItemsSource = bl.displayDroneList();
                 Drone_Label.Content = bl.displayDrone(droneDescription.Id);
             }
@@ -308,5 +399,7 @@ namespace PL
             comboStationSelector.SelectedItem = null;
             comboWeightSelector.SelectedItem = null;
         }
+
+        
     }
 }
