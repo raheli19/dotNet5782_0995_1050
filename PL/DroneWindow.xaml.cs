@@ -145,13 +145,14 @@ namespace PL
             }
             else
             {
+                
                 FirstButton.Content = "COLLECT PACKAGE";
                 FirstButton.ToolTip = "Collect delivery";
             }
 
             if (statusDrone == DroneStatuses.free)
             {
-                SecondButton.Content = "READY FOR PICKING!";
+                SecondButton.Content = "ASSIGN TO A PARCEL";
                 SecondButton.ToolTip = "Send drone to delivery";
             }
             else if (statusDrone == DroneStatuses.shipping)
@@ -273,7 +274,7 @@ namespace PL
                 MessageBox.Show("Your drone is going to collect the parcel attached to it", "On it's way!", MessageBoxButton.OK, MessageBoxImage.Information);
                 try
                 {
-                    bl.Assignement(droneDescription.Id);
+                    bl.PickedUp(droneDescription.Id);
                 }
                 catch(Exception ex)
                 {
@@ -320,15 +321,15 @@ namespace PL
         /// <param name="e"></param>
         private void SecondButton_Click(object sender, RoutedEventArgs e)
         {
-            //SECOND_BUTTON: Can be:1)Deliver Parcel(DELIVERING THE PACKAGE) if status:shipping 2)Send Drone To Delivery(READY FOR PICKING!) if status:free
+            //SECOND_BUTTON: Can be:1)Deliver Parcel(DELIVERING THE PACKAGE) if status:shipping 2)Assign a drone to a parcel if status:free
 
             //First Case:The status of the drone is free, the button is READY FOR PICKING!
             if (droneDescription.Status == DroneStatuses.free)
             {
-                MessageBox.Show("Your drone is going to pick the parcel attached to it", "On it's way!");
+                MessageBox.Show("We are going to assign the drone to a parcel", "On it's way!");
                 try
                 {
-                    bl.PickedUp(droneDescription.Id);
+                    bl.Assignement(droneDescription.Id);
                 }
                 catch(Exception ex)
                 {
