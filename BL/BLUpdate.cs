@@ -171,6 +171,8 @@ namespace IBL
                 }
 
             }
+            else if (blDrone.Status == DroneStatuses.maintenance)
+                throw new NotAvailable("The drone is already charging!");
             else
                 throw new NotAvailable("The drone isn't avaiblable!");
         }
