@@ -434,7 +434,7 @@ namespace IBL
                 IDAL.DO.Parcel prcel = p.FindParcelAssociatedWithDrone(DroneId);
 
 
-                if (prcel.PickedUp == DateTime.Now && prcel.Delivered == DateTime.MinValue)
+                if (prcel.PickedUp !=null && prcel.Delivered == null)
                 {
 
                     int targetId = prcel.TargetId;

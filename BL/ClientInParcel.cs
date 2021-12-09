@@ -15,7 +15,7 @@ namespace IBL
             {
                 String result = "";
                 result += $"The client's id is {ID},\n";
-                result += $"The client's name is {name},\n";
+                result += $"The client's name is {name}";
                 return result;
             }
         }

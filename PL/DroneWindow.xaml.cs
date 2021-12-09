@@ -133,6 +133,7 @@ namespace PL
             AddDroneGrid.Visibility = Visibility.Hidden;
             UpdateDroneGrid.Visibility = Visibility.Visible;
             Drone_Label.Content = bl.displayDrone(droneDescription.Id);
+            Drones_Details.Visibility = Visibility.Visible;
             DroneStatuses statusDrone = droneDescription.Status;
             if (statusDrone == DroneStatuses.maintenance)
             {
@@ -308,6 +309,7 @@ namespace PL
             }
             ListViewDrone.ItemsSource = bl.displayDroneList();
             Drone_Label.Content = bl.displayDrone(droneDescription.Id);
+           
             UpdateTextBox.Visibility = Visibility.Hidden;
             UpdateLabel.Visibility = Visibility.Hidden;
             CheckFullyCharged.Visibility = Visibility.Hidden;
