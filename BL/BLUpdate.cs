@@ -130,13 +130,14 @@ namespace IBL
                 Station nearestStation = NearestStation(blDrone.loc, true);
                 double d = distance(blDrone.loc.latitude, blDrone.loc.longitude, nearestStation.Loc.latitude, nearestStation.Loc.longitude);
                 bool canGoToCharge = false;
-                if (DistanceAccToBattery(blDrone.battery) >= d)
+                double distacctobatt = DistanceAccToBattery(blDrone.battery);
+                if (distacctobatt >= d)
                     canGoToCharge = true;
                 else
                     throw new NotEoughBattery("Can not send the drone to the station, it doesn't have enough battery!");
                 if (canGoToCharge == true)
                 {
-                    blDrone.battery -= BatteryAccToDistance(DistanceAccToBattery(blDrone.battery));// substract the account of percetn from the battery to go to the nearest station
+                    blDrone.battery = BatteryAccToDistance(distacctobatt-d);// substract the account of percetn from the battery to go to the nearest station
                     DroneDescription tempDD = new DroneDescription();//UPDATE DroneDescriptionLIST IN BL
                     tempDD = blDrone;
                     tempDD.loc = nearestStation.Loc;

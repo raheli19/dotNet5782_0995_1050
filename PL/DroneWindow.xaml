@@ -190,8 +190,8 @@
 
             </Button>
 
-            <TextBox x:Name="UpdateTextBox" Visibility="Hidden" HorizontalAlignment="Left" Height="46" Margin="283,146,0,0"  Background="White" TextWrapping="Wrap" VerticalAlignment="Top" Width="147"/>
-            <Label x:Name="UpdateLabel"  HorizontalAlignment="Left" Margin="272,103,0,0" VerticalAlignment="Top" Height="38" Width="168" FontSize="16" FontWeight="Bold" FontStyle="Italic" BorderThickness="1,1,1,1" BorderBrush="Black" Foreground="#FF530C0C" Visibility="Hidden"/>
+            <TextBox x:Name="UpdateTextBox" Visibility="Hidden" HorizontalAlignment="Left" Height="28" Margin="283,164,0,0"  Background="White" TextWrapping="Wrap" VerticalAlignment="Top" Width="147"/>
+            <Label x:Name="UpdateLabel"  HorizontalAlignment="Left" Margin="215,121,0,0" VerticalAlignment="Top" Height="38" Width="302" FontSize="16" FontWeight="Bold" FontStyle="Italic" BorderThickness="1,1,1,1" BorderBrush="Black" Foreground="#FF530C0C" Visibility="Hidden"/>
             <Button x:Name="CheckUpdate" HorizontalAlignment="Left" Height="28" Margin="396,164,0,0" VerticalAlignment="Top" Width="34" Visibility="Hidden" Click="Check_Click_Update">
                 <Button.Background>
                     <ImageBrush ImageSource="/checked.png"/>

@@ -68,10 +68,11 @@ namespace IBL
         {
             //Le drone perd 1% en 7 min  et la vitesse du drone de 50 km/h
             // le drone gagne 1% en 7 min
-            double timeInHours = (7 / 60);
-            double speed = 50;  //50km/h
-            double totalTime = timeInHours * battery;
-            double distance = totalTime * speed;
+            //double timeInHours = (7 / 60);
+            //double speed = 50;  //50km/h
+            //double totalTime = timeInHours * battery;
+            //double distance = totalTime * speed;
+            double distance = battery / 0.0005;
             return distance;
 
         }
@@ -80,9 +81,9 @@ namespace IBL
         #region BatteryAccToTime
         public double BatteryAccToTime(double time, double battery)
         {
-            battery+= time*7;
-            if (battery >= 100)
-                return 100;
+            double timeInHour = time / 60;
+            double distance = 150* timeInHour;
+            battery += distance * 0.5;
             return battery;
 
         }
@@ -91,8 +92,7 @@ namespace IBL
         #region BatteryAccToDistance
         public double BatteryAccToDistance(double distance)
         {
-            double time = distance / 50;
-            double batteryLost = time / (7 / 60);
+            double batteryLost = distance * 0.0005;
             return batteryLost;
         }
         #endregion

@@ -262,7 +262,7 @@ namespace PL
                 UpdateTextBox.Visibility = Visibility.Visible;
                 UpdateLabel.Visibility = Visibility.Visible;
                 CheckFullyCharged.Visibility = Visibility.Visible;
-                UpdateLabel.Content = "Enter the new time of chargement:";
+                UpdateLabel.Content = "Enter the time of chargement (in min):";
               
 
             }
