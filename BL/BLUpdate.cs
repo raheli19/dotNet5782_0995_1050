@@ -197,6 +197,8 @@ namespace IBL
             // upadte the drone in the bl DroneList
             droneBL.Status = DroneStatuses.free;
             droneBL.battery = BatteryAccToTime(time, droneBL.battery);
+            if (droneBL.battery >= 100)
+                droneBL.battery = 100; 
             DroneList.Add(droneBL);
 
             //update station
@@ -264,7 +266,7 @@ namespace IBL
             double batteryNeeded = 0;
             for (int i = (int)Priorities.emergency; i >= (int)Priorities.regular; i--)
             {
-                priorityLevelList = parcelWithNoDrones.ToList().FindAll(parcel => parcel.priority == (Priorities)i);
+                priorityLevelList = parcelWithNoDrones.ToList().FindAll(parcel => parcel.priority == (Priorities)i && parcel.Status==ParcelStatus.requested);
                 for (int j = (int)connectDrone.MaxWeight; j >= (int)WeightCategories.low; j--)
                 {
                     weightLevelList = priorityLevelList.ToList().FindAll(parcel => parcel.weight == (WeightCategories)j);
@@ -454,7 +456,8 @@ namespace IBL
                     p.AddParcelFromBL(tempParcel);
 
                 }
-
+                else
+                    throw new InvalidOperationException("There is no parcel to deliver");
             }
             catch (Exception ex)
             {
