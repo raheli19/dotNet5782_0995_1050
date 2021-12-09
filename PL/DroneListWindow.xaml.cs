@@ -88,6 +88,8 @@ namespace PL
         {
             DroneWindow subWindow = new DroneWindow(bl, DronesListView);
             subWindow.Show();
+            
+
 
         }
         #endregion
