@@ -32,7 +32,7 @@ namespace PL
         IEnumerable<DroneDescription> IEDrones = new List<DroneDescription>();
         public DroneListWindow(IBL.IBL bl)
         {
-           
+
             InitializeComponent();
             this.bl = bl;
             IEDrones = bl.displayDroneList();
@@ -45,7 +45,7 @@ namespace PL
         bool weightFlag= false;
         bool statusFlag = false;
         //private object isDataDirty;
-        private bool checkFlag= false;
+        private bool checkFlag = false;
 
         #region SelectStatut
         private void comboStatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -92,7 +92,7 @@ namespace PL
 
 
         }
-        #endregion
+        #endregion 
 
         private void DroneListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {

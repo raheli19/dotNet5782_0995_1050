@@ -76,7 +76,7 @@ namespace PL
                 return;
 
             }
-            MessageBox.Show("Success!", "Added the drone");
+            MessageBox.Show("Success!", "Added the drone",MessageBoxButton.OK,MessageBoxImage.Information);
             ListViewDrone.ItemsSource = bl.displayDroneList();
 
             this.Close();
