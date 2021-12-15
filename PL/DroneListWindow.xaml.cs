@@ -17,7 +17,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using IBL.BO;
+using BO;
 
 namespace PL
 {
@@ -26,7 +26,7 @@ namespace PL
     /// </summary>
     public partial class DroneListWindow : Window
     {
-        private IBL.IBL bl;
+        private BLApi.IBL bl;
         DroneStatuses status = new DroneStatuses();
         WeightCategories weight = new WeightCategories();
         IEnumerable<DroneDescription> IEDrones = new List<DroneDescription>();
@@ -36,15 +36,15 @@ namespace PL
                 
         }
 
-        public DroneListWindow(IBL.IBL bl)
+        public DroneListWindow(BLApi.IBL bl)
         {
 
             InitializeComponent();
             this.bl = bl;
             IEDrones = bl.displayDroneList();
             DronesListView.ItemsSource = IEDrones;
-            this.comboStatusSelector.ItemsSource = Enum.GetValues(typeof(IBL.BO.DroneStatuses));
-            this.comboWeightSelector.ItemsSource = Enum.GetValues(typeof(IBL.BO.WeightCategories));
+            this.comboStatusSelector.ItemsSource = Enum.GetValues(typeof(BO.DroneStatuses));
+            this.comboWeightSelector.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
         }
         static public DroneStatuses droneStat = 0;
         static public WeightCategories weightStat = 0;

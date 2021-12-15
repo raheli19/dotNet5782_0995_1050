@@ -1,4 +1,8 @@
-﻿using System;
+﻿//triage de la liste
+// rouge qui s'enleve quand on ferme la fenetre du message 
+
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -12,7 +16,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using IBL.BO;
+using BO;
 
 namespace PL
 {
@@ -21,21 +25,21 @@ namespace PL
     /// </summary>
     public partial class DroneWindow : Window
     {
-        private IBL.IBL bl;
+        private BLApi.IBL bl;
         private DroneDescription droneDescription = new DroneDescription();
         //DroneListWindow dlw;
         ListView ListViewDrone;
 
         #region AddDrone
         // ctor to add a drone
-        public DroneWindow(IBL.IBL bl, object DroneListWindow)
+        public DroneWindow(BLApi.IBL bl, object DroneListWindow)
         {
             InitializeComponent();
             this.bl = bl;
             //dlw = new DroneListWindow(bl);
             AddDroneGrid.Visibility = Visibility.Visible;
             UpdateDroneGrid.Visibility = Visibility.Hidden;
-            this.comboWeightSelector.ItemsSource = Enum.GetValues(typeof(IBL.BO.WeightCategories));
+            this.comboWeightSelector.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
             this.comboStationSelector.ItemsSource = bl.DisplayStationList();
             ListViewDrone = (ListView)DroneListWindow;
 
@@ -64,7 +68,7 @@ namespace PL
             string droneModel = Drone_Model.Text;
             WeightCategories droneWeight = (WeightCategories)comboWeightSelector.SelectedItem;
             StationDescription stationId = (StationDescription)comboStationSelector.SelectedItem;
-            IBL.BO.Drone drone = new Drone() { ID = droneIdInt, Model = droneModel, MaxWeight = droneWeight };
+            BO.Drone drone = new Drone() { ID = droneIdInt, Model = droneModel, MaxWeight = droneWeight };
             try
             {
                 bl.addDrone(drone, stationId.Id);
@@ -77,10 +81,10 @@ namespace PL
                 return;
 
             }
-            MessageBox.Show("Success!", "Added the drone",MessageBoxButton.OK,MessageBoxImage.Information);
+            MessageBox.Show("Success!", "Added the drone", MessageBoxButton.OK, MessageBoxImage.Information);
             ListViewDrone.ItemsSource = bl.displayDroneList();
             //dlw.CheckFields();
-             this.Close();
+            this.Close();
         }
 
         #endregion
@@ -125,7 +129,7 @@ namespace PL
 
         #region constructorUPGRADE
         //ctor to upgrade the drone
-        public DroneWindow(object selectedItem, IBL.IBL bl, object dronesListView)
+        public DroneWindow(object selectedItem, BLApi.IBL bl, object dronesListView)
         {
             InitializeComponent();
             this.bl = bl;
@@ -147,7 +151,7 @@ namespace PL
             }
             else
             {
-                
+
                 FirstButton.Content = "COLLECT PACKAGE";
                 FirstButton.ToolTip = "Collect delivery";
             }
@@ -233,7 +237,7 @@ namespace PL
         /// <param name="sender"></param>
         /// <param name="e"></param>
 
-       
+
         private void ClickFirstButton(object sender, RoutedEventArgs e)
         {
             //First case:The status of the drone is FREE, the button is BATTERY LOW?
@@ -266,7 +270,7 @@ namespace PL
                 UpdateLabel.Visibility = Visibility.Visible;
                 CheckFullyCharged.Visibility = Visibility.Visible;
                 UpdateLabel.Content = "Enter the time of chargement (in min):";
-              
+
 
             }
             //Third Case:The status of the drone is SHIPPING,the button is COLLECT PACKAGE
@@ -278,7 +282,7 @@ namespace PL
                 {
                     bl.PickedUp(droneDescription.Id);
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
@@ -291,9 +295,9 @@ namespace PL
 
         private void Check_Click_FullyCharged(object sender, RoutedEventArgs e)
         {
-            string chargeTimeString= UpdateTextBox.Text;
+            string chargeTimeString = UpdateTextBox.Text;
             double chargeTime;
-            if(!double.TryParse(chargeTimeString,out chargeTime))
+            if (!double.TryParse(chargeTimeString, out chargeTime))
             {
                 MessageBox.Show("Please enter an integer Id", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
@@ -309,7 +313,7 @@ namespace PL
             }
             ListViewDrone.ItemsSource = bl.displayDroneList();
             Drone_Label.Content = bl.displayDrone(droneDescription.Id);
-           
+
             UpdateTextBox.Visibility = Visibility.Hidden;
             UpdateLabel.Visibility = Visibility.Hidden;
             CheckFullyCharged.Visibility = Visibility.Hidden;
@@ -334,7 +338,7 @@ namespace PL
                 {
                     bl.Assignement(droneDescription.Id);
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
@@ -351,7 +355,7 @@ namespace PL
                 {
                     bl.delivered(droneDescription.Id);
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
@@ -394,7 +398,7 @@ namespace PL
 
         #endregion
 
-      
+
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
@@ -404,6 +408,6 @@ namespace PL
             comboWeightSelector.SelectedItem = null;
         }
 
-        
+
     }
 }

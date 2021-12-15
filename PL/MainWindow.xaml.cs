@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using BLApi;
 
 
 
@@ -28,17 +28,20 @@ namespace PL
     /// </summary>
     public partial class MainWindow : Window
     {
-        private IBL.IBL bl;
+        internal readonly BLApi.IBL bl = BLFactory.GetBL();
         public MainWindow()
         {
-            bl = new IBL.BL();
+
+           
             InitializeComponent();
+            bl.addClient(new BO.Client
+
         }
 
         private void MainButton_OpenDroneList(object sender, RoutedEventArgs e)
         {
-            DroneListWindow subWindow = new DroneListWindow(bl);
-            subWindow.Show();
+            new DroneListWindow(bl).Show();
+            
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)

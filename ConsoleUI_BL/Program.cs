@@ -1,6 +1,7 @@
 ﻿using System;
-using IBL.BO;
+using BO;
 using BL;
+using BLApi;
 
 namespace ConsoleUI_BL
 {
@@ -13,15 +14,8 @@ namespace ConsoleUI_BL
 
         public static void Main()
         {
-            IBL.IBL obj = new IBL.BL();
-            //try
-            //{
-                //obj= new BL.BL();
-            //}
-            //catch (Exception ex)
-            //{
-            //    Console.WriteLine(ex);
-            //}
+            /*static*/ IBL obj = BLFactory.GetBL();
+
 
 
             option options;
@@ -46,7 +40,7 @@ namespace ConsoleUI_BL
                                     options = 0;
                                     break;
                                 case entities.STATION:
-                                    IBL.BO.Station myStation = new IBL.BO.Station();
+                                    Station myStation = new Station();
                                     myStation.Loc = new ();
                                     int myId;
                                     string myName;
@@ -67,12 +61,12 @@ namespace ConsoleUI_BL
                                     break;
 
                                 case entities.DRONE:
-                                    IBL.BO.Drone myDrone = new IBL.BO.Drone();
+                                    Drone myDrone = new Drone();
                                     Console.WriteLine("You chose to add a Drone.\nPlease enter its ID, Model, MaxWeight,ID of station :");
                                     int.TryParse(Console.ReadLine(), out int DID); //DroneID
                                     string myModel;
                                     myModel = Console.ReadLine();
-                                    myDrone.MaxWeight = (IBL.BO.WeightCategories)int.Parse(Console.ReadLine());
+                                    myDrone.MaxWeight = (WeightCategories)int.Parse(Console.ReadLine());
                                     int.TryParse(Console.ReadLine(), out int NumSt);
                                     myDrone.ID = DID;
                                     myDrone.Model = myModel;
@@ -81,7 +75,7 @@ namespace ConsoleUI_BL
 
 
                                 case entities.CLIENT:
-                                    IBL.BO.Client client = new Client();
+                                    Client client = new Client();
                                     client.ClientLoc = new Localisation();
                                     Console.WriteLine("You chose to add a Client.\nPlease enter his ID, Name, Phone, and his location: latitude and longitude:\n");
                                     int.TryParse(Console.ReadLine(), out int CID);//ClientID
@@ -99,14 +93,14 @@ namespace ConsoleUI_BL
                                     break;
 
                                 case entities.PARCEL:
-                                    IBL.BO.Parcel myParcel = new Parcel();
+                                    Parcel myParcel = new Parcel();
                                     myParcel.Sender = new ClientInParcel();
                                     myParcel.Target = new ClientInParcel();
                                     Console.WriteLine("You chose to add a Parcel.\nPlease enter its SenderId, TargetId, MaxWeight, Priority:");
                                     int.TryParse(Console.ReadLine(), out int senderId);
                                     int.TryParse(Console.ReadLine(), out int targetId);
-                                    myParcel.Weight = (IBL.BO.WeightCategories)int.Parse(Console.ReadLine());
-                                    myParcel.Priority = (IBL.BO.Priorities)int.Parse(Console.ReadLine());
+                                    myParcel.Weight = (WeightCategories)int.Parse(Console.ReadLine());
+                                    myParcel.Priority = (Priorities)int.Parse(Console.ReadLine());
                                     myParcel.Sender.ID = senderId;
                                     myParcel.Target.ID = targetId;
                                     myParcel.Requested = DateTime.Now; //A verifier
