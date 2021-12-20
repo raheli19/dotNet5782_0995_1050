@@ -10,6 +10,7 @@ namespace Dal
 {
     sealed partial class DalObject : IDal //internal
     {
+        
         #region Singleton
         static readonly IDal instance = new DalObject();
         public static IDal Instance { get => instance; }

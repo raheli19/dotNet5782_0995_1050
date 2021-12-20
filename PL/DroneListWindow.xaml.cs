@@ -17,6 +17,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Collections.ObjectModel;
 using BO;
 
 namespace PL
@@ -31,15 +32,24 @@ namespace PL
         WeightCategories weight = new WeightCategories();
         IEnumerable<DroneDescription> IEDrones = new List<DroneDescription>();
 
+        private ObservableCollection<BO.Drone> boDroneList = new ObservableCollection<BO.Drone>();
+
         public DroneListWindow()
         {
-                
+
         }
 
         public DroneListWindow(BLApi.IBL bl)
         {
 
             InitializeComponent();
+            DataContext = boDroneList;
+            foreach (var item in bl.displayDroneList())
+            {
+                boDroneList.Add(bl.displayDrone((item.Id)));
+
+
+            }
             this.bl = bl;
             IEDrones = bl.displayDroneList();
             DronesListView.ItemsSource = IEDrones;
@@ -48,7 +58,7 @@ namespace PL
         }
         static public DroneStatuses droneStat = 0;
         static public WeightCategories weightStat = 0;
-        public bool weightFlag= false;
+        public bool weightFlag = false;
         public bool statusFlag = false;
         //private object isDataDirty;
         private bool checkFlag = false;
@@ -56,11 +66,16 @@ namespace PL
         #region SelectStatut
         private void comboStatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            FilterStatus();
+        }
+        private void FilterStatus()
+        {
             if (comboStatusSelector.SelectedItem == null)
             {
                 return;
             }
-            /*DroneStatuses*/ status = (DroneStatuses)comboStatusSelector.SelectedItem;
+            /*DroneStatuses*/
+            status = (DroneStatuses)comboStatusSelector.SelectedItem;
             droneStat = status;
             statusFlag = true;
             if (weightFlag)
@@ -68,10 +83,18 @@ namespace PL
             else
                 this.DronesListView.ItemsSource = IEDrones.Where(x => x.Status == status);
         }
+
         #endregion
 
+
+
+
         #region WeightSelector
-        private void comboWeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void ComboWeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            FilterWeight();
+        }
+        private void FilterWeight()
         {
             if (comboWeightSelector.SelectedItem == null)
             {
@@ -82,7 +105,7 @@ namespace PL
             weightStat = weight;
             weightFlag = true;
             if (statusFlag)
-                this.DronesListView.ItemsSource = IEDrones.Where(x => x.weight == weight && x.Status==droneStat);
+                this.DronesListView.ItemsSource = IEDrones.Where(x => x.weight == weight && x.Status == droneStat);
             else
                 this.DronesListView.ItemsSource = IEDrones.Where(x => x.weight == weight);
 
@@ -105,12 +128,15 @@ namespace PL
         private void button_addDrone(object sender, RoutedEventArgs e)
         {
             DroneWindow subWindow = new DroneWindow(bl, DronesListView);
-            subWindow.Show();
-            
 
+            subWindow.ShowDialog();
+            subWindow.Hide();
+            //comboStatusSelector_SelectionChanged(comboStatusSelector, new SelectionChangedEventArgs());
+            FilterStatus();
+            FilterWeight();
 
         }
-        #endregion 
+        #endregion
 
         private void DroneListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -119,7 +145,7 @@ namespace PL
             comboWeightSelector.SelectedItem = null;
         }
 
-       
+
 
         #region closeFunctions
         private void Button_Close(object sender, RoutedEventArgs e)
@@ -129,11 +155,11 @@ namespace PL
         }
         private void OnClosing(object sender, CancelEventArgs e)
         {
-            
+
             if (this.checkFlag)// call from the button
                 e.Cancel = false;
             else
-                 e.Cancel = true;// call from the "X", we don't want to close
+                e.Cancel = true;// call from the "X", we don't want to close
 
         }
         #endregion
@@ -157,3 +183,4 @@ namespace PL
         }
     }
 }
+

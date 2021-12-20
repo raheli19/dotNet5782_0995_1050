@@ -42,7 +42,7 @@ namespace PL
             this.comboWeightSelector.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
             this.comboStationSelector.ItemsSource = bl.DisplayStationList();
             ListViewDrone = (ListView)DroneListWindow;
-
+            
         }
         private bool checkFlag = false;
 
