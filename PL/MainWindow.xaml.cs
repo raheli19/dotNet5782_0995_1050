@@ -48,5 +48,15 @@ namespace PL
         {
 
         }
+
+        private void MainButton_ClientList(object sender, RoutedEventArgs e)
+        {
+            new ClientListWindow(bl).Show();
+        }
+
+        private void MainButton_OpenParcelList(object sender, RoutedEventArgs e)
+        {
+            //new ParcelListWindow(bl).Show();
+        }
     }
 }

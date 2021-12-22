@@ -26,6 +26,7 @@ namespace PL
     public partial class DroneWindow : Window
     {
         private BLApi.IBL bl;
+        BO.Drone dataCdrone = new BO.Drone();
         private DroneDescription droneDescription = new DroneDescription();
         //DroneListWindow dlw;
         ListView ListViewDrone;
@@ -36,6 +37,7 @@ namespace PL
         {
             InitializeComponent();
             this.bl = bl;
+            DataContext = dataCdrone;
             //dlw = new DroneListWindow(bl);
             AddDroneGrid.Visibility = Visibility.Visible;
             UpdateDroneGrid.Visibility = Visibility.Hidden;
@@ -57,7 +59,7 @@ namespace PL
                 MessageBox.Show("Please fill al the fields", "WARNING", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
-            string droneIdString = Drone_Id.Text;
+            string droneIdString = Drone_Id.Text;// to check if it's an integer
             int droneIdInt;
             if (!int.TryParse(droneIdString, out droneIdInt))
             {
@@ -65,13 +67,13 @@ namespace PL
                 MessageBox.Show("Please enter an integer Id", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            string droneModel = Drone_Model.Text;
-            WeightCategories droneWeight = (WeightCategories)comboWeightSelector.SelectedItem;
+            //string droneModel = Drone_Model.Text;
+            //WeightCategories droneWeight = (WeightCategories)comboWeightSelector.SelectedItem;
             StationDescription stationId = (StationDescription)comboStationSelector.SelectedItem;
-            BO.Drone drone = new Drone() { ID = droneIdInt, Model = droneModel, MaxWeight = droneWeight };
+            //BO.Drone drone = new Drone() { ID = droneIdInt, Model = droneModel, MaxWeight = droneWeight };
             try
             {
-                bl.addDrone(drone, stationId.Id);
+                bl.addDrone(dataCdrone, stationId.Id);
             }
             catch (Exception ex)
             {
@@ -95,7 +97,7 @@ namespace PL
         {
 
         }
-        #endregion
+        
 
         private void ComboBox_WeightSelection(object sender, SelectionChangedEventArgs e)
         {
@@ -118,7 +120,7 @@ namespace PL
         {
 
         }
-
+        #endregion
         private void Button_Close(object sender, RoutedEventArgs e)
         {
             this.checkFlag = true; // will allow us to close the window from the button and not from the "X"
@@ -133,6 +135,7 @@ namespace PL
         {
             InitializeComponent();
             this.bl = bl;
+            DataContext = dataCdrone;
             this.droneDescription = (DroneDescription)selectedItem;
             AddDroneGrid.Visibility = Visibility.Hidden;
             UpdateDroneGrid.Visibility = Visibility.Visible;
@@ -190,7 +193,7 @@ namespace PL
         /// <param name="sender"></param>
         /// <param name="e"></param>
         /// 
-        string newName = "";
+       // string newName = "";
         private void ClickUpdate(object sender, RoutedEventArgs e)
         {
             MessageBox.Show(/*"The model of your drone is being updated.*/"Please close this window and enter the new name.", "Success!", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -207,15 +210,15 @@ namespace PL
 
         private void Check_Click_Update(object sender, RoutedEventArgs e)
         {
-            newName = UpdateTextBox.Text;
-            if (newName == "")
+            
+            if (droneDescription.Model == "")
             {
                 MessageBox.Show("Please enter a name", "ERROR", MessageBoxButton.OK, MessageBoxImage.Information);
 
             }
             try
             {
-                bl.updateDroneName(droneDescription.Id, newName);
+                bl.updateDroneName(droneDescription.Id, dataCdrone.Model);
             }
             catch (Exception ex)
             {
