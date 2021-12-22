@@ -34,7 +34,7 @@ namespace PL
 
            
             InitializeComponent();
-            bl.addClient(new BO.Client
+            
 
         }
 

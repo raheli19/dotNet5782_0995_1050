@@ -14,11 +14,11 @@ namespace Dal
         #region Singleton
         static readonly IDal instance = new DalObject();
         public static IDal Instance { get => instance; }
-        DalObject() { }
+        //DalObject() { }
         #endregion
 
 
-        //public DalObject() { DataSource.Initialize(); }//constructor
+         DalObject() { DataSource.Initialize(); }//constructor
 
         static Random rand = new Random();
 

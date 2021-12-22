@@ -25,7 +25,7 @@ namespace BL
         static Random rand = new Random();
         double BatteryFree, BatteryLightWeight, BatteryMiddleWeight, BatteryHeavyWeight, ChargingDroneRate;
 
-        internal IDal p;
+        internal IDal p=DalFactory.GetDal();
         help h = new help();
 
         List<DroneDescription> DroneList = new List<DroneDescription>();
@@ -33,8 +33,7 @@ namespace BL
         BL()
         {
             //constructor of the BL file
-            p = DalFactory.GetDal();
-
+           
             
 
            double[] BatteryUse = p.ElectricityUse();

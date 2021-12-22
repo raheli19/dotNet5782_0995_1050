@@ -1,0 +1,83 @@
+﻿<Window x:Class="PL.SignUpSignIn"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL"
+        mc:Ignorable="d"
+        Title="SignUpSignIn" Height="450" Width="800">
+    <Grid Margin="-2,0,2,0">
+        <!--New Client Region-->
+        <Button Content="Sign Up" Margin="211,155,461,216" Background="{x:Null}" FontFamily="Cambria" FontWeight="Bold" FontSize="22" Click="button_SignUp_Click">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Ellipse Stroke="Black"  
+                       StrokeThickness="0">
+                            <Ellipse.Fill>
+                                <RadialGradientBrush>
+                                    <GradientStop Offset="0"  
+                                        Color="#FFB3A0E0" />
+
+                                    <RadialGradientBrush.Transform>
+                                        <TransformGroup>
+                                            <ScaleTransform ScaleY="0.65" />
+                                        </TransformGroup>
+                                    </RadialGradientBrush.Transform>
+                                </RadialGradientBrush>
+                            </Ellipse.Fill>
+                        </Ellipse>
+                        <ContentPresenter HorizontalAlignment="Center"  
+                                VerticalAlignment="Center"/>
+                    </Grid>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+
+
+        <TextBlock Text="New Client" Width="121" Height="53" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,160,0,0" TextAlignment="Center" Foreground="#FFE5D5D5">
+            <TextBlock.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="#FF8245D1" Offset="1"/>
+                </LinearGradientBrush>
+            </TextBlock.Background>
+            <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Foreground" Value="Black"></Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Foreground" Value="Beige" />
+                            <Setter Property="TextDecorations" Value="Underline" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+        <!--Client already exists Region-->
+        <Button x:Name="button_SignIn" Content="Sign In" HorizontalAlignment="Left" Margin="191,284,0,0" VerticalAlignment="Top" Height="53" Width="84" FontSize="22" Click="button_SignIn_Click" Background="#FF965656"/>
+        <TextBlock Text="Already exists"  Width="121" Height="45" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="10,279,0,0" TextAlignment="Center" Foreground="#FFE6DADA">
+            <TextBlock.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="#FFC46D93" Offset="1"/>
+                </LinearGradientBrush>
+            </TextBlock.Background>
+            <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Foreground" Value="Black"></Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Foreground" Value="Beige" />
+                            <Setter Property="TextDecorations" Value="Underline" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+
+
+
+    </Grid>
+</Window>

@@ -64,7 +64,7 @@ namespace PL
         private bool checkFlag = false;
 
         #region SelectStatut
-        private void comboStatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void comboStatusSelector_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
             FilterStatus();
         }
@@ -90,7 +90,7 @@ namespace PL
 
 
         #region WeightSelector
-        private void ComboWeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void comboWeightSelector_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
             FilterWeight();
         }
@@ -181,6 +181,8 @@ namespace PL
             DronesListView.ItemsSource = IEDrones;
 
         }
+
+     
     }
 }
 

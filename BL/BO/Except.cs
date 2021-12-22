@@ -96,7 +96,7 @@ namespace BO
 
     #region IdNotFound
     [Serializable]
-    internal class IDNotFound : Exception
+    public class IDNotFound : Exception
     {
         public IDNotFound()
         {
