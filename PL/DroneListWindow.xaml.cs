@@ -30,7 +30,7 @@ namespace PL
         private BLApi.IBL bl;
         DroneStatuses status = new DroneStatuses();
         WeightCategories weight = new WeightCategories();
-        IEnumerable<DroneDescription> IEDrones = new List<DroneDescription>();
+        IEnumerable<DroneDescription> droneListFromBo = new List<DroneDescription>();
 
         private ObservableCollection<BO.Drone> boDroneList = new ObservableCollection<BO.Drone>();
 
@@ -51,13 +51,13 @@ namespace PL
 
             }
             this.bl = bl;
-            IEDrones = bl.displayDroneList();
-            DronesListView.ItemsSource = IEDrones;
+            droneListFromBo = bl.displayDroneList();
+            DronesListView.ItemsSource = droneListFromBo;
             this.comboStatusSelector.ItemsSource = Enum.GetValues(typeof(BO.DroneStatuses));
             this.comboWeightSelector.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
         }
-        static public DroneStatuses droneStat = 0;
-        static public WeightCategories weightStat = 0;
+        public static DroneStatuses droneStat = 0;
+        public static WeightCategories weightStat = 0;
         public bool weightFlag = false;
         public bool statusFlag = false;
         //private object isDataDirty;
@@ -79,9 +79,9 @@ namespace PL
             droneStat = status;
             statusFlag = true;
             if (weightFlag)
-                this.DronesListView.ItemsSource = IEDrones.Where(x => x.Status == status && x.weight == weightStat);
+                this.DronesListView.ItemsSource = droneListFromBo.Where(x => x.Status == status && x.weight == weightStat);
             else
-                this.DronesListView.ItemsSource = IEDrones.Where(x => x.Status == status);
+                this.DronesListView.ItemsSource = droneListFromBo.Where(x => x.Status == status);
         }
 
         #endregion
@@ -105,22 +105,22 @@ namespace PL
             weightStat = weight;
             weightFlag = true;
             if (statusFlag)
-                this.DronesListView.ItemsSource = IEDrones.Where(x => x.weight == weight && x.Status == droneStat);
+                this.DronesListView.ItemsSource = droneListFromBo.Where(x => x.weight == weight && x.Status == droneStat);
             else
-                this.DronesListView.ItemsSource = IEDrones.Where(x => x.weight == weight);
+                this.DronesListView.ItemsSource = droneListFromBo.Where(x => x.weight == weight);
 
         }
 
         public void CheckFields()
         {
             if (weightFlag && statusFlag)
-                this.DronesListView.ItemsSource = IEDrones.Where(x => x.Status == status && x.weight == weightStat);
+                this.DronesListView.ItemsSource = droneListFromBo.Where(x => x.Status == status && x.weight == weightStat);
             else if (statusFlag)
-                this.DronesListView.ItemsSource = IEDrones.Where(x => x.Status == status);
+                this.DronesListView.ItemsSource = droneListFromBo.Where(x => x.Status == status);
             else if (weightFlag)
-                this.DronesListView.ItemsSource = IEDrones.Where(x => x.weight == weight && x.Status == droneStat);
+                this.DronesListView.ItemsSource = droneListFromBo.Where(x => x.weight == weight && x.Status == droneStat);
             else
-                this.DronesListView.ItemsSource = IEDrones;
+                this.DronesListView.ItemsSource = droneListFromBo;
         }
         #endregion
 
@@ -169,7 +169,7 @@ namespace PL
             comboStatusSelector.SelectedItem = null;
             weightFlag = false;
             weightStat = 0;
-            DronesListView.ItemsSource = IEDrones;
+            DronesListView.ItemsSource = droneListFromBo;
 
         }
 
@@ -178,7 +178,7 @@ namespace PL
             comboWeightSelector.SelectedItem = null;
             droneStat = 0;
             statusFlag = false;
-            DronesListView.ItemsSource = IEDrones;
+            DronesListView.ItemsSource = droneListFromBo;
 
         }
     }

@@ -7,14 +7,17 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="473" Width="800">
     <Window.Background>
-        <ImageBrush ImageSource="/mainwinddrone.png"/> 
+        <ImageBrush ImageSource="/mainwinddrone.png"/>
     </Window.Background>
 
     <Grid x:Name="MainGrid" Height="430" Width="780">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Button Content="Show DroneList" Click="MainButton_OpenDroneList" Height="49" HorizontalAlignment="Center" Margin="0,385,0,0" x:Name="openDroneList" VerticalAlignment="Center" Width="780" FontSize="33" FontWeight="Normal" FontStyle="Normal" Background="#FF9389C3" BorderThickness="4,4,4,4" BorderBrush="#FF150E36"/>
+        <Button Content="Show DroneList" Click="MainButton_OpenDroneList" Height="49" HorizontalAlignment="Left" Margin="10,337,0,0" x:Name="openDroneList" VerticalAlignment="Top" Width="171" FontSize="22" FontWeight="Bold" FontStyle="Normal" Background="#FF9389C3" BorderThickness="4,4,4,4" BorderBrush="#FF150E36"/>
+        <Button Content="Show ClientList" Click="MainButton_ClientList" Height="49" HorizontalAlignment="Left" Margin="291,371,0,0" x:Name="openClientList" VerticalAlignment="Top" Width="171" FontSize="22" FontWeight="Bold" FontStyle="Normal" Background="#FF9389C3" BorderThickness="4,4,4,4" BorderBrush="#FF150E36"/>
+        <Button Content="Show ParcelList" Click="MainButton_OpenParcelList" Height="49" HorizontalAlignment="Left" Margin="600,328,0,0" x:Name="openParcelList" VerticalAlignment="Top" Width="170" FontSize="22" FontWeight="Bold" FontStyle="Normal" Background="#FF9389C3" BorderThickness="4,4,4,4" BorderBrush="#FF150E36"/>
+
         <Label x:Name="label" Content="Welcome to our Nebula Drone delivery System!&#xD;&#xA;" HorizontalAlignment="Center" Margin="0,21,0,0" VerticalAlignment="Top" Width="552" Height="55" FontSize="24" FontWeight="Bold" FontStyle="Italic" BorderThickness="5,5,5,5">
             <Label.BorderBrush>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">

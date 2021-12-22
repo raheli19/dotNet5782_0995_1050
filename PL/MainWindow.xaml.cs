@@ -34,7 +34,7 @@ namespace PL
 
            
             InitializeComponent();
-            bl.addClient(new BO.Client
+            //bl.addClient(new BO.Client client);
 
         }
 
@@ -47,6 +47,16 @@ namespace PL
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
 
+        }
+
+        private void MainButton_ClientList(object sender, RoutedEventArgs e)
+        {
+            new ClientListWindow(bl).Show();
+        }
+
+        private void MainButton_OpenParcelList(object sender, RoutedEventArgs e)
+        {
+            //new ParcelListWindow(bl).Show();
         }
     }
 }

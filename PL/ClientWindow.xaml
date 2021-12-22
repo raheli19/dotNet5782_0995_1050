@@ -1,0 +1,58 @@
+﻿<Window x:Class="PL.ClientWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL"
+        mc:Ignorable="d"
+        Title="ClientWindow" Height="450" Width="800">
+    <Grid x:Name="MainGrid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid x:Name="UpgradeClientGrid" Visibility="Visible">
+            <Button x:Name="UpdateButton" Content="UPDATE" HorizontalAlignment="Left" 
+                   
+                    Background="Transparent" Margin="648,166,0,0" VerticalAlignment="Top" ToolTip="UPDATE" Height="51" Width="133" BorderBrush="Black" Click="ClickUpdate" Opacity="100" FontFamily="Cambria" FontSize="30" FontWeight="Bold" FontStyle="Italic">
+
+            </Button>
+            <TextBox x:Name="UpdateNameTextBox" Visibility="Hidden" Text="{Binding Name, Mode=TwoWay}" HorizontalAlignment="Left" Height="28" Margin="283,137,0,0"  Background="White" TextWrapping="Wrap" VerticalAlignment="Top" Width="147"/>
+            <TextBox x:Name="UpdatePhoneTextBox" Visibility="Hidden" Text="{Binding Phone, Mode=TwoWay}" HorizontalAlignment="Left" Height="28" Margin="283,166,0,0"  Background="White" TextWrapping="Wrap" VerticalAlignment="Top" Width="147"/>
+
+            <Label x:Name="UpdateLabel"  HorizontalAlignment="Left" Margin="206,99,0,0" VerticalAlignment="Top" Height="38" Width="302" FontSize="16" FontWeight="Bold" FontStyle="Italic" BorderThickness="1,1,1,1" BorderBrush="Black" Foreground="#FF530C0C" Visibility="Hidden"/>
+            <Button x:Name="CheckUpdate" HorizontalAlignment="Left" Height="28" Margin="396,194,0,0" VerticalAlignment="Top"  Width="34" Visibility="Hidden" Click="Check_Click_Update">
+                <Button.Background>
+                    <ImageBrush ImageSource="/checked.png"/>
+                </Button.Background>
+            </Button>
+            <Button x:Name="AddClientButton" Content="Add a New Client" HorizontalAlignment="Left"                  
+                    Background="Transparent" Margin="448,63,0,0" VerticalAlignment="Top" ToolTip="UPDATE" Height="51" 
+                    Width="266" BorderBrush="Black" Click="ClickAdd" Opacity="100" FontFamily="Cambria" FontSize="30" FontWeight="Bold" FontStyle="Italic">
+            </Button>
+            <Grid x:Name="AddClient" Margin="100,106,100,93" Background="AliceBlue">
+                <Label Content="Please enter client's informations:" HorizontalAlignment="Left" Height="42" Margin="10,24,0,0" VerticalAlignment="Top" Width="240" FontSize="15"/>
+                <Label Content="Id" HorizontalAlignment="Left" Height="28" Margin="42,71,0,0" VerticalAlignment="Top" Width="120"/>
+                <Label Content="Name" HorizontalAlignment="Left" Height="28" Margin="42,0,0,0" VerticalAlignment="Center" Width="120"/>
+                <Label Content="Phone" HorizontalAlignment="Left" Height="28" Margin="42,137,0,0" VerticalAlignment="Top" Width="120"/>
+                <Label Content="Latitude" HorizontalAlignment="Left" Height="28" Margin="42,165,0,0" VerticalAlignment="Top" Width="120"/>
+                <Label Content="Longitude" HorizontalAlignment="Left" Height="28" Margin="42,198,0,0" VerticalAlignment="Top" Width="120"/>
+                <TextBox x:Name="txt_id" HorizontalAlignment="Left" Height="28" Margin="224,71,0,0" Text="{Binding ID, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top" Width="125"/>
+                <TextBox x:Name="txt_name" HorizontalAlignment="Left" Height="28" Margin="224,0,0,0" Text="{Binding Name, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Center" Width="125"/>
+                <TextBox x:Name="txt_phone" HorizontalAlignment="Left" Height="28" Margin="224,133,0,0" Text="{Binding Phone, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top" Width="125"/>
+                <TextBox x:Name="txt_lat" HorizontalAlignment="Left" Height="28" Margin="224,164,0,0" Text="{Binding Localisation.latitude, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top" Width="125"/>
+                <TextBox x:Name="txt_long" HorizontalAlignment="Left" Height="28" Margin="224,199,0,0" Text="{Binding Localisation.latitude, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top" Width="125"/>
+                <Button Content="" HorizontalAlignment="Left" Height="36" Margin="445,111,0,0" VerticalAlignment="Top" Width="119" Click="Button_Click">
+                    <Button.Background>
+                        <ImageBrush ImageSource="/addbutton.png"/>
+                    </Button.Background>
+                </Button>
+
+            </Grid>
+            <Button x:Name="RemoveClientButton" Content="Remove a Client" HorizontalAlignment="Left"                  
+                    Background="Transparent" Margin="448,305,0,0" VerticalAlignment="Top" ToolTip="UPDATE" Height="50" 
+                    Width="266" BorderBrush="Black" Click="ClickRemove" Opacity="100" FontFamily="Cambria" FontSize="30" FontWeight="Bold" FontStyle="Italic">
+            </Button>
+
+        </Grid>
+    </Grid>
+</Window>
