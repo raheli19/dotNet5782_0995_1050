@@ -22,13 +22,25 @@ namespace PL
         BO.Client DataCclient = new BO.Client();
         private BLApi.IBL bl;
         string clientStatus = " ";
+        public Click_SignUp_In(BLApi.IBL bl,int Sign_Uptemp)
+        {
+            InitializeComponent();
+            DataContext = DataCclient;
+            DataCclient.ClientLoc = new();
+            this.bl = bl;
+            Sign_Up.Visibility = Visibility.Visible;
+
+
+        }
         public Click_SignUp_In(BLApi.IBL bl)
         {
             InitializeComponent();
             DataContext = DataCclient;
             this.bl = bl;
-        }
+            Sign_In.Visibility = Visibility.Visible;
 
+
+        }
         private void button_Join_Click(object sender, RoutedEventArgs e)
         {
             textBox_PersonalId.Background = Brushes.White;

@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BLApi;
 
 namespace PL
 {
@@ -19,19 +20,20 @@ namespace PL
     /// </summary>
     public partial class MenueWindow : Window
     {
+        internal readonly BLApi.IBL bl = BLFactory.GetBL();
         public MenueWindow()
         {
             InitializeComponent();
         }
 
-        private void OpenClientWindow(object sender, RoutedEventArgs e)
+        private void OpenClientWindow(object sender, RoutedEventArgs e) 
         {
-            //ouvre le client window
+            new SignUpSignIn(bl).Show();
         }
 
         private void OpenWorkerWindow(object sender, RoutedEventArgs e)
-        {
-           //ouvre le worker window
+        { 
+          new MainWindow(bl).Show();
         }
     }
 }

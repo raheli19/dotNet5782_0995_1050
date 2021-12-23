@@ -76,6 +76,7 @@
                 </Style>
             </TextBlock.Style>
         </TextBlock>
+        <Label x:Name="label" Content="Label" HorizontalAlignment="Left" Margin="128,38,0,0" VerticalAlignment="Top" Width="532" Height="61"/>
 
 
 

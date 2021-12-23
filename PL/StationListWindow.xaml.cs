@@ -39,5 +39,10 @@ namespace PL
             stationListFromBo = bl.DisplayStationList();
             StationListView.ItemsSource = stationListFromBo;
         }
+
+        private void DroneListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+
+        }
     }
 }

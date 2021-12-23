@@ -34,7 +34,7 @@ namespace PL
 
         private void button_SignUp_Click(object sender, RoutedEventArgs e)
         {
-            new Click_SignUp_In(bl).Show();
+            new Click_SignUp_In(bl,3).Show();
         }
     }
 }

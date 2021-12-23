@@ -33,6 +33,8 @@ namespace PL
             this.MaxWeightL.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
             this.PriorityL.ItemsSource = Enum.GetValues(typeof(BO.Priorities));
             DataContext = DataCParcel;
+            DataCParcel.Sender = new();
+            DataCParcel.Target = new();
             this.bl = bl;
             this.DataCclient = DataCclient;
             this.clientStatus = clientStatus;

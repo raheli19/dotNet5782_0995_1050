@@ -23,11 +23,14 @@ namespace PL
         private BLApi.IBL bl;
         BO.Client dataCclient = new BO.Client();
         private ClientActions droneDescription = new ClientActions();
-        public ClientWindow(BLApi.IBL bl, object ClientListWindow)
+        ListView ListViewClient;
+        public ClientWindow(object selectedItem, BLApi.IBL bl, object ClientListWindow)
         {
 
             InitializeComponent();
+            this.bl = bl;
             DataContext = dataCclient;
+            ListViewClient = (ListView)ClientListWindow;
         }
 
         private void ClickUpdate(object sender, RoutedEventArgs e)

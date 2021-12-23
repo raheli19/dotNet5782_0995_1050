@@ -18,9 +18,9 @@
                 </LinearGradientBrush>
             </Label.BorderBrush>
         </Label>
-        <Button Content="Client"  Click="OpenClientWindow" Height="49" HorizontalAlignment="Left" Margin="25,371,0,0" x:Name="openClientWindow" VerticalAlignment="Top" Width="249" FontSize="33" FontWeight="Normal" FontStyle="Normal"
+        <Button Content="Client"  Click="OpenClientWindow" Height="49" HorizontalAlignment="Left" Margin="27,346,0,0" x:Name="openClientWindow" VerticalAlignment="Top" Width="249" FontSize="33" FontWeight="Normal" FontStyle="Normal"
                 Background="#FF9389C3" BorderThickness="4,4,4,4" BorderBrush="#FF150E36"/>
-        <Button Content="Worker"  Click="OpenWorkerWindow" Height="49" HorizontalAlignment="Left" Margin="521,371,0,0" x:Name="openWorkerWindow" VerticalAlignment="Top" Width="249" FontSize="33" FontWeight="Normal" FontStyle="Normal"
+        <Button Content="Worker"  Click="OpenWorkerWindow" Height="49" HorizontalAlignment="Left" Margin="521,346,0,0" x:Name="openWorkerWindow" VerticalAlignment="Top" Width="249" FontSize="33" FontWeight="Normal" FontStyle="Normal"
                 Background="#FF9389C3" BorderThickness="4,4,4,4" BorderBrush="#FF150E36"/>
         <Label x:Name="label1" Content="To start, please press one of the buttons below" HorizontalAlignment="Left" Margin="158,76,0,0" VerticalAlignment="Top" Width="512" Height="50" FontSize="22" FontWeight="Bold" FontStyle="Italic"/>
 

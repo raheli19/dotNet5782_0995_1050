@@ -28,12 +28,18 @@ namespace PL
     /// </summary>
     public partial class MainWindow : Window
     {
-        internal readonly BLApi.IBL bl = BLFactory.GetBL();
+        private BLApi.IBL bl;
         public MainWindow()
         {
+            InitializeComponent();
 
+        }
+        public MainWindow(BLApi.IBL bl)
+        {
+            
            
             InitializeComponent();
+            this.bl = bl;
             
 
         }

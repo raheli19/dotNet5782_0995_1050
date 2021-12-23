@@ -29,9 +29,10 @@ namespace PL
         public ClientListWindow(BLApi.IBL bl)
         {
             InitializeComponent();
+            this.bl = bl;
             clientListFromBo = bl.displayClientList();
             DataContext = boClientList;
-            foreach (var item in bl.displayDroneList())
+            foreach (var item in bl.displayClientList())
             {
                 boClientList.Add(bl.displayClient((item.Id)));
 
@@ -42,7 +43,7 @@ namespace PL
 
         private void ClientListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            ClientWindow subWindow = new ClientWindow(bl, ClientListView);
+            ClientWindow subWindow = new ClientWindow(ClientListView.SelectedItem, bl, ClientListView);
             subWindow.Show();
         }
     }
