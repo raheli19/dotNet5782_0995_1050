@@ -21,6 +21,7 @@ namespace PL
     public partial class MenueWindow : Window
     {
         internal readonly BLApi.IBL bl = BLFactory.GetBL();
+        //RAHEL
         public MenueWindow()
         {
             InitializeComponent();
