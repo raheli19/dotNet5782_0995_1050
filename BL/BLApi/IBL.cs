@@ -49,6 +49,7 @@ namespace BLApi
         Drone displayDrone(int droneId);
         Client displayClient(int clientId);
         Parcel displayParcel(int parcelId);
+        IEnumerable<DroneCharging> displayDroneChargingList(int stationId);
         IEnumerable<StationDescription> DisplayStationList();
         IEnumerable<DroneDescription> displayDroneList();
         IEnumerable<ClientActions> displayClientList();

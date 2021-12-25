@@ -112,6 +112,8 @@ namespace PL
         {
             txt_id.Background = Brushes.White;
             txt_phone.Background = Brushes.White;
+            txt_lat.Background = Brushes.White;
+            txt_long.Background = Brushes.White;
             //if (txt_id.Text =="" && dataCclient.Name ="" && dataCclient.Phone="")
             //MessageBox.Show("Please fill al the fields", "WARNING", MessageBoxButton.OK, MessageBoxImage.Warning);
             if (txt_id.Text == "" || txt_name.Text == "" || txt_lat.Text == "" || txt_long.Text == "" || txt_phone.Text == "")
@@ -141,8 +143,14 @@ namespace PL
             }
             catch (Exception ex)
             {
-                if (ex.Message == "Id is not valid")
+                if (ex.Message == "ID not valid")
                     txt_id.Background = Brushes.Red;
+                if (ex.Message == "Phone not valid")
+                    txt_phone.Background = Brushes.Red;
+                if (ex.Message == "latitude is not valid")
+                    txt_lat.Background = Brushes.Red;
+                if (ex.Message == "longitude is not valid")
+                    txt_long.Background = Brushes.Red;
                 MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
 

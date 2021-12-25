@@ -248,7 +248,27 @@ namespace BL
 
         #endregion
 
+        public IEnumerable<DroneCharging> displayDroneChargingList(int stationId)
+        {
+           
+                DronesChargingInStation dc = new DronesChargingInStation();
+                List<DroneCharging> droneCharging = new List<DroneCharging>();
+                List<int> DronesID = new List<int>();
 
+                IEnumerable<DO.DroneCharge> droneCharges = p.IEDroneChargeList();  //finds the list which contains the the drone charges from DAL
+                foreach (var item in droneCharges)
+                {
+                    if (item.StationId == stationId)  // finds the station with the ID received 
+                    {
+                        Drone droneInStation = GetDrone(item.DroneId);   // finds the drones contained in this station
+                        droneCharging.Add(new DroneCharging() { ID = item.DroneId, battery = droneInStation.Battery, });
+
+                    }
+
+              
+            }
+            return droneCharging;
+        }
 
 
 

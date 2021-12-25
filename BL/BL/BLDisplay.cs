@@ -48,6 +48,8 @@ namespace BL
         }
         #endregion
 
+      
+
         #region displayDrone
 
         /// <summary>
