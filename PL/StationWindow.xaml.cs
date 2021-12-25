@@ -23,7 +23,7 @@ namespace PL
 
     {
         string newName = "";
-        private BLApi.IBL bl;
+        private BLApi.IBL bl; 
         BO.Station dataCstation = new BO.Station();
         private StationDescription stationDescription = new StationDescription();
         IEnumerable<DroneCharging> droneListFromBo = new List<DroneCharging>();
@@ -52,7 +52,9 @@ namespace PL
 
         private void DroneListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            new DroneWindow(DronesChargingListView.SelectedItem, bl, DronesChargingListView).Show();
+            DroneCharging DCh = (DroneCharging)DronesChargingListView.SelectedItem;
+            DroneDescription DC = bl.displayDroneList().First(x => x.Id == DCh.ID);
+            new DroneWindow(DC, bl, DronesChargingListView).Show();
             //comboStatusSelector.SelectedItem = null;
             //comboWeightSelector.SelectedItem = null;
         }

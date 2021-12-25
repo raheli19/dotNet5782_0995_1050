@@ -54,7 +54,7 @@
                     <ImageBrush ImageSource="/checked.png"/>
                 </Button.Background>
             </Button>
-            <Label x:Name="stationDetails" Content="" HorizontalAlignment="Left" Margin="54,0,0,0" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" Width="303" Height="395">
+            <Label x:Name="stationDetails" Content="" HorizontalAlignment="Left" Margin="20,13,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="303" Height="218">
                 <Label.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
