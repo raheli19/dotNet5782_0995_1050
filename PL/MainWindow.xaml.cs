@@ -64,5 +64,10 @@ namespace PL
         {
             new ParcelListWindow(bl).Show();
         }
+
+        private void MainButton_OpenStationsList(object sender, RoutedEventArgs e)
+        {
+            new StationListWindow(bl).Show();
+        }
     }
 }

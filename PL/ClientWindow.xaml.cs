@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,8 +23,10 @@ namespace PL
     {
         private BLApi.IBL bl;
         BO.Client dataCclient = new BO.Client();
-        private ClientActions droneDescription = new ClientActions();
+        private ClientActions clientActions = new ClientActions();
         ListView ListViewClient;
+        private bool checkFlag = false;
+
         public ClientWindow(object selectedItem, BLApi.IBL bl, object ClientListWindow)
         {
 
@@ -31,6 +34,19 @@ namespace PL
             this.bl = bl;
             DataContext = dataCclient;
             ListViewClient = (ListView)ClientListWindow;
+        }
+        public ClientWindow(BLApi.IBL bl, object ClientListWindow)
+        {
+            InitializeComponent();
+            this.bl = bl;
+            DataContext = dataCclient;
+            //dlw = new DroneListWindow(bl);
+            AddGrid.Visibility = Visibility.Visible;
+            UpgradeClientGrid.Visibility = Visibility.Hidden;
+            //this.comboWeightSelector.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
+            //this.comboStationSelector.ItemsSource = bl.DisplayStationList();
+           // ListViewClient = (ListView)ClientListWindow;
+
         }
 
         private void ClickUpdate(object sender, RoutedEventArgs e)
@@ -64,26 +80,36 @@ namespace PL
         }
 
         #region addClient
-        private void ClickAdd(object sender, RoutedEventArgs e)
-        {
-            RemoveClientButton.Visibility = Visibility.Hidden;
-            AddClient.Visibility = Visibility.Visible;
-            // add un client
-        }
+      
+
+
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             //if (txt_id.Text =="" && dataCclient.Name ="" && dataCclient.Phone="")
             //MessageBox.Show("Please fill al the fields", "WARNING", MessageBoxButton.OK, MessageBoxImage.Warning);
 
             bl.addClient(dataCclient);
-            AddClient.Visibility = Visibility.Hidden;
-        }
-        #endregion
-        private void ClickRemove(object sender, RoutedEventArgs e)
-        {
-            // remove a client
+            //AddClient.Visibility = Visibility.Hidden;
         }
 
-       
+        #endregion
+
+        #region closeFct
+        private void Button_Close(object sender, RoutedEventArgs e)
+        {
+            this.checkFlag = true; // will allow us to close the window from the button and not from the "X"
+            this.Close();
+        }
+        private void OnClosing(object sender, CancelEventArgs e)
+        {
+
+            if (this.checkFlag)// call from the button
+                e.Cancel = false;
+            else
+                e.Cancel = true;// call from the "X", we don't want to close
+
+        }
+        #endregion
     }
 }
