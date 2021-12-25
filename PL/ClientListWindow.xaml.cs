@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,6 +26,7 @@ namespace PL
         IEnumerable<ClientActions> clientListFromBo = new List<ClientActions>();
 
         private ObservableCollection<BO.Client> boClientList = new ObservableCollection<BO.Client>();
+        private bool checkFlag = false;
 
         public ClientListWindow(BLApi.IBL bl)
         {
@@ -46,5 +48,28 @@ namespace PL
             ClientWindow subWindow = new ClientWindow(ClientListView.SelectedItem, bl, ClientListView);
             subWindow.Show();
         }
+
+        private void AddClient_Click(object sender, RoutedEventArgs e)
+        {
+            ClientWindow subWindow = new ClientWindow(bl, clientListFromBo);
+
+            subWindow.ShowDialog();
+        }
+        #region closeFct
+        private void Button_Close(object sender, RoutedEventArgs e)
+        {
+            this.checkFlag = true; // will allow us to close the window from the button and not from the "X"
+            this.Close();
+        }
+        private void OnClosing(object sender, CancelEventArgs e)
+        {
+
+            if (this.checkFlag)// call from the button
+                e.Cancel = false;
+            else
+                e.Cancel = true;// call from the "X", we don't want to close
+
+        }
+        #endregion
     }
 }
