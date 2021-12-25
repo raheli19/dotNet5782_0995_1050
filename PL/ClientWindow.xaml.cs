@@ -41,7 +41,7 @@ namespace PL
             this.bl = bl;
             DataContext = dataCclient;
             //dlw = new DroneListWindow(bl);
-            AddGrid.Visibility = Visibility.Visible;
+            AddGridClient.Visibility = Visibility.Visible;
             UpgradeClientGrid.Visibility = Visibility.Hidden;
             //this.comboWeightSelector.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
             //this.comboStationSelector.ItemsSource = bl.DisplayStationList();
@@ -111,5 +111,10 @@ namespace PL
 
         }
         #endregion
+
+        private void txt_lat_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }

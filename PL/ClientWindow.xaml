@@ -10,7 +10,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Grid x:Name="UpgradeClientGrid" Visibility="Visible">
+        <Grid x:Name="UpgradeClientGrid" Visibility="Hidden">
             <Button x:Name="UpdateButton" Content="UPDATE" HorizontalAlignment="Left" 
                    
                     Background="Transparent" Margin="648,166,0,0" VerticalAlignment="Top" ToolTip="UPDATE" Height="51" Width="133" BorderBrush="Black" Click="ClickUpdate" Opacity="100" FontFamily="Cambria" FontSize="30" FontWeight="Bold" FontStyle="Italic">
@@ -32,7 +32,7 @@
                     ></Button>
 
         </Grid>
-        <Grid x:Name="AddGrid" Visibility="Hidden">
+        <Grid x:Name="AddGridClient" Visibility="Visible">
             <!--buttonadd-->
             <!--<Button x:Name="AddClientButton" Content="Add a New Client" HorizontalAlignment="Left"                  
                     Background="Transparent" Margin="448,63,0,0" VerticalAlignment="Top" ToolTip="UPDATE" Height="51" 

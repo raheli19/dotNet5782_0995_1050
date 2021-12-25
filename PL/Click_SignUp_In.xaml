@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Click_SignUp_In" Height="450" Width="800">
     <Grid x:Name="MainGrid">
-        <Grid x:Name="Sign_Up" Visibility="Visible">
+        <Grid x:Name="Sign_Up" Visibility="Hidden">
             <Label x:Name="info" Content="Please enter your personal details:" HorizontalAlignment="Left" Margin="221,92,0,0" VerticalAlignment="Top" FontSize="20"/>
 
             <Label x:Name="Welcome" Content="We are happy that you decided to join us" HorizontalAlignment="Left" Margin="168,34,0,0" VerticalAlignment="Top" Width="417" FontSize="22" FontStyle="Italic"/>

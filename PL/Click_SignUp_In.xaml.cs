@@ -26,7 +26,7 @@ namespace PL
         {
             InitializeComponent();
             DataContext = DataCclient;
-            DataCclient.ClientLoc = new();
+            DataCclient.ClientLoc = new Localisation();
             this.bl = bl;
             Sign_Up.Visibility = Visibility.Visible;
 
