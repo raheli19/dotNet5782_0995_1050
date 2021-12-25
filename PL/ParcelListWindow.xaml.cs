@@ -30,6 +30,7 @@ namespace PL
         {
             InitializeComponent();
             DataContext = boParcelList;
+            this.bl = bl;
             foreach (var item in bl.displayParcelList())
             {
                 boParcelList.Add(bl.displayParcel((item.Id)));

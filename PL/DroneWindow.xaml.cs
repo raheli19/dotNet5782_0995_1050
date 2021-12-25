@@ -25,6 +25,7 @@ namespace PL
     /// </summary>
     public partial class DroneWindow : Window
     {
+        string newName = "";
         private BLApi.IBL bl;
         BO.Drone dataCdrone = new BO.Drone();
         private DroneDescription droneDescription = new DroneDescription();
@@ -210,7 +211,8 @@ namespace PL
 
         private void Check_Click_Update(object sender, RoutedEventArgs e)
         {
-            
+            newName = UpdateTextBox.Text;
+
             if (droneDescription.Model == "")
             {
                 MessageBox.Show("Please enter a name", "ERROR", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -218,7 +220,7 @@ namespace PL
             }
             try
             {
-                bl.updateDroneName(droneDescription.Id, dataCdrone.Model);
+                bl.updateDroneName(droneDescription.Id, newName);
             }
             catch (Exception ex)
             {

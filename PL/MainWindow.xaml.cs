@@ -62,7 +62,7 @@ namespace PL
 
         private void MainButton_OpenParcelList(object sender, RoutedEventArgs e)
         {
-            //new ParcelListWindow(bl).Show();
+            new ParcelListWindow(bl).Show();
         }
     }
 }

@@ -7,40 +7,18 @@
         mc:Ignorable="d"
         Title="SignUpSignIn" Height="450" Width="800">
     <Grid Margin="-2,0,2,0">
+        <Grid.Background>
+            <ImageBrush ImageSource="/backuser.png"/>
+        </Grid.Background>
+
         <!--New Client Region-->
-        <Button Content="Sign Up" Margin="211,155,461,216" Background="{x:Null}" FontFamily="Cambria" FontWeight="Bold" FontSize="22" Click="button_SignUp_Click">
-            <Button.Template>
-                <ControlTemplate TargetType="Button">
-                    <Grid>
-                        <Ellipse Stroke="Black"  
-                       StrokeThickness="0">
-                            <Ellipse.Fill>
-                                <RadialGradientBrush>
-                                    <GradientStop Offset="0"  
-                                        Color="#FFB3A0E0" />
-
-                                    <RadialGradientBrush.Transform>
-                                        <TransformGroup>
-                                            <ScaleTransform ScaleY="0.65" />
-                                        </TransformGroup>
-                                    </RadialGradientBrush.Transform>
-                                </RadialGradientBrush>
-                            </Ellipse.Fill>
-                        </Ellipse>
-                        <ContentPresenter HorizontalAlignment="Center"  
-                                VerticalAlignment="Center"/>
-                    </Grid>
-                </ControlTemplate>
-            </Button.Template>
-        </Button>
 
 
-
-        <TextBlock Text="New Client" Width="121" Height="53" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,160,0,0" TextAlignment="Center" Foreground="#FFE5D5D5">
+        <TextBlock Text="New Client?" Width="325" Height="40" FontSize="30" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="465,258,0,0" TextAlignment="Center" Foreground="#FFE5D5D5" FontStyle="Italic">
             <TextBlock.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black"/>
-                    <GradientStop Color="#FF8245D1" Offset="1"/>
+                    <GradientStop Color="#FF6C76FC" Offset="1"/>
                 </LinearGradientBrush>
             </TextBlock.Background>
             <TextBlock.Style>
@@ -56,12 +34,12 @@
             </TextBlock.Style>
         </TextBlock>
         <!--Client already exists Region-->
-        <Button x:Name="button_SignIn" Content="Sign In" HorizontalAlignment="Left" Margin="191,284,0,0" VerticalAlignment="Top" Height="53" Width="84" FontSize="22" Click="button_SignIn_Click" Background="#FF965656"/>
-        <TextBlock Text="Already exists"  Width="121" Height="45" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="10,279,0,0" TextAlignment="Center" Foreground="#FFE6DADA">
+        <Button x:Name="button_SignIn" Content="Sign In" HorizontalAlignment="Left" Margin="115,338,0,0" VerticalAlignment="Top" Height="61" Width="111" FontSize="30" Click="button_SignIn_Click" Background="#FFAE3092" FontWeight="Bold"/>
+        <TextBlock Text="Already exist?"  Width="303" Height="46" FontSize="30" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="19,255,0,0" TextAlignment="Center" Foreground="#FFE6DADA" FontStyle="Italic">
             <TextBlock.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black"/>
-                    <GradientStop Color="#FFC46D93" Offset="1"/>
+                    <GradientStop Color="#FF6C76FC" Offset="1"/>
                 </LinearGradientBrush>
             </TextBlock.Background>
             <TextBlock.Style>
@@ -76,7 +54,32 @@
                 </Style>
             </TextBlock.Style>
         </TextBlock>
-        <Label x:Name="label" Content="Label" HorizontalAlignment="Left" Margin="128,38,0,0" VerticalAlignment="Top" Width="532" Height="61"/>
+        <Label x:Name="label" Content="Welcome or welcome back to our system!" HorizontalAlignment="Left" Margin="148,36,0,0" VerticalAlignment="Top" Width="526" Height="52" FontSize="28" FontWeight="Normal" FontStyle="Italic" BorderThickness="3,3,3,3" BorderBrush="#FF1630CF" Foreground="#FF9D9DF4"/>
+        <Image x:Name="image" Height="100" Width="100" Margin="690,9,10,325" Source="/userfonddecran.png">
+            <Image.OpacityMask>
+                <ImageBrush ImageSource="/userfonddecran.png" Stretch="Fill"/>
+            </Image.OpacityMask>
+        </Image>
+        <Label x:Name="label1" Content="" HorizontalAlignment="Left" Margin="0,109,0,0" VerticalAlignment="Top" Width="810" Height="6" RenderTransformOrigin="0.5,0.5" BorderThickness="5,5,5,5" BorderBrush="#FF0B0707">
+            <Label.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleY="1"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Label.RenderTransform>
+        </Label>
+        <Button x:Name="button_SignUP" Content="Sign Up" HorizontalAlignment="Left" Margin="584,338,0,0" VerticalAlignment="Top" Height="64" Width="120" FontSize="30" Click="button_SignUp_Click" Background="#FFAE3092" RenderTransformOrigin="0.5,0.5" FontWeight="Bold">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleX="0.935"/>
+                    <RotateTransform/>
+                    <TranslateTransform X="0.384"/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
 
 
 
