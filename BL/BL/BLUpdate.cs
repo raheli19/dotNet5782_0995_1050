@@ -99,7 +99,7 @@ namespace BL
                 {
                     clientDAL.Name = newName;
                 }
-                if (newName != "n")
+                if (newTel!= "n")
                 {
                     clientDAL.Phone = newTel;
                 }

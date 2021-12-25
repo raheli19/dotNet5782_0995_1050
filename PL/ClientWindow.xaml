@@ -10,13 +10,14 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Grid x:Name="UpgradeClientGrid" Visibility="Hidden">
+        <Grid x:Name="UpgradeClientGrid" Visibility="Visible">
             <Button x:Name="UpdateButton" Content="UPDATE" HorizontalAlignment="Left" 
                    
                     Background="Transparent" Margin="648,166,0,0" VerticalAlignment="Top" ToolTip="UPDATE" Height="51" Width="133" BorderBrush="Black" Click="ClickUpdate" Opacity="100" FontFamily="Cambria" FontSize="30" FontWeight="Bold" FontStyle="Italic">
 
             </Button>
-            <Label x:Name="Drone_Label"   HorizontalAlignment="Left" Margin="10,121,0,0" VerticalAlignment="Top" Height="303" Width="273" FontWeight="Bold" FontStyle="Italic"/>
+            <Label x:Name="Client_Label"   HorizontalAlignment="Left" Margin="10,121,0,0" VerticalAlignment="Top" Height="303" Width="273" FontWeight="Bold" FontStyle="Italic"/>
+            <Label x:Name="Client_Details" Content="Client's details:" HorizontalAlignment="Left" Margin="20,81,0,0" VerticalAlignment="Top" Width="195" FontSize="24" FontWeight="Bold" FontStyle="Italic" BorderThickness="3,3,3,3" Visibility="Visible"/>
 
             <TextBox x:Name="UpdateNameTextBox" Visibility="Hidden" Text="{Binding Name, Mode=TwoWay}" HorizontalAlignment="Left" Height="28" Margin="283,137,0,0"  Background="White" TextWrapping="Wrap" VerticalAlignment="Top" Width="147"/>
             <TextBox x:Name="UpdatePhoneTextBox" Visibility="Hidden" Text="{Binding Phone, Mode=TwoWay}" HorizontalAlignment="Left" Height="28" Margin="283,166,0,0"  Background="White" TextWrapping="Wrap" VerticalAlignment="Top" Width="147"/>
@@ -32,7 +33,7 @@
                     ></Button>
 
         </Grid>
-        <Grid x:Name="AddGridClient" Visibility="Visible">
+        <Grid x:Name="AddGridClient" Visibility="Hidden">
             <!--buttonadd-->
             <!--<Button x:Name="AddClientButton" Content="Add a New Client" HorizontalAlignment="Left"                  
                     Background="Transparent" Margin="448,63,0,0" VerticalAlignment="Top" ToolTip="UPDATE" Height="51" 
@@ -45,11 +46,11 @@
             <Label Content="Phone" HorizontalAlignment="Left" Height="28" Margin="42,232,0,0" VerticalAlignment="Top" Width="120"/>
             <Label Content="Latitude" HorizontalAlignment="Left" Height="28" Margin="42,290,0,0" VerticalAlignment="Top" Width="120"/>
             <Label Content="Longitude" HorizontalAlignment="Left" Height="28" Margin="42,343,0,0" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.512,2.912"/>
-            <TextBox x:Name="txt_id" HorizontalAlignment="Left" Height="28" Margin="224,111,0,0" Text="{Binding ID, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top" Width="124"/>
+            <TextBox x:Name="txt_id"  HorizontalAlignment="Left" Height="28" Margin="224,111,0,0" Text="{Binding ID, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top" Width="124"/>
             <TextBox x:Name="txt_name" HorizontalAlignment="Left" Height="28" Margin="224,162,0,0" Text="{Binding Name, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top" Width="125"/>
             <TextBox x:Name="txt_phone" HorizontalAlignment="Left" Height="28" Margin="224,232,0,0" Text="{Binding Phone, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top" Width="125"/>
             <TextBox x:Name="txt_lat" HorizontalAlignment="Left" Height="28" Margin="224,294,0,0" Text="{Binding Localisation.latitude, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top" Width="125" TextChanged="txt_lat_TextChanged"/>
-            <TextBox x:Name="txt_long" HorizontalAlignment="Left" Height="28" Margin="237,357,0,0" Text="{Binding Localisation.latitude, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top" Width="125" TextChanged="txt_long_TextChanged"/>
+            <TextBox x:Name="txt_long" HorizontalAlignment="Left" Height="28" Margin="237,357,0,0" Text="{Binding Localisation.longitude, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top" Width="125" TextChanged="txt_long_TextChanged"/>
             <Button Content="" HorizontalAlignment="Left" Height="36" Margin="548,285,0,0" VerticalAlignment="Top" Width="120" Click="Add_button">
                 <!--<Button.Background>
                         <ImageBrush ImageSource="/addbutton.png"/>

@@ -35,9 +35,13 @@ namespace PL
             this.bl = bl;
             dataCclient.ClientLoc = new Localisation();
             DataContext = dataCclient;
-            ListViewClient = (ListView)ClientListWindow;
+            this.clientActions = (ClientActions)selectedItem;
             AddGridClient.Visibility = Visibility.Hidden;
             UpgradeClientGrid.Visibility = Visibility.Visible;
+            ListViewClient = (ListView)ClientListWindow;
+            Client_Details.Visibility = Visibility.Visible;
+
+            Client_Label.Content = bl.displayClient(clientActions.Id);
         }
 
         private void ClickUpdate(object sender, RoutedEventArgs e)
@@ -54,21 +58,29 @@ namespace PL
 
         private void Check_Click_Update(object sender, RoutedEventArgs e)
         {
-            if (dataCclient.Name == "" && dataCclient.Phone == "")// didn't enter any information
+            string newName = UpdateNameTextBox.Text;
+            string newPhone="n";
+            if (UpdatePhoneTextBox.Text !="")
+                 newPhone = (UpdatePhoneTextBox.Text);
+
+            if (clientActions.name == "" && clientActions.phone == "")// didn't enter any information
             {
                 MessageBox.Show("Please enter an information", "ERROR", MessageBoxButton.OK, MessageBoxImage.Information);
 
             }
             try
             {
-                bl.updateClientName_Phone(dataCclient.ID, dataCclient.Name);
+                bl.updateClientName_Phone(clientActions.Id, newName, newPhone);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
+            Client_Label.Content = bl.displayClient(clientActions.Id);
+            ListViewClient.ItemsSource = bl.displayClientList();
         }
+
 
         #endregion
 
@@ -88,7 +100,7 @@ namespace PL
              ListViewClient = (ListView)ClientListWindow;
 
         }
-
+        
         private void txt_long_TextChanged(object sender, TextChangedEventArgs e)
         {
             dataCclient.ClientLoc.longitude = (double)int.Parse( txt_long.Text);
@@ -99,15 +111,6 @@ namespace PL
             dataCclient.ClientLoc.latitude = (double)int.Parse(txt_lat.Text);
 
         }
-
-        #endregion
-
-
-        #region addClient
-
-
-
-
         private void Add_button(object sender, RoutedEventArgs e)
         {
             txt_id.Background = Brushes.White;
@@ -155,6 +158,8 @@ namespace PL
         }
 
         #endregion
+
+
 
         #region closeFct
         private void Button_Close(object sender, RoutedEventArgs e)
