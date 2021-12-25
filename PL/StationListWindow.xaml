@@ -11,7 +11,30 @@
             <RowDefinition Height="79*"/>
             <RowDefinition Height="355*"/>
         </Grid.RowDefinitions>
-        <ListView x:Name="StationListView" ItemsSource="{Binding}"  Margin="0,91,0,0" Visibility="Visible" MouseDoubleClick="DroneListView_MouseDoubleClick" Grid.RowSpan="2" Background="#FFEBF6F7"/>
+        <ListView x:Name="StationListView" ItemsSource="{Binding}"  Margin="-4,12,4,0" Visibility="Visible" MouseDoubleClick="StationListView_MouseDoubleClick" Background="#FFEBF6F7" Grid.Row="1"/>
 
+        <Label x:Name="ChooseNumFCS" Content="Choose the number of FCS" HorizontalAlignment="Left" Margin="210,22,0,0" VerticalAlignment="Top" Width="164" Height="38"/>
+        <Button x:Name="containsFreeChargeSlots" Content="Contains free charge slots" HorizontalAlignment="Left" Margin="37,0,0,0" VerticalAlignment="Center" Width="168" Height="38" Click="containsFreeChargeSlots_Click"/>
+        <TextBox x:Name="numFCS" HorizontalAlignment="Left" Margin="374,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="120" Height="38" TextChanged="numFCS_TextChanged" />
+        <Button x:Name="clearNumFCS" Content="CLEAR" HorizontalAlignment="Left" Margin="514,26,0,0" VerticalAlignment="Top" Click="clearNumFCS_Click"/>
+        <Button Content="CLOSE" HorizontalAlignment="Left" Margin="568,24,0,23" Click="Button_Close" Width="88" Foreground="#FFFDFCFC" FontFamily="Segoe UI" FontWeight="Bold" FontSize="16" BorderThickness="4,4,4,4" BorderBrush="#FFD55D5D">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black" Offset="1"/>
+                    <GradientStop Color="#FFF63535"/>
+                    <GradientStop Color="#FF4E0707" Offset="0.913"/>
+                    <GradientStop Color="#FFE25353" Offset="0.073"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Button Content="ADD STATION" Margin="674,24,10,23" Click="button_addStation" FontWeight="Bold" FontFamily="Segoe UI" Foreground="#FFE8D2D2" BorderThickness="4,4,4,4" BorderBrush="#FF2F2C52" FontSize="16">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="#FF6C80C5" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+
+        </Button>
     </Grid>
 </Window>

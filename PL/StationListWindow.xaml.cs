@@ -23,15 +23,13 @@ namespace PL
     {
         private BLApi.IBL bl;
         IEnumerable<StationDescription> stationListFromBo = new List<StationDescription>();
-        BO.Station dataStation = new BO.Station();
-        private StationDescription statDescp = new StationDescription();
-        ListView ListViewStation;
         private ObservableCollection<BO.Station> boStationList = new ObservableCollection<BO.Station>();
+
+
         public StationListWindow(BLApi.IBL bl)
         {
+
             InitializeComponent();
-            this.bl = bl;
-            stationListFromBo = bl.DisplayStationList();
             DataContext = boStationList;
             foreach (var item in bl.DisplayStationList())
             {
@@ -39,41 +37,60 @@ namespace PL
 
 
             }
-           ListViewStation.ItemsSource = stationListFromBo;
+            this.bl = bl;
+            stationListFromBo = bl.DisplayStationList();
+            StationListView.ItemsSource = stationListFromBo;
+            //this.comboStatusSelector.ItemsSource = Enum.GetValues(typeof(BO.DroneStatuses));
+            //this.comboWeightSelector.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
         }
-        #region station
-        //public StationListWindow(object selectedItem, BLApi.IBL bl, object StationListWindow)
-        //{
-        //    InitializeComponent();
-        //    this.bl = bl;
-        //    DataContext = dataStation;
-        //    //foreach (var item in bl.DisplayStationList())
-        //    //{
-        //    //    boStationList.Add(bl.displayStation((item.Id)));
 
-        //    //}
-
-        //    //stationListFromBo = bl.DisplayStationList();
-        //    //StationListView.ItemsSource = stationListFromBo;
-        //}
-
-        //public StationListWindow(BLApi.IBL bl, object StationListWindow)
-        //{
-        //    InitializeComponent();
-        //    this.bl = bl;
-        //    DataContext = dataStation;
-        //    //dlw = new DroneListWindow(bl);
-        //    //AddGrid.Visibility = Visibility.Visible;
-        //    //UpgradeClientGrid.Visibility = Visibility.Hidden;
-        //    //this.comboWeightSelector.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
-        //    //this.comboStationSelector.ItemsSource = bl.DisplayStationList();
-        //    // ListViewClient = (ListView)ClientListWindow;
-
-        //}
-        #endregion
-        private void DroneListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void StationListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            new StationWindow(StationListView.SelectedItem, bl, StationListView).Show();
+            //comboStatusSelector.SelectedItem = null;
+            //comboWeightSelector.SelectedItem = null;
+        }
 
+
+        private void containsFreeChargeSlots_Click(object sender, RoutedEventArgs e)
+        {
+              this.StationListView.ItemsSource = stationListFromBo.Where(x => x.freeChargeSlots>0);
+        }
+
+        private void numFCS_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string numFCSstr = numFCS.Text;
+            if (numFCSstr == "")
+            {
+                return;
+            }
+            int num = int.Parse(numFCSstr);
+            if (stationListFromBo.Where(x => x.freeChargeSlots == num) != null)
+
+            { this.StationListView.ItemsSource = stationListFromBo.Where(x => x.freeChargeSlots == num); }
+            else
+                MessageBox.Show("Input not valid.Please press the button clear", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            return;
+        }
+
+        private void Button_Close(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void button_addStation(object sender, RoutedEventArgs e)
+        {
+                StationWindow subWindow = new StationWindow(bl, StationListView);
+                subWindow.ShowDialog();
+                subWindow.Hide();
+                
+
+        }
+
+        private void clearNumFCS_Click(object sender, RoutedEventArgs e)
+        {
+            numFCS.Text = "";
+            this.StationListView.ItemsSource = stationListFromBo;
         }
     }
 }
