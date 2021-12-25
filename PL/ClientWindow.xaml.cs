@@ -23,30 +23,21 @@ namespace PL
     {
         private BLApi.IBL bl;
         BO.Client dataCclient = new BO.Client();
+
         private ClientActions clientActions = new ClientActions();
         ListView ListViewClient;
         private bool checkFlag = false;
-
+        #region UpgradeClient
         public ClientWindow(object selectedItem, BLApi.IBL bl, object ClientListWindow)
         {
 
             InitializeComponent();
             this.bl = bl;
+            dataCclient.ClientLoc = new Localisation();
             DataContext = dataCclient;
             ListViewClient = (ListView)ClientListWindow;
-        }
-        public ClientWindow(BLApi.IBL bl, object ClientListWindow)
-        {
-            InitializeComponent();
-            this.bl = bl;
-            DataContext = dataCclient;
-            //dlw = new DroneListWindow(bl);
-            AddGrid.Visibility = Visibility.Visible;
-            UpgradeClientGrid.Visibility = Visibility.Hidden;
-            //this.comboWeightSelector.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
-            //this.comboStationSelector.ItemsSource = bl.DisplayStationList();
-           // ListViewClient = (ListView)ClientListWindow;
-
+            AddGridClient.Visibility = Visibility.Hidden;
+            UpgradeClientGrid.Visibility = Visibility.Visible;
         }
 
         private void ClickUpdate(object sender, RoutedEventArgs e)
@@ -79,18 +70,88 @@ namespace PL
             }
         }
 
+        #endregion
+
         #region addClient
-      
-
-
-
-        private void Button_Click(object sender, RoutedEventArgs e)
+        public ClientWindow(BLApi.IBL bl, object ClientListWindow)
         {
+            InitializeComponent();
+            this.bl = bl;
+            DataContext = dataCclient;
+            dataCclient.ClientLoc = new Localisation();
+
+            //dlw = new DroneListWindow(bl);
+            AddGridClient.Visibility = Visibility.Visible;
+            UpgradeClientGrid.Visibility = Visibility.Hidden;
+            //this.comboWeightSelector.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
+            //this.comboStationSelector.ItemsSource = bl.DisplayStationList();
+             ListViewClient = (ListView)ClientListWindow;
+
+        }
+
+        private void txt_long_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            dataCclient.ClientLoc.longitude = (double)int.Parse( txt_long.Text);
+            
+        }
+        private void txt_lat_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            dataCclient.ClientLoc.latitude = (double)int.Parse(txt_lat.Text);
+
+        }
+
+        #endregion
+
+
+        #region addClient
+
+
+
+
+        private void Add_button(object sender, RoutedEventArgs e)
+        {
+            txt_id.Background = Brushes.White;
+            txt_phone.Background = Brushes.White;
             //if (txt_id.Text =="" && dataCclient.Name ="" && dataCclient.Phone="")
             //MessageBox.Show("Please fill al the fields", "WARNING", MessageBoxButton.OK, MessageBoxImage.Warning);
+            if (txt_id.Text == "" || txt_name.Text == "" || txt_lat.Text == "" || txt_long.Text == "" || txt_phone.Text == "")
+            {
+                MessageBox.Show("Please fill al the fields", "WARNING", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            string clientIdCheck = txt_id.Text;// to check if it's an integer
+            int clientIdInt;
+            string phoneCheck = txt_phone.Text;
+            int clientPhoneCheck;
+            if (!int.TryParse(clientIdCheck, out clientIdInt))
+            {
+                txt_id.Background = Brushes.Red;
+                MessageBox.Show("Please enter an integer Id", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (!int.TryParse(phoneCheck, out clientPhoneCheck))
+            {
+                txt_phone.Background = Brushes.Red;
+                MessageBox.Show("Please enter an integer Number", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            try
+            {
+                bl.addClient(dataCclient);
+            }
+            catch (Exception ex)
+            {
+                if (ex.Message == "Id is not valid")
+                    txt_id.Background = Brushes.Red;
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
 
-            bl.addClient(dataCclient);
-            //AddClient.Visibility = Visibility.Hidden;
+            }
+            MessageBox.Show("You're added to our system! Welcome!","Success!", MessageBoxButton.OK, MessageBoxImage.Information);
+            ListViewClient.ItemsSource = bl.displayClientList();
+            //dlw.CheckFields();
+            this.Close();
+
         }
 
         #endregion
@@ -111,5 +172,6 @@ namespace PL
 
         }
         #endregion
+
     }
 }

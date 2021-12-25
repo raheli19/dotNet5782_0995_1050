@@ -51,9 +51,9 @@ namespace PL
 
         private void AddClient_Click(object sender, RoutedEventArgs e)
         {
-            ClientWindow subWindow = new ClientWindow(bl, clientListFromBo);
+            ClientWindow subWindow = new ClientWindow(bl, ClientListView);
 
-            subWindow.ShowDialog();
+            subWindow.Show();
         }
         #region closeFct
         private void Button_Close(object sender, RoutedEventArgs e)
@@ -71,5 +71,10 @@ namespace PL
 
         }
         #endregion
+
+        private void ClientListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

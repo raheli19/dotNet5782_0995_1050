@@ -10,7 +10,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Grid x:Name="UpgradeClientGrid" Visibility="Visible">
+        <Grid x:Name="UpgradeClientGrid" Visibility="Hidden">
             <Button x:Name="UpdateButton" Content="UPDATE" HorizontalAlignment="Left" 
                    
                     Background="Transparent" Margin="648,166,0,0" VerticalAlignment="Top" ToolTip="UPDATE" Height="51" Width="133" BorderBrush="Black" Click="ClickUpdate" Opacity="100" FontFamily="Cambria" FontSize="30" FontWeight="Bold" FontStyle="Italic">
@@ -32,7 +32,7 @@
                     ></Button>
 
         </Grid>
-        <Grid x:Name="AddGrid" Visibility="Hidden">
+        <Grid x:Name="AddGridClient" Visibility="Visible">
             <!--buttonadd-->
             <!--<Button x:Name="AddClientButton" Content="Add a New Client" HorizontalAlignment="Left"                  
                     Background="Transparent" Margin="448,63,0,0" VerticalAlignment="Top" ToolTip="UPDATE" Height="51" 
@@ -49,16 +49,33 @@
             <TextBox x:Name="txt_name" HorizontalAlignment="Left" Height="28" Margin="224,162,0,0" Text="{Binding Name, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top" Width="125"/>
             <TextBox x:Name="txt_phone" HorizontalAlignment="Left" Height="28" Margin="224,232,0,0" Text="{Binding Phone, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top" Width="125"/>
             <TextBox x:Name="txt_lat" HorizontalAlignment="Left" Height="28" Margin="224,294,0,0" Text="{Binding Localisation.latitude, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top" Width="125" TextChanged="txt_lat_TextChanged"/>
-            <TextBox x:Name="txt_long" HorizontalAlignment="Left" Height="28" Margin="237,357,0,0" Text="{Binding Localisation.latitude, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top" Width="125"/>
-            <Button Content="" HorizontalAlignment="Left" Height="36" Margin="548,285,0,0" VerticalAlignment="Top" Width="120" Click="Button_Click">
+            <TextBox x:Name="txt_long" HorizontalAlignment="Left" Height="28" Margin="237,357,0,0" Text="{Binding Localisation.latitude, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top" Width="125" TextChanged="txt_long_TextChanged"/>
+            <Button Content="" HorizontalAlignment="Left" Height="36" Margin="548,285,0,0" VerticalAlignment="Top" Width="120" Click="Add_button">
                 <!--<Button.Background>
                         <ImageBrush ImageSource="/addbutton.png"/>
                     </Button.Background>-->
             </Button>
             <CheckBox Content="I agree the informations I entered are true " 
-                      HorizontalAlignment="Left" Height="42" Margin="460,175,0,0" VerticalAlignment="Top"
-                      Width="296"></CheckBox>
-            <!--data trigger mais je sais pas fairee-->
+                      HorizontalAlignment="Left" Height="42" Margin="460,92,0,0" VerticalAlignment="Top"
+                      Width="296">
+            </CheckBox>
+            <TextBlock HorizontalAlignment="Left" Margin="460,134,0,174" FontSize="14" Width="296">
+
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Text" Value="" />
+                        <Setter Property="Foreground" Value="Red" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=cbSample, Path=IsChecked}" Value="True">
+                                <Setter Property="Text" Value="Press the button below to join the system!" />
+                                <Setter Property="Foreground" Value="Green" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+
+            </TextBlock>
+
 
         </Grid>
     </Grid>
