@@ -23,23 +23,24 @@ namespace PL
     {
         private BLApi.IBL bl;
         IEnumerable<StationDescription> stationListFromBo = new List<StationDescription>();
-        private ObservableCollection<BO.Station> boStationList = new ObservableCollection<BO.Station>();
+        public ObservableCollection<BO.StationDescription> boStationList = new ObservableCollection<BO.StationDescription>();
 
 
         public StationListWindow(BLApi.IBL bl)
         {
 
             InitializeComponent();
+            StationListView.DataContext = boStationList;
             DataContext = boStationList;
             foreach (var item in bl.DisplayStationList())
             {
-                boStationList.Add(bl.displayStation((item.Id)));
+                boStationList.Add(item);
 
 
             }
             this.bl = bl;
-            stationListFromBo = bl.DisplayStationList();
-            StationListView.ItemsSource = stationListFromBo;
+            //stationListFromBo = bl.DisplayStationList();
+            
             //this.comboStatusSelector.ItemsSource = Enum.GetValues(typeof(BO.DroneStatuses));
             //this.comboWeightSelector.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
         }

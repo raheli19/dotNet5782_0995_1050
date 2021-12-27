@@ -13,6 +13,7 @@ using BLApi;
 using System.Linq;
 using DalApi;
 using static BL.Tools;
+using System.Text;
 
 namespace BL
 {
@@ -288,5 +289,115 @@ namespace BL
         }
         #endregion
 
+        public List<ParcelToClient> FindParcelsToClient(int clientId)
+        {
+            List<ParcelToClient> TempParcLstFromClient = new List<ParcelToClient>();
+
+            foreach (var parcel in p.IEParcelList())
+            {
+                if (parcel.SenderId == clientId)  //The parcel has been sent by this client so get the info 
+                {
+                    ParcelToClient PCT = new ParcelToClient();
+                    PCT.ID = parcel.ID;
+                    PCT.weight = (WeightCategories)parcel.Weight;
+                    PCT.priority = (Priorities)parcel.Priority;
+                    if (parcel.Requested != DateTime.MinValue)
+                    {
+                        PCT.Status = ParcelStatus.requested;
+                    }
+                    else if (parcel.Scheduled != DateTime.MinValue)
+                    {
+                        PCT.Status = ParcelStatus.scheduled;
+                    }
+                    else if (parcel.PickedUp != DateTime.MinValue)
+                    {
+                        PCT.Status = ParcelStatus.pickedup;
+                    }
+                    else if (parcel.Delivered != DateTime.MinValue)
+                    {
+                        PCT.Status = ParcelStatus.delivered;
+                    }
+                    ClientInParcel myClient = new ClientInParcel();
+                    myClient.ID = clientId;
+                    try //checks if the clients exists
+                    {
+                        myClient.name = p.ClientById(clientId).Name;
+                    }
+                    catch (DO.ClientException ex)
+                    {
+                        throw new IDNotFound("The client doesnt exist", ex);
+                    }
+                    PCT.client = myClient;
+                    TempParcLstFromClient.Add(PCT);
+
+                }
+            }
+            return TempParcLstFromClient;
+        }
+
+        public List<ParcelToClient> FindParcelsFromClient(int clientId)
+        {
+            List<ParcelToClient> TempParcLstToClient = new List<ParcelToClient>();
+
+            foreach (var parcel in p.IEParcelList())
+            {
+                if (parcel.TargetId == clientId)  //The parcel has been sent by this client
+                {
+                    ParcelToClient PCT = new ParcelToClient();
+                    PCT.ID = parcel.ID;
+                    PCT.weight = (WeightCategories)parcel.Weight;
+                    PCT.priority = (Priorities)parcel.Priority;
+                    if (parcel.Requested != DateTime.MinValue)
+                    {
+                        PCT.Status = ParcelStatus.requested;
+                    }
+                    else if (parcel.Scheduled != DateTime.MinValue)
+                    {
+                        PCT.Status = ParcelStatus.scheduled;
+                    }
+                    else if (parcel.PickedUp != DateTime.MinValue)
+                    {
+                        PCT.Status = ParcelStatus.pickedup;
+                    }
+                    else if (parcel.Delivered != DateTime.MinValue)
+                    {
+                        PCT.Status = ParcelStatus.delivered;
+                    }
+                    ClientInParcel myClient = new ClientInParcel();
+                    myClient.ID = clientId;
+                    try
+                    {
+                        myClient.name = p.ClientById(clientId).Name;
+                    }
+                    catch (DO.ClientException ex)
+                    {
+                        throw new IDNotFound("The client doesnt exist", ex);
+                    }
+                    PCT.client = myClient;
+                    TempParcLstToClient.Add(PCT);
+
+                }
+            }
+            return TempParcLstToClient;
+        }
+
+        public string parcelsFromCLiList(int clientID)
+        {
+            String result = "";
+            StringBuilder parcelsFromClientStr = new StringBuilder();
+            foreach (var elementInCharge in FindParcelsFromClient(clientID))
+                parcelsFromClientStr.Append(elementInCharge).Append(", ");
+            result += $"Parcels from client: {parcelsFromClientStr.ToString()},\n";
+            return result;
+        }
+        public string parcelsToCliList(int clientID)
+        {
+            String result = "";
+            StringBuilder parcelsToClientStr = new StringBuilder();
+            foreach (var elementInCharge in FindParcelsToClient(clientID))
+                parcelsToClientStr.Append(elementInCharge).Append(", ");
+            result += $"Parcel to client: {parcelsToClientStr.ToString()},\n";
+            return result;
+        }
     }
 }

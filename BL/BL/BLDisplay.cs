@@ -125,93 +125,9 @@ namespace BL
         {
             Client clientBL = GetClient(clientId);   //Copies the fields from DAL
 
-            List<ParcelToClient> TempParcLstFromClient = new List<ParcelToClient>();
+            clientBL.ParcLstFromClient = FindParcelsToClient(clientId); // copies the lists which contains the parcels he sent into the field
 
-            foreach (var parcel in p.IEParcelList())
-            {
-                if (parcel.SenderId == clientId)  //The parcel has been sent by this client so get the info 
-                {
-                    ParcelToClient PCT = new ParcelToClient();
-                    PCT.ID = parcel.ID;
-                    PCT.weight = (WeightCategories)parcel.Weight;
-                    PCT.priority = (Priorities)parcel.Priority;
-                    if (parcel.Requested != DateTime.MinValue)
-                    {
-                        PCT.Status = ParcelStatus.requested;
-                    }
-                    else if (parcel.Scheduled != DateTime.MinValue)
-                    {
-                        PCT.Status = ParcelStatus.scheduled;
-                    }
-                    else if (parcel.PickedUp != DateTime.MinValue)
-                    {
-                        PCT.Status = ParcelStatus.pickedup;
-                    }
-                    else if (parcel.Delivered != DateTime.MinValue)
-                    {
-                        PCT.Status = ParcelStatus.delivered;
-                    }
-                    ClientInParcel myClient = new ClientInParcel();
-                    myClient.ID = clientId;
-                    try //checks if the clients exists
-                    {
-                        myClient.name = p.ClientById(clientId).Name;
-                    }
-                    catch (DO.ClientException ex)
-                    {
-                        throw new IDNotFound("The client doesnt exist", ex);
-                    }
-                    PCT.client = myClient;
-                    TempParcLstFromClient.Add(PCT);
-
-                }
-            }
-            clientBL.ParcLstFromClient = TempParcLstFromClient; // copies the lists which contains the parcels he sent into the field
-
-
-            List<ParcelToClient> TempParcLstToClient = new List<ParcelToClient>();
-
-            foreach (var parcel in p.IEParcelList())
-            {
-                if (parcel.TargetId == clientId)  //The parcel has been sent by this client
-                {
-                    ParcelToClient PCT = new ParcelToClient();
-                    PCT.ID = parcel.ID;
-                    PCT.weight = (WeightCategories)parcel.Weight;
-                    PCT.priority = (Priorities)parcel.Priority;
-                    if (parcel.Requested != DateTime.MinValue)
-                    {
-                        PCT.Status = ParcelStatus.requested;
-                    }
-                    else if (parcel.Scheduled != DateTime.MinValue)
-                    {
-                        PCT.Status = ParcelStatus.scheduled;
-                    }
-                    else if (parcel.PickedUp != DateTime.MinValue)
-                    {
-                        PCT.Status = ParcelStatus.pickedup;
-                    }
-                    else if (parcel.Delivered != DateTime.MinValue)
-                    {
-                        PCT.Status = ParcelStatus.delivered;
-                    }
-                    ClientInParcel myClient = new ClientInParcel();
-                    myClient.ID = clientId;
-                    try
-                    {
-                        myClient.name = p.ClientById(clientId).Name;
-                    }
-                    catch (DO.ClientException ex)
-                    {
-                        throw new IDNotFound("The client doesnt exist", ex);
-                    }
-                    PCT.client = myClient;
-                    TempParcLstToClient.Add(PCT);
-
-                }
-            }
-
-            clientBL.ParcLstToClient = TempParcLstToClient; // gets the lists withall the parcels the client received
+            clientBL.ParcLstToClient =FindParcelsFromClient(clientId); // gets the lists withall the parcels the client received
 
             return clientBL;
 
@@ -264,7 +180,25 @@ namespace BL
         #endregion
 
 
+        public DroneCharging displayDroneCharging(int stationId)
+        {
+            DroneCharging droneCharging = new DroneCharging();
 
+            IEnumerable<DO.DroneCharge> droneCharges = p.IEDroneChargeList();  //finds the list which contains the the drone charges from DAL
+            foreach (var item in droneCharges)
+            {
+                Drone droneInStation = GetDrone(item.DroneId);
+                if (item.StationId == stationId)  // finds the station with the ID received 
+                {
+                    droneCharging.ID = item.DroneId;
+                    droneCharging.battery = droneInStation.Battery;
+
+                }
+
+
+            }
+            return droneCharging;
+        }
         #endregion
 
     }

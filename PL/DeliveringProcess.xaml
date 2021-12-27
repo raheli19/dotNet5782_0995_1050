@@ -7,13 +7,22 @@
         mc:Ignorable="d"
         Title="DeliveringProcess" Height="450" Width="800">
     <Grid>
-        <Button x:Name="ParcelsFromClient" Content="The parcels I sent" HorizontalAlignment="Left" Margin="80,45,0,0" VerticalAlignment="Top" Width="250" Height="44" FontSize="20" FontStyle="Italic" Click="ParcelsFromClient_Click"/>
-        <Label x:Name="parcelsFromClient" Content="" HorizontalAlignment="Left" Margin="397,27,0,0" VerticalAlignment="Top" Height="143" Width="144" Background="#FFD8C1E2" Visibility="Hidden"/>
-        <Button x:Name="ParcelsToClient" Content="The parcels I need to receive" HorizontalAlignment="Left" Margin="143,125,0,0" VerticalAlignment="Top" Width="249" Height="45" FontSize="20" FontStyle="Italic" Click="ParcelsToClient_Click" />
-        <Label x:Name="parcelsToClient" Content="" HorizontalAlignment="Left" Margin="593,27,0,0" VerticalAlignment="Top" Width="137" Height="143" Background="#FFD8C1E2" Visibility="Hidden"/>
-        <Button x:Name="SendNewParcel" Content="Send a new parcel" HorizontalAlignment="Left" Margin="509,330,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.029,-0.386" Width="200" Height="44" FontStyle="Italic" FontSize="20" Click="SendNewParcel_Click"/>
-        <Button x:Name="AssignParcel" Content="Assign a parcel" HorizontalAlignment="Left" Margin="288,0,0,0" VerticalAlignment="Center" FontStyle="Italic" FontSize="20" Height="39" Width="159" Click="AssignParcelClick"/>
-        <Button x:Name="button3" Content="Pick a parcel" HorizontalAlignment="Left" Margin="400,271,0,0" VerticalAlignment="Top" Width="141" Height="35" FontStyle="Italic" FontSize="20"/>
+        <Button x:Name="ParcelsFromClient" Content="The parcels I sent" HorizontalAlignment="Left" Margin="0,20,0,0" VerticalAlignment="Top" Width="250" Height="44" FontSize="20" FontStyle="Italic" Click="ParcelsFromClient_Click"/>
+        <Label x:Name="parcelsFromClient" Content="" HorizontalAlignment="Left" Margin="311,27,0,0" VerticalAlignment="Top" Height="340" Width="230" Background="#FFD8C1E2" Visibility="Hidden" RenderTransformOrigin="0.5,0.5">
+            <Label.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleY="0.628"/>
+                    <RotateTransform/>
+                    <TranslateTransform Y="-0.789"/>
+                </TransformGroup>
+            </Label.RenderTransform>
+        </Label>
+        <Button x:Name="ParcelsToClient" Content="The parcels I received" HorizontalAlignment="Left" Margin="39,98,0,0" VerticalAlignment="Top" Width="249" Height="46" FontSize="20" FontStyle="Italic" Click="ParcelsToClient_Click" />
+        <Label x:Name="parcelsToClient" Content="" HorizontalAlignment="Left" Margin="560,27,0,0" VerticalAlignment="Top" Width="210" Height="330" Background="#FFD8C1E2" Visibility="Hidden"/>
+        <Button x:Name="SendNewParcel" Content="Send a new parcel" HorizontalAlignment="Left" Margin="54,335,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.029,-0.386" Width="200" Height="44" FontStyle="Italic" FontSize="20" Click="SendNewParcel_Click"/>
+        <Button x:Name="AssignParcel" Content="Assign a parcel" HorizontalAlignment="Left" Margin="84,178,0,0" VerticalAlignment="Top" FontStyle="Italic" FontSize="20" Height="39" Width="159" Click="AssignParcelClick"/>
+        <Button x:Name="button3" Content="Pick a parcel" HorizontalAlignment="Left" Margin="84,257,0,0" VerticalAlignment="Top" Width="141" Height="35" FontStyle="Italic" FontSize="20"/>
         <Label x:Name="SenderId" Visibility="Hidden" Content="SenderId" HorizontalAlignment="Left" Margin="522,27,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Background="#FF88B91A" Width="76"/>
         <Label x:Name="TargetId" Visibility="Hidden"  Content="Target Id" HorizontalAlignment="Left" Margin="522,83,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16" Background="#FF88B91A" Width="76"/>
         <Label x:Name="MaxWeight" Visibility="Hidden"  Content="MaxWeight" HorizontalAlignment="Left" Margin="522,148,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Bold" Background="#FF88B91A"/>

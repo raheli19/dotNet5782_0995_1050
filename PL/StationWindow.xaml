@@ -39,7 +39,7 @@
             </Grid.Background>
 
 
-            <ListView x:Name="DronesChargingListView" ItemsSource="{Binding}" MouseDoubleClick="DroneListView_MouseDoubleClick"  Margin="0,240,397,0" Visibility="Visible" Background="#FFEBF6F7"/>
+            <ListView x:Name="DronesChargingListView" ItemsSource="{Binding}" MouseDoubleClick="DronesChargingListView_MouseDoubleClick"  Margin="0,240,397,0" Visibility="Visible" Background="#FFEBF6F7"/>
             <!--Update Button-->
             <Button x:Name="UpdateButton" Content="UPDATE" HorizontalAlignment="Left" 
                    

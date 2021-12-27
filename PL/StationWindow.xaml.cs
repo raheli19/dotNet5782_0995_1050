@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,6 +29,7 @@ namespace PL
         BO.Station dataCstation = new BO.Station();
         private StationDescription stationDescription = new StationDescription();
         IEnumerable<DroneCharging> droneListFromBo = new List<DroneCharging>();
+        public ObservableCollection<BO.DroneCharging> boDronesCharging = new ObservableCollection<BO.DroneCharging>();
         ListView ListViewStation;
         // -------------------------------------------------------UPGRADE------------------------------------------------------------------------------
 
@@ -43,15 +45,20 @@ namespace PL
             AddStationGrid.Visibility = Visibility.Hidden;
             UpdateStationGrid.Visibility = Visibility.Visible;
             stationDetails.Content = bl.displayStation(stationDescription.Id);
-            droneListFromBo = bl.displayDroneChargingList(stationDescription.Id);
+            //droneListFromBo = bl.displayDroneChargingList(stationDescription.Id);
             stationDetails.Visibility = Visibility.Visible;
             ListViewStation = (ListView)stationListView;
-            DronesChargingListView.ItemsSource = droneListFromBo;
+            DronesChargingListView.DataContext = boDronesCharging;
+            foreach(var item in bl.displayDroneChargingList(stationDescription.Id))
+            {
+                boDronesCharging.Add(item);
+            }
+            //boDronesCharging= (ObservableCollection<DroneCharging>)bl.displayDroneChargingList(stationDescription.Id);
 
         }
         #endregion
 
-        private void DroneListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void DronesChargingListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             DroneCharging DCh = (DroneCharging)DronesChargingListView.SelectedItem;
             DroneDescription DC = bl.displayDroneList().First(x => x.Id == DCh.ID);

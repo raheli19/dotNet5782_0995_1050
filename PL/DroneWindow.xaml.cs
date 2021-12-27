@@ -316,9 +316,8 @@ namespace PL
                 MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            ListViewDrone.ItemsSource = bl.displayDroneList();
+            ListViewDrone.ItemsSource= bl.displayDroneList();
             Drone_Label.Content = bl.displayDrone(droneDescription.Id);
-
             UpdateTextBox.Visibility = Visibility.Hidden;
             UpdateLabel.Visibility = Visibility.Hidden;
             CheckFullyCharged.Visibility = Visibility.Hidden;

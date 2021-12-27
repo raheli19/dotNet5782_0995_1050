@@ -42,6 +42,11 @@ namespace BLApi
 
         void delivered(int DroneId);
 
+        List<ParcelToClient> FindParcelsToClient(int clientId);
+        List<ParcelToClient> FindParcelsFromClient(int clientId);
+        string parcelsFromCLiList(int clientID);
+        string parcelsToCliList(int clientID);
+
 
         //functions print
 
@@ -49,6 +54,8 @@ namespace BLApi
         Drone displayDrone(int droneId);
         Client displayClient(int clientId);
         Parcel displayParcel(int parcelId);
+
+        DroneCharging displayDroneCharging(int stationId);
         IEnumerable<DroneCharging> displayDroneChargingList(int stationId);
         IEnumerable<StationDescription> DisplayStationList();
         IEnumerable<DroneDescription> displayDroneList();

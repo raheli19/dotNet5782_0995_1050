@@ -23,24 +23,21 @@ namespace PL
     public partial class ClientListWindow : Window
     {
         private BLApi.IBL bl;
-        IEnumerable<ClientActions> clientListFromBo = new List<ClientActions>();
 
-        private ObservableCollection<BO.Client> boClientList = new ObservableCollection<BO.Client>();
+        private ObservableCollection<BO.ClientActions> boClientList = new ObservableCollection<BO.ClientActions>();
         private bool checkFlag = false;
 
         public ClientListWindow(BLApi.IBL bl)
         {
             InitializeComponent();
             this.bl = bl;
-            clientListFromBo = bl.displayClientList();
-            DataContext = boClientList;
+            ClientListView.DataContext = boClientList;
             foreach (var item in bl.displayClientList())
             {
-                boClientList.Add(bl.displayClient((item.Id)));
-
+                boClientList.Add(item);
 
             }
-            ClientListView.ItemsSource = clientListFromBo;
+            
         }
 
         private void ClientListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)

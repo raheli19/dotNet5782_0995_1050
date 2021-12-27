@@ -32,7 +32,7 @@ namespace PL
         WeightCategories weight = new WeightCategories();
         IEnumerable<DroneDescription> droneListFromBo = new List<DroneDescription>();
 
-        private ObservableCollection<BO.Drone> boDroneList = new ObservableCollection<BO.Drone>();
+        private ObservableCollection<BO.DroneDescription> boDroneList = new ObservableCollection<BO.DroneDescription>();
 
         public DroneListWindow()
         {
@@ -43,16 +43,15 @@ namespace PL
         {
 
             InitializeComponent();
-            DataContext = boDroneList;
+            DronesListView.DataContext = boDroneList;
             foreach (var item in bl.displayDroneList())
             {
-                boDroneList.Add(bl.displayDrone((item.Id)));
+                boDroneList.Add(item);
 
 
             }
             this.bl = bl;
-            droneListFromBo = bl.displayDroneList();
-            DronesListView.ItemsSource = droneListFromBo;
+            
             this.comboStatusSelector.ItemsSource = Enum.GetValues(typeof(BO.DroneStatuses));
             this.comboWeightSelector.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
         }

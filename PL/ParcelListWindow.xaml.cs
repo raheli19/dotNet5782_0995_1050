@@ -22,23 +22,22 @@ namespace PL
     public partial class ParcelListWindow : Window
     {
         private BLApi.IBL bl;
-        IEnumerable<ParcelDescription> parcelListFromBo = new List<ParcelDescription>();
-        private ObservableCollection<BO.Parcel> boParcelList = new ObservableCollection<BO.Parcel>();
+        private ObservableCollection<BO.ParcelDescription> boParcelList = new ObservableCollection<BO.ParcelDescription>();
 
 
         public ParcelListWindow(BLApi.IBL bl)
         {
             InitializeComponent();
             DataContext = boParcelList;
+            ParcelsListView.DataContext = boParcelList;
             this.bl = bl;
             foreach (var item in bl.displayParcelList())
             {
-                boParcelList.Add(bl.displayParcel((item.Id)));
+                boParcelList.Add(item);
 
 
             }
-            parcelListFromBo = bl.displayParcelList();
-            ParcelsListView.ItemsSource = parcelListFromBo;
+            
             //combobox?
         }
 

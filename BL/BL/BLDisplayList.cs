@@ -113,7 +113,7 @@ namespace BL
                 IEnumerable<DO.Parcel> sent_and_delivLst = p.IEParcelList().Where(x => x.SenderId == item.ID && x.Delivered != DateTime.MinValue);
                 IEnumerable<DO.Parcel> sent_and_notDelivLst = p.IEParcelList().Where(x => x.SenderId == item.ID && x.Delivered == DateTime.MinValue);
                 IEnumerable<DO.Parcel> receivLst = p.IEParcelList().Where(x => x.TargetId == item.ID && x.Delivered != DateTime.MinValue);
-                IEnumerable<DO.Parcel> receivingLst = p.IEParcelList().Where(x => x.TargetId == item.ID && x.Delivered == DateTime.Now);
+                IEnumerable<DO.Parcel> receivingLst = p.IEParcelList().Where(x => x.TargetId == item.ID && x.Delivered != DateTime.MinValue);
                 int sent_and_delivLstCount = sent_and_delivLst.Count();
                 int sent_and_notDelivLstCount = sent_and_notDelivLst.Count();
                 int receivLstCount = receivLst.Count();

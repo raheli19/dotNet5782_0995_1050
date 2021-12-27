@@ -49,13 +49,9 @@ namespace PL
             }
             if (clientStatus == "Sign In")
             {
-                //String result = "";
-                //StringBuilder parcelsFromClientStr = new StringBuilder();
-                //foreach (var elementInCharge in bl.FindParcelsFromClient(DataCclient.ID))
-                //    parcelsFromClientStr.Append(elementInCharge).Append(", ");
-                //result += $"Parcels from client: {parcelsFromClient.ToString()},\n";
-                //parcelsFromClient.Visibility = Visibility.Visible;
-                //parcelsFromClient.Content = result;
+                string parcelsFromClientList = bl.parcelsToCliList(DataCclient.ID);
+                parcelsFromClient.Visibility = Visibility.Visible;
+                parcelsFromClient.Content = parcelsFromClientList;
 
 
             }
@@ -69,13 +65,9 @@ namespace PL
             }
             if (clientStatus == "Sign In")
             {
-                String result = "";
-                StringBuilder parcelsToClientStr = new StringBuilder();
-                //foreach (var elementInCharge in bl.FindParcelsToClient(DataCclient.ID))
-                //    parcelsToClientStr.Append(elementInCharge).Append(", ");
-                //result += $"Parcel to client: {parcelsToClient.ToString()},\n";
-                //parcelsToClient.Visibility = Visibility.Visible;
-                //parcelsToClient.Content = result;
+                string parcelsToClientList = bl.parcelsFromCLiList(DataCclient.ID);
+                parcelsToClient.Visibility = Visibility.Visible;
+                parcelsToClient.Content = parcelsToClientList;
             }
         }
 
