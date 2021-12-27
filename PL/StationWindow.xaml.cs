@@ -27,46 +27,13 @@ namespace PL
         int newCS = -1;
         private BLApi.IBL bl; 
         BO.Station dataCstation = new BO.Station();
-        private StationDescription stationDescription = new StationDescription();
+        StationDescription dataCstationUpdate = new StationDescription();
+        //private StationDescription stationDescription = new StationDescription();
         IEnumerable<DroneCharging> droneListFromBo = new List<DroneCharging>();
         public ObservableCollection<BO.DroneCharging> boDronesCharging = new ObservableCollection<BO.DroneCharging>();
         ListView ListViewStation;
-        // -------------------------------------------------------UPGRADE------------------------------------------------------------------------------
 
-        #region constructorUPGRADE
-        //ctor to upgrade the station
-        public StationWindow(object selectedItem, BLApi.IBL bl, object stationListView)
-        {
-            InitializeComponent();
-            this.bl = bl;
-            DataContext = dataCstation;
-            dataCstation.Loc = new();
-            this.stationDescription = (StationDescription)selectedItem;
-            AddStationGrid.Visibility = Visibility.Hidden;
-            UpdateStationGrid.Visibility = Visibility.Visible;
-            stationDetails.Content = bl.displayStation(stationDescription.Id);
-            //droneListFromBo = bl.displayDroneChargingList(stationDescription.Id);
-            stationDetails.Visibility = Visibility.Visible;
-            ListViewStation = (ListView)stationListView;
-            DronesChargingListView.DataContext = boDronesCharging;
-            foreach(var item in bl.displayDroneChargingList(stationDescription.Id))
-            {
-                boDronesCharging.Add(item);
-            }
-            //boDronesCharging= (ObservableCollection<DroneCharging>)bl.displayDroneChargingList(stationDescription.Id);
-
-        }
-        #endregion
-
-        private void DronesChargingListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            DroneCharging DCh = (DroneCharging)DronesChargingListView.SelectedItem;
-            DroneDescription DC = bl.displayDroneList().First(x => x.Id == DCh.ID);
-            new DroneWindow(DC, bl, DronesChargingListView).Show();
-            //comboStatusSelector.SelectedItem = null;
-            //comboWeightSelector.SelectedItem = null;
-        }
-
+        // -------------------------------------------------------ADD------------------------------------------------------------------------------
         // ctor to add a station
         public StationWindow(BLApi.IBL bl, object DroneListWindow)
         {
@@ -119,7 +86,7 @@ namespace PL
             {
                 if (ex.Message == "ID not valid")
                     txt_id.Background = Brushes.Red;
-                if(ex.Message== "latitude is not valid")
+                if (ex.Message == "latitude is not valid")
                     txt_lat.Background = Brushes.Red;
                 if (ex.Message == "longitude is not valid")
                     txt_long.Background = Brushes.Red;
@@ -132,6 +99,44 @@ namespace PL
             //dlw.CheckFields();
             this.Close();
         }
+        // -------------------------------------------------------UPGRADE------------------------------------------------------------------------------
+
+        #region constructorUPGRADE
+        //ctor to upgrade the station
+        public StationWindow(object selectedItem, BLApi.IBL bl, object stationListView)
+        {
+            InitializeComponent();
+            this.bl = bl;
+            dataCstationUpdate = (StationDescription)selectedItem;
+            DataContext = dataCstationUpdate;
+            dataCstation.Loc = new();
+            //this.stationDescription = (StationDescription)selectedItem;
+            AddStationGrid.Visibility = Visibility.Hidden;
+            UpdateStationGrid.Visibility = Visibility.Visible;
+            stationDetails.Content = bl.displayStation(dataCstationUpdate.Id);
+            //droneListFromBo = bl.displayDroneChargingList(stationDescription.Id);
+            stationDetails.Visibility = Visibility.Visible;
+            ListViewStation = (ListView)stationListView;
+            DronesChargingListView.DataContext = boDronesCharging;
+            foreach(var item in bl.displayDroneChargingList(dataCstationUpdate.Id))
+            {
+                boDronesCharging.Add(item);
+            }
+            //boDronesCharging= (ObservableCollection<DroneCharging>)bl.displayDroneChargingList(stationDescription.Id);
+
+        }
+        #endregion
+
+        private void DronesChargingListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            DroneCharging DCh = (DroneCharging)DronesChargingListView.SelectedItem;
+            DroneDescription DC = bl.displayDroneList().First(x => x.Id == DCh.ID);
+            new DroneWindow(DC, bl, DronesChargingListView).Show();
+            //comboStatusSelector.SelectedItem = null;
+            //comboWeightSelector.SelectedItem = null;
+        }
+
+ 
 
         private void ClickUpdate(object sender, RoutedEventArgs e)
         {  MessageBox.Show(/*"The model of your drone is being updated.*/"Please close this window and enter the new name and/or new number of charge slots.", "Success!", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -148,8 +153,8 @@ namespace PL
         }
         private void Check_Click_Update(object sender, RoutedEventArgs e)
         {
-            if (UpdateNameTextBox.Text != "")
-                newName = UpdateNameTextBox.Text;
+            if (dataCstationUpdate.name != "")
+                newName = dataCstationUpdate.name;
             else
                 newName = "n";
            
@@ -160,7 +165,7 @@ namespace PL
             //}
             try
             {
-                bl.updateStationName_CS(stationDescription.Id, newName);
+                bl.updateStationName_CS(dataCstationUpdate.Id, newName);
             }
             catch (Exception ex)
             {
@@ -168,7 +173,7 @@ namespace PL
                 return;
             }
             ListViewStation.ItemsSource = bl.DisplayStationList();
-            stationDetails.Content = bl.displayStation(stationDescription.Id);
+            stationDetails.Content = bl.displayStation(dataCstationUpdate.Id);
             UpdateNameTextBox.Visibility = Visibility.Hidden;
             UpdateNameLabel.Visibility = Visibility.Hidden;
             CheckNameUpdate.Visibility = Visibility.Hidden;
@@ -184,7 +189,7 @@ namespace PL
                 newCS = -1;
             try
             {
-                bl.updateStationName_CS(stationDescription.Id, "n",newCS);
+                bl.updateStationName_CS(dataCstationUpdate.Id, "n",newCS);
             }
             catch (Exception ex)
             {
@@ -192,7 +197,7 @@ namespace PL
                 return;
             }
             ListViewStation.ItemsSource = bl.DisplayStationList();
-            stationDetails.Content = bl.displayStation(stationDescription.Id);
+            stationDetails.Content = bl.displayStation(dataCstationUpdate.Id);
             //UpdateNameTextBox.Visibility = Visibility.Hidden;
             //UpdateNameLabel.Visibility = Visibility.Hidden;
             //CheckNameUpdate.Visibility = Visibility.Hidden;
