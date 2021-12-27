@@ -83,7 +83,7 @@ namespace BL
         public double BatteryAccToTime(double time, double battery)
         {
             double timeInHour = time / 60;
-            double distance = 150* timeInHour;
+            double distance = 150 * timeInHour;
             battery += distance * 0.5;
             return battery;
 
@@ -128,7 +128,7 @@ namespace BL
         #endregion
 
         #region ClosestParcel
-       public DO.Parcel ClosestParcel(List<DO.Parcel> list, Localisation droneLoc)
+        public DO.Parcel ClosestParcel(List<DO.Parcel> list, Localisation droneLoc)
         {
             double minDist = double.MaxValue;
             DO.Parcel tempParcel = new DO.Parcel();
@@ -147,7 +147,7 @@ namespace BL
         #endregion
 
         #region ConvertStationToDal
-       public DO.Station ConvertStationToDal(Station s)
+        public DO.Station ConvertStationToDal(Station s)
         {
             DO.Station stat = new DO.Station();
             stat.ID = s.ID;
@@ -162,14 +162,21 @@ namespace BL
 
         public void updateBlDroneList(DroneDescription droneToUpdate)
         {
-            
+
             DroneDescription blD = new DroneDescription();
-            blD=DroneList.Find(x => droneToUpdate.Id == x.Id);
+            blD = DroneList.Find(x => droneToUpdate.Id == x.Id);
             DroneList.Remove(blD);
             DroneList.Add(droneToUpdate);
-            
+
 
         }
+
+        public int GetIdParcel(int senderId, int TargetId)
+        {
+             int id = p.DalGetIdParcel( senderId,TargetId);
+            return id;
+        }
+
         
 
 

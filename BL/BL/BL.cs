@@ -407,7 +407,8 @@ namespace BL
             {
                 idList.Add(item.SenderId);
             }
-            return idList;
+            List<int> idListWithoutDuplicates = idList.Distinct().ToList();
+            return idListWithoutDuplicates;
         }
         public List<int> AllTargets_Id()
         {
@@ -416,7 +417,8 @@ namespace BL
             {
                 idList.Add(item.TargetId);
             }
-            return idList;
+            List<int> idListWithoutDuplicates = idList.Distinct().ToList();
+            return idListWithoutDuplicates;
         }
 
     }

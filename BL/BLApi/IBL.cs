@@ -9,13 +9,13 @@ namespace BLApi
     public interface IBL
     {
         //using functions
-
+        string Name(int id);
         //functions ADD
         Parcel GetParcel(int id);
         Client GetClient(int id);
         Station GetStation(int id);
         Drone GetDrone(int id);
-
+        int GetIdParcel(int senderId, int TargetId);
         void addStation(Station s);
 
         void addDrone(Drone d, int StationID);
@@ -57,6 +57,7 @@ namespace BLApi
         Client displayClient(int clientId);
         Parcel displayParcel(int parcelId);
 
+        void RemoveParcel(Parcel parcelToRemove);
         DroneCharging displayDroneCharging(int stationId);
         IEnumerable<DroneCharging> displayDroneChargingList(int stationId);
         IEnumerable<StationDescription> DisplayStationList();

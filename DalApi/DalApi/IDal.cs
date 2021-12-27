@@ -50,6 +50,7 @@ namespace DalApi
         Client ClientById(int id);
         Parcel ParcelById(int id);
 
+        void RemoveParcel(DO.Parcel p);
         IEnumerable<Station> IEStationList(Func<Station, bool> predicate = null);
         IEnumerable<Drone> IEDroneList();
         IEnumerable<Client> IEClientList();
@@ -65,6 +66,7 @@ namespace DalApi
         List<int> IdStation();
         public List<int> clientReceivedParcel();
         //void Assignement(object iD, int id);
+        int DalGetIdParcel(int senderId, int TargetId);
 
         //public Station FoundStation(int id);
 

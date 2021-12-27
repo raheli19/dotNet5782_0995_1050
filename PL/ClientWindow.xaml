@@ -5,13 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="ClientWindow" Height="450" Width="800">
+        Title="ClientWindow" Height="450" Width="800"
+        Closing="OnClosing">
+    <!--<Window.Resources>
+        <Style TargetType="{x:Type Button}">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>-->
     <Grid x:Name="MainGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid x:Name="UpgradeClientGrid" Visibility="Visible">
-            <Button x:Name="UpdateButton" Content="UPDATE" HorizontalAlignment="Left" 
+            <Button x:Name="UpdateButton" Content="UPDATE" HorizontalAlignment="Left" Cursor="Cross"
                    
                     Background="Transparent" Margin="648,166,0,0" VerticalAlignment="Top" ToolTip="UPDATE" Height="51" Width="133" BorderBrush="Black" Click="ClickUpdate" Opacity="100" FontFamily="Cambria" FontSize="30" FontWeight="Bold" FontStyle="Italic">
 
@@ -31,7 +41,7 @@
             <!--<ListView x:Name="ParcelFromClient" ItemsSource="{Binding}" MouseDoubleClick="">    </ListView>-->
 
 
-            <Button Name="CloseButton" Content="CLOSE" HorizontalAlignment="Left" Background="Transparent" Margin="513,59,0,0" 
+            <Button Name="CloseButton" Content="CLOSE" Cursor="Hand" HorizontalAlignment="Left" Background="Transparent" Margin="513,59,0,0" 
                     VerticalAlignment="Top" ToolTip="Close the Window" Height="59" Width="130" BorderBrush="Black" Click="Button_Close" Opacity="100" FontFamily="Cambria" FontWeight="Bold" FontStyle="Italic" FontSize="30"
                     ></Button>
             <ListView HorizontalAlignment="Left" Height="82" Margin="430,302,0,0" VerticalAlignment="Top" Width="351" SelectionChanged="ListView_SelectionChanged">
@@ -43,7 +53,7 @@
             </ListView>
 
         </Grid>
-        <Grid x:Name="AddGridClient" Visibility="Visible">
+        <Grid x:Name="AddGridClient" Visibility="Hidden">
             <Grid.Background>
                 <ImageBrush ImageSource="/fondessai.png"/>
             </Grid.Background>

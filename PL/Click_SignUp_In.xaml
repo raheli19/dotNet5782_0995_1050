@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="Click_SignUp_In" Height="450" Width="800">
- 
+        Title="Click_SignUp_In" Height="450" Width="800"
+        Closing="OnClosing">
+
     <Grid x:Name="MainGrid">
         <!--New Client Region-->
         <Grid.Resources>
@@ -19,16 +20,8 @@
             </Style>
         </Grid.Resources>
         <Grid x:Name="Sign_Up" Visibility="Hidden">
-            <!--New Client Region-->
-            <Grid.Resources>
-                <Style TargetType="{x:Type Button}">
-                    <Style.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Cursor" Value="Hand"/>
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </Grid.Resources>
+            
+            
             <Label x:Name="info" Content="Please enter your personal details:" HorizontalAlignment="Left" Margin="221,92,0,0" VerticalAlignment="Top" FontSize="20"/>
 
             <Label x:Name="Welcome" Content="We are happy that you decided to join us" HorizontalAlignment="Left" Margin="168,34,0,0" VerticalAlignment="Top" Width="417" FontSize="22" FontStyle="Italic"/>
@@ -43,6 +36,7 @@
             <TextBox x:Name="textBox_Latitude" Text="{Binding ClientLoc.latitude,Mode=OneWayToSource}"  HorizontalAlignment="Center" Margin="0,316,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="98" Height="31"/>
             <TextBox x:Name="textBox_Longitude" Text="{Binding ClientLoc.longitude,Mode=OneWayToSource}"  HorizontalAlignment="Center" Margin="0,368,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="98" Height="34"/>
 
+            
             <CheckBox Name="cbSample" Content="I agree the conditions" Margin="564,110,42,228" FontWeight="Bold" FontStyle="Italic" />
             <TextBlock HorizontalAlignment="Left" Margin="491,217,0,105" FontSize="14" Width="267">
                 <TextBlock.Style>
@@ -71,11 +65,17 @@
                     </Style.Triggers>
                 </Style>
             </Grid.Resources>
-            <Label x:Name="Welcome2" Content="We are happy to see you again" HorizontalAlignment="Left" Margin="245,44,0,0" VerticalAlignment="Top" Width="326" Height="44" FontSize="22" FontWeight="Normal" FontStyle="Italic"/>
+            <Label x:Name="Welcome2" Content="We are glad to see you again!" HorizontalAlignment="Left" Margin="245,44,0,0" VerticalAlignment="Top" Width="326" Height="44" FontSize="22" FontWeight="Normal" FontStyle="Italic"/>
             <Label x:Name="EnterID" Content="Please enter your personnal ID:" HorizontalAlignment="Center" Margin="0,110,0,0" VerticalAlignment="Top" Width="264" Height="39" FontSize="18"/>
             <TextBox x:Name="textBox_ID" Text="{Binding ID,Mode=TwoWay}" HorizontalAlignment="Center" Margin="0,199,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="137" Height="49" Background="#FFD8C1E2"/>
             <Button x:Name="NEXT" Content="NEXT" HorizontalAlignment="Left" Margin="633,344,0,0" VerticalAlignment="Top" Width="89" Height="46" FontStyle="Italic" FontSize="20" FontWeight="Bold" Click="NEXT_Click"/>
-
+            <Button Name="CloseButton" Cursor="Hand" HorizontalAlignment="Left" Margin="678,10,0,0" 
+                    VerticalAlignment="Top" ToolTip="Close the Window" Height="59" Width="112" BorderBrush="Black" Click="Button_Close" Opacity="100" FontFamily="Cambria" FontWeight="Bold" FontStyle="Italic" FontSize="30"
+                    >
+                <Button.Background>
+                    <ImageBrush ImageSource="/exit.png"/>
+                </Button.Background>
+            </Button>
         </Grid>
 
 

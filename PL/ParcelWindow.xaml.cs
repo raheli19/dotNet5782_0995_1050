@@ -35,6 +35,8 @@ namespace PL
             this.bl = bl;
             dataCparcel.Sender = new ClientInParcel();
             dataCparcel.Target = new ClientInParcel();
+            dataCparcel.Weight = new WeightCategories();
+            dataCparcel.Priority = new Priorities();
             DataContext = dataCparcel;
 
 
@@ -50,12 +52,17 @@ namespace PL
 
         }
 
-        private void OpenWindow_Add(object sender, RoutedEventArgs e)
+        private void Add_Click(object sender, RoutedEventArgs e)
         {
 
             if (Combo_SenderId == null || Combo_TargetId == null || Combo_Weight == null || Combo_Priority == null)
             {
                 MessageBox.Show("Please make a selection", "WARNING", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            if ( Combo_SenderId.SelectedItem.Equals( Combo_TargetId.SelectedItem))
+            {
+                MessageBox.Show("A client can't send a parcel to himself! ", "Aie aie aie...", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
             try
@@ -67,7 +74,39 @@ namespace PL
                 MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
+            MessageBox.Show("Success!", "Added the drone", MessageBoxButton.OK, MessageBoxImage.Information);
+            ListViewParcel.ItemsSource = bl.displayParcelList();
+            this.Combo_SenderId.ItemsSource = bl.AllSenders_Id();
+            this.Combo_TargetId.ItemsSource = bl.AllTargets_Id();
+
+        } 
+        
+        #region comboboxSelections
+        private void Combo_SenderId_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            dataCparcel.Sender.ID = (int)Combo_SenderId.SelectedItem;
+            dataCparcel.Sender.name = bl.displayClient(dataCparcel.Sender.ID).Name;
+
         }
+
+        private void Combo_TargetId_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            dataCparcel.Target.ID = (int)Combo_TargetId.SelectedItem;
+            dataCparcel.Target.name = bl.displayClient(dataCparcel.Target.ID).Name;
+
+        }
+
+        private void Combo_Priority_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            dataCparcel.Priority = (Priorities)Combo_Priority.SelectedItem;
+        }
+
+        private void Combo_Weight_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            dataCparcel.Weight = (WeightCategories)Combo_Weight.SelectedItem;
+        }
+        #endregion
+
         #endregion
 
 
@@ -99,9 +138,37 @@ namespace PL
 
         #endregion
 
-        private void Combo_SenderId_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void Remove_Button(object sender, RoutedEventArgs e)
         {
-            dataCparcel.Sender.ID = (int)Combo_SenderId.SelectedItem;
+            if (Combo_SenderId.SelectedItem == null || Combo_TargetId.SelectedItem == null)
+            {
+                MessageBox.Show("Please make a selection", "WARNING", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            if (Combo_SenderId.SelectedItem == Combo_TargetId.SelectedItem)
+            {
+                MessageBox.Show("A client didn't sent a parcel to himself! ", "Aie aie aie...", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            //dataCparcel.ID = bl.displayParcelList().Where(x => x.SenderName == bl.displayClient((int)Combo_SenderId.SelectedItem).Name && x.TargetName == bl.displayClient((int)Combo_TargetId.SelectedItem).Name);
+            dataCparcel.ID = bl.GetIdParcel((int)Combo_SenderId.SelectedItem, (int)Combo_TargetId.SelectedItem);
+            try
+            {
+                
+                bl.RemoveParcel(dataCparcel);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            MessageBox.Show("Success!", "The Parcel is removed", MessageBoxButton.OK, MessageBoxImage.Information);
+            //this.Combo_SenderId.SelectedItem = null;
+            //this.Combo_TargetId.SelectedItem = null;
+            this.Combo_SenderId.ItemsSource = bl.AllSenders_Id();
+            this.Combo_TargetId.ItemsSource = bl.AllTargets_Id();
+            ListViewParcel.ItemsSource = bl.displayParcelList();
+
         }
     }
 }

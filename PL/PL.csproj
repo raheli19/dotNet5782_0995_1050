@@ -16,6 +16,7 @@
     <None Remove="close.png" />
     <None Remove="closebutton.png" />
     <None Remove="drone.png" />
+    <None Remove="exit.png" />
     <None Remove="fond.png" />
     <None Remove="fond2.png" />
     <None Remove="fondessai.png" />
@@ -37,6 +38,7 @@
     <Resource Include="close.png" />
     <Resource Include="closebutton.png" />
     <Resource Include="drone.png" />
+    <Resource Include="exit.png" />
     <Resource Include="fond.png" />
     <Resource Include="fond2.png" />
     <Resource Include="fondessai.png" />

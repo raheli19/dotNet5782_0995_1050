@@ -88,7 +88,7 @@ namespace PL
 
         #endregion
 
-#region addClient
+        #region addClient
         public ClientWindow(BLApi.IBL bl, object ClientListWindow)
         {
             InitializeComponent();

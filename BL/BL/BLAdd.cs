@@ -190,6 +190,16 @@ namespace BL
 
         }
 
+        public void RemoveParcel(Parcel parcelToRemove)
+        {
+            //if (parcelToRemove.Delivered == null)
+            //    throw new DO.ParcelException("The parcel is not delivered!");
+            DO.Parcel parcelDal = new DO.Parcel();
+            parcelDal.ID = parcelToRemove.ID;
+            parcelDal.SenderId = parcelToRemove.Sender.ID;
+            parcelDal.TargetId = parcelToRemove.Target.ID;
+            p.RemoveParcel(parcelDal);
+        }
         #endregion
 
       

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +23,7 @@ namespace PL
         BO.Client DataCclient = new BO.Client();
         private BLApi.IBL bl;
         string clientStatus = " ";
+        private bool checkFlag = false;
         public Click_SignUp_In(BLApi.IBL bl,int Sign_Uptemp)
         {
             InitializeComponent();
@@ -107,5 +109,24 @@ namespace PL
             this.Close();
             new DeliveringProcess(bl, DataCclient, clientStatus).Show();
         }
+
+        #region closeFct
+        private void Button_Close(object sender, RoutedEventArgs e)
+        {
+            this.checkFlag = true; // will allow us to close the window from the button and not from the "X"
+            this.Close();
+        }
+        private void OnClosing(object sender, CancelEventArgs e)
+        {
+
+            if (this.checkFlag)// call from the button
+                e.Cancel = false;
+            else
+                e.Cancel = true;// call from the "X", we don't want to close
+
+        }
+        #endregion
+
+        
     }
 }

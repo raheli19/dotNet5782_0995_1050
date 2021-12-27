@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="MenueWindow" Height="450" Width="800">
-    <!--New Client Region-->
+   
     <Window.Resources>
         <Style TargetType="{x:Type Button}">
             <Style.Triggers>

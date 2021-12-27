@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="ParcelList" Height="450" Width="800">
+        Title="ParcelList" Height="450" Width="800"
+        Closing="OnClosing">
     <Window.Resources>
         <Style TargetType="{x:Type Button}">
             <Style.Triggers>
@@ -35,7 +36,7 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <ListView x:Name="ParcelsListView" ItemsSource="{Binding}"  Margin="0,91,0,0" Visibility="Visible" MouseDoubleClick="ParcelView_MouseDoubleClick" Grid.RowSpan="2" Background="#FFEBF6F7"/>
+        <ListView x:Name="ParcelsListView" Cursor="Hand" ItemsSource="{Binding}"  Margin="0,91,0,0" Visibility="Visible" MouseDoubleClick="ParcelView_MouseDoubleClick" Grid.RowSpan="2" Background="#FFEBF6F7"/>
 
     </Grid>
 </Window>

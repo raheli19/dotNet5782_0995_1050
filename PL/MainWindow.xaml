@@ -14,9 +14,10 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Button Content="Show DroneList" Click="MainButton_OpenDroneList" Height="49" HorizontalAlignment="Left" Margin="10,294,0,0" x:Name="openDroneList" VerticalAlignment="Top" Width="171" FontSize="22" FontWeight="Bold" FontStyle="Normal" Background="#FF9389C3" BorderThickness="4,4,4,4" BorderBrush="#FF150E36"/>
-        <Button Content="Show ClientList" Click="MainButton_ClientList" Height="49" HorizontalAlignment="Left" Margin="152,371,0,0" x:Name="openClientList" VerticalAlignment="Top" Width="171" FontSize="22" FontWeight="Bold" FontStyle="Normal" Background="#FF9389C3" BorderThickness="4,4,4,4" BorderBrush="#FF150E36"/>
-        <Button Content="Show ParcelList" Click="MainButton_OpenParcelList" Height="49" HorizontalAlignment="Left" Margin="610,285,0,0" x:Name="openParcelList" VerticalAlignment="Top" Width="170" FontSize="22" FontWeight="Bold" FontStyle="Normal" Background="#FF9389C3" BorderThickness="4,4,4,4" BorderBrush="#FF150E36"/>
+        <Button Content="Show DroneList" Cursor="Hand" Click="MainButton_OpenDroneList" Height="49" HorizontalAlignment="Left" Margin="10,294,0,0" x:Name="openDroneList" VerticalAlignment="Top" Width="171" FontSize="22" FontWeight="Bold" FontStyle="Normal" Background="#FF9389C3" BorderThickness="4,4,4,4" BorderBrush="#FF150E36"/>
+        <Button Content="Show ClientList" Cursor="Hand" Click="MainButton_ClientList" Height="49" HorizontalAlignment="Left" Margin="152,371,0,0" x:Name="openClientList" VerticalAlignment="Top" Width="171" FontSize="22" FontWeight="Bold" FontStyle="Normal" Background="#FF9389C3" BorderThickness="4,4,4,4" BorderBrush="#FF150E36"/>
+        <Button Content="Show ParcelList" Cursor="Hand" Click="MainButton_OpenParcelList" Height="49" HorizontalAlignment="Left" Margin="610,285,0,0" x:Name="openParcelList" VerticalAlignment="Top" Width="170" FontSize="22" FontWeight="Bold" FontStyle="Normal" Background="#FF9389C3" BorderThickness="4,4,4,4" BorderBrush="#FF150E36"/>
+        <Button Content="Show StationsList" Cursor="Hand" Click="MainButton_OpenStationsList" Height="49" HorizontalAlignment="Left" Margin="422,371,0,0" x:Name="openParcelList_Copy" VerticalAlignment="Top" Width="225" FontSize="22" FontWeight="Bold" FontStyle="Normal" Background="#FF9389C3" BorderThickness="4,4,4,4" BorderBrush="#FF150E36"/>
 
         <Label x:Name="label" Content="Welcome to our Nebula Drone delivery System!&#xD;&#xA;" HorizontalAlignment="Center" Margin="0,21,0,0" VerticalAlignment="Top" Width="552" Height="55" FontSize="24" FontWeight="Bold" FontStyle="Italic" BorderThickness="5,5,5,5">
             <Label.BorderBrush>
@@ -27,7 +28,6 @@
             </Label.BorderBrush>
         </Label>
         <Label x:Name="label1" Content="To start, please press the button below" HorizontalAlignment="Center" Margin="0,76,0,0" VerticalAlignment="Top" Width="429" Height="50" FontSize="22" FontWeight="Bold" FontStyle="Italic"/>
-        <Button Content="Show StationsList" Click="MainButton_OpenStationsList" Height="49" HorizontalAlignment="Left" Margin="422,371,0,0" x:Name="openParcelList_Copy" VerticalAlignment="Top" Width="225" FontSize="22" FontWeight="Bold" FontStyle="Normal" Background="#FF9389C3" BorderThickness="4,4,4,4" BorderBrush="#FF150E36"/>
 
     </Grid>
 </Window>

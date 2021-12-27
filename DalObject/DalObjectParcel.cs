@@ -27,6 +27,20 @@ namespace Dal
         }
         #endregion
 
+        #region removeParcel
+        public void RemoveParcel(Parcel p)
+        {
+            for(int i=0; i< DataSource.ParcelList.Count; i++)
+            {
+                if(DataSource.ParcelList[i].ID== p.ID)
+                {
+                    DataSource.ParcelList.RemoveAt(i);
+                    break;
+                }
+            }
+        }
+        #endregion
+
         //-----------------------------------UPDATE-FUNCTIONS-------------------------------------------
 
         public void UpdateParcel(Parcel parcel)
@@ -69,7 +83,7 @@ namespace Dal
 
         //-----------------------------------ACTIONS-------------------------------------------
 
-       
+
         #region ParcelById
         /// <summary>
         /// Receives an id and returns the parcel which contains this ID
@@ -89,6 +103,11 @@ namespace Dal
         }
         #endregion
 
+        public int DalGetIdParcel(int senderId, int TargetId)
+        {
+            int id = DataSource.ParcelList.Find(x => x.SenderId == senderId && x.TargetId == TargetId).ID;
+            return id;
+        }
         #region IENUMERABLE
         #region ParcelList
         /// <summary>
@@ -108,5 +127,4 @@ namespace Dal
     }
 }
 
-       
-       
+

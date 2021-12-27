@@ -11,7 +11,7 @@
             <RowDefinition Height="79*"/>
             <RowDefinition Height="355*"/>
         </Grid.RowDefinitions>
-        <ListView x:Name="StationListView" ItemsSource="{Binding}"  Margin="-4,12,4,0" Visibility="Visible" MouseDoubleClick="StationListView_MouseDoubleClick" Background="#FFEBF6F7" Grid.Row="1"/>
+        <ListView x:Name="StationListView" ItemsSource="{Binding}" Cursor="Hand" Margin="-4,12,4,0" Visibility="Visible" MouseDoubleClick="StationListView_MouseDoubleClick" Background="#FFEBF6F7" Grid.Row="1"/>
 
         <Label x:Name="ChooseNumFCS" Content="Choose the number of FCS" HorizontalAlignment="Left" Margin="210,22,0,0" VerticalAlignment="Top" Width="164" Height="38"/>
         <Button x:Name="containsFreeChargeSlots" Content="Contains free charge slots" HorizontalAlignment="Left" Margin="37,0,0,0" VerticalAlignment="Center" Width="168" Height="38" Click="containsFreeChargeSlots_Click"/>
