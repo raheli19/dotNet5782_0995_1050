@@ -12,13 +12,14 @@
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Cursor" Value="Hand"/>
+                    
                 </Trigger>
             </Style.Triggers>
         </Style>
     </Window.Resources>
 
     <Grid x:Name="MainGrid">
-        <Grid x:Name="UpgradeGrid" Visibility="Visible">
+        <Grid x:Name="UpgradeGrid" Visibility="Hidden">
             <Button x:Name="UpdateButton" Content="UPDATE" HorizontalAlignment="Left" 
                    
                     Background="Transparent" Margin="648,166,0,0" VerticalAlignment="Top" ToolTip="UPDATE" Height="51" Width="133" BorderBrush="Black" Click="ClickUpdate" Opacity="100" FontFamily="Cambria" FontSize="30" FontWeight="Bold" FontStyle="Italic">
@@ -27,6 +28,18 @@
             <Button Name="CloseButton" Content="CLOSE" HorizontalAlignment="Left" Background="Transparent" Margin="472,10,0,0" VerticalAlignment="Top" ToolTip="Close the Window" Height="59" Width="130" BorderBrush="Black" Click="ClickCloseParcelWindow" Opacity="100" FontFamily="Cambria" FontWeight="Bold" FontStyle="Italic" FontSize="30">
 
             </Button>
+        </Grid>
+        <Grid x:Name="AddGrid" Visibility="Visible">
+            <Button Content="Add" HorizontalAlignment="Left" Height="74" Margin="584,42,0,0" VerticalAlignment="Top" Width="124" Click="OpenWindow_Add"/>
+            <ComboBox x:Name="Combo_SenderId" HorizontalAlignment="Left" Height="37" SelectedItem="{Binding ClientInParcel.ID, Mode=TwoWay}" Margin="87,68,0,0" VerticalAlignment="Top" Width="232" SelectionChanged="Combo_SenderId_SelectionChanged"/>
+            <ComboBox x:Name="Combo_TargetId" HorizontalAlignment="Left" Height="30" SelectedItem="{Binding ClientInParcel.ID,Mode=TwoWay}" Margin="81,170,0,0" VerticalAlignment="Top" Width="229"/>
+            <ComboBox x:Name="Combo_Priority" HorizontalAlignment="Left" Height="34" SelectedItem="{Binding Priority, Mode=TwoWay}" Margin="81,247,0,0" VerticalAlignment="Top" Width="229"/>
+            <ComboBox x:Name="Combo_Weight" HorizontalAlignment="Left" Height="31" SelectedItem="{Binding Weight, Mode=TwoWay}" Margin="87,343,0,0" VerticalAlignment="Top" Width="223"/>
+            <Label  Content="SenderId" HorizontalAlignment="Left" Height="29" Margin="90,34,0,0" VerticalAlignment="Top" Width="229"/>
+            <Label Content="TargetId" HorizontalAlignment="Left" Height="29" Margin="88,139,0,0" VerticalAlignment="Top" Width="230"/>
+            <Label Content="Priority" HorizontalAlignment="Left" Height="29" Margin="88,217,0,0" VerticalAlignment="Top" Width="229"/>
+            <Label Content="Weight" HorizontalAlignment="Left" Height="29" Margin="89,313,0,0" VerticalAlignment="Top" Width="229"/>
+
         </Grid>
     </Grid>
 </Window>

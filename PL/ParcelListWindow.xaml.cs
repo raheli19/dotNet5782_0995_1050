@@ -46,10 +46,7 @@ namespace PL
             //open the ParcelWindow
         }
 
-        private void button_addDrone(object sender, RoutedEventArgs e)
-        {
-            //open parcelWindow
-        }
+        
 
         #region closeFunctions
         private void Button_Close(object sender, RoutedEventArgs e)
@@ -67,5 +64,11 @@ namespace PL
 
         }
         #endregion
+
+        private void button_addParcel(object sender, RoutedEventArgs e)
+        {
+            ParcelWindow subWindow = new ParcelWindow(bl, ParcelsListView);
+            subWindow.Show();
+        }
     }
 }

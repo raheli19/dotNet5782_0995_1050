@@ -20,7 +20,7 @@
             <RowDefinition Height="89*"/>
             <RowDefinition Height="345*"/>
         </Grid.RowDefinitions>
-        <Button Content="ADD DRONE" Margin="674,24,10,23" Click="button_addDrone" FontWeight="Bold" FontFamily="Segoe UI" Foreground="#FFE8D2D2" BorderThickness="4,4,4,4" BorderBrush="#FF2F2C52" FontSize="16">
+        <Button Content="ADD PARCEL" Margin="674,24,10,23" Click="button_addParcel" FontWeight="Bold" FontFamily="Segoe UI" Foreground="#FFE8D2D2" BorderThickness="4,4,4,4" BorderBrush="#FF2F2C52" FontSize="16">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black"/>

@@ -26,15 +26,15 @@ namespace BLApi
 
         //functions UPDATE
 
-        void updateDroneName(int Id,string newName);
+        void updateDroneName(int Id, string newName);
 
-        void updateStationName_CS(int Id, string newName=" ",int newCS=-1);
+        void updateStationName_CS(int Id, string newName = " ", int newCS = -1);
 
-        void updateClientName_Phone(int Id, string newName =" ", string newTel=" ");
+        void updateClientName_Phone(int Id, string newName = " ", string newTel = " ");
 
         void DroneToCharge(int DroneId);
 
-        void DroneCharged(int DroneId,double timeInCharge);
+        void DroneCharged(int DroneId, double timeInCharge);
 
         void Assignement(int DroneId);
 
@@ -47,6 +47,8 @@ namespace BLApi
         string parcelsFromCLiList(int clientID);
         string parcelsToCliList(int clientID);
 
+        public List<int> AllTargets_Id();
+        public List<int> AllSenders_Id();
 
         //functions print
 
@@ -62,7 +64,7 @@ namespace BLApi
         IEnumerable<ClientActions> displayClientList();
         IEnumerable<ParcelDescription> displayParcelList();
         IEnumerable<ParcelDescription> displayParcelsNotAssigned();
-        IEnumerable <StationDescription> printFreeStations();
-       
+        IEnumerable<StationDescription> printFreeStations();
+
     }
 }

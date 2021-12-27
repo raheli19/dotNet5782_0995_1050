@@ -399,5 +399,25 @@ namespace BL
             result += $"Parcel to client: {parcelsToClientStr.ToString()},\n";
             return result;
         }
+
+        public List<int> AllSenders_Id()
+        {
+            List<int> idList = new List<int>();
+            foreach(var item in p.IEParcelList())
+            {
+                idList.Add(item.SenderId);
+            }
+            return idList;
+        }
+        public List<int> AllTargets_Id()
+        {
+            List<int> idList = new List<int>();
+            foreach (var item in p.IEParcelList())
+            {
+                idList.Add(item.TargetId);
+            }
+            return idList;
+        }
+
     }
 }

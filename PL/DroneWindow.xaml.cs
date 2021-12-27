@@ -45,7 +45,7 @@ namespace PL
             this.comboWeightSelector.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
             this.comboStationSelector.ItemsSource = bl.DisplayStationList();
             ListViewDrone = (ListView)DroneListWindow;
-            
+
         }
         private bool checkFlag = false;
 
@@ -98,7 +98,7 @@ namespace PL
         {
 
         }
-        
+
 
         private void ComboBox_WeightSelection(object sender, SelectionChangedEventArgs e)
         {
@@ -316,7 +316,7 @@ namespace PL
                 MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            ListViewDrone.ItemsSource= bl.displayDroneList();
+            ListViewDrone.ItemsSource = bl.displayDroneList();
             Drone_Label.Content = bl.displayDrone(droneDescription.Id);
             UpdateTextBox.Visibility = Visibility.Hidden;
             UpdateLabel.Visibility = Visibility.Hidden;
