@@ -12,6 +12,7 @@ namespace BO
 
         public int freeChargeSlots { get; set; }
         public int fullChargeSlots { get; set; }
+        public FreeOrNot freeornot { get; set; }
 
         public override string ToString()
         {

@@ -21,6 +21,10 @@ namespace BO
     {
         requested, scheduled, pickedup, delivered
     };
+    public enum FreeOrNot
+    {
+GotFreeChargesSlots,NoFreeChargesSlots
+    };
 
 }
 

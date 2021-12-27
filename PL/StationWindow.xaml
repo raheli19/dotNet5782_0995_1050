@@ -35,33 +35,37 @@
         </Grid>
         <Grid Name="UpdateStationGrid" Visibility="Visible" Opacity="0.745" Margin="-10,0,0,0">
             <Grid.Background>
-                <ImageBrush ImageSource="/fond.png"/>
+                <ImageBrush ImageSource="/stationBackground.png" Opacity="0.6"/>
             </Grid.Background>
 
 
-            <ListView x:Name="DronesChargingListView" ItemsSource="{Binding}" MouseDoubleClick="DronesChargingListView_MouseDoubleClick"  Margin="0,240,397,0" Visibility="Visible" Background="#FFEBF6F7"/>
+            <ListView x:Name="DronesChargingListView" ItemsSource="{Binding}" MouseDoubleClick="DronesChargingListView_MouseDoubleClick"  Margin="0,240,397,0" Visibility="Visible" Background="#FF4E9B46" FontSize="14" FontStyle="Italic"/>
             <!--Update Button-->
             <Button x:Name="UpdateButton" Content="UPDATE" HorizontalAlignment="Left" 
                    
-                    Background="Transparent" Margin="648,166,0,0" VerticalAlignment="Top" ToolTip="UPDATE" Height="51" Width="133" BorderBrush="Black" Click="ClickUpdate" Opacity="100" FontFamily="Cambria" FontSize="30" FontWeight="Bold" FontStyle="Italic">
+                    Background="#FF4E9B46" Margin="550,60,0,0" VerticalAlignment="Top" ToolTip="UPDATE" Height="51" Width="132" BorderBrush="Black" Click="ClickUpdate" Opacity="100" FontFamily="Cambria" FontSize="30" FontWeight="Bold" FontStyle="Italic">
 
             </Button>
             <!--we didn't do binding for this part because we use the same text box for 2 things different (one string and one int) so it was better to not use it instead of using two textboxes-->
-            <TextBox x:Name="UpdateNameTextBox" Text="{Binding name,Mode=OneWayToSource}" Visibility="Visible"  HorizontalAlignment="Left" Height="28" Margin="283,164,0,0"  Background="White" TextWrapping="Wrap" VerticalAlignment="Top" Width="147"/>
-            <Label x:Name="UpdateNameLabel"  HorizontalAlignment="Left" Margin="215,121,0,0" VerticalAlignment="Top" Height="38" Width="302" FontSize="16" FontWeight="Bold" FontStyle="Italic" BorderThickness="1,1,1,1" BorderBrush="Black" Foreground="#FF530C0C" Visibility="Hidden"/>
-            <Button x:Name="CheckNameUpdate"  HorizontalAlignment="Left" Height="28" Margin="396,164,0,0" VerticalAlignment="Top"  Width="34" Visibility="Hidden" Click="Check_Click_Update">
+            <TextBox x:Name="UpdateNameTextBox" Text="{Binding name,Mode=OneWayToSource}" Visibility="Hidden"  HorizontalAlignment="Left" Height="28" Margin="533,189,0,0"  Background="White" TextWrapping="Wrap" VerticalAlignment="Top" Width="147" BorderBrush="#FF4E9B46" BorderThickness="3,3,3,3"/>
+            <Label x:Name="UpdateNameLabel"  HorizontalAlignment="Left" Margin="456,128,0,0" VerticalAlignment="Top" Height="38" Width="302" FontSize="16" FontWeight="Bold" FontStyle="Italic" BorderThickness="3,3,3,3" BorderBrush="Black" Foreground="Black" Visibility="Hidden"/>
+            <Button x:Name="CheckNameUpdate"  HorizontalAlignment="Left" Height="28" Margin="648,189,0,0" VerticalAlignment="Top"  Width="34" Visibility="Hidden" Click="Check_Click_Update">
                 <Button.Background>
                     <ImageBrush ImageSource="/checked.png"/>
                 </Button.Background>
             </Button>
-            <TextBox x:Name="UpdateCSTextBox" Text="{Binding freeChargeSlots,Mode=OneWayToSource}" Visibility="Hidden"  HorizontalAlignment="Left" Height="28" Margin="533,309,0,0"  Background="White" TextWrapping="Wrap" VerticalAlignment="Top" Width="147"/>
-            <Label x:Name="UpdateCSLabel"  HorizontalAlignment="Left" Margin="456,266,0,0" VerticalAlignment="Top" Height="38" Width="302" FontSize="16" FontWeight="Bold" FontStyle="Italic" BorderThickness="1,1,1,1" BorderBrush="Black" Foreground="#FF530C0C" Visibility="Hidden"/>
+            <TextBox x:Name="UpdateCSTextBox" Text="{Binding freeChargeSlots,Mode=OneWayToSource}" Visibility="Hidden"  HorizontalAlignment="Left" Height="28" Margin="533,309,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="147" BorderBrush="#FF4E9B46" BorderThickness="3,3,3,3">
+                <TextBox.Background>
+                    <SolidColorBrush Color="White" Opacity="0.3"/>
+                </TextBox.Background>
+            </TextBox>
+            <Label x:Name="UpdateCSLabel"  HorizontalAlignment="Left" Margin="456,255,0,0" VerticalAlignment="Top" Height="38" Width="302" FontSize="16" FontWeight="Bold" FontStyle="Italic" BorderThickness="3,3,3,3" BorderBrush="Black" Foreground="Black" Visibility="Hidden"/>
             <Button x:Name="CheckCSUpdate" HorizontalAlignment="Left" Height="28" Margin="648,309,0,0" VerticalAlignment="Top"  Width="34" Visibility="Hidden" Click="Check_Click_UpdateCS">
                 <Button.Background>
                     <ImageBrush ImageSource="/checked.png"/>
                 </Button.Background>
             </Button>
-            <Label x:Name="stationDetails" Content="" HorizontalAlignment="Left" Margin="20,13,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="303" Height="218">
+            <Label x:Name="stationDetails" Content="" HorizontalAlignment="Left" Margin="20,-1,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="392" Height="232" FontWeight="Bold" FontStyle="Italic" FontSize="14" Foreground="#FF02020F">
                 <Label.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>

@@ -6,17 +6,21 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="StationListWindow" Height="450" Width="800">
-    <Grid>
+    <Grid Background="#FFE6F6E5">
         <Grid.RowDefinitions>
             <RowDefinition Height="79*"/>
             <RowDefinition Height="355*"/>
         </Grid.RowDefinitions>
-        <ListView x:Name="StationListView" ItemsSource="{Binding}"  Margin="-4,12,4,0" Visibility="Visible" MouseDoubleClick="StationListView_MouseDoubleClick" Background="#FFEBF6F7" Grid.Row="1"/>
+        <ListView x:Name="StationListView" ItemsSource="{Binding}"  Margin="-4,12,4,0" Visibility="Visible" MouseDoubleClick="StationListView_MouseDoubleClick" Grid.Row="1" FontSize="18" FontWeight="Bold" FontStyle="Italic">
+            <ListView.Background>
+                <ImageBrush ImageSource="/stationBackground.png" Opacity="0.4"/>
+            </ListView.Background>
+        </ListView>
 
-        <Label x:Name="ChooseNumFCS" Content="Choose the number of FCS" HorizontalAlignment="Left" Margin="210,22,0,0" VerticalAlignment="Top" Width="164" Height="38"/>
-        <Button x:Name="containsFreeChargeSlots" Content="Contains free charge slots" HorizontalAlignment="Left" Margin="37,0,0,0" VerticalAlignment="Center" Width="168" Height="38" Click="containsFreeChargeSlots_Click"/>
-        <TextBox x:Name="numFCS" HorizontalAlignment="Left" Margin="374,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="120" Height="38" TextChanged="numFCS_TextChanged" />
-        <Button x:Name="clearNumFCS" Content="CLEAR" HorizontalAlignment="Left" Margin="514,26,0,0" VerticalAlignment="Top" Click="clearNumFCS_Click"/>
+        <Label x:Name="ChooseNumFCS" Content="Choose the number of FCS" HorizontalAlignment="Left" Margin="210,22,0,0" VerticalAlignment="Top" Width="120" Height="38"/>
+        <Button x:Name="containsFreeChargeSlots" Content="Contains free charge slots" HorizontalAlignment="Left" Margin="37,0,0,0" VerticalAlignment="Center" Width="134" Height="38" Click="containsFreeChargeSlots_Click"/>
+        <TextBox x:Name="numFCS" HorizontalAlignment="Left" Margin="354,17,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="56" Height="38" TextChanged="numFCS_TextChanged" />
+        <Button x:Name="clearNumFCS" Content="CLEAR" HorizontalAlignment="Left" Margin="515,45,0,0" VerticalAlignment="Top" Click="clearNumFCS_Click"/>
         <Button Content="CLOSE" HorizontalAlignment="Left" Margin="568,24,0,23" Click="Button_Close" Width="88" Foreground="#FFFDFCFC" FontFamily="Segoe UI" FontWeight="Bold" FontSize="16" BorderThickness="4,4,4,4" BorderBrush="#FFD55D5D">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -36,5 +40,56 @@
             </Button.Background>
 
         </Button>
+
+        <ListView Name="GotOrNotAvailableChargeSlots" ItemsSource="{Binding}" MouseDoubleClick="GotOrNotAvailableChargeSlots_MouseDoubleClick" Visibility="Hidden" Margin="-4,79,4,0"  FontSize="18" FontWeight="Bold" FontStyle="Italic" Grid.RowSpan="2" >
+            <ListView.Background>
+                <ImageBrush ImageSource="/stationBackground.png" Opacity="0.4"/>
+            </ListView.Background>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Id" Width="200" DisplayMemberBinding="{Binding Id}" />
+                    <GridViewColumn Header="Name" Width="150" DisplayMemberBinding="{Binding name}" />
+                    <GridViewColumn Header="ChargeSlotsAvailable" Width="225" DisplayMemberBinding="{Binding freeChargeSlots}" />
+                    <GridViewColumn Header="ChargeSlotsNotAvailable" Width="225" DisplayMemberBinding="{Binding fullChargeSlots}" />
+                </GridView>
+            </ListView.View>
+
+            <ListView.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock FontWeight="Bold" FontSize="14" Text="{Binding Name}"/>
+                        </DataTemplate>
+                    </GroupStyle.HeaderTemplate>
+                </GroupStyle>
+            </ListView.GroupStyle>
+        </ListView>
+
+        <ListView Name="CountAvailableChargeSlots" ItemsSource="{Binding}" MouseDoubleClick="CountAvailableChargeSlots_MouseDoubleClick" Visibility="Hidden" Margin="0,75,0,0" Grid.RowSpan="2" FontSize="18" FontWeight="Bold" FontStyle="Italic" >
+            <ListView.Background>
+                <ImageBrush ImageSource="/stationBackground.png" Opacity="0.4"/>
+            </ListView.Background>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Id" Width="200" DisplayMemberBinding="{Binding Id}" />
+                    <GridViewColumn Header="Name" Width="150" DisplayMemberBinding="{Binding name}" />
+                    <GridViewColumn Header="ChargeSlotsAvailable" Width="225" DisplayMemberBinding="{Binding freeChargeSlots}" />
+                    <GridViewColumn Header="ChargeSlotsNotAvailable" Width="225" DisplayMemberBinding="{Binding fullChargeSlots}" />
+                </GridView>
+            </ListView.View>
+
+            <ListView.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock FontWeight="Bold" FontSize="14" Text="{Binding Name}"/>
+                        </DataTemplate>
+                    </GroupStyle.HeaderTemplate>
+                </GroupStyle>
+            </ListView.GroupStyle>
+        </ListView>
+        <Button x:Name="button" Content="FilterByFree" HorizontalAlignment="Left" Margin="429,9,0,0" VerticalAlignment="Top" Click="button_Click"/>
+        <Button x:Name="button1" Content="FilterByCount" HorizontalAlignment="Left" Margin="429,49,0,0" VerticalAlignment="Top" Width="74" Click="button1_Click"/>
+        <Button x:Name="clearGrouping" Content="clearGrouping" HorizontalAlignment="Left" Margin="499,9,0,0" VerticalAlignment="Top" Width="87" Click="clearGrouping_Click" />
     </Grid>
 </Window>
