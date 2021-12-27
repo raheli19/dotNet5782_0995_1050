@@ -8,6 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="addbutton.png" />
+    <None Remove="adduser.png" />
     <None Remove="backgroundUser.png" />
     <None Remove="backuser.png" />
     <None Remove="checked.png" />
@@ -15,8 +17,11 @@
     <None Remove="closebutton.png" />
     <None Remove="drone.png" />
     <None Remove="fond.png" />
+    <None Remove="fond2.png" />
+    <None Remove="fondessai.png" />
     <None Remove="mainwinddrone.png" />
     <None Remove="userfonddecran.png" />
+    <None Remove="workeraddclientback.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,6 +29,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="addbutton.png" />
+    <Resource Include="adduser.png" />
     <Resource Include="backgroundUser.png" />
     <Resource Include="backuser.png" />
     <Resource Include="checked.png" />
@@ -31,8 +38,11 @@
     <Resource Include="closebutton.png" />
     <Resource Include="drone.png" />
     <Resource Include="fond.png" />
+    <Resource Include="fond2.png" />
+    <Resource Include="fondessai.png" />
     <Resource Include="mainwinddrone.png" />
     <Resource Include="userfonddecran.png" />
+    <Resource Include="workeraddclientback.png" />
   </ItemGroup>
 
 </Project>

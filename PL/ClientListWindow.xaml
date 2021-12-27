@@ -7,14 +7,27 @@
         mc:Ignorable="d"
         Title="ClientListWindow" Height="450" Width="800">
     <Grid Name="ClientList">
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="Black"/>
+                <GradientStop Color="White" Offset="1"/>
+                <GradientStop Color="#FFF1CFCF" Offset="0.178"/>
+                <GradientStop Color="#FFF36969" Offset="0.017"/>
+                <GradientStop Color="#FFF3B0B0" Offset="0.091"/>
+            </LinearGradientBrush>
+        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="54*"/>
             <RowDefinition Height="163*"/>
         </Grid.RowDefinitions>
         <ListView x:Name="ClientListView" ItemsSource="{Binding}"  Margin="0,91,0,0" Visibility="Visible" MouseDoubleClick="ClientListView_MouseDoubleClick" Grid.RowSpan="2" Background="#FFEBF6F7" SelectionChanged="ClientListView_SelectionChanged"/>
-        <Label Content="List of clients who are currently members in our Nebula System: " HorizontalAlignment="Left" Height="51" VerticalAlignment="Top" Width="645" FontSize="22" Margin="-20,10,0,0"/>
-        <Button Content="Add" HorizontalAlignment="Left" Height="47" Margin="630,18,0,0" VerticalAlignment="Top" Width="58" Click="AddClient_Click"/>
-        <Button Content="CLOSE" HorizontalAlignment="Left" Margin="714,21,0,46" Click="Button_Close" Width="76" Foreground="#FFFDFCFC" FontFamily="Segoe UI" FontWeight="Bold" FontSize="16" BorderThickness="4,4,4,4" BorderBrush="#FFD55D5D">
+        <Label Content="List of clients who are currently members in our Nebula System: " HorizontalAlignment="Left" Height="51" VerticalAlignment="Top" Width="615" FontSize="20" Margin="16,10,0,0" FontStyle="Italic" FontWeight="Bold"/>
+        <Button Content="" HorizontalAlignment="Left" Height="47" Margin="648,18,0,0" VerticalAlignment="Top" Width="58" Click="AddClient_Click">
+            <Button.Background>
+                <ImageBrush ImageSource="/adduser.png"/>
+            </Button.Background>
+        </Button>
+        <Button Content="CLOSE" HorizontalAlignment="Left" Margin="720,21,0,46" Click="Button_Close" Width="64" Foreground="#FFFDFCFC" FontFamily="Segoe UI" FontWeight="Bold" FontSize="16" BorderThickness="4,4,4,4" BorderBrush="#FFD55D5D">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black" Offset="1"/>
