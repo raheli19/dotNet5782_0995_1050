@@ -16,7 +16,7 @@
                     Background="Transparent" Margin="648,166,0,0" VerticalAlignment="Top" ToolTip="UPDATE" Height="51" Width="133" BorderBrush="Black" Click="ClickUpdate" Opacity="100" FontFamily="Cambria" FontSize="30" FontWeight="Bold" FontStyle="Italic">
 
             </Button>
-            <Label x:Name="Client_Label"   HorizontalAlignment="Left" Margin="10,78,0,0" VerticalAlignment="Top" Height="303" Width="273" FontWeight="Bold" FontStyle="Italic"/>
+            <Label x:Name="Client_Label"   HorizontalAlignment="Left" Margin="10,78,0,0" VerticalAlignment="Top" Height="346" Width="273" FontWeight="Bold" FontStyle="Italic"/>
             <Label x:Name="Client_Details" Content="Client's details:" HorizontalAlignment="Left" Margin="23,25,0,0" VerticalAlignment="Top" Width="195" FontSize="24" FontWeight="Bold" FontStyle="Italic" BorderThickness="3,3,3,3" Visibility="Visible"/>
 
             <TextBox x:Name="UpdateNameTextBox" Visibility="Hidden" Text="{Binding Name, Mode=TwoWay}" HorizontalAlignment="Left" Height="28" Margin="283,137,0,0"  Background="White" TextWrapping="Wrap" VerticalAlignment="Top" Width="147"/>
@@ -28,10 +28,19 @@
                     <ImageBrush ImageSource="/checked.png"/>
                 </Button.Background>
             </Button>
+            <!--<ListView x:Name="ParcelFromClient" ItemsSource="{Binding}" MouseDoubleClick="">    </ListView>-->
+
 
             <Button Name="CloseButton" Content="CLOSE" HorizontalAlignment="Left" Background="Transparent" Margin="513,59,0,0" 
                     VerticalAlignment="Top" ToolTip="Close the Window" Height="59" Width="130" BorderBrush="Black" Click="Button_Close" Opacity="100" FontFamily="Cambria" FontWeight="Bold" FontStyle="Italic" FontSize="30"
                     ></Button>
+            <ListView HorizontalAlignment="Left" Height="82" Margin="430,302,0,0" VerticalAlignment="Top" Width="351" SelectionChanged="ListView_SelectionChanged">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
 
         </Grid>
         <Grid x:Name="AddGridClient" Visibility="Hidden">
@@ -74,5 +83,6 @@
 
 
         </Grid>
+
     </Grid>
 </Window>

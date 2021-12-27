@@ -67,6 +67,7 @@ namespace PL
                 e.Cancel = true;// call from the "X", we don't want to close
 
         }
+
         #endregion
 
         private void ClientListView_SelectionChanged(object sender, SelectionChangedEventArgs e)

@@ -6,11 +6,35 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="ParcelList" Height="450" Width="800">
+    <Window.Resources>
+        <Style TargetType="{x:Type Button}">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="89*"/>
             <RowDefinition Height="345*"/>
         </Grid.RowDefinitions>
+        <Button Content="ADD DRONE" Margin="674,24,10,23" Click="button_addDrone" FontWeight="Bold" FontFamily="Segoe UI" Foreground="#FFE8D2D2" BorderThickness="4,4,4,4" BorderBrush="#FF2F2C52" FontSize="16">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="#FF6C80C5" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+
+        </Button>
+        <Button Content="CLOSE" HorizontalAlignment="Left" Margin="568,24,0,23" Click="Button_Close" Width="88" Foreground="Black"  FontFamily="Segoe UI" FontWeight="Bold" FontSize="16" BorderThickness="4,4,4,4" BorderBrush="#FFD55D5D">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
         <ListView x:Name="ParcelsListView" ItemsSource="{Binding}"  Margin="0,91,0,0" Visibility="Visible" MouseDoubleClick="ParcelView_MouseDoubleClick" Grid.RowSpan="2" Background="#FFEBF6F7"/>
 
     </Grid>

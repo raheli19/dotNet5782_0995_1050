@@ -6,10 +6,21 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="MenueWindow" Height="450" Width="800">
+    <!--New Client Region-->
+    <Window.Resources>
+        <Style TargetType="{x:Type Button}">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
     <Window.Background>
         <ImageBrush ImageSource="/mainwinddrone.png"/>
     </Window.Background>
     <Grid x:Name="MenuGrid" Height="430" Width="780">
+      
         <Label x:Name="label" Content="Welcome to our Nebula Drone delivery System!&#xD;&#xA;" HorizontalAlignment="Center" Margin="0,21,0,0" VerticalAlignment="Top" Width="552" Height="55" FontSize="24" FontWeight="Bold" FontStyle="Italic" BorderThickness="5,5,5,5">
             <Label.BorderBrush>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -20,7 +31,7 @@
         </Label>
         <Button Content="Client"  Click="OpenClientWindow" Height="49" HorizontalAlignment="Left" Margin="27,346,0,0" x:Name="openClientWindow" VerticalAlignment="Top" Width="249" FontSize="33" FontWeight="Normal" FontStyle="Normal"
                 Background="#FF9389C3" BorderThickness="4,4,4,4" BorderBrush="#FF150E36"/>
-        <Button Content="Worker"  Click="OpenWorkerWindow" Height="49" HorizontalAlignment="Left" Margin="521,346,0,0" x:Name="openWorkerWindow" VerticalAlignment="Top" Width="249" FontSize="33" FontWeight="Normal" FontStyle="Normal"
+        <Button Content="Manager"  Click="OpenWorkerWindow" Height="49" HorizontalAlignment="Left" Margin="521,346,0,0" x:Name="openWorkerWindow" VerticalAlignment="Top" Width="249" FontSize="33" FontWeight="Normal" FontStyle="Normal"
                 Background="#FF9389C3" BorderThickness="4,4,4,4" BorderBrush="#FF150E36"/>
         <Label x:Name="label1" Content="To start, please press one of the buttons below" HorizontalAlignment="Left" Margin="158,76,0,0" VerticalAlignment="Top" Width="512" Height="50" FontSize="22" FontWeight="Bold" FontStyle="Italic"/>
 

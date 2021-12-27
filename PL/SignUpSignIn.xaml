@@ -12,7 +12,15 @@
         </Grid.Background>
 
         <!--New Client Region-->
-
+        <Grid.Resources>
+            <Style TargetType="{x:Type Button}">
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Cursor" Value="Hand"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </Grid.Resources>
 
         <TextBlock Text="New Client?" Width="325" Height="40" FontSize="30" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="465,258,0,0" TextAlignment="Center" Foreground="#FFE5D5D5" FontStyle="Italic">
             <TextBlock.Background>
@@ -34,7 +42,16 @@
             </TextBlock.Style>
         </TextBlock>
         <!--Client already exists Region-->
-        <Button x:Name="button_SignIn" Content="Sign In" HorizontalAlignment="Left" Margin="115,338,0,0" VerticalAlignment="Top" Height="61" Width="111" FontSize="30" Click="button_SignIn_Click" Background="#FFAE3092" FontWeight="Bold"/>
+        <Button x:Name="button_SignIn"  Content="Sign In" HorizontalAlignment="Left" Margin="115,338,0,0" VerticalAlignment="Top" Height="61" Width="111"
+                FontSize="30" Click="button_SignIn_Click" Background="#FFAE3092" FontWeight="Bold"/>
+        <!--<Style>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+            </Style.Triggers>
+            </Style>-->
+        
         <TextBlock Text="Already exist?"  Width="303" Height="46" FontSize="30" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="19,255,0,0" TextAlignment="Center" Foreground="#FFE6DADA" FontStyle="Italic">
             <TextBlock.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
