@@ -63,6 +63,20 @@ namespace BL
                 stationBL.Loc.longitude = dalStat.Longitude;
                 stationBL.Loc.latitude = dalStat.Latitude;
                 stationBL.ChargeSlots = dalStat.ChargeSlots;
+
+                //List<DroneCharging> droneCharging = new List<DroneCharging>();
+                //List<int> DronesID = new List<int>();
+
+                //IEnumerable<DO.DroneCharge> droneCharges = p.IEDroneChargeList();  //finds the list which contains the the drone charges from DAL
+                //foreach (var item in droneCharges)
+                //{
+                //    if (item.StationId == stationBL.ID)  // finds the station with the ID received 
+                //    {
+                //        Drone droneInStation = GetDrone(item.DroneId);   // finds the drones contained in this station
+                //        stationBL.DroneCharging.Add(new DroneCharging() { ID = item.DroneId, battery = droneInStation.Battery, });
+
+                //    }
+                //}
             }
             catch (DO.StationException statEX) //catches the DAL exception
             {

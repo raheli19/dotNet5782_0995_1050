@@ -22,7 +22,8 @@ namespace PL
     public partial class StationWindow : Window
 
     {
-        string newName = "";
+        string newName = "n";
+        int newCS = -1;
         private BLApi.IBL bl; 
         BO.Station dataCstation = new BO.Station();
         private StationDescription stationDescription = new StationDescription();
@@ -126,24 +127,30 @@ namespace PL
         }
 
         private void ClickUpdate(object sender, RoutedEventArgs e)
-        {  MessageBox.Show(/*"The model of your drone is being updated.*/"Please close this window and enter the new name.", "Success!", MessageBoxButton.OK, MessageBoxImage.Information);
-                UpdateTextBox.Visibility = Visibility.Visible;
-                UpdateLabel.Visibility = Visibility.Visible;
-                CheckUpdate.Visibility = Visibility.Visible;
+        {  MessageBox.Show(/*"The model of your drone is being updated.*/"Please close this window and enter the new name and/or new number of charge slots.", "Success!", MessageBoxButton.OK, MessageBoxImage.Information);
+                UpdateNameTextBox.Visibility = Visibility.Visible;
+                UpdateNameLabel.Visibility = Visibility.Visible;
+                CheckNameUpdate.Visibility = Visibility.Visible;
+            UpdateCSTextBox.Visibility = Visibility.Visible;
+            UpdateCSLabel.Visibility = Visibility.Visible;
+            CheckCSUpdate.Visibility = Visibility.Visible;
 
-
-                UpdateLabel.Content = "Enter the new name:";
+            UpdateNameLabel.Content = "Enter the new name:";
+            UpdateCSLabel.Content = "Enter the new number of charge slots";
 
         }
         private void Check_Click_Update(object sender, RoutedEventArgs e)
         {
-            newName = UpdateTextBox.Text;
+            if (UpdateNameTextBox.Text != "")
+                newName = UpdateNameTextBox.Text;
+            else
+                newName = "n";
+           
+            //if (stationDescription.name == "")
+            //{
+            //    MessageBox.Show("Please enter a name", "ERROR", MessageBoxButton.OK, MessageBoxImage.Information);
 
-            if (stationDescription.name == "")
-            {
-                MessageBox.Show("Please enter a name", "ERROR", MessageBoxButton.OK, MessageBoxImage.Information);
-
-            }
+            //}
             try
             {
                 bl.updateStationName_CS(stationDescription.Id, newName);
@@ -155,9 +162,36 @@ namespace PL
             }
             ListViewStation.ItemsSource = bl.DisplayStationList();
             stationDetails.Content = bl.displayStation(stationDescription.Id);
-            UpdateTextBox.Visibility = Visibility.Hidden;
-            UpdateLabel.Visibility = Visibility.Hidden;
-            CheckUpdate.Visibility = Visibility.Hidden;
+            UpdateNameTextBox.Visibility = Visibility.Hidden;
+            UpdateNameLabel.Visibility = Visibility.Hidden;
+            CheckNameUpdate.Visibility = Visibility.Hidden;
+            //UpdateCSTextBox.Visibility = Visibility.Hidden;
+            //UpdateCSLabel.Visibility = Visibility.Hidden;
+            //CheckCSUpdate.Visibility = Visibility.Hidden;
+        }
+       public void Check_Click_UpdateCS(object sender, RoutedEventArgs e)
+        {
+            if (UpdateCSTextBox.Text != "")
+                newCS = int.Parse(UpdateCSTextBox.Text);
+            else
+                newCS = -1;
+            try
+            {
+                bl.updateStationName_CS(stationDescription.Id, "n",newCS);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            ListViewStation.ItemsSource = bl.DisplayStationList();
+            stationDetails.Content = bl.displayStation(stationDescription.Id);
+            //UpdateNameTextBox.Visibility = Visibility.Hidden;
+            //UpdateNameLabel.Visibility = Visibility.Hidden;
+            //CheckNameUpdate.Visibility = Visibility.Hidden;
+            UpdateCSTextBox.Visibility = Visibility.Hidden;
+            UpdateCSLabel.Visibility = Visibility.Hidden;
+            CheckCSUpdate.Visibility = Visibility.Hidden;
         }
     }
 }

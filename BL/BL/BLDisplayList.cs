@@ -45,7 +45,7 @@ namespace BL
                 //statD.freeChargeSlots = item.ChargeSlots;// free ones
                 //statList.Add(statD);// add it to the list
 
-                Station station = GetStation(item.ID);      //copies the fields 
+                Station station = displayStation(item.ID);      //copies the fields 
                 statList.Add(new StationDescription()
                 {
                     Id = item.ID,
