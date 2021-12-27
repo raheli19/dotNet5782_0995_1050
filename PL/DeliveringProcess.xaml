@@ -18,6 +18,7 @@
                 </TransformGroup>
             </Label.RenderTransform>
         </Label>
+        
         <Button x:Name="ParcelsToClient" Content="The parcels I received" HorizontalAlignment="Left" Margin="39,98,0,0" VerticalAlignment="Top" Width="249" Height="46" FontSize="20" FontStyle="Italic" Click="ParcelsToClient_Click" />
         <Label x:Name="parcelsToClient" Content="" HorizontalAlignment="Left" Margin="560,27,0,0" VerticalAlignment="Top" Width="210" Height="330" Background="#FFD8C1E2" Visibility="Hidden"/>
         <Button x:Name="SendNewParcel" Content="Send a new parcel" HorizontalAlignment="Left" Margin="54,335,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.029,-0.386" Width="200" Height="44" FontStyle="Italic" FontSize="20" Click="SendNewParcel_Click"/>
