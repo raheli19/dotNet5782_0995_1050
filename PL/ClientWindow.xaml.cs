@@ -23,7 +23,7 @@ namespace PL
     {
         private BLApi.IBL bl;
         BO.Client dataCclient = new BO.Client();
-
+        //Nullable<int> value;
         private ClientActions clientActions = new ClientActions();
         ListView ListViewClient;
         private bool checkFlag = false;
@@ -79,19 +79,22 @@ namespace PL
             }
             Client_Label.Content = bl.displayClient(clientActions.Id);
             ListViewClient.ItemsSource = bl.displayClientList();
+            UpdateNameTextBox.Visibility = Visibility.Hidden;
+            UpdatePhoneTextBox.Visibility = Visibility.Hidden;
+            UpdateLabel.Visibility = Visibility.Hidden;
+            CheckUpdate.Visibility = Visibility.Hidden;
         }
 
 
         #endregion
 
-        #region addClient
+#region addClient
         public ClientWindow(BLApi.IBL bl, object ClientListWindow)
         {
             InitializeComponent();
             this.bl = bl;
             DataContext = dataCclient;
             dataCclient.ClientLoc = new Localisation();
-
             //dlw = new DroneListWindow(bl);
             AddGridClient.Visibility = Visibility.Visible;
             UpgradeClientGrid.Visibility = Visibility.Hidden;
@@ -186,5 +189,9 @@ namespace PL
         }
         #endregion
 
+        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

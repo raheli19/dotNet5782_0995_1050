@@ -6,7 +6,18 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="ClientListWindow" Height="450" Width="800">
+
     <Grid Name="ClientList">
+        
+        <Grid.Resources>
+            <Style TargetType="{x:Type Button}">
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Cursor" Value="Hand"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </Grid.Resources>
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                 <GradientStop Color="Black"/>

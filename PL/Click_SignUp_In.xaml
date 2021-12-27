@@ -6,8 +6,29 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="Click_SignUp_In" Height="450" Width="800">
+ 
     <Grid x:Name="MainGrid">
+        <!--New Client Region-->
+        <Grid.Resources>
+            <Style TargetType="{x:Type Button}">
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Cursor" Value="Hand"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </Grid.Resources>
         <Grid x:Name="Sign_Up" Visibility="Hidden">
+            <!--New Client Region-->
+            <Grid.Resources>
+                <Style TargetType="{x:Type Button}">
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Cursor" Value="Hand"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Resources>
             <Label x:Name="info" Content="Please enter your personal details:" HorizontalAlignment="Left" Margin="221,92,0,0" VerticalAlignment="Top" FontSize="20"/>
 
             <Label x:Name="Welcome" Content="We are happy that you decided to join us" HorizontalAlignment="Left" Margin="168,34,0,0" VerticalAlignment="Top" Width="417" FontSize="22" FontStyle="Italic"/>
@@ -40,6 +61,16 @@
             <Button x:Name="button_Join" Content="JOIN" HorizontalAlignment="Left" Margin="658,357,0,0" VerticalAlignment="Top" Width="89" Height="45" Background="#FF8C67C5" FontSize="24" FontStyle="Italic" FontWeight="Bold" BorderThickness="4,4,4,4" Click="button_Join_Click"  />
         </Grid>
         <Grid x:Name="Sign_In" Visibility="Hidden">
+            <!--New Client Region-->
+            <Grid.Resources>
+                <Style TargetType="{x:Type Button}">
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Cursor" Value="Hand"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Resources>
             <Label x:Name="Welcome2" Content="We are happy to see you again" HorizontalAlignment="Left" Margin="245,44,0,0" VerticalAlignment="Top" Width="326" Height="44" FontSize="22" FontWeight="Normal" FontStyle="Italic"/>
             <Label x:Name="EnterID" Content="Please enter your personnal ID:" HorizontalAlignment="Center" Margin="0,110,0,0" VerticalAlignment="Top" Width="264" Height="39" FontSize="18"/>
             <TextBox x:Name="textBox_ID" Text="{Binding ID,Mode=TwoWay}" HorizontalAlignment="Center" Margin="0,199,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="137" Height="49" Background="#FFD8C1E2"/>

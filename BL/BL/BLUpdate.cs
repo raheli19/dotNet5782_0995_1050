@@ -90,12 +90,12 @@ namespace BL
         /// <param name="Id"></param>
         /// <param name="newName"></param>
         /// <param name="newTel"></param>
-        public void updateClientName_Phone(int clientId, string newName = "n", string newTel = "n")
+        public void updateClientName_Phone(int clientId, string newName = "", string newTel = "n")
         {
             try
             {
                 DO.Client clientDAL = p.ClientById(clientId);  //search the client in dal
-                if (newName != "n")  //if the user wants to update the client's name
+                if (newName != "")  //if the user wants to update the client's name
                 {
                     clientDAL.Name = newName;
                 }

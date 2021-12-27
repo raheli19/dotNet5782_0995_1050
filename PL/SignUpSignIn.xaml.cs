@@ -31,10 +31,15 @@ namespace PL
             new Click_SignUp_In(bl).Show();
 
         }
-
+        
         private void button_SignUp_Click(object sender, RoutedEventArgs e)
         {
             new Click_SignUp_In(bl,3).Show();
+        }
+
+        private void MouseOver(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            
         }
     }
 }

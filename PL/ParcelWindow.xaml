@@ -1,0 +1,29 @@
+﻿<Window x:Class="PL.ParcelWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL"
+        mc:Ignorable="d"
+        Title="ParcelWindow" Height="450" Width="800">
+    
+        <Window.Resources>
+            <Style TargetType="{x:Type Button}">
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Cursor" Value="Hand"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </Window.Resources>
+
+    <Grid x:Name="MainGrid">
+        <Grid x:Name="UpgradeGrid" Visibility="Visible">
+            <Button x:Name="UpdateButton" Content="UPDATE" HorizontalAlignment="Left" 
+                   
+                    Background="Transparent" Margin="648,166,0,0" VerticalAlignment="Top" ToolTip="UPDATE" Height="51" Width="133" BorderBrush="Black" Click="ClickUpdate" Opacity="100" FontFamily="Cambria" FontSize="30" FontWeight="Bold" FontStyle="Italic">
+
+        </Button></Grid>
+        
+    </Grid>
+</Window>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,7 +25,7 @@ namespace PL
         private BLApi.IBL bl;
         IEnumerable<ParcelDescription> parcelListFromBo = new List<ParcelDescription>();
         private ObservableCollection<BO.Parcel> boParcelList = new ObservableCollection<BO.Parcel>();
-
+        private bool checkFlag = false;
 
         public ParcelListWindow(BLApi.IBL bl)
         {
@@ -46,5 +47,27 @@ namespace PL
         {
             //open the ParcelWindow
         }
+
+        private void button_addDrone(object sender, RoutedEventArgs e)
+        {
+            //open parcelWindow
+        }
+
+        #region closeFunctions
+        private void Button_Close(object sender, RoutedEventArgs e)
+        {
+            this.checkFlag = true; // will allow us to close the window from the button and not from the "X"
+            this.Close();
+        }
+        private void OnClosing(object sender, CancelEventArgs e)
+        {
+
+            if (this.checkFlag)// call from the button
+                e.Cancel = false;
+            else
+                e.Cancel = true;// call from the "X", we don't want to close
+
+        }
+        #endregion
     }
 }
