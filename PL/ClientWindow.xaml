@@ -16,8 +16,8 @@
                     Background="Transparent" Margin="648,166,0,0" VerticalAlignment="Top" ToolTip="UPDATE" Height="51" Width="133" BorderBrush="Black" Click="ClickUpdate" Opacity="100" FontFamily="Cambria" FontSize="30" FontWeight="Bold" FontStyle="Italic">
 
             </Button>
-            <Label x:Name="Client_Label"   HorizontalAlignment="Left" Margin="10,121,0,0" VerticalAlignment="Top" Height="303" Width="273" FontWeight="Bold" FontStyle="Italic"/>
-            <Label x:Name="Client_Details" Content="Client's details:" HorizontalAlignment="Left" Margin="20,81,0,0" VerticalAlignment="Top" Width="195" FontSize="24" FontWeight="Bold" FontStyle="Italic" BorderThickness="3,3,3,3" Visibility="Visible"/>
+            <Label x:Name="Client_Label"   HorizontalAlignment="Left" Margin="10,78,0,0" VerticalAlignment="Top" Height="303" Width="273" FontWeight="Bold" FontStyle="Italic"/>
+            <Label x:Name="Client_Details" Content="Client's details:" HorizontalAlignment="Left" Margin="23,25,0,0" VerticalAlignment="Top" Width="195" FontSize="24" FontWeight="Bold" FontStyle="Italic" BorderThickness="3,3,3,3" Visibility="Visible"/>
 
             <TextBox x:Name="UpdateNameTextBox" Visibility="Hidden" Text="{Binding Name, Mode=TwoWay}" HorizontalAlignment="Left" Height="28" Margin="283,137,0,0"  Background="White" TextWrapping="Wrap" VerticalAlignment="Top" Width="147"/>
             <TextBox x:Name="UpdatePhoneTextBox" Visibility="Hidden" Text="{Binding Phone, Mode=TwoWay}" HorizontalAlignment="Left" Height="28" Margin="283,166,0,0"  Background="White" TextWrapping="Wrap" VerticalAlignment="Top" Width="147"/>
@@ -28,54 +28,49 @@
                     <ImageBrush ImageSource="/checked.png"/>
                 </Button.Background>
             </Button>
+
             <Button Name="CloseButton" Content="CLOSE" HorizontalAlignment="Left" Background="Transparent" Margin="513,59,0,0" 
                     VerticalAlignment="Top" ToolTip="Close the Window" Height="59" Width="130" BorderBrush="Black" Click="Button_Close" Opacity="100" FontFamily="Cambria" FontWeight="Bold" FontStyle="Italic" FontSize="30"
                     ></Button>
 
         </Grid>
         <Grid x:Name="AddGridClient" Visibility="Hidden">
+            <Grid.Background>
+                <ImageBrush ImageSource="/fondessai.png"/>
+            </Grid.Background>
             <!--buttonadd-->
             <!--<Button x:Name="AddClientButton" Content="Add a New Client" HorizontalAlignment="Left"                  
                     Background="Transparent" Margin="448,63,0,0" VerticalAlignment="Top" ToolTip="UPDATE" Height="51" 
                     Width="266" BorderBrush="Black" Click="ClickAdd" Opacity="100" FontFamily="Cambria" FontSize="30" FontWeight="Bold" FontStyle="Italic">
             </Button>-->
 
-            <Label Content="Please enter client's informations:" HorizontalAlignment="Left" Height="42" Margin="10,24,0,0" VerticalAlignment="Top" Width="240" FontSize="15"/>
-            <Label Content="Id" HorizontalAlignment="Left" Height="43" Margin="42,104,0,0" VerticalAlignment="Top" Width="136"/>
-            <Label Content="Name" HorizontalAlignment="Left" Height="28" Margin="42,158,0,0" VerticalAlignment="Top" Width="120"/>
-            <Label Content="Phone" HorizontalAlignment="Left" Height="28" Margin="42,232,0,0" VerticalAlignment="Top" Width="120"/>
-            <Label Content="Latitude" HorizontalAlignment="Left" Height="28" Margin="42,290,0,0" VerticalAlignment="Top" Width="120"/>
-            <Label Content="Longitude" HorizontalAlignment="Left" Height="28" Margin="42,343,0,0" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.512,2.912"/>
-            <TextBox x:Name="txt_id"  HorizontalAlignment="Left" Height="28" Margin="224,111,0,0" Text="{Binding ID, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top" Width="124"/>
-            <TextBox x:Name="txt_name" HorizontalAlignment="Left" Height="28" Margin="224,162,0,0" Text="{Binding Name, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top" Width="125"/>
-            <TextBox x:Name="txt_phone" HorizontalAlignment="Left" Height="28" Margin="224,232,0,0" Text="{Binding Phone, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top" Width="125"/>
-            <TextBox x:Name="txt_lat" HorizontalAlignment="Left" Height="28" Margin="224,294,0,0" Text="{Binding Localisation.latitude, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top" Width="125" TextChanged="txt_lat_TextChanged"/>
-            <TextBox x:Name="txt_long" HorizontalAlignment="Left" Height="28" Margin="237,357,0,0" Text="{Binding Localisation.longitude, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top" Width="125" TextChanged="txt_long_TextChanged"/>
-            <Button Content="" HorizontalAlignment="Left" Height="36" Margin="548,285,0,0" VerticalAlignment="Top" Width="120" Click="Add_button">
+            <Label Content="Please enter the Client's informations:" HorizontalAlignment="Left" Height="42" Margin="148,24,0,0" VerticalAlignment="Top" Width="580" FontSize="22" BorderThickness="2,2,2,2" FontFamily="Arial" FontWeight="Bold" FontStyle="Italic">
+                <Label.BorderBrush>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFF3F9FB" Offset="1"/>
+                        <GradientStop Color="#FF00AEFF" Offset="0"/>
+                        <GradientStop Color="#FF60C1EE" Offset="0.57"/>
+                    </LinearGradientBrush>
+                </Label.BorderBrush>
+            </Label>
+            <Label Content="Id" HorizontalAlignment="Left" Height="28" Margin="89,104,0,0" VerticalAlignment="Top" Width="102" FontFamily="Arial Black" FontWeight="Bold"/>
+            <Label Content="Name" HorizontalAlignment="Left" Height="28" Margin="89,162,0,0" VerticalAlignment="Top" Width="120" FontFamily="Arial Black" FontWeight="Normal"/>
+            <Label Content="Phone" HorizontalAlignment="Left" Height="28" Margin="89,228,0,0" VerticalAlignment="Top" Width="120" FontFamily="Arial Black"/>
+            <Label Content="Latitude" HorizontalAlignment="Left" Height="28" Margin="89,294,0,0" VerticalAlignment="Top" Width="120" FontFamily="Arial Black"/>
+            <Label Content="Longitude" HorizontalAlignment="Left" Height="28" Margin="89,357,0,0" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.512,2.912" FontFamily="Arial Black"/>
+            <TextBox x:Name="txt_id"  HorizontalAlignment="Left" Height="28" Margin="225,104,0,0" Text="{Binding ID, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top" Width="124" BorderBrush="#FF1111D1" BorderThickness="2,2,2,2"/>
+            <TextBox x:Name="txt_name" HorizontalAlignment="Left" Height="28" Margin="224,162,0,0" Text="{Binding Name, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top" Width="125" BorderBrush="#FF1111D1" BorderThickness="2,2,2,2"/>
+            <TextBox x:Name="txt_phone" HorizontalAlignment="Left" Height="28" Margin="224,232,0,0" Text="{Binding Phone, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top" Width="125" BorderBrush="#FF1111D1" BorderThickness="2,2,2,2"/>
+            <TextBox x:Name="txt_lat" HorizontalAlignment="Left" Height="28" Margin="224,294,0,0" Text="{Binding Localisation.latitude, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top" Width="125" TextChanged="txt_lat_TextChanged" BorderBrush="#FF1111D1" BorderThickness="2,2,2,2"/>
+            <TextBox x:Name="txt_long" HorizontalAlignment="Left" Height="28" Margin="224,357,0,0" Text="{Binding Localisation.longitude, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top" Width="125" TextChanged="txt_long_TextChanged" BorderBrush="#FF1111D1" BorderThickness="2,2,2,2"/>
+            <Button Content="" HorizontalAlignment="Left" Height="53" Margin="560,317,0,0" VerticalAlignment="Top" Width="178" Click="Add_button">
+                <Button.Background>
+                    <ImageBrush ImageSource="/addbutton.png"/>
+                </Button.Background>
                 <!--<Button.Background>
                         <ImageBrush ImageSource="/addbutton.png"/>
                     </Button.Background>-->
             </Button>
-            <CheckBox Content="I agree the informations I entered are true " 
-                      HorizontalAlignment="Left" Height="42" Margin="460,92,0,0" VerticalAlignment="Top"
-                      Width="296">
-            </CheckBox>
-            <TextBlock HorizontalAlignment="Left" Margin="460,134,0,174" FontSize="14" Width="296">
-
-                <TextBlock.Style>
-                    <Style TargetType="TextBlock">
-                        <Setter Property="Text" Value="" />
-                        <Setter Property="Foreground" Value="Red" />
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding ElementName=cbSample, Path=IsChecked}" Value="True">
-                                <Setter Property="Text" Value="Press the button below to join the system!" />
-                                <Setter Property="Foreground" Value="Green" />
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </TextBlock.Style>
-
-            </TextBlock>
 
 
         </Grid>
