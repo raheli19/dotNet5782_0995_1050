@@ -24,7 +24,7 @@ namespace PL
     {
         private BLApi.IBL bl;
         private ObservableCollection<BO.ParcelDescription> boParcelList = new ObservableCollection<BO.ParcelDescription>();
-
+        private bool checkFlag = false;
         public ParcelListWindow(BLApi.IBL bl)
         {
             InitializeComponent();
