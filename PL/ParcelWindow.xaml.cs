@@ -23,6 +23,7 @@ namespace PL
     {
         private BLApi.IBL bl;
         BO.Parcel dataCparcel = new BO.Parcel();
+        BO.ParcelDescription dataCparcelUpdate = new BO.ParcelDescription();
         private ParcelDescription parcelDescription = new ParcelDescription();
         //DroneListWindow dlw;
         ListView ListViewParcel;
@@ -41,8 +42,8 @@ namespace PL
 
 
             //dlw = new DroneListWindow(bl);
-            //AddDroneGrid.Visibility = Visibility.Visible;
-            //UpdateDroneGrid.Visibility = Visibility.Hidden;
+            AddGrid.Visibility = Visibility.Visible;
+            UpgradeGrid.Visibility = Visibility.Hidden;
             this.Combo_SenderId.ItemsSource = bl.AllSenders_Id();
             this.Combo_TargetId.ItemsSource = bl.AllTargets_Id();
             this.Combo_Weight.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
@@ -74,7 +75,7 @@ namespace PL
                 MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            MessageBox.Show("Success!", "Added the drone", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show( "Added the parcel", "Success!", MessageBoxButton.OK, MessageBoxImage.Information);
             ListViewParcel.ItemsSource = bl.displayParcelList();
             this.Combo_SenderId.ItemsSource = bl.AllSenders_Id();
             this.Combo_TargetId.ItemsSource = bl.AllTargets_Id();
@@ -108,7 +109,20 @@ namespace PL
         #endregion
 
         #endregion
+        public ParcelWindow(object selectedItem, BLApi.IBL bl, object parcelListView)
+        {
+            InitializeComponent();
+            this.bl = bl;
+            this.dataCparcelUpdate = (ParcelDescription)selectedItem;
+            DataContext = dataCparcelUpdate;
+            AddGrid.Visibility = Visibility.Hidden;
+            UpgradeGrid.Visibility = Visibility.Visible;
+            parcelDetails.Content = bl.displayParcel(dataCparcelUpdate.Id);
+            //Drones_Details.Visibility = Visibility.Visible;
+            
+            ListViewParcel = (ListView)parcelListView;
 
+        }
 
 
         #region UPDATE

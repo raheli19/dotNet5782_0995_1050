@@ -79,19 +79,19 @@
                     </LinearGradientBrush>
                 </Label.BorderBrush>
             </Label>
+            <Button Content="ADD DRONE" Margin="0,0,10,26" Click="button_addDrone" FontWeight="Bold" FontFamily="Segoe UI" Foreground="#FFE8D2D2" BorderThickness="4,4,4,4" BorderBrush="#FF2F2C52" FontSize="16" Grid.Column="5" Height="45" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="104">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="Black"/>
+                        <GradientStop Color="#FF6C80C5" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+
+            </Button>
 
         </Grid>
         <ListView x:Name="DronesListView" Cursor="Hand" ItemsSource="{Binding}"  Margin="0,91,0,0" Visibility="Visible" MouseDoubleClick="DroneListView_MouseDoubleClick" Grid.RowSpan="2" Background="#FFEBF6F7"/>
         <!-- <Button Content="Add a Drone" HorizontalAlignment="Left" Margin="640,0,0,0" VerticalAlignment="Center" Width="150" Height="48" Click="button_addDrone"/>-->
-        <Button Content="ADD DRONE" Margin="674,24,10,23" Click="button_addDrone" FontWeight="Bold" FontFamily="Segoe UI" Foreground="#FFE8D2D2" BorderThickness="4,4,4,4" BorderBrush="#FF2F2C52" FontSize="16">
-            <Button.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="Black"/>
-                    <GradientStop Color="#FF6C80C5" Offset="1"/>
-                </LinearGradientBrush>
-            </Button.Background>
-
-        </Button>
         <Button Content="CLOSE" HorizontalAlignment="Left" Margin="568,24,0,23" Click="Button_Close" Width="88" Foreground="#FFFDFCFC" FontFamily="Segoe UI" FontWeight="Bold" FontSize="16" BorderThickness="4,4,4,4" BorderBrush="#FFD55D5D">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -105,7 +105,61 @@
         <Button x:Name="ClearStatus" Content="CLEAR" HorizontalAlignment="Left" Margin="118,54,0,0" VerticalAlignment="Top" Click="ClearStatus_Click" ToolTip="ClearStatus" Height="27" Width="128" FontSize="18" FontWeight="Bold" FontStyle="Normal" Background="#FFD2E6F6"/>
         <Button x:Name="ClearWeight" Content="CLEAR" HorizontalAlignment="Left" Margin="400,54,0,0" VerticalAlignment="Top" Click="ClearWeight_Click" Height="27" Width="126" FontSize="18" FontWeight="Bold" Background="#FFCBEBF7"/>
 
+        <ListView Name="FilterByWeight" ItemsSource="{Binding}" MouseDoubleClick="FilterByWeight_MouseDoubleClick" Visibility="Hidden" Margin="-4,79,4,0"  FontSize="18" FontWeight="Bold" FontStyle="Italic" Grid.RowSpan="2" >
+            <ListView.Background>
+                <ImageBrush  Opacity="0.4"/>
+            </ListView.Background>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Id" Width="60" DisplayMemberBinding="{Binding Id}" />
+                    <GridViewColumn Header="Model" Width="80" DisplayMemberBinding="{Binding Model}" />
+                    <GridViewColumn Header="WeightCategories" Width="160" DisplayMemberBinding="{Binding weight }" />
+                    <GridViewColumn Header="Battery" Width="80" DisplayMemberBinding="{Binding battery}" />
+                    <GridViewColumn Header="Status" Width="100" DisplayMemberBinding="{Binding Status}" />
+                    <GridViewColumn Header="Latitude" Width="100" DisplayMemberBinding="{Binding loc.latitude}" />
+                    <GridViewColumn Header="Longitude" Width="100" DisplayMemberBinding="{Binding loc.longitude}" />
+                    <GridViewColumn Header="ParcelId" Width="100" DisplayMemberBinding="{Binding parcelId}" />
+                </GridView>
+            </ListView.View>
 
+            <ListView.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock FontWeight="Bold" FontSize="14" Text="{Binding Name}"/>
+                        </DataTemplate>
+                    </GroupStyle.HeaderTemplate>
+                </GroupStyle>
+            </ListView.GroupStyle>
+        </ListView>
+
+        <ListView Name="FilterByStatus" ItemsSource="{Binding}" MouseDoubleClick="FilterByStatus_MouseDoubleClick" Visibility="Hidden" Margin="0,75,0,0" Grid.RowSpan="2" FontSize="18" FontWeight="Bold" FontStyle="Italic" >
+            <ListView.Background>
+                <ImageBrush  Opacity="0.4"/>
+            </ListView.Background>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Id" Width="60" DisplayMemberBinding="{Binding Id}" />
+                    <GridViewColumn Header="Model" Width="80" DisplayMemberBinding="{Binding Model}" />
+                    <GridViewColumn Header="WeightCategories" Width="160" DisplayMemberBinding="{Binding weight }" />
+                    <GridViewColumn Header="Battery" Width="80" DisplayMemberBinding="{Binding battery}" />
+                    <GridViewColumn Header="Status" Width="100" DisplayMemberBinding="{Binding Status}" />
+                    <GridViewColumn Header="Latitude" Width="100" DisplayMemberBinding="{Binding loc.latitude}" />
+                    <GridViewColumn Header="Longitude" Width="100" DisplayMemberBinding="{Binding loc.longitude}" />
+                    <GridViewColumn Header="ParcelId" Width="100" DisplayMemberBinding="{Binding parcelId}" />
+                </GridView>
+            </ListView.View>
+
+            <ListView.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock FontWeight="Bold" FontSize="14" Text="{Binding Name}"/>
+                        </DataTemplate>
+                    </GroupStyle.HeaderTemplate>
+                </GroupStyle>
+            </ListView.GroupStyle>
+        </ListView>
 
     </Grid>
 

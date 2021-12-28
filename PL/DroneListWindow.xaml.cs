@@ -54,6 +54,37 @@ namespace PL
             
             this.comboStatusSelector.ItemsSource = Enum.GetValues(typeof(BO.DroneStatuses));
             this.comboWeightSelector.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
+
+
+            List<DroneDescription> dronesByWeight = new List<DroneDescription>();
+            foreach (var item in boDroneList)
+            {
+                dronesByWeight.Add(new DroneDescription() { Id = item.Id, Model = item.Model, battery = item.battery, weight = item.weight,Status=item.Status,loc=item.loc, parcelId=item.parcelId });
+
+            }
+            List<DroneDescription> dronesBYWeight = new List<DroneDescription>();
+            dronesBYWeight = dronesByWeight.OrderBy(d => d.weight).ToList();
+            FilterByWeight.ItemsSource = dronesBYWeight;
+            
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(FilterByWeight.ItemsSource);
+            PropertyGroupDescription groupDescription = new PropertyGroupDescription("weight");
+            view.GroupDescriptions.Add(groupDescription);
+
+
+            List<DroneDescription> dronesByStatus = new List<DroneDescription>();
+            foreach (var item in boDroneList)
+            {
+                dronesByStatus.Add(new DroneDescription() { Id = item.Id, Model = item.Model, battery = item.battery, weight = item.weight, Status = item.Status, loc = item.loc, parcelId = item.parcelId });
+
+            }
+            List<DroneDescription> dronesBYStatus = new List<DroneDescription>();
+            dronesBYStatus = dronesByStatus.OrderBy(d => d.Status).ToList();
+            FilterByStatus.ItemsSource = dronesBYStatus;
+
+            CollectionView view2 = (CollectionView)CollectionViewSource.GetDefaultView(FilterByStatus.ItemsSource);
+            PropertyGroupDescription groupDescription2 = new PropertyGroupDescription("Status");
+            view2.GroupDescriptions.Add(groupDescription2);
+
         }
         public static DroneStatuses droneStat = 0;
         public static WeightCategories weightStat = 0;
@@ -145,7 +176,19 @@ namespace PL
         }
 
 
+        private void FilterByWeight_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            new DroneWindow(FilterByWeight.SelectedItem, bl, DronesListView).Show();
+            comboStatusSelector.SelectedItem = null;
+            comboWeightSelector.SelectedItem = null;
+        }
 
+        private void FilterByStatus_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            new DroneWindow(FilterByWeight.SelectedItem, bl, DronesListView).Show();
+            comboStatusSelector.SelectedItem = null;
+            comboWeightSelector.SelectedItem = null;
+        }
         #region closeFunctions
         private void Button_Close(object sender, RoutedEventArgs e)
         {

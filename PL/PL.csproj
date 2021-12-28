@@ -9,18 +9,22 @@
 
   <ItemGroup>
     <None Remove="addbutton.png" />
+    <None Remove="addParcel.png" />
     <None Remove="adduser.png" />
     <None Remove="backgroundUser.png" />
     <None Remove="backuser.png" />
     <None Remove="checked.png" />
     <None Remove="close.png" />
     <None Remove="closebutton.png" />
+    <None Remove="colisBackground.png" />
     <None Remove="drone.png" />
     <None Remove="exit.png" />
     <None Remove="fond.png" />
     <None Remove="fond2.png" />
     <None Remove="fondessai.png" />
     <None Remove="mainwinddrone.png" />
+    <None Remove="parcelBackgound.png" />
+    <None Remove="stationAdd.png" />
     <None Remove="stationBackground.png" />
     <None Remove="userfonddecran.png" />
     <None Remove="workeraddclientback.png" />
@@ -32,18 +36,22 @@
 
   <ItemGroup>
     <Resource Include="addbutton.png" />
+    <Resource Include="addParcel.png" />
     <Resource Include="adduser.png" />
     <Resource Include="backgroundUser.png" />
     <Resource Include="backuser.png" />
     <Resource Include="checked.png" />
     <Resource Include="close.png" />
     <Resource Include="closebutton.png" />
+    <Resource Include="colisBackground.png" />
     <Resource Include="drone.png" />
     <Resource Include="exit.png" />
     <Resource Include="fond.png" />
     <Resource Include="fond2.png" />
     <Resource Include="fondessai.png" />
     <Resource Include="mainwinddrone.png" />
+    <Resource Include="parcelBackgound.png" />
+    <Resource Include="stationAdd.png" />
     <Resource Include="stationBackground.png" />
     <Resource Include="userfonddecran.png" />
     <Resource Include="workeraddclientback.png" />

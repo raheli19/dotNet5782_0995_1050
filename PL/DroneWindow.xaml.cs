@@ -170,11 +170,13 @@ namespace PL
             {
                 SecondButton.Content = "DELIVERING THE PACKAGE";
                 SecondButton.ToolTip = "Deliver Parcel";
+                ShowParcel.Visibility = Visibility.Visible;
             }
             else
             {
                 SecondButton.Visibility = Visibility.Hidden;
             }
+
             ListViewDrone = (ListView)dronesListView;
 
         }
@@ -233,6 +235,10 @@ namespace PL
             UpdateTextBox.Visibility = Visibility.Hidden;
             UpdateLabel.Visibility = Visibility.Hidden;
             CheckUpdate.Visibility = Visibility.Hidden;
+            if (dataCdroneUpdate.Status == DroneStatuses.shipping)
+            {
+                ShowParcel.Visibility = Visibility.Visible;
+            }
         }
         #endregion
 
@@ -350,6 +356,9 @@ namespace PL
                 }
                 ListViewDrone.ItemsSource = bl.displayDroneList();
                 Drone_Label.Content = bl.displayDrone(dataCdroneUpdate.Id);
+               
+                    ShowParcel.Visibility = Visibility.Visible;
+                
             }
 
             //Second case:The status of the drone is shipping,the button is DELIVERING THE PACKAGE
@@ -413,6 +422,24 @@ namespace PL
             comboWeightSelector.SelectedItem = null;
         }
 
+        private void ShowParcel_Click(object sender, RoutedEventArgs e)
+        {
+            if (bl.displayDrone(dataCdroneUpdate.Id).Status == DroneStatuses.shipping)
+            {
+                int parcelID = 0;
+                foreach (var item in bl.displayDroneList())
+                {
+                    if (item.Id == dataCdroneUpdate.Id)
+                        parcelID = item.parcelId;
+                }
+                ParcelDescription parcelSelectedItem = bl.displayParcelList().First(x => x.Id == parcelID);
+                new ParcelWindow(parcelSelectedItem, bl, ListViewDrone).Show();
+            }
+            else
+            {
+                MessageBox.Show("There is no parcel attached to your drone...", "Sorry!");
+            }
 
+        }
     }
 }

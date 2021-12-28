@@ -13,7 +13,7 @@
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Cursor" Value="Hand"/>
-                    
+
                 </Trigger>
             </Style.Triggers>
         </Style>
@@ -29,23 +29,31 @@
             <Button Name="CloseButton" Content="CLOSE" HorizontalAlignment="Left" Background="Transparent" Margin="472,10,0,0" VerticalAlignment="Top" ToolTip="Close the Window" Height="59" Width="130" BorderBrush="Black" Click="ClickCloseParcelWindow" Opacity="100" FontFamily="Cambria" FontWeight="Bold" FontStyle="Italic" FontSize="30">
 
             </Button>
+            <Label x:Name="parcelDetails" Content="Label" HorizontalAlignment="Left" Margin="268,0,0,0" VerticalAlignment="Center" Height="174" Width="187"/>
         </Grid>
         <Grid x:Name="AddGrid" Visibility="Visible">
-            <Button Content="Add" HorizontalAlignment="Left" Height="74" Margin="584,42,0,0" VerticalAlignment="Top" Width="124" Click="Add_Click"/>
-            <ComboBox x:Name="Combo_SenderId" HorizontalAlignment="Left" Height="37" SelectedItem="{Binding ClientInParcel.ID, Mode=TwoWay}" Margin="87,68,0,0" VerticalAlignment="Top" Width="232" SelectionChanged="Combo_SenderId_SelectionChanged"/>
-            <ComboBox x:Name="Combo_TargetId" HorizontalAlignment="Left" Height="30" SelectedItem="{Binding ClientInParcel.ID,Mode=TwoWay}" Margin="81,170,0,0" VerticalAlignment="Top" Width="229" SelectionChanged="Combo_TargetId_SelectionChanged"/>
-            <ComboBox x:Name="Combo_Priority" HorizontalAlignment="Left" Height="34" SelectedItem="{Binding Priority, Mode=TwoWay}" Margin="81,247,0,0" VerticalAlignment="Top" Width="229" SelectionChanged="Combo_Priority_SelectionChanged"/>
-            <ComboBox x:Name="Combo_Weight" HorizontalAlignment="Left" Height="31" SelectedItem="{Binding Weight, Mode=TwoWay}" Margin="87,343,0,0" VerticalAlignment="Top" Width="223" SelectionChanged="Combo_Weight_SelectionChanged"/>
-            <Label  Content="SenderId" HorizontalAlignment="Left" Height="29" Margin="90,34,0,0" VerticalAlignment="Top" Width="229"/>
-            <Label Content="TargetId" HorizontalAlignment="Left" Height="29" Margin="88,139,0,0" VerticalAlignment="Top" Width="230"/>
-            <Label Content="Priority" HorizontalAlignment="Left" Height="29" Margin="88,217,0,0" VerticalAlignment="Top" Width="229"/>
-            <Label Content="Weight" HorizontalAlignment="Left" Height="29" Margin="89,313,0,0" VerticalAlignment="Top" Width="229"/>
-            <Button Content="" HorizontalAlignment="Left" ToolTip="Close" Height="49" Margin="631,353,0,0" VerticalAlignment="Top" Width="120" Click="ClickCloseParcelWindow" FontFamily="Cambria" FontWeight="Bold" Foreground="Red" FontSize="22" FontStyle="Normal" BorderThickness="3,3,3,3" SnapsToDevicePixels="True">
+            <Grid.Background>
+                <ImageBrush ImageSource="/parcelBackgound.png" Opacity="0.7"/>
+            </Grid.Background>
+            <Button Content="ADD" HorizontalAlignment="Left" Height="67" Margin="128,357,0,0" VerticalAlignment="Top" Width="148" Click="Add_Click" FontWeight="Bold" FontSize="40" Foreground="White">
+                <Button.Background>
+                    <ImageBrush ImageSource="/addParcel.png" Opacity="0.9"/>
+                </Button.Background>
+            </Button>
+            <ComboBox x:Name="Combo_SenderId" HorizontalAlignment="Left" Height="37" SelectedItem="{Binding ClientInParcel.ID, Mode=TwoWay}" Margin="87,44,0,0" VerticalAlignment="Top" Width="223" SelectionChanged="Combo_SenderId_SelectionChanged"/>
+            <ComboBox x:Name="Combo_TargetId" HorizontalAlignment="Left" Height="30" SelectedItem="{Binding ClientInParcel.ID,Mode=TwoWay}" Margin="84,129,0,0" VerticalAlignment="Top" Width="229" SelectionChanged="Combo_TargetId_SelectionChanged"/>
+            <ComboBox x:Name="Combo_Priority" HorizontalAlignment="Left" Height="34" SelectedItem="{Binding Priority, Mode=TwoWay}" Margin="84,223,0,0" VerticalAlignment="Top" Width="229" SelectionChanged="Combo_Priority_SelectionChanged"/>
+            <ComboBox x:Name="Combo_Weight" HorizontalAlignment="Left" Height="31" SelectedItem="{Binding Weight, Mode=TwoWay}" Margin="87,306,0,0" VerticalAlignment="Top" Width="223" SelectionChanged="Combo_Weight_SelectionChanged"/>
+            <Label  Content="SenderId" HorizontalAlignment="Left" Height="29" Margin="84,10,0,0" VerticalAlignment="Top" Width="229" HorizontalContentAlignment="Center" FontSize="18" FontWeight="Bold" FontStyle="Italic"/>
+            <Label Content="TargetId" HorizontalAlignment="Left" Height="38" Margin="84,86,0,0" VerticalAlignment="Top" Width="230" HorizontalContentAlignment="Center" FontSize="18" FontWeight="Bold" FontStyle="Italic"/>
+            <Label Content="Priority" HorizontalAlignment="Left" Height="41" Margin="87,176,0,0" VerticalAlignment="Top" Width="229" FontSize="18" FontWeight="Bold" FontStyle="Italic" HorizontalContentAlignment="Center"/>
+            <Label Content="Weight" HorizontalAlignment="Left" Height="39" Margin="86,262,0,0" VerticalAlignment="Top" Width="230" FontSize="18" FontWeight="Bold" FontStyle="Italic" HorizontalContentAlignment="Center"/>
+            <Button Content="" HorizontalAlignment="Left" ToolTip="Close" Height="49" Margin="644,358,0,0" VerticalAlignment="Top" Width="120" Click="ClickCloseParcelWindow" FontFamily="Cambria" FontWeight="Bold" Foreground="Red" FontSize="22" FontStyle="Normal" BorderThickness="3,3,3,3" SnapsToDevicePixels="True">
                 <Button.Background>
                     <ImageBrush ImageSource="/close.png"/>
                 </Button.Background>
             </Button>
-            <Button Content="Remove" HorizontalAlignment="Left" Height="64" Margin="501,217,0,0" VerticalAlignment="Top" Width="119" Click="Remove_Button"/>
+            <Button Content="Remove" HorizontalAlignment="Left" Height="34" Margin="660,300,0,0" VerticalAlignment="Top" Width="119" Click="Remove_Button"/>
 
         </Grid>
     </Grid>

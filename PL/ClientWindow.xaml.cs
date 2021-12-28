@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -27,6 +28,8 @@ namespace PL
         private ClientActions clientActions = new ClientActions();
         ListView ListViewClient;
         private bool checkFlag = false;
+        private ObservableCollection<BO.ParcelDescription> boParcelList = new ObservableCollection<BO.ParcelDescription>();
+
         #region UpgradeClient
         public ClientWindow(object selectedItem, BLApi.IBL bl, object ClientListWindow)
         {
@@ -40,8 +43,18 @@ namespace PL
             UpgradeClientGrid.Visibility = Visibility.Visible;
             ListViewClient = (ListView)ClientListWindow;
             Client_Details.Visibility = Visibility.Visible;
-
             Client_Label.Content = bl.displayClient(clientActions.Id);
+            ParcelsFromClient.ItemsSource = bl.FindParcelsFromClient(clientActions.Id);
+            ParcelsToClient.ItemsSource = bl.FindParcelsToClient(clientActions.Id);
+            listViewParcels.DataContext = boParcelList;
+            DataContext = boParcelList;
+            foreach (var item in bl.displayParcelList())
+            {
+                boParcelList.Add(item);
+
+
+            }
+
         }
 
         private void ClickUpdate(object sender, RoutedEventArgs e)
@@ -189,11 +202,17 @@ namespace PL
         }
         #endregion
 
-        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+      
+        private void ParcelsToClient_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-
+            new ParcelWindow(ParcelsToClient.SelectedItem, bl, listViewParcels).Show();
         }
 
-       
+        private void ParcelsFromClient_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            
+            //ParcelDescription myParcelDescription=bl.displayParcelList.First(ParcelsFromClient.SelectedItem.)
+            //new ParcelWindow(ParcelsFromClient.SelectedItem, bl, listViewParcels).Show();
+        }
     }
 }

@@ -35,21 +35,51 @@ namespace PL
             {
                 boParcelList.Add(item);
 
+            }
+            List<ParcelDescription> parcelsBySender = new List<ParcelDescription>();
+            foreach (var item in boParcelList)
+            {
+                parcelsBySender.Add(new ParcelDescription() { Id = item.Id, SenderName = item.SenderName, TargetName = item.TargetName, weight = item.weight, Status = item.Status, priority = item.priority});
 
             }
-            
+            List<ParcelDescription> parcelsBYSender = new List<ParcelDescription>();
+            parcelsBYSender = parcelsBySender.OrderBy(d => d.SenderName).ToList();
+            FilterBySender.ItemsSource = parcelsBYSender;
+
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(FilterBySender.ItemsSource);
+            PropertyGroupDescription groupDescription = new PropertyGroupDescription("SenderName");
+            view.GroupDescriptions.Add(groupDescription);
+
+
+
+            List<ParcelDescription> parcelsByTarget = new List<ParcelDescription>();
+            foreach (var item in boParcelList)
+            {
+                parcelsByTarget.Add(new ParcelDescription() { Id = item.Id, SenderName = item.SenderName, TargetName = item.TargetName, weight = item.weight, Status = item.Status, priority = item.priority });
+
+            }
+            List<ParcelDescription> parcelsBYTarget = new List<ParcelDescription>();
+            parcelsBYTarget = parcelsByTarget.OrderBy(d => d.TargetName).ToList();
+            FilterByTarget.ItemsSource = parcelsBYTarget;
+
+            CollectionView view2 = (CollectionView)CollectionViewSource.GetDefaultView(FilterByTarget.ItemsSource);
+            PropertyGroupDescription groupDescription2 = new PropertyGroupDescription("TargetName");
+            view2.GroupDescriptions.Add(groupDescription2);
             //combobox?
         }
 
         private void ParcelView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            //open the ParcelWindow
+            new ParcelWindow(ParcelsListView.SelectedItem, bl, ParcelsListView).Show();
         }
 
-        
+        private void FilterBySender_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            new ParcelWindow(FilterBySender.SelectedItem, bl, ParcelsListView).Show();
+        }
 
-        #region closeFunctions
-        private void Button_Close(object sender, RoutedEventArgs e)
+            #region closeFunctions
+            private void Button_Close(object sender, RoutedEventArgs e)
         {
             this.checkFlag = true; // will allow us to close the window from the button and not from the "X"
             this.Close();
@@ -69,6 +99,32 @@ namespace PL
         {
             ParcelWindow subWindow = new ParcelWindow(bl, ParcelsListView);
             subWindow.Show();
+        }
+
+        private void FilterByTarget_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            new ParcelWindow(FilterByTarget.SelectedItem, bl, ParcelsListView).Show();
+        }
+
+        private void FilterBySender1_Click(object sender, RoutedEventArgs e)
+        {
+            FilterBySender.Visibility = Visibility.Visible;
+            FilterByTarget.Visibility = Visibility.Hidden;
+            ParcelsListView.Visibility = Visibility.Hidden;
+        }
+
+        private void FilterByTarget1_Click(object sender, RoutedEventArgs e)
+        {
+            FilterByTarget.Visibility = Visibility.Visible;
+            FilterBySender.Visibility = Visibility.Hidden;
+            ParcelsListView.Visibility = Visibility.Hidden;
+        }
+
+        private void clearGrouping_Click(object sender, RoutedEventArgs e)
+        {
+            FilterBySender.Visibility = Visibility.Hidden;
+            FilterByTarget.Visibility = Visibility.Hidden;
+            ParcelsListView.Visibility= Visibility.Visible; 
         }
     }
 }

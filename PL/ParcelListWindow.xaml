@@ -16,27 +16,113 @@
             </Style.Triggers>
         </Style>
     </Window.Resources>
-    <Grid>
+    <Grid Background="#FFA1B9DD">
         <Grid.RowDefinitions>
             <RowDefinition Height="89*"/>
             <RowDefinition Height="345*"/>
         </Grid.RowDefinitions>
-        <Button Content="ADD PARCEL" Margin="674,24,10,23" Click="button_addParcel" FontWeight="Bold" FontFamily="Segoe UI" Foreground="#FFE8D2D2" BorderThickness="4,4,4,4" BorderBrush="#FF2F2C52" FontSize="16">
+        <Button Content="ADD PARCEL" Margin="633,22,51,25" Click="button_addParcel" FontWeight="Bold" FontFamily="Segoe UI" Foreground="#FFE8D2D2" BorderThickness="2,2,2,2" BorderBrush="#FF01011A" FontSize="16" FontStyle="Italic">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="Black"/>
+                    <GradientStop Color="#FF64B9EB"/>
                     <GradientStop Color="#FF6C80C5" Offset="1"/>
                 </LinearGradientBrush>
             </Button.Background>
 
         </Button>
-        <Button Content="CLOSE" HorizontalAlignment="Left" Margin="568,24,0,23" Click="Button_Close" Width="88" Foreground="Black"  FontFamily="Segoe UI" FontWeight="Bold" FontSize="16" BorderThickness="4,4,4,4" BorderBrush="#FFD55D5D">
+        <Button Content="CLOSE" HorizontalAlignment="Left" Margin="429,50,0,3" Click="Button_Close" Width="148" Foreground="Black"  FontFamily="Segoe UI" FontWeight="Bold" FontSize="16" BorderThickness="1,1,1,1" BorderBrush="#FF262626" FontStyle="Italic">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFE43E4B"/>
+                    <GradientStop Color="White" Offset="1"/>
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <ListView x:Name="ParcelsListView" Cursor="Hand" ItemsSource="{Binding}"  Margin="0,91,0,0" Visibility="Visible" MouseDoubleClick="ParcelView_MouseDoubleClick" Grid.RowSpan="2" Background="#FFEBF6F7"/>
+        <ListView x:Name="ParcelsListView" Cursor="Hand" ItemsSource="{Binding}"  Margin="0,91,0,0" Visibility="Visible" MouseDoubleClick="ParcelView_MouseDoubleClick" Grid.RowSpan="2" FontSize="14" FontWeight="Bold" FontStyle="Italic" Foreground="#FF151CA0">
+            <ListView.Background>
+                <ImageBrush ImageSource="/colisBackground.png" Opacity="0.5"/>
+            </ListView.Background>
+        </ListView>
+        <Button x:Name="FilterBySender1" Content="FilterBySender" HorizontalAlignment="Left" Margin="58,0,0,0" VerticalAlignment="Center" Height="41" Width="137" FontSize="16" FontWeight="Bold" FontStyle="Italic" Click="FilterBySender1_Click">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF83A9F1"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Button x:Name="FilterByTarget1" Content="FilterByTarget" HorizontalAlignment="Left" Margin="232,0,0,0" VerticalAlignment="Center" Width="127" Height="41" FontSize="16" FontWeight="Bold" FontStyle="Italic" Click="FilterByTarget1_Click">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF83A9F1"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
 
+
+
+        <ListView Name="FilterBySender" ItemsSource="{Binding}" MouseDoubleClick="FilterBySender_MouseDoubleClick" Visibility="Hidden" Margin="-4,79,4,0"  FontSize="18" FontWeight="Bold" FontStyle="Italic" Grid.RowSpan="2" >
+            <ListView.Background>
+                <ImageBrush  Opacity="0.4" ImageSource="/colisBackground.png"/>
+            </ListView.Background>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Id" Width="100" DisplayMemberBinding="{Binding Id}" />
+                    <GridViewColumn Header="SenderName" Width="180" DisplayMemberBinding="{Binding SenderName}" />
+                    <GridViewColumn Header="TargetName" Width="180" DisplayMemberBinding="{Binding TargetName }" />
+                    <GridViewColumn Header="Weight" Width="100" DisplayMemberBinding="{Binding weight}" />
+                    <GridViewColumn Header="Priority" Width="120" DisplayMemberBinding="{Binding priority}" />
+                    <GridViewColumn Header="Status" Width="120" DisplayMemberBinding="{Binding Status}" />
+
+                </GridView>
+            </ListView.View>
+
+            <ListView.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock FontWeight="Bold" FontSize="14" Text="{Binding Name}"/>
+                        </DataTemplate>
+                    </GroupStyle.HeaderTemplate>
+                </GroupStyle>
+            </ListView.GroupStyle>
+        </ListView>
+
+
+        <ListView Name="FilterByTarget" ItemsSource="{Binding}" MouseDoubleClick="FilterByTarget_MouseDoubleClick" Visibility="Hidden" Margin="-4,79,4,0"  FontSize="18" FontWeight="Bold" FontStyle="Italic" Grid.RowSpan="2" >
+            <ListView.Background>
+                <ImageBrush  Opacity="0.4" ImageSource="/colisBackground.png"/>
+            </ListView.Background>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Id" Width="100" DisplayMemberBinding="{Binding Id}" />
+                    <GridViewColumn Header="SenderName" Width="180" DisplayMemberBinding="{Binding SenderName}" />
+                    <GridViewColumn Header="TargetName" Width="180" DisplayMemberBinding="{Binding TargetName }" />
+                    <GridViewColumn Header="Weight" Width="100" DisplayMemberBinding="{Binding weight}" />
+                    <GridViewColumn Header="Priority" Width="120" DisplayMemberBinding="{Binding priority}" />
+                    <GridViewColumn Header="Status" Width="120" DisplayMemberBinding="{Binding Status}" />
+
+                </GridView>
+            </ListView.View>
+
+            <ListView.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock FontWeight="Bold" FontSize="14" Text="{Binding Name}"/>
+                        </DataTemplate>
+                    </GroupStyle.HeaderTemplate>
+                </GroupStyle>
+            </ListView.GroupStyle>
+        </ListView>
+        <Button x:Name="clearGrouping" Content="CLEAR GROUPING" HorizontalAlignment="Left" Margin="429,4,0,0" VerticalAlignment="Top" Width="148" Height="41" FontWeight="Bold" FontSize="16" Click="clearGrouping_Click" FontStyle="Italic">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFE43E4B"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
     </Grid>
 </Window>
