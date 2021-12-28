@@ -38,7 +38,7 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <ListView x:Name="ParcelsListView" Cursor="Hand" ItemsSource="{Binding}"  Margin="0,91,0,0" Visibility="Visible" MouseDoubleClick="ParcelView_MouseDoubleClick" Grid.RowSpan="2" Background="#FFEBF6F7"/>
+       
         <ComboBox x:Name="Combo_priority" HorizontalAlignment="Left" Height="32" Margin="40,24,0,0" VerticalAlignment="Top" Width="177" SelectionChanged="Combo_priority_SelectionChanged"/>
         <ComboBox x:Name="Combo_weight" HorizontalAlignment="Left" Height="32" Margin="250,24,0,0" VerticalAlignment="Top" Width="166" SelectionChanged="Combo_weight_SelectionChanged"/>
         <Button x:Name="ClearPriority" Grid.Column="1"  Content="CLEAR" HorizontalAlignment="Right" Margin="0,56,0,0" Click="ClearPriority_Click" ToolTip="ClearPriority" Width="128" FontSize="18" FontWeight="Bold" FontStyle="Normal" Background="#FFD2E6F6" Height="27" VerticalAlignment="Top"/>
