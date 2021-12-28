@@ -23,8 +23,14 @@ namespace PL
     public partial class ParcelListWindow : Window
     {
         private BLApi.IBL bl;
+        Priorities prior = new Priorities();//statut
+        WeightCategories weight = new WeightCategories();
         private ObservableCollection<BO.ParcelDescription> boParcelList = new ObservableCollection<BO.ParcelDescription>();
         private bool checkFlag = false;
+        public static Priorities parcelPriority = 0;//dronestat
+        public static WeightCategories weightStat = 0;
+        public bool weightFlag = false;
+        public bool priorityFlag = false; //droneFlag
         public ParcelListWindow(BLApi.IBL bl)
         {
             InitializeComponent();
@@ -65,6 +71,9 @@ namespace PL
             CollectionView view2 = (CollectionView)CollectionViewSource.GetDefaultView(FilterByTarget.ItemsSource);
             PropertyGroupDescription groupDescription2 = new PropertyGroupDescription("TargetName");
             view2.GroupDescriptions.Add(groupDescription2);
+            this.Combo_priority.ItemsSource = Enum.GetValues(typeof(BO.Priorities));
+            this.Combo_weight.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
+
             //combobox?
         }
 
@@ -126,5 +135,61 @@ namespace PL
             FilterByTarget.Visibility = Visibility.Hidden;
             ParcelsListView.Visibility= Visibility.Visible; 
         }
+
+        #region selections
+        private void Combo_weight_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (Combo_weight.SelectedItem == null)
+            {
+                return;
+            }
+            /*DroneStatuses*/
+            weight = (WeightCategories)Combo_weight.SelectedItem;
+            weightStat = weight;
+
+            weightFlag = true;
+            if (priorityFlag)
+                this.ParcelsListView.ItemsSource = boParcelList.Where(x => x.weight == weight && x.priority == parcelPriority);
+            else
+                this.ParcelsListView.ItemsSource = boParcelList.Where(x => x.weight == weight);
+           
+        }
+
+        private void Combo_priority_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (Combo_priority.SelectedItem == null)
+            {
+                return;
+            }
+            /*WeightCategories*/
+            prior = (Priorities)Combo_priority.SelectedItem;
+            parcelPriority = prior;
+            priorityFlag = true;
+            if (weightFlag)
+                this.ParcelsListView.ItemsSource = boParcelList.Where(x => x.priority == prior && x.weight == weightStat);
+            else
+                this.ParcelsListView.ItemsSource = boParcelList.Where(x => x.priority == prior);
+
+        }
+        #endregion
+
+        private void ClearPriority_Click(object sender, RoutedEventArgs e)
+        {
+            Combo_priority.SelectedItem = null;
+            weightFlag = false;
+            weightStat = 0;
+            ParcelsListView.DataContext = boParcelList;
+
+        }
+
+        private void ClearWeight_Click(object sender, RoutedEventArgs e)
+        {
+            Combo_weight.SelectedItem = null;
+            parcelPriority = 0;
+            priorityFlag = false;
+            ParcelsListView.DataContext = boParcelList;
+
+        }
+
     }
 }
