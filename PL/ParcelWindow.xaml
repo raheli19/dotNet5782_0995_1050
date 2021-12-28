@@ -20,18 +20,16 @@
     </Window.Resources>
 
     <Grid x:Name="MainGrid">
-        <Grid x:Name="UpgradeGrid" Visibility="Hidden">
-            <Button x:Name="UpdateButton" Content="UPDATE" HorizontalAlignment="Left" 
-                   
-                    Background="Transparent" Margin="648,166,0,0" VerticalAlignment="Top" ToolTip="UPDATE" Height="51" Width="133" BorderBrush="Black" Click="ClickUpdate" Opacity="100" FontFamily="Cambria" FontSize="30" FontWeight="Bold" FontStyle="Italic">
-            </Button>
+        <Grid x:Name="UpgradeGrid" Visibility="Visible">
+            <Button Content="Remove" HorizontalAlignment="Left" Height="34" Margin="572,243,0,0" VerticalAlignment="Top" Width="118" Click="Remove_Button"/>
+
             <!--CloseButton-->
             <Button Name="CloseButton" Content="CLOSE" HorizontalAlignment="Left" Background="Transparent" Margin="472,10,0,0" VerticalAlignment="Top" ToolTip="Close the Window" Height="59" Width="130" BorderBrush="Black" Click="ClickCloseParcelWindow" Opacity="100" FontFamily="Cambria" FontWeight="Bold" FontStyle="Italic" FontSize="30">
 
             </Button>
-            <Label x:Name="parcelDetails" Content="Label" HorizontalAlignment="Left" Margin="268,0,0,0" VerticalAlignment="Center" Height="174" Width="187"/>
+            <Label x:Name="parcelDetails" Content="Label" HorizontalAlignment="Left" Margin="73,0,0,0" VerticalAlignment="Center" Height="414" Width="347"/>
         </Grid>
-        <Grid x:Name="AddGrid" Visibility="Visible">
+        <Grid x:Name="AddGrid" Visibility="Hidden">
             <Grid.Background>
                 <ImageBrush ImageSource="/parcelBackgound.png" Opacity="0.7"/>
             </Grid.Background>
@@ -53,7 +51,6 @@
                     <ImageBrush ImageSource="/close.png"/>
                 </Button.Background>
             </Button>
-            <Button Content="Remove" HorizontalAlignment="Left" Height="34" Margin="660,300,0,0" VerticalAlignment="Top" Width="119" Click="Remove_Button"/>
 
         </Grid>
     </Grid>

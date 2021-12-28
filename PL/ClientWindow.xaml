@@ -20,7 +20,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Grid x:Name="UpgradeClientGrid" Visibility="Visible">
+        <Grid x:Name="UpgradeClientGrid" Visibility="Hidden">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="193*"/>
                 <ColumnDefinition Width="7*"/>
@@ -74,7 +74,7 @@
             <Label x:Name="ParcelsFromClientLabel" Content="Parcels From Client:" HorizontalAlignment="Left" Margin="460,0,0,0" VerticalAlignment="Center" Width="207" FontSize="20" FontWeight="Bold" FontStyle="Italic"/>
 
         </Grid>
-        <Grid x:Name="AddGridClient" Visibility="Hidden">
+        <Grid x:Name="AddGridClient" Visibility="Visible">
             <Grid.Background>
                 <ImageBrush ImageSource="/fondessai.png"/>
             </Grid.Background>

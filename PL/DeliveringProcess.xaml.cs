@@ -40,6 +40,10 @@ namespace PL
             this.clientStatus = clientStatus;
         }
 
+        private void Drone_Id_entered_TextChanged1(object sender, TextChangedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
 
         private void ParcelsFromClient_Click(object sender, RoutedEventArgs e)
         {
@@ -49,7 +53,7 @@ namespace PL
             }
             if (clientStatus == "Sign In")
             {
-                string parcelsFromClientList = bl.parcelsToCliList(DataCclient.ID);
+                string parcelsFromClientList = bl.parcelsToCliList(DataCclient.ID); //
                 parcelsFromClient.Visibility = Visibility.Visible;
                 parcelsFromClient.Content = parcelsFromClientList;
 
@@ -125,6 +129,40 @@ namespace PL
         private void ComboBox_PrioritySelection(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+        public static int idparcelIdEnteredByUser = 0;
+        private void Picked_up(object sender, RoutedEventArgs e)
+        {
+            //affiche liste des parcels qu'ils envoit
+            List<ParcelDescription> tempList = new List<ParcelDescription>();
+            DataCParcel.Drone = new DroneWithParcel();
+            tempList = bl.displayParcelList().Where(x => x.SenderName == DataCclient.Name).ToList();
+            listOf_Parcels.Visibility = Visibility.Visible;
+            Drone_Id_entered.Visibility = Visibility.Visible;
+            click_PickedUpButton.Visibility = Visibility.Visible;
+            listOf_Parcels.Content = tempList;
+            //DataCParcel.ID = Convert.ToInt32(Parcel_Id_Entered.Text);
+            //DataCParcel.Drone.ID = bl.displayDroneList().First(x => x.parcelId == DataCParcel.ID).Id;
+
+            //selectionne une
+            //met comme quoi il ont pîcked up
+        }
+
+       
+
+        private void click_PickedUp_Click(object sender, RoutedEventArgs e)
+        {
+            DataCParcel.ID = Convert.ToInt32(Parcel_Id_Entered.Text);
+            DataCParcel.Drone.ID = bl.displayDroneList().First(x => x.parcelId == DataCParcel.ID).Id;
+            //DataCParcel.Drone.ID = Convert.ToInt32(Drone_Id_entered.Text);
+            try
+            { bl.PickedUp(DataCParcel.Drone.ID); }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Aie aie aie...", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
         }
     }
 }

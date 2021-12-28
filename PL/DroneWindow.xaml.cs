@@ -356,9 +356,9 @@ namespace PL
                 }
                 ListViewDrone.ItemsSource = bl.displayDroneList();
                 Drone_Label.Content = bl.displayDrone(dataCdroneUpdate.Id);
-               
-                    ShowParcel.Visibility = Visibility.Visible;
-                
+
+                ShowParcel.Visibility = Visibility.Visible;
+
             }
 
             //Second case:The status of the drone is shipping,the button is DELIVERING THE PACKAGE
