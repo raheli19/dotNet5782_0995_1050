@@ -72,6 +72,7 @@
             </ListView>
             <Label x:Name="ParcelsToClientLabel" Content="Parcels To Client:" HorizontalAlignment="Left" Margin="460,0,0,0" VerticalAlignment="Top" Width="184" FontWeight="Bold" FontSize="20" FontStyle="Italic"/>
             <Label x:Name="ParcelsFromClientLabel" Content="Parcels From Client:" HorizontalAlignment="Left" Margin="460,0,0,0" VerticalAlignment="Center" Width="207" FontSize="20" FontWeight="Bold" FontStyle="Italic"/>
+            
 
         </Grid>
         <Grid x:Name="AddGridClient" Visibility="Hidden">

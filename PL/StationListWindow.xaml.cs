@@ -43,32 +43,9 @@ namespace PL
 
             //this.comboStatusSelector.ItemsSource = Enum.GetValues(typeof(BO.DroneStatuses));
             //this.comboWeightSelector.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
-            List<StationDescription> listByFree = new List<StationDescription>();
-            foreach (var item in boStationList)
-            {
-                listByFree.Add(new StationDescription() { Id = item.Id, name = item.name, freeChargeSlots = item.freeChargeSlots,fullChargeSlots=item.fullChargeSlots });
-              
-            }
-            GotOrNotAvailableChargeSlots.ItemsSource = listByFree;
-
-            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(GotOrNotAvailableChargeSlots.ItemsSource);
-            PropertyGroupDescription groupDescription = new PropertyGroupDescription("freeornot");
-            view.GroupDescriptions.Add(groupDescription);
+            
 
 
-            List<StationDescription> listByNumFree = new List<StationDescription>();
-            foreach (var item in boStationList)
-            {
-                listByNumFree.Add(new StationDescription() { Id = item.Id, name = item.name, freeChargeSlots = item.freeChargeSlots, fullChargeSlots = item.fullChargeSlots });
-
-            }
-            List<StationDescription> listByCount = new List<StationDescription>();
-            listByCount = listByNumFree.OrderBy(d => d.freeChargeSlots).ToList();
-            CountAvailableChargeSlots.ItemsSource = listByCount;
-
-            CollectionView view2 = (CollectionView)CollectionViewSource.GetDefaultView(CountAvailableChargeSlots.ItemsSource);
-            PropertyGroupDescription groupDescription2 = new PropertyGroupDescription("CS");
-            view2.GroupDescriptions.Add(groupDescription2);
         }
 
         private void StationListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -134,6 +111,17 @@ namespace PL
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
+            List<StationDescription> listByFree = new List<StationDescription>();
+            foreach (var item in bl.DisplayStationList())
+            {
+                listByFree.Add(new StationDescription() { Id = item.Id, name = item.name, freeChargeSlots = item.freeChargeSlots, fullChargeSlots = item.fullChargeSlots });
+
+            }
+            GotOrNotAvailableChargeSlots.ItemsSource = listByFree;
+
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(GotOrNotAvailableChargeSlots.ItemsSource);
+            PropertyGroupDescription groupDescription = new PropertyGroupDescription("freeornot");
+            view.GroupDescriptions.Add(groupDescription);
             GotOrNotAvailableChargeSlots.Visibility = Visibility.Visible;
             CountAvailableChargeSlots.Visibility = Visibility.Hidden;
             StationListView.Visibility = Visibility.Hidden;
@@ -141,8 +129,22 @@ namespace PL
 
         private void button1_Click(object sender, RoutedEventArgs e)
         {
-           
-                CountAvailableChargeSlots.Visibility = Visibility.Visible;
+
+
+            List<StationDescription> listByNumFree = new List<StationDescription>();
+            foreach (var item in bl.DisplayStationList())
+            {
+                listByNumFree.Add(new StationDescription() { Id = item.Id, name = item.name, freeChargeSlots = item.freeChargeSlots, fullChargeSlots = item.fullChargeSlots });
+
+            }
+            List<StationDescription> listByCount = new List<StationDescription>();
+            listByCount = listByNumFree.OrderBy(d => d.freeChargeSlots).ToList();
+            CountAvailableChargeSlots.ItemsSource = listByCount;
+
+            CollectionView view2 = (CollectionView)CollectionViewSource.GetDefaultView(CountAvailableChargeSlots.ItemsSource);
+            PropertyGroupDescription groupDescription2 = new PropertyGroupDescription("CS");
+            view2.GroupDescriptions.Add(groupDescription2);
+            CountAvailableChargeSlots.Visibility = Visibility.Visible;
             GotOrNotAvailableChargeSlots.Visibility = Visibility.Hidden;
             StationListView.Visibility = Visibility.Hidden;
         }

@@ -205,14 +205,16 @@ namespace PL
       
         private void ParcelsToClient_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            new ParcelWindow(ParcelsToClient.SelectedItem, bl, listViewParcels).Show();
+            ParcelToClient myParcelToClient = (ParcelToClient)ParcelsToClient.SelectedItem;
+            ParcelDescription myParcelDescription = bl.displayParcelList().First(x => x.Id == myParcelToClient.ID);
+            new ParcelWindow(myParcelDescription, bl, listViewParcels).Show();
         }
 
         private void ParcelsFromClient_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            
-            //ParcelDescription myParcelDescription=bl.displayParcelList.First(ParcelsFromClient.SelectedItem.)
-            //new ParcelWindow(ParcelsFromClient.SelectedItem, bl, listViewParcels).Show();
+            ParcelToClient myParcelToClient = (ParcelToClient)ParcelsFromClient.SelectedItem;
+            ParcelDescription myParcelDescription = bl.displayParcelList().First(x => x.Id == myParcelToClient.ID);
+           new ParcelWindow(myParcelDescription, bl, listViewParcels).Show();
         }
     }
 }

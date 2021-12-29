@@ -42,37 +42,11 @@ namespace PL
                 boParcelList.Add(item);
 
             }
-            List<ParcelDescription> parcelsBySender = new List<ParcelDescription>();
-            foreach (var item in boParcelList)
-            {
-                parcelsBySender.Add(new ParcelDescription() { Id = item.Id, SenderName = item.SenderName, TargetName = item.TargetName, weight = item.weight, Status = item.Status, priority = item.priority});
-
-            }
-            List<ParcelDescription> parcelsBYSender = new List<ParcelDescription>();
-            parcelsBYSender = parcelsBySender.OrderBy(d => d.SenderName).ToList();
-            FilterBySender.ItemsSource = parcelsBYSender;
-
-            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(FilterBySender.ItemsSource);
-            PropertyGroupDescription groupDescription = new PropertyGroupDescription("SenderName");
-            view.GroupDescriptions.Add(groupDescription);
+            
 
 
 
-            List<ParcelDescription> parcelsByTarget = new List<ParcelDescription>();
-            foreach (var item in boParcelList)
-            {
-                parcelsByTarget.Add(new ParcelDescription() { Id = item.Id, SenderName = item.SenderName, TargetName = item.TargetName, weight = item.weight, Status = item.Status, priority = item.priority });
-
-            }
-            List<ParcelDescription> parcelsBYTarget = new List<ParcelDescription>();
-            parcelsBYTarget = parcelsByTarget.OrderBy(d => d.TargetName).ToList();
-            FilterByTarget.ItemsSource = parcelsBYTarget;
-
-            CollectionView view2 = (CollectionView)CollectionViewSource.GetDefaultView(FilterByTarget.ItemsSource);
-            PropertyGroupDescription groupDescription2 = new PropertyGroupDescription("TargetName");
-            view2.GroupDescriptions.Add(groupDescription2);
-            this.Combo_priority.ItemsSource = Enum.GetValues(typeof(BO.Priorities));
-            this.Combo_weight.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
+          
 
             //combobox?
         }
@@ -117,6 +91,19 @@ namespace PL
 
         private void FilterBySender1_Click(object sender, RoutedEventArgs e)
         {
+            List<ParcelDescription> parcelsBySender = new List<ParcelDescription>();
+            foreach (var item in bl.displayParcelList())
+            {
+                parcelsBySender.Add(new ParcelDescription() { Id = item.Id, SenderName = item.SenderName, TargetName = item.TargetName, weight = item.weight, Status = item.Status, priority = item.priority });
+
+            }
+            List<ParcelDescription> parcelsBYSender = new List<ParcelDescription>();
+            parcelsBYSender = parcelsBySender.OrderBy(d => d.SenderName).ToList();
+            FilterBySender.ItemsSource = parcelsBYSender;
+
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(FilterBySender.ItemsSource);
+            PropertyGroupDescription groupDescription = new PropertyGroupDescription("SenderName");
+            view.GroupDescriptions.Add(groupDescription);
             FilterBySender.Visibility = Visibility.Visible;
             FilterByTarget.Visibility = Visibility.Hidden;
             ParcelsListView.Visibility = Visibility.Hidden;
@@ -124,6 +111,21 @@ namespace PL
 
         private void FilterByTarget1_Click(object sender, RoutedEventArgs e)
         {
+            List<ParcelDescription> parcelsByTarget = new List<ParcelDescription>();
+            foreach (var item in bl.displayParcelList())
+            {
+                parcelsByTarget.Add(new ParcelDescription() { Id = item.Id, SenderName = item.SenderName, TargetName = item.TargetName, weight = item.weight, Status = item.Status, priority = item.priority });
+
+            }
+            List<ParcelDescription> parcelsBYTarget = new List<ParcelDescription>();
+            parcelsBYTarget = parcelsByTarget.OrderBy(d => d.TargetName).ToList();
+            FilterByTarget.ItemsSource = parcelsBYTarget;
+
+            CollectionView view2 = (CollectionView)CollectionViewSource.GetDefaultView(FilterByTarget.ItemsSource);
+            PropertyGroupDescription groupDescription2 = new PropertyGroupDescription("TargetName");
+            view2.GroupDescriptions.Add(groupDescription2);
+            this.Combo_priority.ItemsSource = Enum.GetValues(typeof(BO.Priorities));
+            this.Combo_weight.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
             FilterByTarget.Visibility = Visibility.Visible;
             FilterBySender.Visibility = Visibility.Hidden;
             ParcelsListView.Visibility = Visibility.Hidden;

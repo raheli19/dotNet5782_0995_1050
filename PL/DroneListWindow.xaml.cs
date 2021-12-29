@@ -44,6 +44,7 @@ namespace PL
 
             InitializeComponent();
             DronesListView.DataContext = boDroneList;
+            DataContext = boDroneList;
             foreach (var item in bl.displayDroneList())
             {
                 boDroneList.Add(item);
@@ -56,34 +57,10 @@ namespace PL
             this.comboWeightSelector.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
 
 
-            List<DroneDescription> dronesByWeight = new List<DroneDescription>();
-            foreach (var item in boDroneList)
-            {
-                dronesByWeight.Add(new DroneDescription() { Id = item.Id, Model = item.Model, battery = item.battery, weight = item.weight,Status=item.Status,loc=item.loc, parcelId=item.parcelId });
-
-            }
-            List<DroneDescription> dronesBYWeight = new List<DroneDescription>();
-            dronesBYWeight = dronesByWeight.OrderBy(d => d.weight).ToList();
-            FilterByWeight.ItemsSource = dronesBYWeight;
-            
-            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(FilterByWeight.ItemsSource);
-            PropertyGroupDescription groupDescription = new PropertyGroupDescription("weight");
-            view.GroupDescriptions.Add(groupDescription);
+           
 
 
-            List<DroneDescription> dronesByStatus = new List<DroneDescription>();
-            foreach (var item in boDroneList)
-            {
-                dronesByStatus.Add(new DroneDescription() { Id = item.Id, Model = item.Model, battery = item.battery, weight = item.weight, Status = item.Status, loc = item.loc, parcelId = item.parcelId });
-
-            }
-            List<DroneDescription> dronesBYStatus = new List<DroneDescription>();
-            dronesBYStatus = dronesByStatus.OrderBy(d => d.Status).ToList();
-            FilterByStatus.ItemsSource = dronesBYStatus;
-
-            CollectionView view2 = (CollectionView)CollectionViewSource.GetDefaultView(FilterByStatus.ItemsSource);
-            PropertyGroupDescription groupDescription2 = new PropertyGroupDescription("Status");
-            view2.GroupDescriptions.Add(groupDescription2);
+           
 
         }
         public static DroneStatuses droneStat = 0;
@@ -224,7 +201,53 @@ namespace PL
 
         }
 
-     
+        private void FilterByWeightButton_Click(object sender, RoutedEventArgs e)
+        {
+            List<DroneDescription> dronesByWeight = new List<DroneDescription>();
+            foreach (var item in bl.displayDroneList())
+            {
+                dronesByWeight.Add(new DroneDescription() { Id = item.Id, Model = item.Model, battery = item.battery, weight = item.weight, Status = item.Status, loc = item.loc, parcelId = item.parcelId });
+
+            }
+            List<DroneDescription> dronesBYWeight = new List<DroneDescription>();
+            dronesBYWeight = dronesByWeight.OrderBy(d => d.weight).ToList();
+            FilterByWeight.ItemsSource = dronesBYWeight;
+
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(FilterByWeight.ItemsSource);
+            PropertyGroupDescription groupDescription = new PropertyGroupDescription("weight");
+            view.GroupDescriptions.Add(groupDescription);
+
+            FilterByWeight.Visibility = Visibility.Visible;
+            FilterByStatus.Visibility = Visibility.Hidden;
+            DronesListView.Visibility = Visibility.Hidden;
+        }
+
+        private void FilterByStatusButton_Click(object sender, RoutedEventArgs e)
+        {
+            List<DroneDescription> dronesByStatus = new List<DroneDescription>();
+            foreach (var item in bl.displayDroneList())
+            {
+                dronesByStatus.Add(new DroneDescription() { Id = item.Id, Model = item.Model, battery = item.battery, weight = item.weight, Status = item.Status, loc = item.loc, parcelId = item.parcelId });
+
+            }
+            List<DroneDescription> dronesBYStatus = new List<DroneDescription>();
+            dronesBYStatus = dronesByStatus.OrderBy(d => d.Status).ToList();
+            FilterByStatus.ItemsSource = dronesBYStatus;
+
+            CollectionView view2 = (CollectionView)CollectionViewSource.GetDefaultView(FilterByStatus.ItemsSource);
+            PropertyGroupDescription groupDescription2 = new PropertyGroupDescription("Status");
+            view2.GroupDescriptions.Add(groupDescription2);
+            FilterByWeight.Visibility = Visibility.Hidden;
+            FilterByStatus.Visibility = Visibility.Visible;
+            DronesListView.Visibility = Visibility.Hidden;
+        }
+
+        private void clearGrouping_Click(object sender, RoutedEventArgs e)
+        {
+            FilterByWeight.Visibility = Visibility.Hidden;
+            FilterByStatus.Visibility = Visibility.Hidden;
+            DronesListView.Visibility = Visibility.Visible;
+        }
     }
 }
 

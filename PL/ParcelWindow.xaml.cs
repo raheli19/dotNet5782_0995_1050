@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -28,6 +29,7 @@ namespace PL
         //DroneListWindow dlw;
         ListView ListViewParcel;
         private bool checkFlag = false;
+        private ObservableCollection<BO.ClientActions> boClientList = new ObservableCollection<BO.ClientActions>();
 
         #region ADDPARCEL
         public ParcelWindow(BLApi.IBL bl, object ParcelListWindow)
@@ -121,7 +123,12 @@ namespace PL
             //Drones_Details.Visibility = Visibility.Visible;
             
             ListViewParcel = (ListView)parcelListView;
+            ClientslistView.DataContext = boClientList;
+            foreach (var item in bl.displayClientList())
+            {
+                boClientList.Add(item);
 
+            }
         }
 
 
@@ -183,6 +190,22 @@ namespace PL
             this.Combo_TargetId.ItemsSource = bl.AllTargets_Id();
             ListViewParcel.ItemsSource = bl.displayParcelList();
 
+        }
+
+        private void displaySender_Click(object sender, RoutedEventArgs e)
+        {
+            ClientActions clientActions = new();
+            clientActions = bl.displayClientList().First(x => x.name == dataCparcelUpdate.SenderName);
+
+            new ClientWindow(clientActions, bl, ClientslistView).Show();
+        }
+
+        private void displayTarget_Click(object sender, RoutedEventArgs e)
+        {
+            ClientActions clientActions = new();
+            clientActions = bl.displayClientList().First(x => x.name == dataCparcelUpdate.TargetName);
+
+            new ClientWindow(clientActions, bl, ClientslistView).Show();
         }
     }
 }
