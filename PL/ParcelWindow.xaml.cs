@@ -111,6 +111,10 @@ namespace PL
         #endregion
 
         #endregion
+    
+
+
+        #region UPDATE
         public ParcelWindow(object selectedItem, BLApi.IBL bl, object parcelListView)
         {
             InitializeComponent();
@@ -121,7 +125,7 @@ namespace PL
             UpgradeGrid.Visibility = Visibility.Visible;
             parcelDetails.Content = bl.displayParcel(dataCparcelUpdate.Id);
             //Drones_Details.Visibility = Visibility.Visible;
-            
+
             ListViewParcel = (ListView)parcelListView;
             ClientslistView.DataContext = boClientList;
             foreach (var item in bl.displayClientList())
@@ -131,8 +135,6 @@ namespace PL
             }
         }
 
-
-        #region UPDATE
         private void ClickUpdate(object sender, RoutedEventArgs e)
         {
 
@@ -166,7 +168,7 @@ namespace PL
                 MessageBox.Show("Please make a selection", "WARNING", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
-            if (Combo_SenderId.SelectedItem == Combo_TargetId.SelectedItem)
+            if (Combo_SenderId.SelectedItem.Equals(Combo_TargetId.SelectedItem))
             {
                 MessageBox.Show("A client didn't sent a parcel to himself! ", "Aie aie aie...", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;

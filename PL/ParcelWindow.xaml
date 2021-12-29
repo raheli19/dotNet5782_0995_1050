@@ -63,7 +63,6 @@
                     <ImageBrush ImageSource="/close.png"/>
                 </Button.Background>
             </Button>
-            <Button Content="Remove" HorizontalAlignment="Left" Height="34" Margin="660,300,0,0" VerticalAlignment="Top" Width="119" Click="Remove_Button"/>
 
         </Grid>
     </Grid>

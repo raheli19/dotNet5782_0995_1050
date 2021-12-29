@@ -18,12 +18,11 @@
                 </TransformGroup>
             </Label.RenderTransform>
         </Label>
-        
+
         <Button x:Name="ParcelsToClient" Content="The parcels I received" HorizontalAlignment="Left" Margin="39,98,0,0" VerticalAlignment="Top" Width="249" Height="46" FontSize="20" FontStyle="Italic" Click="ParcelsToClient_Click" />
         <Label x:Name="parcelsToClient" Content="" HorizontalAlignment="Left" Margin="560,27,0,0" VerticalAlignment="Top" Width="210" Height="330" Background="#FFD8C1E2" Visibility="Hidden"/>
         <Button x:Name="SendNewParcel" Content="Send a new parcel" HorizontalAlignment="Left" Margin="54,335,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.029,-0.386" Width="200" Height="44" FontStyle="Italic" FontSize="20" Click="SendNewParcel_Click"/>
-        <Button x:Name="AssignParcel" Content="Assign a parcel" HorizontalAlignment="Left" Margin="84,178,0,0" VerticalAlignment="Top" FontStyle="Italic" FontSize="20" Height="39" Width="159" Click="AssignParcelClick"/>
-        <Button x:Name="button3" Content="Pick a parcel" HorizontalAlignment="Left" Margin="84,257,0,0" VerticalAlignment="Top" Width="141" Height="35" FontStyle="Italic" FontSize="20"/>
+        <Button x:Name="PickedUp" Content="Did the drone picked up the package?" HorizontalAlignment="Left" Margin="84,257,0,0" VerticalAlignment="Top" Width="343" Height="35" FontStyle="Italic" FontSize="20" Click="Picked_up"/>
         <Label x:Name="SenderId" Visibility="Hidden" Content="SenderId" HorizontalAlignment="Left" Margin="522,27,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Background="#FF88B91A" Width="76"/>
         <Label x:Name="TargetId" Visibility="Hidden"  Content="Target Id" HorizontalAlignment="Left" Margin="522,83,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16" Background="#FF88B91A" Width="76"/>
         <Label x:Name="MaxWeight" Visibility="Hidden"  Content="MaxWeight" HorizontalAlignment="Left" Margin="522,148,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Bold" Background="#FF88B91A"/>
@@ -32,6 +31,15 @@
         <TextBox x:Name="TargetID" Visibility="Hidden" Text="{Binding Target.ID,Mode=TwoWay}" HorizontalAlignment="Left" Margin="634,83,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="96" RenderTransformOrigin="0.406,0.369" Height="31"/>
         <ComboBox x:Name="MaxWeightL" Visibility="Hidden" Text="{Binding Weight,Mode=TwoWay}" HorizontalAlignment="Left" Margin="634,148,0,0" SelectionChanged="ComboBox_WeightSelection"  VerticalAlignment="Top" Width="96" Height="29"/>
         <ComboBox x:Name="PriorityL" Visibility="Hidden" Text="{Binding Priority,Mode=TwoWay}" HorizontalAlignment="Left" Margin="634,210,0,0" SelectionChanged="ComboBox_PrioritySelection" VerticalAlignment="Top" Width="96" Height="27"/>
+        <Label x:Name="listOf_Parcels" Content="Label" HorizontalAlignment="Left" Height="254" Margin="350,38,0,0" VerticalAlignment="Top" Width="219" Visibility="Hidden"/>
+        <Button x:Name="click_PickedUpButton" Content="" HorizontalAlignment="Left" Height="32" Margin="648,205,0,0" VerticalAlignment="Top" Width="34" Click="click_PickedUp_Click">
+            <Button.Background>
+                <ImageBrush ImageSource="/checked.png"/>
+            </Button.Background>
+        </Button>
+        <Label Content="The parcel has been picked up" HorizontalAlignment="Left" Height="26" Margin="598,177,0,0" VerticalAlignment="Top" Width="172"/>
+        <TextBox x:Name="Drone_Id_entered" HorizontalAlignment="Left" Height="34" Margin="574,114,0,0" Text="{Binding Drone.ID,Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top" Width="156" />
+        <TextBox x:Name="Parcel_Id_Entered" HorizontalAlignment="Left" Height="36" Margin="569,42,0,0" Text="{Binding ID ,Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top" Width="161"/>
 
 
     </Grid>

@@ -20,7 +20,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Grid x:Name="UpgradeClientGrid" Visibility="Visible">
+        <Grid x:Name="UpgradeClientGrid" Visibility="Hidden">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="193*"/>
                 <ColumnDefinition Width="7*"/>
@@ -75,7 +75,7 @@
             
 
         </Grid>
-        <Grid x:Name="AddGridClient" Visibility="Hidden">
+        <Grid x:Name="AddGridClient" Visibility="Visible">
             <Grid.Background>
                 <ImageBrush ImageSource="/fondessai.png"/>
             </Grid.Background>
