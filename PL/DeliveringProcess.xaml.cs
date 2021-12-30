@@ -144,11 +144,11 @@ namespace PL
             listOf_Parcels.Visibility = Visibility.Visible;
             label_info.Visibility = Visibility.Visible;
             Parcel_Id_Entered.Visibility = Visibility.Visible;
-           // Drone_Id_entered.Visibility = Visibility.Visible;
+            // Drone_Id_entered.Visibility = Visibility.Visible;
             click_PickedUpButton.Visibility = Visibility.Visible;
-            listOf_Parcels.Content = tempList; //doesn't work to print the list!!!!
-            
-            
+            listOf_Parcels.Content = tempList.ToString(); //doesn't work to print the list!!!!
+
+
             //DataCParcel.ID = Convert.ToInt32(Parcel_Id_Entered.Text);
             //DataCParcel.Drone.ID = bl.displayDroneList().First(x => x.parcelId == DataCParcel.ID).Id;
 
@@ -194,6 +194,25 @@ namespace PL
             parcelsToClient.Visibility = Visibility.Hidden;
             parcelsFromClient.Visibility = Visibility.Hidden;
 
+        }
+
+        private void received_parcel_Click(object sender, RoutedEventArgs e)
+        {
+            Parcel_Id_Entered.Visibility = Visibility.Visible;
+            label_info.Content = "Please enter its Id";
+            label_info.Visibility = Visibility.Visible;
+            BO.DroneDescription delDrone = new DroneDescription();
+            delDrone = bl.displayDroneList().First(x => x.parcelId == DataCParcel.ID);
+            try
+            {
+                bl.delivered(delDrone.Id);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Aie aie aie...", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+
+            }
         }
     }
 }

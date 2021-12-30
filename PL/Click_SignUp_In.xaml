@@ -54,7 +54,7 @@
             </TextBlock>
             <Button x:Name="button_Join" Content="JOIN" HorizontalAlignment="Left" Margin="658,357,0,0" VerticalAlignment="Top" Width="89" Height="45" Background="#FF8C67C5" FontSize="24" FontStyle="Italic" FontWeight="Bold" BorderThickness="4,4,4,4" Click="button_Join_Click"  />
         </Grid>
-        <Grid x:Name="Sign_In" Visibility="Hidden">
+        <Grid x:Name="Sign_In" Visibility="Visible">
             <!--New Client Region-->
             <Grid.Resources>
                 <Style TargetType="{x:Type Button}">
