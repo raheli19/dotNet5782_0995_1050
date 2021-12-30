@@ -25,6 +25,8 @@ namespace PL
     /// </summary>
     public partial class DroneWindow : Window
     {
+        private bool checkFlag = false;
+
         string newName = "";
         private BLApi.IBL bl;
         BO.Drone dataCdrone = new BO.Drone();
@@ -48,7 +50,6 @@ namespace PL
             ListViewDrone = (ListView)DroneListWindow;
 
         }
-        private bool checkFlag = false;
 
         #region add_Click
         private void AddDrone_Click(object sender, RoutedEventArgs e)
@@ -416,10 +417,13 @@ namespace PL
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
+            clear_button.Cursor = Cursors.Wait;
             Drone_Id.Text = "";
             Drone_Model.Text = "";
             comboStationSelector.SelectedItem = null;
             comboWeightSelector.SelectedItem = null;
+            clear_button.Cursor = Cursors.Arrow;
+
         }
 
         private void ShowParcel_Click(object sender, RoutedEventArgs e)
@@ -440,6 +444,24 @@ namespace PL
                 MessageBox.Show("There is no parcel attached to your drone...", "Sorry!");
             }
 
+        }
+
+        private void Id_enter(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+
+                Drone_Model.Focus();
+            }
+        }
+
+        private void Model_enter(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+
+                comboWeightSelector.Focus();
+            }
         }
     }
 }

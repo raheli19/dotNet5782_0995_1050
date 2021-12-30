@@ -13,6 +13,7 @@
     <None Remove="adduser.png" />
     <None Remove="backgroundUser.png" />
     <None Remove="backuser.png" />
+    <None Remove="cancelbutton.png" />
     <None Remove="checked.png" />
     <None Remove="close.png" />
     <None Remove="closebutton.png" />
@@ -40,6 +41,7 @@
     <Resource Include="adduser.png" />
     <Resource Include="backgroundUser.png" />
     <Resource Include="backuser.png" />
+    <Resource Include="cancelbutton.png" />
     <Resource Include="checked.png" />
     <Resource Include="close.png" />
     <Resource Include="closebutton.png" />

@@ -63,6 +63,9 @@ namespace PL
 
         private void ParcelsToClient_Click(object sender, RoutedEventArgs e)
         {
+            // enters the number of the parcel // fromthe list
+            //calls the function delivered
+
             if (clientStatus == "Sign Up")   //Join
             {
                 MessageBox.Show("Aie aie aie...", "You just joined our delivering system.There is no parcels for you. ", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -131,7 +134,7 @@ namespace PL
 
         }
 
-        public static int idparcelIdEnteredByUser = 0;
+        #region checkPickedUp
         private void Picked_up(object sender, RoutedEventArgs e)
         {
             //affiche liste des parcels qu'ils envoit
@@ -139,9 +142,13 @@ namespace PL
             DataCParcel.Drone = new DroneWithParcel();
             tempList = bl.displayParcelList().Where(x => x.SenderName == DataCclient.Name).ToList();
             listOf_Parcels.Visibility = Visibility.Visible;
-            Drone_Id_entered.Visibility = Visibility.Visible;
+            label_info.Visibility = Visibility.Visible;
+            Parcel_Id_Entered.Visibility = Visibility.Visible;
+           // Drone_Id_entered.Visibility = Visibility.Visible;
             click_PickedUpButton.Visibility = Visibility.Visible;
-            listOf_Parcels.Content = tempList;
+            listOf_Parcels.Content = tempList; //doesn't work to print the list!!!!
+            
+            
             //DataCParcel.ID = Convert.ToInt32(Parcel_Id_Entered.Text);
             //DataCParcel.Drone.ID = bl.displayDroneList().First(x => x.parcelId == DataCParcel.ID).Id;
 
@@ -149,20 +156,44 @@ namespace PL
             //met comme quoi il ont pîcked up
         }
 
-       
-
         private void click_PickedUp_Click(object sender, RoutedEventArgs e)
         {
-            DataCParcel.ID = Convert.ToInt32(Parcel_Id_Entered.Text);
-            DataCParcel.Drone.ID = bl.displayDroneList().First(x => x.parcelId == DataCParcel.ID).Id;
+            //enter the id of the parcel from the list
+            // supposed to go into th elist of the parcel, find it, and assign in the datacontext the id of the associated' drone!
+            //DataCParcel.ID = Convert.ToInt32(Parcel_Id_Entered.Text);
             //DataCParcel.Drone.ID = Convert.ToInt32(Drone_Id_entered.Text);
             try
-            { bl.PickedUp(DataCParcel.Drone.ID); }
+            {
+                DataCParcel.Drone.ID = bl.displayDroneList().First(x => x.parcelId == DataCParcel.ID).Id;
+
+                bl.PickedUp(DataCParcel.Drone.ID);
+            }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Aie aie aie...", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
+        }
+        #endregion
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            listOf_Parcels.Visibility = Visibility.Hidden;
+            label_info.Visibility = Visibility.Hidden;
+            Parcel_Id_Entered.Visibility = Visibility.Hidden;
+            click_PickedUpButton.Visibility = Visibility.Hidden;
+            SenderId.Visibility = Visibility.Hidden;
+            TargetId.Visibility = Visibility.Hidden;
+            MaxWeight.Visibility = Visibility.Hidden;
+            Priority.Visibility = Visibility.Hidden;
+            //textboxs and comboBox
+            senderID.Visibility = Visibility.Hidden;
+            TargetID.Visibility = Visibility.Hidden;
+            MaxWeightL.Visibility = Visibility.Hidden;
+            PriorityL.Visibility = Visibility.Hidden;
+            parcelsToClient.Visibility = Visibility.Hidden;
+            parcelsFromClient.Visibility = Visibility.Hidden;
+
         }
     }
 }

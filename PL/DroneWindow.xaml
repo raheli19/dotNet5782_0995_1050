@@ -8,11 +8,22 @@
         Title="DroneWindow" Height="450" Width="800" Icon="/drone.png"
         Closing="OnClosing">
 
+    <Window.Resources>
+        <Style TargetType="{x:Type Button}">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Cursor" Value="Hand"/>
+
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    
     <Grid x:Name="MainGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Grid x:Name="AddDroneGrid" Visibility="Hidden">
+        <Grid x:Name="AddDroneGrid" Visibility="Visible">
 
             <Grid.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -143,8 +154,8 @@
             </Button>
             <ComboBox Name="comboWeightSelector" HorizontalAlignment="Left" SelectedItem="{Binding MaxWeight, Mode=TwoWay}" Margin="345,230,0,0" VerticalAlignment="Top" Width="181" Height="50" ToolTip="Drone Weight" SelectionChanged="ComboBox_WeightSelection" FontWeight="Bold" FontSize="14"/>
             <ComboBox Name="comboStationSelector" HorizontalAlignment="Left" SelectedItem="{Binding Station, Mode=TwoWay}" Margin="436,316,0,0" VerticalAlignment="Top" Width="180" Height="51" SelectionChanged="ComboBox_SelectionChanged" FontSize="14" FontWeight="Bold"/>
-            <TextBox x:Name="Drone_Id" Text="{Binding ID, Mode=TwoWay}" HorizontalAlignment="Left" Height="44" Margin="180,28,0,0" ToolTip="Enter Drone Id" TextWrapping="Wrap" VerticalAlignment="Top" Width="181" FontSize="14" FontWeight="Bold" />
-            <TextBox x:Name="Drone_Model" Text="{Binding Model, Mode=TwoWay}" HorizontalAlignment="Left" Height="52" Margin="270,118,0,0" ToolTip="Enter Drone Model" TextWrapping="Wrap" VerticalAlignment="Top" Width="190" FontSize="14" FontWeight="Bold" />
+            <TextBox x:Name="Drone_Id" KeyDown="Id_enter" Text="{Binding ID, Mode=TwoWay}" HorizontalAlignment="Left" Height="44" Margin="180,28,0,0" ToolTip="Enter Drone Id" TextWrapping="Wrap" VerticalAlignment="Top" Width="181" FontSize="14" FontWeight="Bold" />
+            <TextBox x:Name="Drone_Model" KeyDown="Model_enter" Text="{Binding Model, Mode=TwoWay}" HorizontalAlignment="Left" Height="52" Margin="270,118,0,0" ToolTip="Enter Drone Model" TextWrapping="Wrap" VerticalAlignment="Top" Width="190" FontSize="14" FontWeight="Bold" />
 
 
             <!--<Label Content="Add" HorizontalAlignment="Left" Margin="325,82,0,0" VerticalAlignment="Top" FontFamily="Cambria" FontWeight="Bold" FontStyle="Italic" FontSize="16" Background="Transparent"/>-->
@@ -166,12 +177,12 @@
             </Button>
             <Label x:Name="label"  Content="Please enter the details&#xA;of the drone you want&#xD;&#xA;to add.&#xA;&#xA;To close the window,&#xA;press the button below.&#xA; " HorizontalAlignment="Left" Margin="516,66,0,0" VerticalAlignment="Top" Height="159" Width="230" FontFamily="Century" FontStyle="Normal" FontWeight="Bold" FontSize="18" BorderBrush="Black" BorderThickness="5,5,5,5" />
             <Label x:Name="label1" Content="Fill out the form:" HorizontalAlignment="Left" Margin="516,14,0,0" VerticalAlignment="Top" Width="244" Height="44" FontFamily="FrankRuehl" FontSize="32" FontWeight="Bold" FontStyle="Normal" Foreground="#FF3423B6"/>
-            <Button Content="CLEAR" HorizontalAlignment="Left" Height="43" Margin="631,284,0,0" VerticalAlignment="Top" Width="120" Click="Button_Click_1" FontSize="24" FontWeight="Bold" BorderThickness="3,3,3,3"/>
+            <Button x:Name="clear_button" Content="CLEAR" HorizontalAlignment="Left" Height="43" Margin="631,284,0,0" VerticalAlignment="Top" Width="120" Click="Button_Click_1" FontSize="24" FontWeight="Bold" BorderThickness="3,3,3,3"/>
             <!--<Button Content="Button" HorizontalAlignment="Left" Height="33" Margin="290,49,0,0" VerticalAlignment="Top" Click="AddDrone_Click" Width="120"/>-->
 
         </Grid>
 
-        <Grid Name="UpdateDroneGrid" Visibility="Visible" Opacity="0.745" Margin="-10,0,0,0">
+        <Grid Name="UpdateDroneGrid" Visibility="Hidden" Opacity="0.745" Margin="-10,0,0,0">
             <Grid.Background>
                 <ImageBrush ImageSource="/fond.png"/>
             </Grid.Background>

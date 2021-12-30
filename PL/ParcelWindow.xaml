@@ -20,7 +20,7 @@
     </Window.Resources>
 
     <Grid x:Name="MainGrid">
-        <Grid x:Name="UpgradeGrid" Visibility="Visible">
+        <Grid x:Name="UpgradeGrid" Visibility="Hidden">
             <Button x:Name="UpdateButton" Content="UPDATE" HorizontalAlignment="Left" 
                    
                     Background="Transparent" Margin="634,89,0,0" VerticalAlignment="Top" ToolTip="UPDATE" Height="51" Width="133" BorderBrush="Black" Click="ClickUpdate" Opacity="100" FontFamily="Cambria" FontSize="30" FontWeight="Bold" FontStyle="Italic">
@@ -41,7 +41,7 @@
                 </ListView.View>
             </ListView>
         </Grid>
-        <Grid x:Name="AddGrid" Visibility="Hidden">
+        <Grid x:Name="AddGrid" Visibility="Visible">
             <Grid.Background>
                 <ImageBrush ImageSource="/parcelBackgound.png" Opacity="0.7"/>
             </Grid.Background>
@@ -63,6 +63,9 @@
                     <ImageBrush ImageSource="/close.png"/>
                 </Button.Background>
             </Button>
+            <!--<Button Content="remove" HorizontalAlignment="Left" Height="73" Margin="495,144,0,0" VerticalAlignment="Top" Width="123" Click="Remove_Button"/>-->
+            <TextBox  HorizontalAlignment="Left" KeyDown="enter_tap" Height="34" Margin="556,62,0,0" Text="{Binding ID, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top" Width="172"/>
+            <Label Content="Pease enter the id of the Parcel you&#xD;&#xA;   want to delete and press enter" HorizontalAlignment="Left" Height="49" Margin="543,14,0,0" VerticalAlignment="Top" Width="199"/>
 
         </Grid>
     </Grid>

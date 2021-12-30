@@ -32,14 +32,15 @@
         <ComboBox x:Name="MaxWeightL" Visibility="Hidden" Text="{Binding Weight,Mode=TwoWay}" HorizontalAlignment="Left" Margin="634,148,0,0" SelectionChanged="ComboBox_WeightSelection"  VerticalAlignment="Top" Width="96" Height="29"/>
         <ComboBox x:Name="PriorityL" Visibility="Hidden" Text="{Binding Priority,Mode=TwoWay}" HorizontalAlignment="Left" Margin="634,210,0,0" SelectionChanged="ComboBox_PrioritySelection" VerticalAlignment="Top" Width="96" Height="27"/>
         <Label x:Name="listOf_Parcels" Content="Label" HorizontalAlignment="Left" Height="254" Margin="350,38,0,0" VerticalAlignment="Top" Width="219" Visibility="Hidden"/>
-        <Button x:Name="click_PickedUpButton" Content="" HorizontalAlignment="Left" Height="32" Margin="648,205,0,0" VerticalAlignment="Top" Width="34" Click="click_PickedUp_Click">
+        <Button x:Name="click_PickedUpButton" Content="" HorizontalAlignment="Left" Visibility="Hidden" Cursor="Hand" Height="32" Margin="648,205,0,0" VerticalAlignment="Top" Width="34" Click="click_PickedUp_Click">
             <Button.Background>
                 <ImageBrush ImageSource="/checked.png"/>
             </Button.Background>
         </Button>
-        <Label Content="The parcel has been picked up" HorizontalAlignment="Left" Height="26" Margin="598,177,0,0" VerticalAlignment="Top" Width="172"/>
-        <TextBox x:Name="Drone_Id_entered" HorizontalAlignment="Left" Height="34" Margin="574,114,0,0" Text="{Binding Drone.ID,Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top" Width="156" />
-        <TextBox x:Name="Parcel_Id_Entered" HorizontalAlignment="Left" Height="36" Margin="569,42,0,0" Text="{Binding ID ,Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top" Width="161"/>
+        <Label x:Name="label_info" Content="The parcel has been picked up" HorizontalAlignment="Left" Height="26" Margin="598,177,0,0" Visibility="Hidden" VerticalAlignment="Top" Width="172"/>
+        <!--<TextBox x:Name="Drone_Id_entered" HorizontalAlignment="Left" Height="34" Margin="574,114,0,0" Text="{Binding Drone.ID,Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top" Width="156" />-->
+        <TextBox x:Name="Parcel_Id_Entered" HorizontalAlignment="Left" Height="36" Margin="569,42,0,0" Text="{Binding ID ,Mode=TwoWay}" TextWrapping="Wrap" Visibility="Hidden" VerticalAlignment="Top" Width="161"/>
+        <Button Content="closeAll" HorizontalAlignment="Left" Height="40" Margin="288,10,0,0" VerticalAlignment="Top" Width="40" Click="Button_Click"/>
 
 
     </Grid>

@@ -54,7 +54,7 @@
             </TextBlock>
             <Button x:Name="button_Join" Content="JOIN" HorizontalAlignment="Left" Margin="658,357,0,0" VerticalAlignment="Top" Width="89" Height="45" Background="#FF8C67C5" FontSize="24" FontStyle="Italic" FontWeight="Bold" BorderThickness="4,4,4,4" Click="button_Join_Click"  />
         </Grid>
-        <Grid x:Name="Sign_In" Visibility="Visible">
+        <Grid x:Name="Sign_In" Visibility="Hidden">
             <!--New Client Region-->
             <Grid.Resources>
                 <Style TargetType="{x:Type Button}">
@@ -72,6 +72,11 @@
             <Button Name="CloseButton" Cursor="Hand" HorizontalAlignment="Left" Margin="678,10,0,0" 
                     VerticalAlignment="Top" ToolTip="Close the Window" Height="59" Width="112" BorderBrush="Black" Click="Button_Close" Opacity="100" FontFamily="Cambria" FontWeight="Bold" FontStyle="Italic" FontSize="30"
                     >
+                <Button Content="" HorizontalAlignment="Left" ToolTip="Close" Height="49" Margin="631,353,0,0" VerticalAlignment="Top" Width="120" Click="Button_Close" FontFamily="Cambria" FontWeight="Bold" Foreground="Red" FontSize="22" FontStyle="Normal" BorderThickness="3,3,3,3" SnapsToDevicePixels="True">
+                    <Button.Background>
+                        <ImageBrush ImageSource="/close.png"/>
+                    </Button.Background>
+                </Button>
                 <Button.Background>
                     <ImageBrush ImageSource="/exit.png"/>
                 </Button.Background>
