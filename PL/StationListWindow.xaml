@@ -5,13 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="StationListWindow" Height="450" Width="800">
+        Title="StationListWindow" Height="450" Width="800"
+        Closing="OnClosing">
+    <Window.Resources>
+        <Style TargetType="{x:Type Button}">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Cursor" Value="Hand"/>
+
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
     <Grid Background="#FFE6F6E5">
         <Grid.RowDefinitions>
             <RowDefinition Height="79*"/>
             <RowDefinition Height="355*"/>
         </Grid.RowDefinitions>
-        <ListView x:Name="StationListView" ItemsSource="{Binding}"  Margin="0,21,4,0" Visibility="Visible" MouseDoubleClick="StationListView_MouseDoubleClick" Grid.Row="1" FontSize="18" FontWeight="Bold" FontStyle="Italic">
+        <ListView x:Name="StationListView" Cursor="Hand" ItemsSource="{Binding}"  Margin="0,21,4,0" Visibility="Visible" MouseDoubleClick="StationListView_MouseDoubleClick" Grid.Row="1" FontSize="18" FontWeight="Bold" FontStyle="Italic">
             <ListView.Background>
                 <ImageBrush ImageSource="/stationBackground.png" Opacity="0.4"/>
             </ListView.Background>

@@ -33,7 +33,12 @@
                     Background="#FFF3ACA1" Margin="10,3,0,0" VerticalAlignment="Top" ToolTip="UPDATE" Height="52" Width="134" BorderBrush="Black" Click="ClickUpdate" Opacity="100" FontFamily="Cambria" FontSize="30" FontWeight="Bold" FontStyle="Italic">
 
             </Button>
-            <Label x:Name="Client_Label"   HorizontalAlignment="Left" Margin="-2,232,0,0" VerticalAlignment="Top" Height="346" Width="352" FontWeight="Bold" FontStyle="Italic" FontSize="25">
+            <Button Content="" HorizontalAlignment="Left" ToolTip="Close" Height="49" Margin="631,353,0,0" VerticalAlignment="Top" Width="120" Click="Button_Close" FontFamily="Cambria" FontWeight="Bold" Foreground="Red" FontSize="22" FontStyle="Normal" BorderThickness="3,3,3,3" SnapsToDevicePixels="True">
+                <Button.Background>
+                    <ImageBrush ImageSource="/close.png"/>
+                </Button.Background>
+            </Button>
+            <Label x:Name="Client_Label"   HorizontalAlignment="Left" Margin="10,180,0,0" VerticalAlignment="Top" Height="346" Width="315" FontWeight="Bold" FontStyle="Italic" FontSize="16">
                 <ListView x:Name="listViewParcels" ItemsSource="{Binding}" Visibility="Hidden" >
                     <ListView.View>
                         <GridView>
@@ -102,15 +107,16 @@
                     </LinearGradientBrush>
                 </Label.BorderBrush>
             </Label>
+
             <Label Content="Id" HorizontalAlignment="Left" Height="28" Margin="89,104,0,0" VerticalAlignment="Top" Width="102" FontFamily="Arial Black" FontWeight="Bold"/>
             <Label Content="Name" HorizontalAlignment="Left" Height="28" Margin="89,162,0,0" VerticalAlignment="Top" Width="120" FontFamily="Arial Black" FontWeight="Normal"/>
             <Label Content="Phone" HorizontalAlignment="Left" Height="28" Margin="89,228,0,0" VerticalAlignment="Top" Width="120" FontFamily="Arial Black"/>
             <Label Content="Latitude" HorizontalAlignment="Left" Height="28" Margin="89,294,0,0" VerticalAlignment="Top" Width="120" FontFamily="Arial Black"/>
             <Label Content="Longitude" HorizontalAlignment="Left" Height="28" Margin="89,357,0,0" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.512,2.912" FontFamily="Arial Black"/>
-            <TextBox x:Name="txt_id" HorizontalAlignment="Left" Height="28" Margin="225,104,0,0" Text="{Binding ID, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top" Width="124" BorderBrush="#FF1111D1" BorderThickness="2,2,2,2"/>
-            <TextBox x:Name="txt_name" HorizontalAlignment="Left" Height="28" Margin="224,162,0,0" Text="{Binding Name, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top" Width="125" BorderBrush="#FF1111D1" BorderThickness="2,2,2,2"/>
-            <TextBox x:Name="txt_phone" HorizontalAlignment="Left" Height="28" Margin="224,232,0,0" Text="{Binding Phone, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top" Width="125" BorderBrush="#FF1111D1" BorderThickness="2,2,2,2"/>
-            <TextBox x:Name="txt_lat" HorizontalAlignment="Left" Height="28" Margin="224,294,0,0" Text="{Binding Localisation.latitude, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top" Width="125" TextChanged="txt_lat_TextChanged" BorderBrush="#FF1111D1" BorderThickness="2,2,2,2"/>
+            <TextBox x:Name="txt_id" HorizontalAlignment="Left" KeyDown="id_enter" Height="28" Margin="225,104,0,0" Text="{Binding ID, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top" Width="124" BorderBrush="#FF1111D1" BorderThickness="2,2,2,2"/>
+            <TextBox x:Name="txt_name" KeyDown="name_enter" HorizontalAlignment="Left" Height="28" Margin="224,162,0,0" Text="{Binding Name, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top" Width="125" BorderBrush="#FF1111D1" BorderThickness="2,2,2,2"/>
+            <TextBox x:Name="txt_phone" HorizontalAlignment="Left" KeyDown="phone_enter" Height="28" Margin="224,232,0,0" Text="{Binding Phone, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top" Width="125" BorderBrush="#FF1111D1" BorderThickness="2,2,2,2"/>
+            <TextBox x:Name="txt_lat" HorizontalAlignment="Left" KeyDown="lat_enter" Height="28" Margin="224,294,0,0" Text="{Binding Localisation.latitude, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top" Width="125" TextChanged="txt_lat_TextChanged" BorderBrush="#FF1111D1" BorderThickness="2,2,2,2"/>
             <TextBox x:Name="txt_long" HorizontalAlignment="Left" Height="28" Margin="224,357,0,0" Text="{Binding Localisation.longitude, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top" Width="125" TextChanged="txt_long_TextChanged" BorderBrush="#FF1111D1" BorderThickness="2,2,2,2"/>
             <Button Content="" HorizontalAlignment="Left" Height="53" Margin="560,317,0,0" VerticalAlignment="Top" Width="178" Click="Add_button">
                 <Button.Background>
@@ -120,7 +126,11 @@
                         <ImageBrush ImageSource="/addbutton.png"/>
                     </Button.Background>-->
             </Button>
-
+            <Button Content="" HorizontalAlignment="Left" ToolTip="Close" Height="49" Margin="690,19,0,0" VerticalAlignment="Top" Width="100" Click="Button_Close" FontFamily="Cambria" FontWeight="Bold" Foreground="Red" FontSize="22" FontStyle="Normal" BorderThickness="3,3,3,3" SnapsToDevicePixels="True">
+                <Button.Background>
+                    <ImageBrush ImageSource="/cancelbutton.png"/>
+                </Button.Background>
+            </Button>
 
         </Grid>
 

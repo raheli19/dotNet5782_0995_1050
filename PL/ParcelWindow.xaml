@@ -55,7 +55,7 @@
             </ListView>
             <Label x:Name="details" Content="Parcel's Details:" HorizontalAlignment="Left" Margin="121,10,0,0" VerticalAlignment="Top" Width="225" Height="47" FontSize="28" FontWeight="Bold" FontStyle="Italic" Background="#FFDDDDDD" BorderBrush="#FF020203" BorderThickness="1,1,1,1"/>
         </Grid>
-        <Grid x:Name="AddGrid" Visibility="Hidden">
+        <Grid x:Name="AddGrid" Visibility="Visible">
             <Grid.Background>
                 <ImageBrush ImageSource="/parcelBackgound.png" Opacity="0.7"/>
             </Grid.Background>
@@ -77,6 +77,9 @@
                     <ImageBrush ImageSource="/close.png"/>
                 </Button.Background>
             </Button>
+            <!--<Button Content="remove" HorizontalAlignment="Left" Height="73" Margin="495,144,0,0" VerticalAlignment="Top" Width="123" Click="Remove_Button"/>-->
+            <TextBox  HorizontalAlignment="Left" KeyDown="enter_tap" Height="34" Margin="556,62,0,0" Text="{Binding ID, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top" Width="172"/>
+            <Label Content="Pease enter the id of the Parcel you&#xD;&#xA;   want to delete and press enter" HorizontalAlignment="Left" Height="49" Margin="543,14,0,0" VerticalAlignment="Top" Width="199"/>
 
         </Grid>
     </Grid>

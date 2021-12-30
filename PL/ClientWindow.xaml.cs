@@ -217,5 +217,44 @@ namespace PL
             ParcelDescription myParcelDescription = bl.displayParcelList().First(x => x.Id == myParcelToClient.ID);
            new ParcelWindow(myParcelDescription, bl, listViewParcels).Show();
         }
+
+        #region enterFunctions
+        private void id_enter(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                
+                txt_name.Focus();
+            }
+
+        }
+
+        private void name_enter(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Enter)
+            {
+                
+                txt_phone.Focus();
+            }
+        }
+        #endregion
+
+        private void phone_enter(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                
+                txt_lat.Focus();
+            }
+        }
+
+        private void lat_enter(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+
+                txt_long.Focus();
+            }
+        }
     }
 }

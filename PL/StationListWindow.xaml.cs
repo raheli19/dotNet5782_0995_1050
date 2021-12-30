@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,6 +25,7 @@ namespace PL
         private BLApi.IBL bl;
         IEnumerable<StationDescription> stationListFromBo = new List<StationDescription>();
         public ObservableCollection<BO.StationDescription> boStationList = new ObservableCollection<BO.StationDescription>();
+        private bool checkFlag = false;
 
 
         public StationListWindow(BLApi.IBL bl)
@@ -43,7 +45,7 @@ namespace PL
 
             //this.comboStatusSelector.ItemsSource = Enum.GetValues(typeof(BO.DroneStatuses));
             //this.comboWeightSelector.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
-            
+
 
 
         }
@@ -66,11 +68,11 @@ namespace PL
             //comboStatusSelector.SelectedItem = null;
             //comboWeightSelector.SelectedItem = null;
         }
-        
+
 
         private void containsFreeChargeSlots_Click(object sender, RoutedEventArgs e)
         {
-              this.StationListView.ItemsSource = boStationList.Where(x => x.freeChargeSlots>0);
+            this.StationListView.ItemsSource = boStationList.Where(x => x.freeChargeSlots > 0);
         }
 
         private void numFCS_TextChanged(object sender, TextChangedEventArgs e)
@@ -96,10 +98,10 @@ namespace PL
 
         private void button_addStation(object sender, RoutedEventArgs e)
         {
-                StationWindow subWindow = new StationWindow(bl, StationListView);
-                subWindow.ShowDialog();
-                subWindow.Hide();
-                
+            StationWindow subWindow = new StationWindow(bl, StationListView);
+            subWindow.ShowDialog();
+            subWindow.Hide();
+
 
         }
 
@@ -155,5 +157,34 @@ namespace PL
             GotOrNotAvailableChargeSlots.Visibility = Visibility.Hidden;
             StationListView.Visibility = Visibility.Visible;
         }
+
+        #region Close_Click
+        /// <summary>
+        /// This button closes the window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+
+        private void OnClosing(object sender, CancelEventArgs e)
+        {
+
+            if (this.checkFlag)// call from the button
+                e.Cancel = false;
+            else
+                e.Cancel = true;// call from the "X", we don't want to close
+
+        }
+        private void ClickCloseDroneWindow(object sender, RoutedEventArgs e)
+        {
+            this.checkFlag = true; // will allow us to close the window from the button and not from the "X"
+
+            this.Close();
+            //    MessageBox.Show("Your drone is fully charged. We are going to unplug it", "Success!");
+        }
+
+
+
+        #endregion
+
     }
 }

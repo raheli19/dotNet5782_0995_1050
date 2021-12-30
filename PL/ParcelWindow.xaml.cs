@@ -64,7 +64,7 @@ namespace PL
                 MessageBox.Show("Please make a selection", "WARNING", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
-            if ( Combo_SenderId.SelectedItem.Equals( Combo_TargetId.SelectedItem))
+            if (Combo_SenderId.SelectedItem.Equals(Combo_TargetId.SelectedItem))
             {
                 MessageBox.Show("A client can't send a parcel to himself! ", "Aie aie aie...", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
@@ -78,13 +78,13 @@ namespace PL
                 MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            MessageBox.Show( "Added the parcel", "Success!", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show("Added the parcel", "Success!", MessageBoxButton.OK, MessageBoxImage.Information);
             ListViewParcel.ItemsSource = bl.displayParcelList();
             this.Combo_SenderId.ItemsSource = bl.AllSenders_Id();
             this.Combo_TargetId.ItemsSource = bl.AllTargets_Id();
 
-        } 
-        
+        }
+
         #region comboboxSelections
         private void Combo_SenderId_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -112,7 +112,7 @@ namespace PL
         #endregion
 
         #endregion
-    
+
 
 
         #region UPDATE
@@ -172,21 +172,21 @@ namespace PL
 
         private void Remove_Button(object sender, RoutedEventArgs e)
         {
-            if (Combo_SenderId.SelectedItem == null || Combo_TargetId.SelectedItem == null)
-            {
-                MessageBox.Show("Please make a selection", "WARNING", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-            if (Combo_SenderId.SelectedItem.Equals(Combo_TargetId.SelectedItem))
-            {
-                MessageBox.Show("A client didn't sent a parcel to himself! ", "Aie aie aie...", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
+            //if (Combo_SenderId.SelectedItem == null || Combo_TargetId.SelectedItem == null)
+            //{
+            //    MessageBox.Show("Please make a selection", "WARNING", MessageBoxButton.OK, MessageBoxImage.Warning);
+            //    return;
+            //}
+            //if (Combo_SenderId.SelectedItem.Equals(Combo_TargetId.SelectedItem))
+            //{
+            //    MessageBox.Show("A client didn't sent a parcel to himself! ", "Aie aie aie...", MessageBoxButton.OK, MessageBoxImage.Warning);
+            //    return;
+            //}
             //dataCparcel.ID = bl.displayParcelList().Where(x => x.SenderName == bl.displayClient((int)Combo_SenderId.SelectedItem).Name && x.TargetName == bl.displayClient((int)Combo_TargetId.SelectedItem).Name);
-            dataCparcel.ID = bl.GetIdParcel((int)Combo_SenderId.SelectedItem, (int)Combo_TargetId.SelectedItem);
+            //dataCparcel.ID = bl.GetIdParcel((int)Combo_SenderId.SelectedItem, (int)Combo_TargetId.SelectedItem);
             try
             {
-                
+
                 bl.RemoveParcel(dataCparcel);
             }
             catch (Exception ex)
@@ -219,11 +219,42 @@ namespace PL
             new ClientWindow(clientActions, bl, ClientslistView).Show();
         }
 
-        private void displayDrone_Click(object sender, RoutedEventArgs e)
-        {
-            //DroneDescription droneDes = new();
-            //droneDes=bl.displayDroneList().First(x=>x.Id==dataCparcelUpdate.D)
+        //private void Remove_Button(object sender, MouseButtonEventArgs e)
+        //{
+        //    dataCparcel.ID = bl.GetIdParcel((int)Combo_SenderId.SelectedItem, (int)Combo_TargetId.SelectedItem);
+        //    try
+        //    {
 
+        //        bl.RemoveParcel(dataCparcel);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+        //        return;
+        //    }
+        //    MessageBox.Show("Success!", "The Parcel is removed", MessageBoxButton.OK, MessageBoxImage.Information);
+        //    //this.Combo_SenderId.SelectedItem = null;
+        //    //this.Combo_TargetId.SelectedItem = null;
+        //    this.Combo_SenderId.ItemsSource = bl.AllSenders_Id();
+        //    this.Combo_TargetId.ItemsSource = bl.AllTargets_Id();
+        //    ListViewParcel.ItemsSource = bl.displayParcelList();
+        //}
+
+        private void enter_tap(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                try
+                { this.Remove_Button(sender, e); }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+
+                }
+            }
         }
+
+
     }
 }

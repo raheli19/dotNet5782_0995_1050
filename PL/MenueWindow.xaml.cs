@@ -29,12 +29,19 @@ namespace PL
 
         private void OpenClientWindow(object sender, RoutedEventArgs e) 
         {
+            openClientWindow.Cursor = Cursors.AppStarting;
             new SignUpSignIn(bl).Show();
+            openClientWindow.Cursor = Cursors.Arrow;
+
         }
 
         private void OpenWorkerWindow(object sender, RoutedEventArgs e)
-        { 
-          new MainWindow(bl).Show();
+        {
+            openClientWindow.Cursor = Cursors.AppStarting;
+
+            new MainWindow(bl).Show();
+            openClientWindow.Cursor = Cursors.Arrow;
+
         }
     }
 }

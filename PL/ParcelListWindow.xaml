@@ -50,7 +50,7 @@
         <ComboBox x:Name="Combo_weight" HorizontalAlignment="Left" Height="32" Margin="15,56,0,0" VerticalAlignment="Top" Width="166" SelectionChanged="Combo_weight_SelectionChanged"/>
         <Button x:Name="ClearPriority"  Content="CLEAR" HorizontalAlignment="Left" Margin="14,0,0,57" Click="ClearPriority_Click" ToolTip="ClearPriority" Width="128" FontSize="18" FontWeight="Bold" FontStyle="Normal" Background="#FFD2E6F6" Height="27" VerticalAlignment="Bottom" Grid.Column="1"/>
         <Button x:Name="ClearWeight" Content="CLEAR" HorizontalAlignment="Left" Margin="15,56,0,0" VerticalAlignment="Top" Click="ClearWeight_Click" Height="27" Width="126" FontSize="18" FontWeight="Bold" Background="#FFCBEBF7" Grid.Column="1"/>
-        <ListView x:Name="ParcelsListView" Cursor="Hand" ItemsSource="{Binding}"  Margin="0,91,0,0" Visibility="Visible" MouseDoubleClick="ParcelView_MouseDoubleClick" Grid.RowSpan="2" FontSize="14" FontWeight="Bold" FontStyle="Italic" Foreground="#FF151CA0" Grid.ColumnSpan="5">
+        <ListView x:Name="ParcelsListView" Cursor="Hand" ItemsSource="{Binding}" Visibility="Visible" MouseDoubleClick="ParcelView_MouseDoubleClick" Grid.RowSpan="2" FontSize="14" FontWeight="Bold" FontStyle="Italic" Foreground="#FF151CA0" Grid.ColumnSpan="5" Height="343" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="800">
             <ListView.Background>
                 <ImageBrush ImageSource="/colisBackground.png" Opacity="0.5"/>
             </ListView.Background>
