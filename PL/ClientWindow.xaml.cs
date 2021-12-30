@@ -65,6 +65,7 @@ namespace PL
             UpdatePhoneTextBox.Visibility = Visibility.Visible;
             UpdateLabel.Visibility = Visibility.Visible;
             CheckUpdate.Visibility = Visibility.Visible;
+            //CheckUpdate2.Visibility = Visibility.Visible;
             UpdateLabel.Content = "Enter the new name and/or new phone number";
 
         }

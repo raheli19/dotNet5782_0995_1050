@@ -21,18 +21,24 @@
 
     <Grid x:Name="MainGrid">
         <Grid x:Name="UpgradeGrid" Visibility="Visible">
-            <Button x:Name="UpdateButton" Content="UPDATE" HorizontalAlignment="Left" 
+            <Grid.Background>
+                <ImageBrush ImageSource="/parcelUpdate.png" Opacity="0.6"/>
+            </Grid.Background>
+            <Button x:Name="UpdateButton" Content="Update" HorizontalAlignment="Left" 
                    
-                    Background="Transparent" Margin="634,89,0,0" VerticalAlignment="Top" ToolTip="UPDATE" Height="51" Width="133" BorderBrush="Black" Click="ClickUpdate" Opacity="100" FontFamily="Cambria" FontSize="30" FontWeight="Bold" FontStyle="Italic">
+                    Background="#FFDDDDDD" Margin="572,59,0,0" VerticalAlignment="Top" ToolTip="UPDATE" Height="41" Width="133" BorderBrush="Black" Click="ClickUpdate" Opacity="100" FontFamily="Cambria" FontSize="30" FontWeight="Bold" FontStyle="Italic">
             </Button>
             <!--CloseButton-->
-            <Button Name="CloseButton" Content="CLOSE" HorizontalAlignment="Left" Background="Transparent" Margin="472,10,0,0" VerticalAlignment="Top" ToolTip="Close the Window" Height="59" Width="130" BorderBrush="Black" Click="ClickCloseParcelWindow" Opacity="100" FontFamily="Cambria" FontWeight="Bold" FontStyle="Italic" FontSize="30">
+            <Button Name="CloseButton" Content="" HorizontalAlignment="Left" Margin="596,345,0,0" VerticalAlignment="Top" ToolTip="Close the Window" Height="50" Width="130" BorderBrush="Black" Click="ClickCloseParcelWindow" Opacity="100" FontFamily="Cambria" FontWeight="Bold" FontStyle="Italic" FontSize="30">
+                <Button.Background>
+                    <ImageBrush ImageSource="/close.png"/>
+                </Button.Background>
 
             </Button>
-            <Label x:Name="parcelDetails" Content="Label" HorizontalAlignment="Left" Margin="34,0,0,0" VerticalAlignment="Center" Height="355" Width="421"/>
-            <Button x:Name="displaySender" Content="Display Sender" HorizontalAlignment="Left" Margin="490,0,0,0" VerticalAlignment="Center" FontSize="30" FontWeight="Bold" FontStyle="Italic" Width="237" Height="46" FontFamily="Cambria" Click="displaySender_Click"/>
-            <Button x:Name="displayParcel" Content="Display My Parcel" HorizontalAlignment="Left" Margin="490,260,0,0" VerticalAlignment="Top" FontFamily="Cambria" FontSize="30" FontWeight="Bold" FontStyle="Italic" Height="45"/>
-            <Button x:Name="displayTarget" Content="Display Target" HorizontalAlignment="Left" Margin="497,324,0,0" VerticalAlignment="Top" Width="230" Height="40" FontSize="30" FontFamily="Cambria" FontWeight="Bold" FontStyle="Italic" Click="displayTarget_Click"/>
+            <Label x:Name="parcelDetails" Content="" HorizontalAlignment="Left" Margin="37,62,0,0" VerticalAlignment="Top" Height="355" Width="421" FontSize="14" FontWeight="Bold" FontStyle="Italic"/>
+            <Button x:Name="displaySender" Content="Display Sender" HorizontalAlignment="Left" Margin="526,130,0,0" VerticalAlignment="Top" FontSize="30" FontWeight="Bold" FontStyle="Italic" Width="225" Height="46" FontFamily="Cambria" Click="displaySender_Click"/>
+            <Button x:Name="displayDrone" Content="Display Drone" HorizontalAlignment="Left" Margin="536,284,0,0" VerticalAlignment="Top" FontFamily="Cambria" FontSize="30" FontWeight="Bold" FontStyle="Italic" Height="43" Click="displayDrone_Click" Width="218"/>
+            <Button x:Name="displayTarget" Content="Display Target" HorizontalAlignment="Left" Margin="524,207,0,0" VerticalAlignment="Top" Width="230" Height="40" FontSize="30" FontFamily="Cambria" FontWeight="Bold" FontStyle="Italic" Click="displayTarget_Click"/>
             <ListView x:Name="ClientslistView" ItemsSource="{Binding}" Visibility="Hidden">
                 <ListView.View>
                     <GridView>
@@ -40,6 +46,14 @@
                     </GridView>
                 </ListView.View>
             </ListView>
+            <ListView x:Name="DronesListView" Visibility="Hidden">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <Label x:Name="details" Content="Parcel's Details:" HorizontalAlignment="Left" Margin="121,10,0,0" VerticalAlignment="Top" Width="225" Height="47" FontSize="28" FontWeight="Bold" FontStyle="Italic" Background="#FFDDDDDD" BorderBrush="#FF020203" BorderThickness="1,1,1,1"/>
         </Grid>
         <Grid x:Name="AddGrid" Visibility="Hidden">
             <Grid.Background>

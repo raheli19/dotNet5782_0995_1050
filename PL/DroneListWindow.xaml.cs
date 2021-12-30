@@ -30,8 +30,7 @@ namespace PL
         private BLApi.IBL bl;
         DroneStatuses status = new DroneStatuses();
         WeightCategories weight = new WeightCategories();
-        IEnumerable<DroneDescription> droneListFromBo = new List<DroneDescription>();
-
+        
         private ObservableCollection<BO.DroneDescription> boDroneList = new ObservableCollection<BO.DroneDescription>();
 
         public DroneListWindow()
@@ -86,9 +85,9 @@ namespace PL
             droneStat = status;
             statusFlag = true;
             if (weightFlag)
-                this.DronesListView.ItemsSource = droneListFromBo.Where(x => x.Status == status && x.weight == weightStat);
+                this.DronesListView.ItemsSource = bl.displayDroneList().Where(x => x.Status == status && x.weight == weightStat);
             else
-                this.DronesListView.ItemsSource = droneListFromBo.Where(x => x.Status == status);
+                this.DronesListView.ItemsSource = bl.displayDroneList().Where(x => x.Status == status);
         }
 
         #endregion
@@ -112,22 +111,22 @@ namespace PL
             weightStat = weight;
             weightFlag = true;
             if (statusFlag)
-                this.DronesListView.ItemsSource = droneListFromBo.Where(x => x.weight == weight && x.Status == droneStat);
+                this.DronesListView.ItemsSource = bl.displayDroneList().Where(x => x.weight == weight && x.Status == droneStat);
             else
-                this.DronesListView.ItemsSource = droneListFromBo.Where(x => x.weight == weight);
+                this.DronesListView.ItemsSource = bl.displayDroneList().Where(x => x.weight == weight);
 
         }
 
         public void CheckFields()
         {
             if (weightFlag && statusFlag)
-                this.DronesListView.ItemsSource = droneListFromBo.Where(x => x.Status == status && x.weight == weightStat);
+                this.DronesListView.ItemsSource = bl.displayDroneList().Where(x => x.Status == status && x.weight == weightStat);
             else if (statusFlag)
-                this.DronesListView.ItemsSource = droneListFromBo.Where(x => x.Status == status);
+                this.DronesListView.ItemsSource = bl.displayDroneList().Where(x => x.Status == status);
             else if (weightFlag)
-                this.DronesListView.ItemsSource = droneListFromBo.Where(x => x.weight == weight && x.Status == droneStat);
+                this.DronesListView.ItemsSource = bl.displayDroneList().Where(x => x.weight == weight && x.Status == droneStat);
             else
-                this.DronesListView.ItemsSource = droneListFromBo;
+                this.DronesListView.ItemsSource = bl.displayDroneList();
         }
         #endregion
 
@@ -147,7 +146,7 @@ namespace PL
 
         private void DroneListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            new DroneWindow(DronesListView.SelectedItem, bl, DronesListView).Show();
+            new DroneWindow(DronesListView.SelectedItem, bl, DronesListView,default,default).Show();
             comboStatusSelector.SelectedItem = null;
             comboWeightSelector.SelectedItem = null;
         }
@@ -155,14 +154,14 @@ namespace PL
 
         private void FilterByWeight_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            new DroneWindow(FilterByWeight.SelectedItem, bl, DronesListView).Show();
+            new DroneWindow(FilterByWeight.SelectedItem, bl, DronesListView,FilterByWeight,default).Show();
             comboStatusSelector.SelectedItem = null;
             comboWeightSelector.SelectedItem = null;
         }
 
         private void FilterByStatus_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            new DroneWindow(FilterByWeight.SelectedItem, bl, DronesListView).Show();
+            new DroneWindow(FilterByStatus.SelectedItem, bl,DronesListView,default, FilterByStatus).Show();
             comboStatusSelector.SelectedItem = null;
             comboWeightSelector.SelectedItem = null;
         }
@@ -188,7 +187,7 @@ namespace PL
             comboStatusSelector.SelectedItem = null;
             weightFlag = false;
             weightStat = 0;
-            DronesListView.ItemsSource = droneListFromBo;
+            DronesListView.ItemsSource = bl.displayDroneList();
 
         }
 
@@ -197,7 +196,7 @@ namespace PL
             comboWeightSelector.SelectedItem = null;
             droneStat = 0;
             statusFlag = false;
-            DronesListView.ItemsSource = droneListFromBo;
+            DronesListView.ItemsSource = bl.displayDroneList();
 
         }
 
@@ -246,6 +245,7 @@ namespace PL
         {
             FilterByWeight.Visibility = Visibility.Hidden;
             FilterByStatus.Visibility = Visibility.Hidden;
+            DronesListView.ItemsSource = bl.displayDroneList();
             DronesListView.Visibility = Visibility.Visible;
         }
     }

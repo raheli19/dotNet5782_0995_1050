@@ -134,7 +134,7 @@ namespace Dal
                     TargetId = ClientList[rand.Next(0, 10)].ID,
                     Weight = (WeightCategories)rand.Next(3),
                     Priority = (Priorities)rand.Next(3),
-                    Requested = null,
+                    Requested = DateTime.Now,
                 });
             }
         }

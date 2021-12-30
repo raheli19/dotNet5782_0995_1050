@@ -32,6 +32,7 @@ namespace PL
         IEnumerable<DroneCharging> droneListFromBo = new List<DroneCharging>();
         public ObservableCollection<BO.DroneCharging> boDronesCharging = new ObservableCollection<BO.DroneCharging>();
         ListView ListViewStation;
+        private ObservableCollection<BO.DroneDescription> boDroneList = new ObservableCollection<BO.DroneDescription>();
 
         // -------------------------------------------------------ADD------------------------------------------------------------------------------
         // ctor to add a station
@@ -122,6 +123,14 @@ namespace PL
             {
                 boDronesCharging.Add(item);
             }
+            DronesListView.DataContext = boDroneList;
+            DataContext = boDroneList;
+            foreach (var item in bl.displayDroneList())
+            {
+                boDroneList.Add(item);
+
+
+            }
             //boDronesCharging= (ObservableCollection<DroneCharging>)bl.displayDroneChargingList(stationDescription.Id);
 
         }
@@ -129,9 +138,10 @@ namespace PL
 
         private void DronesChargingListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+
             DroneCharging DCh = (DroneCharging)DronesChargingListView.SelectedItem;
             DroneDescription DC = bl.displayDroneList().First(x => x.Id == DCh.ID);
-            new DroneWindow(DC, bl, DronesChargingListView).Show();
+            new DroneWindow(DC, bl, DronesListView,default,default).Show();
             //comboStatusSelector.SelectedItem = null;
             //comboWeightSelector.SelectedItem = null;
         }
@@ -153,8 +163,8 @@ namespace PL
         }
         private void Check_Click_Update(object sender, RoutedEventArgs e)
         {
-            if (dataCstationUpdate.name != "")
-                newName = dataCstationUpdate.name;
+            if (UpdateNameTextBox.Text != "")
+                newName = UpdateNameTextBox.Text;
             else
                 newName = "n";
            

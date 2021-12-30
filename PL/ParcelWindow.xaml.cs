@@ -30,6 +30,7 @@ namespace PL
         ListView ListViewParcel;
         private bool checkFlag = false;
         private ObservableCollection<BO.ClientActions> boClientList = new ObservableCollection<BO.ClientActions>();
+        private ObservableCollection<BO.DroneDescription> boDroneList = new ObservableCollection<BO.DroneDescription>();
 
         #region ADDPARCEL
         public ParcelWindow(BLApi.IBL bl, object ParcelListWindow)
@@ -133,6 +134,14 @@ namespace PL
                 boClientList.Add(item);
 
             }
+            DronesListView.DataContext = boDroneList;
+            DataContext = boDroneList;
+            foreach (var item in bl.displayDroneList())
+            {
+                boDroneList.Add(item);
+
+
+            }
         }
 
         private void ClickUpdate(object sender, RoutedEventArgs e)
@@ -208,6 +217,13 @@ namespace PL
             clientActions = bl.displayClientList().First(x => x.name == dataCparcelUpdate.TargetName);
 
             new ClientWindow(clientActions, bl, ClientslistView).Show();
+        }
+
+        private void displayDrone_Click(object sender, RoutedEventArgs e)
+        {
+            //DroneDescription droneDes = new();
+            //droneDes=bl.displayDroneList().First(x=>x.Id==dataCparcelUpdate.D)
+
         }
     }
 }

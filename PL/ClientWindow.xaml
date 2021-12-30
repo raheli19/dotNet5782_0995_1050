@@ -20,17 +20,20 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Grid x:Name="UpgradeClientGrid" Visibility="Hidden">
+        <Grid x:Name="UpgradeClientGrid" Visibility="Visible" Margin="-3,0,3,0">
+            <Grid.Background>
+                <ImageBrush ImageSource="/clientUpdate.png" Opacity="0.7"/>
+            </Grid.Background>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="193*"/>
                 <ColumnDefinition Width="7*"/>
             </Grid.ColumnDefinitions>
             <Button x:Name="UpdateButton" Content="UPDATE" HorizontalAlignment="Left" Cursor="Cross"
                    
-                    Background="Transparent" Margin="24,18,0,0" VerticalAlignment="Top" ToolTip="UPDATE" Height="52" Width="134" BorderBrush="Black" Click="ClickUpdate" Opacity="100" FontFamily="Cambria" FontSize="30" FontWeight="Bold" FontStyle="Italic">
+                    Background="#FFF3ACA1" Margin="10,3,0,0" VerticalAlignment="Top" ToolTip="UPDATE" Height="52" Width="134" BorderBrush="Black" Click="ClickUpdate" Opacity="100" FontFamily="Cambria" FontSize="30" FontWeight="Bold" FontStyle="Italic">
 
             </Button>
-            <Label x:Name="Client_Label"   HorizontalAlignment="Left" Margin="10,180,0,0" VerticalAlignment="Top" Height="346" Width="315" FontWeight="Bold" FontStyle="Italic" FontSize="16">
+            <Label x:Name="Client_Label"   HorizontalAlignment="Left" Margin="-2,232,0,0" VerticalAlignment="Top" Height="346" Width="352" FontWeight="Bold" FontStyle="Italic" FontSize="25">
                 <ListView x:Name="listViewParcels" ItemsSource="{Binding}" Visibility="Hidden" >
                     <ListView.View>
                         <GridView>
@@ -39,13 +42,18 @@
                     </ListView.View>
                 </ListView>
             </Label>
-            <Label x:Name="Client_Details" Content="Client's details:" HorizontalAlignment="Left" Margin="49,127,0,0" VerticalAlignment="Top" Width="195" FontSize="24" FontWeight="Bold" FontStyle="Italic" BorderThickness="3,3,3,3" Visibility="Visible"/>
+            <Label x:Name="Client_Details" Content="Client's details:" HorizontalAlignment="Left" Margin="62,165,0,0" VerticalAlignment="Top" Width="224" FontSize="24" FontWeight="Bold" FontStyle="Italic" BorderThickness="3,3,3,3" Visibility="Visible" BorderBrush="Black" Height="57" HorizontalContentAlignment="Center"/>
 
-            <TextBox x:Name="UpdateNameTextBox" Visibility="Hidden" Text="{Binding Name, Mode=TwoWay}" HorizontalAlignment="Left" Height="28" Margin="283,137,0,0"  Background="White" TextWrapping="Wrap" VerticalAlignment="Top" Width="147"/>
-            <TextBox x:Name="UpdatePhoneTextBox" Visibility="Hidden" Text="{Binding Phone, Mode=TwoWay}" HorizontalAlignment="Left" Height="28" Margin="283,166,0,0"  Background="White" TextWrapping="Wrap" VerticalAlignment="Top" Width="147"/>
+            <TextBox x:Name="UpdateNameTextBox" Visibility="Hidden" Text="{Binding Name, Mode=TwoWay}" HorizontalAlignment="Left" Height="28" Margin="20,108,0,0"  Background="White" TextWrapping="Wrap" VerticalAlignment="Top" Width="148"/>
+            <TextBox x:Name="UpdatePhoneTextBox" Visibility="Hidden" Text="{Binding Phone, Mode=TwoWay}" HorizontalAlignment="Left" Height="28" Margin="195,108,0,0"  Background="White" TextWrapping="Wrap" VerticalAlignment="Top" Width="147"/>
 
-            <Label x:Name="UpdateLabel"  HorizontalAlignment="Left" Margin="206,99,0,0" VerticalAlignment="Top" Height="38" Width="302" FontSize="16" FontWeight="Bold" FontStyle="Italic" BorderThickness="1,1,1,1" BorderBrush="Black" Foreground="#FF530C0C" Visibility="Hidden"/>
-            <Button x:Name="CheckUpdate" HorizontalAlignment="Left" Height="28" Margin="396,194,0,0" VerticalAlignment="Top"  Width="34" Visibility="Hidden" Click="Check_Click_Update">
+            <Label x:Name="UpdateLabel"  HorizontalAlignment="Left" Margin="23,60,0,0" VerticalAlignment="Top" Height="38" Width="302" FontSize="16" FontWeight="Bold" FontStyle="Italic" BorderThickness="1,1,1,1" BorderBrush="Black" Foreground="#FF530C0C" Visibility="Hidden"/>
+            <Button x:Name="CheckUpdate" HorizontalAlignment="Left" Height="28" Margin="308,108,0,0" VerticalAlignment="Top"  Width="34" Visibility="Hidden" Click="Check_Click_Update">
+                <Button.Background>
+                    <ImageBrush ImageSource="/checked.png"/>
+                </Button.Background>
+            </Button>
+            <Button x:Name="CheckUpdate2" HorizontalAlignment="Left" Height="28" Margin="134,108,0,0" VerticalAlignment="Top"  Width="34" Visibility="Hidden" Click="Check_Click_Update">
                 <Button.Background>
                     <ImageBrush ImageSource="/checked.png"/>
                 </Button.Background>
@@ -53,17 +61,17 @@
             <!--<ListView x:Name="ParcelFromClient" ItemsSource="{Binding}" MouseDoubleClick="">    </ListView>-->
 
 
-            <Button Name="CloseButton" Content="CLOSE" Cursor="Hand" HorizontalAlignment="Left" Background="Transparent" Margin="180,59,0,0" 
-                    VerticalAlignment="Top" ToolTip="Close the Window" Height="59" Width="130" BorderBrush="Black" Click="Button_Close" Opacity="100" FontFamily="Cambria" FontWeight="Bold" FontStyle="Italic" FontSize="30"
+            <Button Name="CloseButton" Content="CLOSE" Cursor="Hand" HorizontalAlignment="Left" Background="#FFDA9090" Margin="195,4,0,0" 
+                    VerticalAlignment="Top" ToolTip="Close the Window" Height="51" Width="130" BorderBrush="Black" Click="Button_Close" Opacity="100" FontFamily="Cambria" FontWeight="Bold" FontStyle="Italic" FontSize="30"
                     ></Button>
-            <ListView x:Name="ParcelsFromClient" HorizontalAlignment="Left" Height="192" Margin="357,232,0,0" VerticalAlignment="Top" Width="429" MouseDoubleClick="ParcelsFromClient_MouseDoubleClick" Grid.ColumnSpan="2">
+            <ListView x:Name="ParcelsFromClient" HorizontalAlignment="Left" Height="192" Margin="357,232,0,0" VerticalAlignment="Top" Width="429" MouseDoubleClick="ParcelsFromClient_MouseDoubleClick" Grid.ColumnSpan="2" FontSize="14" FontStyle="Italic" FontWeight="Bold">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn/>
                     </GridView>
                 </ListView.View>
             </ListView>
-            <ListView x:Name="ParcelsToClient" MouseDoubleClick="ParcelsToClient_MouseDoubleClick" Margin="356,35,10,226" Grid.ColumnSpan="2">
+            <ListView x:Name="ParcelsToClient" MouseDoubleClick="ParcelsToClient_MouseDoubleClick" Margin="356,35,10,226" Grid.ColumnSpan="2" FontSize="14" FontStyle="Italic" FontWeight="Bold">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn/>
@@ -72,10 +80,10 @@
             </ListView>
             <Label x:Name="ParcelsToClientLabel" Content="Parcels To Client:" HorizontalAlignment="Left" Margin="460,0,0,0" VerticalAlignment="Top" Width="184" FontWeight="Bold" FontSize="20" FontStyle="Italic"/>
             <Label x:Name="ParcelsFromClientLabel" Content="Parcels From Client:" HorizontalAlignment="Left" Margin="460,0,0,0" VerticalAlignment="Center" Width="207" FontSize="20" FontWeight="Bold" FontStyle="Italic"/>
-            
+
 
         </Grid>
-        <Grid x:Name="AddGridClient" Visibility="Visible">
+        <Grid x:Name="AddGridClient" Visibility="Hidden">
             <Grid.Background>
                 <ImageBrush ImageSource="/fondessai.png"/>
             </Grid.Background>

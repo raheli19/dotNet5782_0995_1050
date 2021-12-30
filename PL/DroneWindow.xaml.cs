@@ -32,6 +32,8 @@ namespace PL
         //private DroneDescription droneDescription = new DroneDescription();
         //DroneListWindow dlw;
         ListView ListViewDrone;
+        ListView FilterByWeight;
+        ListView FilterByStatus;
 
         #region AddDrone
         // ctor to add a drone
@@ -133,7 +135,7 @@ namespace PL
 
         #region constructorUPGRADE
         //ctor to upgrade the drone
-        public DroneWindow(object selectedItem, BLApi.IBL bl, object dronesListView)
+        public DroneWindow(object selectedItem, BLApi.IBL bl, object dronesListView, object filterByWeight,object filterByStatus)
         {
             InitializeComponent();
             this.bl = bl;
@@ -178,6 +180,9 @@ namespace PL
             }
 
             ListViewDrone = (ListView)dronesListView;
+            FilterByWeight = (ListView)filterByWeight;
+            FilterByStatus = (ListView)filterByStatus;
+            
 
         }
 
@@ -230,7 +235,12 @@ namespace PL
                 MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
+            if(ListViewDrone!=default)
             ListViewDrone.ItemsSource = bl.displayDroneList();
+            if(FilterByWeight!=default)
+            FilterByWeight.ItemsSource = bl.displayDroneList();
+            if (FilterByStatus!=default)
+            FilterByStatus.ItemsSource = bl.displayDroneList();
             Drone_Label.Content = bl.displayDrone(dataCdroneUpdate.Id);
             UpdateTextBox.Visibility = Visibility.Hidden;
             UpdateLabel.Visibility = Visibility.Hidden;
@@ -267,7 +277,12 @@ namespace PL
                     MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
-                ListViewDrone.ItemsSource = bl.displayDroneList();
+                if (ListViewDrone != default)
+                    ListViewDrone.ItemsSource = bl.displayDroneList();
+                if (FilterByWeight != default)
+                    FilterByWeight.ItemsSource = bl.displayDroneList();
+                if (FilterByStatus != default)
+                    FilterByStatus.ItemsSource = bl.displayDroneList();
                 Drone_Label.Content = bl.displayDrone(dataCdroneUpdate.Id);
 
 
@@ -299,7 +314,12 @@ namespace PL
                     MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
-                ListViewDrone.ItemsSource = bl.displayDroneList();
+                if (ListViewDrone != default)
+                    ListViewDrone.ItemsSource = bl.displayDroneList();
+                if (FilterByWeight != default)
+                    FilterByWeight.ItemsSource = bl.displayDroneList();
+                if (FilterByStatus != default)
+                    FilterByStatus.ItemsSource = bl.displayDroneList();
                 Drone_Label.Content = bl.displayDrone(dataCdroneUpdate.Id);
             }
         }
@@ -323,8 +343,14 @@ namespace PL
                 MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            ListViewDrone.ItemsSource = bl.displayDroneList();
+            
             Drone_Label.Content = bl.displayDrone(dataCdroneUpdate.Id);
+            if (ListViewDrone != default)
+                ListViewDrone.ItemsSource = bl.displayDroneList();
+            if (FilterByWeight != default)
+                FilterByWeight.ItemsSource = bl.displayDroneList();
+            if (FilterByStatus != default)
+                FilterByStatus.ItemsSource = bl.displayDroneList();
             UpdateTextBox.Visibility = Visibility.Hidden;
             UpdateLabel.Visibility = Visibility.Hidden;
             CheckFullyCharged.Visibility = Visibility.Hidden;
@@ -354,7 +380,12 @@ namespace PL
                     MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
-                ListViewDrone.ItemsSource = bl.displayDroneList();
+                if (ListViewDrone != default)
+                    ListViewDrone.ItemsSource = bl.displayDroneList();
+                if (FilterByWeight != default)
+                    FilterByWeight.ItemsSource = bl.displayDroneList();
+                if (FilterByStatus != default)
+                    FilterByStatus.ItemsSource = bl.displayDroneList();
                 Drone_Label.Content = bl.displayDrone(dataCdroneUpdate.Id);
 
                 ShowParcel.Visibility = Visibility.Visible;
@@ -374,7 +405,12 @@ namespace PL
                     MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
-                ListViewDrone.ItemsSource = bl.displayDroneList();
+                if (ListViewDrone != default)
+                    ListViewDrone.ItemsSource = bl.displayDroneList();
+                if (FilterByWeight != default)
+                    FilterByWeight.ItemsSource = bl.displayDroneList();
+                if (FilterByStatus != default)
+                    FilterByStatus.ItemsSource = bl.displayDroneList();
                 Drone_Label.Content = bl.displayDrone(dataCdroneUpdate.Id);
             }
             else
@@ -405,6 +441,7 @@ namespace PL
             this.checkFlag = true; // will allow us to close the window from the button and not from the "X"
 
             this.Close();
+            
             //    MessageBox.Show("Your drone is fully charged. We are going to unplug it", "Success!");
         }
 

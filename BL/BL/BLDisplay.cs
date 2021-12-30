@@ -143,6 +143,7 @@ namespace BL
         /// <returns></returns>
         public Parcel displayParcel(int parcelId)
         {
+            bool flag = false;
             Parcel parcelBL = GetParcel(parcelId);
             //The missing fields are Sender(ClientInParcel),Target(ClientInParcel) and Drone(droneWithParcel)
 
@@ -171,9 +172,13 @@ namespace BL
                 if (droneItem.Id == parcelBL.Drone.ID)
                 {
                     parcelBL.Drone = new DroneWithParcel() { ID = droneItem.Id, battery = droneItem.battery, departureLoc = droneItem.loc };
+                    flag = true;
                 }
+                //else
+                //    parcelBL.Drone = tempDrone;
             }
-            parcelBL.Drone = tempDrone;
+            if(flag==false)
+                parcelBL.Drone = tempDrone;
             return parcelBL;
 
         }

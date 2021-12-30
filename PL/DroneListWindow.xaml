@@ -88,13 +88,29 @@
                 </Button.Background>
 
             </Button>
-            <Button x:Name="FilterByStatusButton" Content="FilterByStatus" Grid.Column="4" HorizontalAlignment="Center" Margin="0,8,0,0" VerticalAlignment="Top" Width="128" Height="35" FontSize="16" FontWeight="Bold" FontStyle="Italic" Click="FilterByStatusButton_Click"/>
-            <Button x:Name="FilterByWeightButton" Content="FilterByWeight" Grid.Column="4" HorizontalAlignment="Center" Margin="0,54,0,0" VerticalAlignment="Top" Width="128" Height="30" FontSize="16" FontWeight="Bold" FontStyle="Italic" Click="FilterByWeightButton_Click"/>
+            <Button x:Name="FilterByStatusButton" Content="FilterByStatus" Grid.Column="4" HorizontalAlignment="Center" Margin="0,8,0,0" VerticalAlignment="Top" Width="128" Height="35" FontSize="16" FontWeight="Bold" FontStyle="Italic" Click="FilterByStatusButton_Click" Background="#FF84C5CE"/>
+            <Button x:Name="FilterByWeightButton" Content="FilterByWeight" Grid.Column="4" HorizontalAlignment="Center" Margin="0,54,0,0" VerticalAlignment="Top" Width="128" Height="30" FontSize="16" FontWeight="Bold" FontStyle="Italic" Click="FilterByWeightButton_Click" Background="#FF84C5CE"/>
             <Button x:Name="clearGrouping" Content="CLEAR GROUPING" Grid.Column="2" HorizontalAlignment="Center" Margin="0,53,0,0" VerticalAlignment="Top" Width="133" Height="36" FontSize="14" FontWeight="Bold" FontStyle="Italic" Click="clearGrouping_Click"/>
 
         </Grid>
 
-        <ListView x:Name="DronesListView" Cursor="Hand" ItemsSource="{Binding}"  Margin="0,91,0,0" Visibility="Visible" MouseDoubleClick="DroneListView_MouseDoubleClick" Grid.RowSpan="2" Background="#FFEBF6F7"/>
+        <ListView x:Name="DronesListView" Cursor="Hand" ItemsSource="{Binding}"  Margin="0,91,0,0" Visibility="Visible" MouseDoubleClick="DroneListView_MouseDoubleClick" Grid.RowSpan="2" FontSize="18" FontWeight="Bold" FontStyle="Italic">
+            <ListView.Background>
+                <ImageBrush ImageSource="/droneListBack.png" Opacity="0.6"/>
+            </ListView.Background>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Id" Width="100" DisplayMemberBinding="{Binding Id}" />
+                    <GridViewColumn Header="Model" Width="120" DisplayMemberBinding="{Binding Model}" />
+                    <GridViewColumn Header="Weight" Width="100" DisplayMemberBinding="{Binding weight }" />
+                    <GridViewColumn Header="Battery" Width="80" DisplayMemberBinding="{Binding battery}" />
+                    <GridViewColumn Header="Status" Width="120" DisplayMemberBinding="{Binding Status}" />
+                    <GridViewColumn Header="Latitude" Width="140" DisplayMemberBinding="{Binding loc.latitude}" />
+                    <GridViewColumn Header="Longitude" Width="140" DisplayMemberBinding="{Binding loc.longitude}" />
+                    <GridViewColumn Header="ParcelId" Width="100" DisplayMemberBinding="{Binding parcelId}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
         <!-- <Button Content="Add a Drone" HorizontalAlignment="Left" Margin="640,0,0,0" VerticalAlignment="Center" Width="150" Height="48" Click="button_addDrone"/>-->
         <Button Content="CLOSE" HorizontalAlignment="Left" Margin="689,49,0,5" Click="Button_Close" Width="101" Foreground="#FFFDFCFC" FontFamily="Segoe UI" FontWeight="Bold" FontSize="16" BorderThickness="4,4,4,4" BorderBrush="#FFD55D5D">
             <Button.Background>
@@ -115,17 +131,17 @@
 
         <ListView Name="FilterByWeight" ItemsSource="{Binding}" MouseDoubleClick="FilterByWeight_MouseDoubleClick" Visibility="Hidden" Margin="-4,79,4,0"  FontSize="18" FontWeight="Bold" FontStyle="Italic" Grid.RowSpan="2" >
             <ListView.Background>
-                <ImageBrush  Opacity="0.4"/>
+                <ImageBrush  Opacity="0.4" ImageSource="/droneGrouping.png"/>
             </ListView.Background>
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Id" Width="60" DisplayMemberBinding="{Binding Id}" />
-                    <GridViewColumn Header="Model" Width="80" DisplayMemberBinding="{Binding Model}" />
-                    <GridViewColumn Header="WeightCategories" Width="160" DisplayMemberBinding="{Binding weight }" />
+                    <GridViewColumn Header="Id" Width="100" DisplayMemberBinding="{Binding Id}" />
+                    <GridViewColumn Header="Model" Width="120" DisplayMemberBinding="{Binding Model}" />
+                    <GridViewColumn Header="Weight" Width="100" DisplayMemberBinding="{Binding weight }" />
                     <GridViewColumn Header="Battery" Width="80" DisplayMemberBinding="{Binding battery}" />
-                    <GridViewColumn Header="Status" Width="100" DisplayMemberBinding="{Binding Status}" />
-                    <GridViewColumn Header="Latitude" Width="100" DisplayMemberBinding="{Binding loc.latitude}" />
-                    <GridViewColumn Header="Longitude" Width="100" DisplayMemberBinding="{Binding loc.longitude}" />
+                    <GridViewColumn Header="Status" Width="120" DisplayMemberBinding="{Binding Status}" />
+                    <GridViewColumn Header="Latitude" Width="140" DisplayMemberBinding="{Binding loc.latitude}" />
+                    <GridViewColumn Header="Longitude" Width="140" DisplayMemberBinding="{Binding loc.longitude}" />
                     <GridViewColumn Header="ParcelId" Width="100" DisplayMemberBinding="{Binding parcelId}" />
                 </GridView>
             </ListView.View>
@@ -143,17 +159,17 @@
 
         <ListView Name="FilterByStatus" ItemsSource="{Binding}" MouseDoubleClick="FilterByStatus_MouseDoubleClick" Visibility="Hidden" Margin="0,75,0,0" Grid.RowSpan="2" FontSize="18" FontWeight="Bold" FontStyle="Italic" >
             <ListView.Background>
-                <ImageBrush  Opacity="0.4"/>
+                <ImageBrush  Opacity="0.4" ImageSource="/droneGrouping.png"/>
             </ListView.Background>
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Id" Width="60" DisplayMemberBinding="{Binding Id}" />
-                    <GridViewColumn Header="Model" Width="80" DisplayMemberBinding="{Binding Model}" />
-                    <GridViewColumn Header="WeightCategories" Width="160" DisplayMemberBinding="{Binding weight }" />
+                    <GridViewColumn Header="Id" Width="100" DisplayMemberBinding="{Binding Id}" />
+                    <GridViewColumn Header="Model" Width="120" DisplayMemberBinding="{Binding Model}" />
+                    <GridViewColumn Header="Weight" Width="100" DisplayMemberBinding="{Binding weight }" />
                     <GridViewColumn Header="Battery" Width="80" DisplayMemberBinding="{Binding battery}" />
-                    <GridViewColumn Header="Status" Width="100" DisplayMemberBinding="{Binding Status}" />
-                    <GridViewColumn Header="Latitude" Width="100" DisplayMemberBinding="{Binding loc.latitude}" />
-                    <GridViewColumn Header="Longitude" Width="100" DisplayMemberBinding="{Binding loc.longitude}" />
+                    <GridViewColumn Header="Status" Width="120" DisplayMemberBinding="{Binding Status}" />
+                    <GridViewColumn Header="Latitude" Width="140" DisplayMemberBinding="{Binding loc.latitude}" />
+                    <GridViewColumn Header="Longitude" Width="140" DisplayMemberBinding="{Binding loc.longitude}" />
                     <GridViewColumn Header="ParcelId" Width="100" DisplayMemberBinding="{Binding parcelId}" />
                 </GridView>
             </ListView.View>

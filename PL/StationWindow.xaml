@@ -10,7 +10,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Grid x:Name="AddStationGrid" Visibility="Visible">
+        <Grid x:Name="AddStationGrid" Visibility="Hidden">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="39*"/>
                 <ColumnDefinition/>
@@ -34,7 +34,7 @@
             <Button Content="ADD" HorizontalAlignment="Left" Height="48" Margin="368,183,0,0" VerticalAlignment="Top" Width="120" Click="Add_button" FontSize="30" FontWeight="Bold" Foreground="#FF38383F" Background="#FF6A6A73" FontStyle="Italic"/>
 
         </Grid>
-        <Grid Name="UpdateStationGrid" Visibility="Hidden" Opacity="0.745" Margin="-10,0,0,0">
+        <Grid Name="UpdateStationGrid" Visibility="Visible" Opacity="0.745" Margin="-10,0,0,0">
             <Grid.Background>
                 <ImageBrush ImageSource="/stationBackground.png" Opacity="0.6"/>
             </Grid.Background>
@@ -76,6 +76,13 @@
                     </TransformGroup>
                 </Label.RenderTransform>
             </Label>
+            <ListView x:Name="DronesListView" Visibility="Hidden">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
         </Grid>
 
     </Grid>
