@@ -19,7 +19,7 @@ namespace DalApi
 
         void AddDroneCharge(DroneCharge dc);
 
-        void AddParcelToDrone(Parcel parcel, Drone d); // associate a parcel to a drone
+        //void AddParcelToDrone(Parcel parcel, Drone d); // associate a parcel to a drone
 
         void UpdateDrone(Drone droneToUpdate);
 
@@ -31,15 +31,15 @@ namespace DalApi
 
         void UpdateClient(Client clientToUpdate);
 
-        void Assignement(int parcelId, int droneId);
+        //void Assignement(int parcelId, int droneId);
 
-        void IsPickedUp(int parcelId, int droneId);
+        //void IsPickedUp(int parcelId, int droneId);
 
-        void DeliveredToClient(int parcelId);//deliver a package to a customer
+        //void DeliveredToClient(int parcelId);//deliver a package to a customer
 
-        void DroneToCharge(int droneId, int stationId);
+        //void DroneToCharge(int droneId, int stationId);
 
-        void DroneCharged(int droneId, int stationId);
+        //void DroneCharged(int droneId, int stationId);
 
         int RunnerNumber();
 

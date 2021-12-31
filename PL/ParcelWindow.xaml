@@ -37,7 +37,7 @@
             </Button>
             <Label x:Name="parcelDetails" Content="" HorizontalAlignment="Left" Margin="37,62,0,0" VerticalAlignment="Top" Height="355" Width="421" FontSize="14" FontWeight="Bold" FontStyle="Italic"/>
             <Button x:Name="displaySender" Content="Display Sender" HorizontalAlignment="Left" Margin="526,130,0,0" VerticalAlignment="Top" FontSize="30" FontWeight="Bold" FontStyle="Italic" Width="225" Height="46" FontFamily="Cambria" Click="displaySender_Click"/>
-            <Button x:Name="displayDrone" Content="Display Drone" HorizontalAlignment="Left" Margin="536,284,0,0" VerticalAlignment="Top" FontFamily="Cambria" FontSize="30" FontWeight="Bold" FontStyle="Italic" Height="43" Click="displayDrone_Click" Width="218"/>
+            <Button x:Name="displayDrone" Content="Display Drone" HorizontalAlignment="Left" Margin="536,284,0,0" VerticalAlignment="Top" FontFamily="Cambria" FontSize="30" FontWeight="Bold" FontStyle="Italic" Height="43" Width="218"/>
             <Button x:Name="displayTarget" Content="Display Target" HorizontalAlignment="Left" Margin="524,207,0,0" VerticalAlignment="Top" Width="230" Height="40" FontSize="30" FontFamily="Cambria" FontWeight="Bold" FontStyle="Italic" Click="displayTarget_Click"/>
             <ListView x:Name="ClientslistView" ItemsSource="{Binding}" Visibility="Hidden">
                 <ListView.View>

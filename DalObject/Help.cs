@@ -43,6 +43,7 @@ namespace Dal
             }
             return (myClient).Latitude;
         }
+
         public double FindLong(int myID)
         {
             Client myClient = new Client();
