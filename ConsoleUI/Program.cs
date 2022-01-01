@@ -109,30 +109,30 @@ namespace ConsoleUI
                                 Console.WriteLine("You chose to assign a Parcel to a Drone.\nPlease enter the Parcel's Id and Drone's Id:\n");
                                 int.TryParse(Console.ReadLine(), out int ParcelID);
                                 int.TryParse(Console.ReadLine(), out int DroneID);
-                                myDalObject.Assignement(ParcelID, DroneID);
+                              //  myDalObject.Assignement(ParcelID, DroneID);
                                 break;
                             case update.PICKEDUP:
                                 Console.WriteLine("You chose to pick up a Parcel.\nPlease enter the Parcel's Id and the Drone's Id:\n");
                                 int.TryParse(Console.ReadLine(), out int ParcID);
                                 int.TryParse(Console.ReadLine(), out int DronID);
-                                myDalObject.IsPickedUp(ParcID, DronID);
+                                //myDalObject.IsPickedUp(ParcID, DronID);
                                 break;
                             case update.DELIVERED:
                                 Console.WriteLine("Your Parcel has arrived!.\nPlease enter the Parcel's Id:\n");
                                 int.TryParse(Console.ReadLine(), out int myParcID);
-                                myDalObject.DeliveredToClient(myParcID);
+                                //myDalObject.DeliveredToClient(myParcID);
                                 break;
                             case update.CHARGING:
                                 Console.WriteLine("You want to plug in a Drone.\nPlease enter the Drone's and Station's Id:\n");
                                 int.TryParse(Console.ReadLine(), out int myDronID);
                                 int.TryParse(Console.ReadLine(), out int myStationID);
-                                myDalObject.DroneToCharge(myDronID, myStationID);
+                               // myDalObject.DroneToCharge(myDronID, myStationID);
                                 break;
                             case update.CHARGED:
                                 Console.WriteLine("Your drone has finished charging.\nPlease enter the Drone's and Station Id:\n");
                                 int.TryParse(Console.ReadLine(), out int DrID);
                                 int.TryParse(Console.ReadLine(), out int statID);
-                                myDalObject.DroneCharged(DrID, statID);
+                               // myDalObject.DroneCharged(DrID, statID);
                                 break;
                         }
                         break;

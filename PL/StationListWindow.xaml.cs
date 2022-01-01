@@ -91,10 +91,7 @@ namespace PL
             return;
         }
 
-        private void Button_Close(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
+        
 
         private void button_addStation(object sender, RoutedEventArgs e)
         {
@@ -165,6 +162,11 @@ namespace PL
         /// <param name="sender"></param>
         /// <param name="e"></param>
 
+        private void Button_Close(object sender, RoutedEventArgs e)
+        {
+            this.checkFlag = true;
+            this.Close();
+        }
         private void OnClosing(object sender, CancelEventArgs e)
         {
 
