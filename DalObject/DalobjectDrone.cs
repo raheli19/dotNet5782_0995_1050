@@ -118,7 +118,7 @@ namespace Dal
         #endregion
 
         #region PickedUpFunction
-        /// <summary>
+        ///// <summary>
         ///// To pick a parcel contained in a drone and update their statuses
         ///// </summary>
         ///// <param name="parcelId"></param>
