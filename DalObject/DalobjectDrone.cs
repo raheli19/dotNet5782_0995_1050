@@ -25,7 +25,7 @@ namespace Dal
         }
         #endregion
 
-        //#region AddParcelToDrone
+        //#region AddParcelToDron
         ///// <summary>
         ///// Function which associate a parcel to a drone by its id
         ///// </summary>
