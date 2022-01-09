@@ -346,6 +346,7 @@ namespace Dal
             {
                 throw new DroneException("DL: Drone with the same id already exists...");
             }
+            XMLTools.SaveListToXMLSerializer<Parcel>(listOfParcels, parcelPath);
         }
 
         public void UpdateParcelFromBL(Parcel ParcelToUpdate)
@@ -440,6 +441,7 @@ namespace Dal
             {
                 throw new StationException("DL: Station with the same id already exists...");
             }
+            XMLTools.SaveListToXMLSerializer<Station>(listOfStations, stationPath);
         }
 
         public DO.Station StationById(int id)
@@ -456,18 +458,18 @@ namespace Dal
         {
             var listOfStations = XMLTools.LoadListFromXMLSerializer<DO.Station>(stationPath);
             Station myStation = new();
-
+                                                                                            
             int index = listOfStations.FindIndex(t => t.ID == stationToUpdate.ID);
 
             if (index == -1)
                 throw new Exception("DAL: Station with the same id not found...");
-
+            listOfStations.RemoveAt(index);
             myStation.ID = stationToUpdate.ID;
             myStation.Name = stationToUpdate.Name;
             myStation.Longitude = stationToUpdate.Longitude;
             myStation.Latitude = stationToUpdate.Latitude;
             myStation.ChargeSlots = stationToUpdate.ChargeSlots;
-
+            listOfStations.Add(myStation);
 
             XMLTools.SaveListToXMLSerializer<DO.Station>(listOfStations, stationPath);
         }
