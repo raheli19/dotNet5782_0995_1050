@@ -22,7 +22,7 @@
         </Grid.ColumnDefinitions>
         <Grid x:Name="UpgradeClientGrid" Visibility="Visible" Margin="-3,0,3,0">
             <Grid.Background>
-                <ImageBrush ImageSource="/clientUpdate.png" Opacity="0.7"/>
+                <ImageBrush ImageSource="/clientUpdate.png" Opacity="0.3"/>
             </Grid.Background>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="193*"/>
@@ -38,7 +38,7 @@
                     <ImageBrush ImageSource="/close.png"/>
                 </Button.Background>
             </Button>
-            <Label x:Name="Client_Label"   HorizontalAlignment="Left" Margin="10,180,0,0" VerticalAlignment="Top" Height="346" Width="315" FontWeight="Bold" FontStyle="Italic" FontSize="16">
+            <Label x:Name="Client_Label"   HorizontalAlignment="Left" Margin="10,120,0,0" VerticalAlignment="Top" Height="298" Width="315" FontWeight="Bold" FontStyle="Italic" FontSize="16">
                 <ListView x:Name="listViewParcels" ItemsSource="{Binding}" Visibility="Hidden" >
                     <ListView.View>
                         <GridView>
@@ -47,7 +47,7 @@
                     </ListView.View>
                 </ListView>
             </Label>
-            <Label x:Name="Client_Details" Content="Client's details:" HorizontalAlignment="Left" Margin="62,165,0,0" VerticalAlignment="Top" Width="224" FontSize="24" FontWeight="Bold" FontStyle="Italic" BorderThickness="3,3,3,3" Visibility="Visible" BorderBrush="Black" Height="57" HorizontalContentAlignment="Center"/>
+            <Label x:Name="Client_Details" Content="Client's details:" HorizontalAlignment="Left" Margin="62,54,0,0" VerticalAlignment="Top" Width="224" FontSize="24" FontWeight="Bold" FontStyle="Italic" BorderThickness="3,3,3,3" Visibility="Visible" BorderBrush="Black" Height="57" HorizontalContentAlignment="Center"/>
 
             <TextBox x:Name="UpdateNameTextBox" Visibility="Hidden" Text="{Binding Name, Mode=TwoWay}" HorizontalAlignment="Left" Height="28" Margin="20,108,0,0"  Background="White" TextWrapping="Wrap" VerticalAlignment="Top" Width="148"/>
             <TextBox x:Name="UpdatePhoneTextBox" Visibility="Hidden" Text="{Binding Phone, Mode=TwoWay}" HorizontalAlignment="Left" Height="28" Margin="195,108,0,0"  Background="White" TextWrapping="Wrap" VerticalAlignment="Top" Width="147"/>

@@ -24,7 +24,7 @@
         </Grid.RowDefinitions>
         <ListView x:Name="StationListView" Cursor="Hand" ItemsSource="{Binding}"  Margin="0,21,4,0" Visibility="Visible" MouseDoubleClick="StationListView_MouseDoubleClick" Grid.Row="1" FontSize="18" FontWeight="Bold" FontStyle="Italic">
             <ListView.Background>
-                <ImageBrush ImageSource="/stationBackground.png" Opacity="0.4"/>
+                <ImageBrush ImageSource="/stationBackground.png" Opacity="0.35"/>
             </ListView.Background>
         </ListView>
 

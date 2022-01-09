@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<ArrayOfStation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Station>
+    <ID>8580760</ID>
+    <Name>Bahnhof 0</Name>
+    <Longitude>26.219728711163498</Longitude>
+    <Latitude>25.419314957698486</Latitude>
+    <ChargeSlots>8</ChargeSlots>
+  </Station>
+  <Station>
+    <ID>1418791</ID>
+    <Name>Bahnhof 1</Name>
+    <Longitude>26.281677180799505</Longitude>
+    <Latitude>25.44105699488011</Latitude>
+    <ChargeSlots>1</ChargeSlots>
+  </Station>
+</ArrayOfStation>

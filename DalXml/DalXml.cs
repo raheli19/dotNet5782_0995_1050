@@ -1,25 +1,49 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Xml.Linq;
 using DalApi;
 using DO;
 
 namespace Dal
 {
-    public class DalXml : IDal
+    internal class DalXml : IDal
     {
         #region singleton
+
+        private string configPath;
+        private string clientPath;
+        private string dronePath;
+        private string droneChargePath;
+        private string parcelPath;
+        private string stationPath;
+
         static readonly IDal instance = new DalXml();
         public static IDal Instance { get => instance; }
-        //XElement ClientRoot;
-        //XElement DroneRoot;
+       
         XElement DroneChargeRoot;
-        //XElement ParcelRoot;
-        //XElement StationRoot;
+     
         public DalXml()
         {
+            string str = Assembly.GetExecutingAssembly().Location;
+            string localPath = Path.GetDirectoryName(str);
+            for (int i = 0; i <2 ; i++)
+                localPath = Path.GetDirectoryName(localPath);
+
+            localPath += @"\Data";
+
+           configPath = localPath + @"\config.xml";
+           clientPath = localPath + @"\customer.xml"; //XMLSerializer
+           dronePath = localPath + @"\drone.xml";//XMLSerializer
+           droneChargePath = localPath + @"\droneCharge.xml";//XElement
+           parcelPath = localPath + @"\parcel.xml";//XMLSerializer
+           stationPath = localPath + @"\station.xml";//XMLSerializer
+
+            //string configurationPath = @"configurationXml.xml";
+            //user
             ////client
             //if (!File.Exists(clientPath))
             //    CreateClientFile();
@@ -92,6 +116,32 @@ namespace Dal
 
         #region LoadData
 
+
+
+        private void LoadDroneChargeData()
+        {
+            try
+            {
+                DroneChargeRoot = XElement.Load(droneChargePath);
+            }
+            catch
+            {
+                throw new Exception("File upload problem");
+            }
+        }
+        #region notes
+        //private void LoadDroneData()
+        //{
+        //    try
+        //    {
+        //        DroneRoot = XElement.Load(dronePath);
+        //    }
+        //    catch
+        //    {
+        //        throw new Exception("File upload problem");
+        //    }
+        //}
+
         //private void LoadStationData()
         //{
         //    try
@@ -116,31 +166,6 @@ namespace Dal
         //        throw new Exception("File upload problem");
         //    }
         //}
-
-        private void LoadDroneChargeData()
-        {
-            try
-            {
-                DroneChargeRoot = XElement.Load(droneChargePath);
-            }
-            catch
-            {
-                throw new Exception("File upload problem");
-            }
-        }
-
-        //private void LoadDroneData()
-        //{
-        //    try
-        //    {
-        //        DroneRoot = XElement.Load(dronePath);
-        //    }
-        //    catch
-        //    {
-        //        throw new Exception("File upload problem");
-        //    }
-        //}
-
         //private void LoadClientData()
         //{
         //    try
@@ -153,21 +178,13 @@ namespace Dal
         //    }
         //}
         #endregion
+        #endregion
 
 
 
         static DalXml() { }
         #endregion
 
-        string clientPath = @"ClientXml.xml"; //XMLSerializer
-        string dronePath = @"DroneXml.xml";//XMLSerializer
-        string droneChargePath = @"DroneChargeXml.xml";//XElement
-        string parcelPath = @"ParcelXml.xml";//XMLSerializer
-        string stationPath = @"StationXml.xml";//XMLSerializer
-        //string configurationPath = @"configurationXml.xml";
-        //user
-
-        
         #region DroneCharge
         public void AddDroneCharge(DroneCharge droneChargeToAdd) //XElement
         {
@@ -181,8 +198,8 @@ namespace Dal
 
         public IEnumerable<DroneCharge> IEDroneChargeList()
         {
-            List<DroneCharge> listOfAllDronesCharge = XMLTools.LoadListFromXMLSerializer<DroneCharge>(droneChargePath);
-            return listOfAllDronesCharge;
+            //List<DroneCharge> listOfAllDronesCharge = XMLTools.LoadListFromXMLSerializer<DroneCharge>(droneChargePath);
+            //return listOfAllDronesCharge;
 
             LoadDroneChargeData();
             List<DroneCharge> listDroneCharge;
@@ -218,7 +235,7 @@ namespace Dal
             }
             else
             {
-                throw new AlreadyExistsException("DL: Drone with the same id already exists...");
+                throw new DroneException("DL: Drone with the same id already exists...");
             }
 
             XMLTools.SaveListToXMLSerializer<Drone>(listOfDrones, dronePath);
@@ -245,12 +262,12 @@ namespace Dal
                 myDrone = listOfdrones.Find(x => x.ID == droneToUpdate.ID);
             }
             else
-                throw new Exception("DAL: Drone with the same id not found...");
+                throw new DroneException("DAL: Drone with the same id not found...");
 
             myDrone.ID = droneToUpdate.ID;
             myDrone.Model = droneToUpdate.Model;
             myDrone.weight = droneToUpdate.weight;
-            XMLTools.SaveListToXMLSerializer<DO.Drone>(dronesList, dronePath);
+            XMLTools.SaveListToXMLSerializer<DO.Drone>(listOfdrones, dronePath);
         }
 
         public IEnumerable<Drone> IEDroneList()
@@ -274,8 +291,9 @@ namespace Dal
             }
             else
             {
-                throw new AlreadyExistsException("DL: Client with the same id already exists...");
+                throw new ClientException("DL: Client with the same id already exists...");
             }
+            XMLTools.SaveListToXMLSerializer<Client>(listOfClients, clientPath);
         }
 
         public DO.Client ClientById(int id)
@@ -326,7 +344,7 @@ namespace Dal
             }
             else
             {
-                throw new AlreadyExistsException("DL: Drone with the same id already exists...");
+                throw new DroneException("DL: Drone with the same id already exists...");
             }
         }
 
@@ -338,7 +356,7 @@ namespace Dal
             int index = listOfParcels.FindIndex(t => t.ID == ParcelToUpdate.ID);
 
             if (index == -1)
-                throw new Exception("DAL: Parcel with the same id not found...");
+                throw new ParcelException("DAL: Parcel with the same id not found...");
 
 
             myParcel.ID = ParcelToUpdate.ID;
@@ -379,7 +397,7 @@ namespace Dal
             List<Parcel> listOfAllParcels = XMLTools.LoadListFromXMLSerializer<Parcel>(parcelPath);
             if (parcelToDelete.Delivered == DateTime.MinValue)
                 throw new Exception("Can not delete the parcel, it has not been delivered yet! ");
-            Parcel temp =ParcelById(parcelToDelete.ID); // checks if the parcel is in the list
+            Parcel temp = ParcelById(parcelToDelete.ID); // checks if the parcel is in the list
             listOfAllParcels.Remove(parcelToDelete);
             XMLTools.SaveListToXMLSerializer(listOfAllParcels, parcelPath);
         }
@@ -396,7 +414,7 @@ namespace Dal
             XMLTools.SaveListToXMLSerializer(listOfAllParcels, parcelPath);
         }
 
-        public void FindParcelAssociatedWithDrone(int droneId)
+        public Parcel FindParcelAssociatedWithDrone(int droneId)
         {
             List<Parcel> listOfParcels = XMLTools.LoadListFromXMLSerializer<Parcel>(parcelPath);
             int index = listOfParcels.FindIndex(x => x.DroneId == droneId);
@@ -404,7 +422,7 @@ namespace Dal
             {
                 throw new ParcelException("There is no parcel which contains this droneID!");
             }
-            return listOfParcels.FirstOrDefault(x => x.ID == id);
+            return listOfParcels.FirstOrDefault(x => x.ID == droneId);
 
         }
         #endregion
@@ -420,7 +438,7 @@ namespace Dal
             }
             else
             {
-                throw new AlreadyExistsException("DL: Station with the same id already exists...");
+                throw new StationException("DL: Station with the same id already exists...");
             }
         }
 
@@ -457,11 +475,7 @@ namespace Dal
         public IEnumerable<Station> IEStationList(Func<Station, bool> predicate = null)
         {
             List<DO.Station> listOfStations = XMLTools.LoadListFromXMLSerializer<DO.Station>(stationPath);
-            var v = from item in listOfStations
-                    select item; //item.Clone();
-            if (predicate == null)
-                return v.AsEnumerable().OrderByDescending(x => x.ID);
-            return v.Where(predicate).OrderByDescending(x => x.ID);
+            return listOfStations;
         }
 
         #endregion
@@ -488,7 +502,7 @@ namespace Dal
             var listOfStations = XMLTools.LoadListFromXMLSerializer<DO.Station>(stationPath);
             List<int> listOfId = new List<int>();
             int sid = 0;
-            foreach(var item in listOfStations)
+            foreach (var item in listOfStations)
             {
                 sid = item.ID;
                 listOfId.Add(sid);
@@ -502,7 +516,7 @@ namespace Dal
             List<DO.Parcel> listOfParcels = XMLTools.LoadListFromXMLSerializer<DO.Parcel>(parcelPath);
 
             List<int> listId = new List<int>();
-            foreach(var item in listOfParcels)
+            foreach (var item in listOfParcels)
             {
                 if (item.Delivered != DateTime.MinValue)
                     listId.Add(item.TargetId);
@@ -520,7 +534,7 @@ namespace Dal
 
         public void AddFromBLDroneCharging(int DroneID, int StationID)
         {
-            
+
             XElement droneId = new XElement("droneId", DroneID);
             XElement stationId = new XElement("stationId", StationID);
 
@@ -547,9 +561,26 @@ namespace Dal
         }
         #endregion
 
+        public double[] ElectricityUse()
+        {
+            var config = XMLTools.LoadListFromXMLSerializer<string>(configPath);
+           double[] arr = new double[5];
 
+            arr[0] = double.Parse(config[1], CultureInfo.InvariantCulture);
+            arr[1] = double.Parse(config[2], CultureInfo.InvariantCulture);
+            arr[2] =double.Parse(config[3], CultureInfo.InvariantCulture);
+            arr[3] = double.Parse(config[4], CultureInfo.InvariantCulture);
+            arr[4] = double.Parse(config[5], CultureInfo.InvariantCulture);
+            return arr;
+            
+        }
 
-
+        public int RunnerNumber()
+        {
+            var runnerNumber = XMLTools.LoadListFromXMLSerializer<string>(configPath);
+            int real = Convert.ToInt32(runnerNumber);
+            return real;
+        }
 
 
 

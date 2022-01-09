@@ -1,12 +1,8 @@
 {
   "profiles": {
-    "Targuil0": {
+    "PL": {
       "commandName": "Project",
       "workingDirectory": "$(SolutionDir)"
-    },
-    "WSL": {
-      "commandName": "WSL2",
-      "distributionName": ""
     }
   }
 }

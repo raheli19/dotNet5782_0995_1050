@@ -10,14 +10,14 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Grid x:Name="AddStationGrid" Visibility="Hidden">
+        <Grid x:Name="AddStationGrid" Visibility="Visible">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="39*"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
             <Grid.Background>
-                <ImageBrush ImageSource="/stationAdd.png" Opacity="0.7"/>
+                <ImageBrush ImageSource="/stationAdd.png" Opacity="0.35"/>
             </Grid.Background>
 
 
@@ -36,7 +36,7 @@
         </Grid>
         <Grid Name="UpdateStationGrid" Visibility="Visible" Opacity="0.745" Margin="-10,0,0,0">
             <Grid.Background>
-                <ImageBrush ImageSource="/stationBackground.png" Opacity="0.6"/>
+                <ImageBrush ImageSource="/stationBackground.png" Opacity="0.35"/>
             </Grid.Background>
 
 

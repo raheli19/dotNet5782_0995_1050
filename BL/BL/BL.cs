@@ -26,7 +26,7 @@ namespace BL
         static Random rand = new Random();
         double BatteryFree, BatteryLightWeight, BatteryMiddleWeight, BatteryHeavyWeight, ChargingDroneRate;
 
-        internal IDal p=DalFactory.GetDal();
+        internal IDal p = DalFactory.GetDal();
         help h = new help();
 
         List<DroneDescription> DroneList = new List<DroneDescription>();
@@ -34,10 +34,10 @@ namespace BL
         BL()
         {
             //constructor of the BL file
-           
-            
 
-           double[] BatteryUse = p.ElectricityUse();
+
+
+            double[] BatteryUse = p.ElectricityUse();
 
             BatteryFree = BatteryUse[0];
             BatteryLightWeight = BatteryUse[1];
@@ -62,7 +62,7 @@ namespace BL
                     if (itemParcel.DroneId == drone.Id && itemParcel.Delivered == DateTime.MinValue) // if  drone scheduled but not delivered
                     {
                         drone.Status = DroneStatuses.shipping;
-                        drone.parcelId= itemParcel.ID;
+                        drone.parcelId = itemParcel.ID;
                         if (itemParcel.PickedUp == DateTime.MinValue) // if drone not ever picket up - his location is the location of the closest station to the customer
                         {
                             foreach (var itemCustomer in listCustomersFromIdal)
@@ -249,7 +249,7 @@ namespace BL
         /// <returns>Returns the distance between the 2 locations</returns>
         private double Distance(Localisation from, Localisation to)
         {
-            
+
             int R = 6371 * 1000;
             double phi1 = from.latitude * Math.PI / 180;
             double phi2 = to.latitude * Math.PI / 180;
@@ -403,7 +403,7 @@ namespace BL
         public List<int> AllSenders_Id()
         {
             List<int> idList = new List<int>();
-            foreach(var item in p.IEParcelList())
+            foreach (var item in p.IEParcelList())
             {
                 idList.Add(item.SenderId);
             }

@@ -8,7 +8,7 @@
         Title="SignUpSignIn" Height="450" Width="800">
     <Grid Margin="-2,0,2,0">
         <Grid.Background>
-            <ImageBrush ImageSource="/backuser.png"/>
+            <ImageBrush ImageSource="/backuser.png" Opacity="0.56"/>
         </Grid.Background>
 
         <!--New Client Region-->

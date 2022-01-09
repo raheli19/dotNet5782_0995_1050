@@ -20,9 +20,9 @@
     </Window.Resources>
 
     <Grid x:Name="MainGrid">
-        <Grid x:Name="UpgradeGrid" Visibility="Visible">
+        <Grid x:Name="UpgradeGrid" Visibility="Hidden">
             <Grid.Background>
-                <ImageBrush ImageSource="/parcelUpdate.png" Opacity="0.6"/>
+                <ImageBrush ImageSource="/parcelUpdate.png" Opacity="0.35"/>
             </Grid.Background>
             <Button x:Name="UpdateButton" Content="Update" HorizontalAlignment="Left" 
                    
@@ -55,9 +55,9 @@
             </ListView>
             <Label x:Name="details" Content="Parcel's Details:" HorizontalAlignment="Left" Margin="121,10,0,0" VerticalAlignment="Top" Width="225" Height="47" FontSize="28" FontWeight="Bold" FontStyle="Italic" Background="#FFDDDDDD" BorderBrush="#FF020203" BorderThickness="1,1,1,1"/>
         </Grid>
-        <Grid x:Name="AddGrid" Visibility="Visible">
+        <Grid x:Name="AddGrid" Visibility="Hidden">
             <Grid.Background>
-                <ImageBrush ImageSource="/parcelBackgound.png" Opacity="0.7"/>
+                <ImageBrush ImageSource="/parcelBackgound.png" Opacity="0.35"/>
             </Grid.Background>
             <Button Content="ADD" HorizontalAlignment="Left" Height="67" Margin="128,357,0,0" VerticalAlignment="Top" Width="148" Click="Add_Click" FontWeight="Bold" FontSize="40" Foreground="White">
                 <Button.Background>

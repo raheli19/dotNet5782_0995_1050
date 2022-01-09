@@ -17,7 +17,7 @@ namespace Dal
         public static List<Station> StationList = new List<Station>();
         public static List<DroneCharge> DroneChargesList = new List<DroneCharge>();
 
-        static DataSource() { Initialize(); } //ctor which initialize all the lists
+        static DataSource() { Initialize(); BuildXmlFromDS.BuildXmlFromDataSource(); } //ctor which initialize all the lists
 
         #region Random
         /// <summary>
@@ -150,6 +150,7 @@ namespace Dal
             InitializeDrone();
             InitializeParcel();
             InitializeStations();
+            InitializeDroneChargesList();
         }
     }
     #endregion
