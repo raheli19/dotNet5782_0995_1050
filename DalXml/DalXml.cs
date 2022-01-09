@@ -42,73 +42,23 @@ namespace Dal
            parcelPath = localPath + @"\parcel.xml";//XMLSerializer
            stationPath = localPath + @"\station.xml";//XMLSerializer
 
-            //string configurationPath = @"configurationXml.xml";
-            //user
-            ////client
-            //if (!File.Exists(clientPath))
-            //    CreateClientFile();
-            //else
-            //    LoadClientData();
-
-            ////drone
-            //if (!File.Exists(dronePath))
-            //    CreateDroneFile();
-            //else
-            //    LoadDroneData();
-
-            //droneCharge
+            
             if (!File.Exists(droneChargePath))
                 CreateDroneChargeFile();
             else
                 LoadDroneChargeData();
 
-            ////parcel
-            //if (!File.Exists(parcelPath))
-            //    CreateParcelFile();
-            //else
-            //    LoadParcelData();
-
-            ////station
-            //if (!File.Exists(stationPath))
-            //    CreateStationFile();
-            //else
-            //    LoadStationData();
+           
         }
 
         #region CreateFiles
 
-        //private void CreateClientFile()
-        //{
-        //    ClientRoot = new XElement("Clients");
-        //    ClientRoot.Save(clientPath);
-        //}
-
-        //private void CreateStationFile()
-        //{
-        //    StationRoot = new XElement("Stations");
-        //    StationRoot.Save(stationPath);
-        //}
-
-        //private void CreateParcelFile()
-        //{
-        //    ParcelRoot = new XElement("Parcels");
-        //    ParcelRoot.Save(parcelPath);
-        //}
 
         private void CreateDroneChargeFile()
         {
             DroneChargeRoot = new XElement("DroneCharges");
             DroneChargeRoot.Save(droneChargePath);
         }
-
-        //private void CreateDroneFile()
-        //{
-        //    DroneRoot = new XElement("Drones");
-        //    DroneRoot.Save(dronePath);
-        //}
-
-
-
 
 
 
@@ -260,6 +210,7 @@ namespace Dal
             if (listOfdrones.Exists(t => t.ID == droneToUpdate.ID))
             {
                 myDrone = listOfdrones.Find(x => x.ID == droneToUpdate.ID);
+                listOfdrones.Remove(myDrone);
             }
             else
                 throw new DroneException("DAL: Drone with the same id not found...");
@@ -267,6 +218,7 @@ namespace Dal
             myDrone.ID = droneToUpdate.ID;
             myDrone.Model = droneToUpdate.Model;
             myDrone.weight = droneToUpdate.weight;
+            listOfdrones.Add(myDrone);
             XMLTools.SaveListToXMLSerializer<DO.Drone>(listOfdrones, dronePath);
         }
 
@@ -314,13 +266,13 @@ namespace Dal
 
             if (index == -1)
                 throw new Exception("DAL: Client with the same id not found...");
-
+            listOfClients.RemoveAt(index);
             myClient.ID = clientToUpdate.ID;
             myClient.Name = clientToUpdate.Name;
             myClient.Longitude = clientToUpdate.Longitude;
             myClient.Latitude = clientToUpdate.Latitude;
             myClient.Phone = clientToUpdate.Phone;
-
+            listOfClients.Add(myClient);
 
             XMLTools.SaveListToXMLSerializer<DO.Client>(listOfClients, clientPath);
         }
@@ -554,10 +506,8 @@ namespace Dal
                     dalDr.StationId = item.StationId;
                 }
 
-
-
             }
-            DataSource.DroneChargesList.Remove(dalDr);
+            DroneChargeRoot.Elements().Where(el => el.Element("DroneId").Value== droneId.ToString()&& el.Element("StationId").Value == statId.ToString()).Remove();
         }
         #endregion
 
