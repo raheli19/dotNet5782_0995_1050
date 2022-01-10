@@ -24,6 +24,8 @@ namespace PL
         private BLApi.IBL bl;
         string clientStatus = " ";
         private bool checkFlag = false;
+
+        #region ctor GridSignUp
         public Click_SignUp_In(BLApi.IBL bl,int Sign_Uptemp)
         {
             InitializeComponent();
@@ -34,15 +36,70 @@ namespace PL
 
 
         }
+        #endregion
+
+        #region GridSinIn
         public Click_SignUp_In(BLApi.IBL bl)
         {
             InitializeComponent();
             DataContext = DataCclient;
             this.bl = bl;
             Sign_In.Visibility = Visibility.Visible;
+        }
+        #endregion
 
+        #region enterFunctions
+        private void id_enter(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+
+                textBox_Name.Focus();
+            }
 
         }
+
+        private void name_enter(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+
+                textBox_Phone.Focus();
+            }
+        }
+
+
+        private void phone_enter(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+
+                textBox_Latitude.Focus();
+            }
+        }
+
+        private void lat_enter(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+
+                textBox_Longitude.Focus();
+            }
+        }
+
+        private void long_enter(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+
+                button_Join_Click(sender, e);// verifier si ca marche
+            }
+        }
+
+        #endregion
+
+
+        #region JoinButtonClicked
         private void button_Join_Click(object sender, RoutedEventArgs e)
         {
             textBox_PersonalId.Background = Brushes.White;
@@ -87,7 +144,9 @@ namespace PL
             this.Close();
             new DeliveringProcess(bl, DataCclient, clientStatus).Show();
         }
+        #endregion
 
+        #region nextButtonClick
         private void NEXT_Click(object sender, RoutedEventArgs e)
         {
             clientStatus = "Sign In";
@@ -109,6 +168,7 @@ namespace PL
             this.Close();
             new DeliveringProcess(bl, DataCclient, clientStatus).Show();
         }
+        #endregion
 
         #region closeFct
         private void Button_Close(object sender, RoutedEventArgs e)

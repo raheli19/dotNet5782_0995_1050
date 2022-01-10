@@ -35,7 +35,7 @@ namespace BL
             stationDAL.ChargeSlots = stationBL.ChargeSlots;
             try
             {
-                p.AddStation(stationDAL);
+                dal.AddStation(stationDAL);
                 //p.addStation((DO.Station)s.CopyPropertiesToNew(typeof(DO.Station)));
             }
             catch (DO.StationException ex)  //catches the exception from DAL
@@ -78,7 +78,7 @@ namespace BL
             DO.DroneCharge DalDC = new DO.DroneCharge();
             DalDC.StationId = StationID;
             DalDC.DroneId = droneBL.ID;
-            p.AddFromBLDroneCharging(DalDC.DroneId, DalDC.StationId);
+            dal.AddFromBLDroneCharging(DalDC.DroneId, DalDC.StationId);
 
             //Create a new DroneDescription and add it TO BL
             DroneDescription DP = new DroneDescription();
@@ -93,7 +93,7 @@ namespace BL
             stationBL.ChargeSlots--;// one more is full
             try
             {
-                p.AddDrone(droneDAL);//ADD TO DAL
+                dal.AddDrone(droneDAL);//ADD TO DAL
                 //p.AddDrone((DO.Drone)d.CopyPropertiesToNew(typeof(DO.Drone)));
             }
             catch (DO.DroneException ex)
@@ -102,7 +102,7 @@ namespace BL
             }
             DO.Station dalS = new DO.Station();
             dalS = ConvertStationToDal(stationBL);
-            p.UpdateStation(dalS);
+            dal.UpdateStation(dalS);
         }
         #endregion
 
@@ -129,7 +129,7 @@ namespace BL
             clientDAL.Longitude = clientBL.ClientLoc.longitude;
             try
             {
-                p.AddClient(clientDAL);  //ADD it to DAL
+                dal.AddClient(clientDAL);  //ADD it to DAL
                 //p.addClient((DO.Client)c.CopyPropertiesToNew(typeof(DO.Client)));
             }
             catch (DO.ClientException ex)  //catches a DAL exception
@@ -152,7 +152,7 @@ namespace BL
         {
             DO.Parcel DALParcel = new DO.Parcel(); // creates a new parcel from DAL
 
-            DALParcel.ID = p.RunnerNumber();  //copies all the fields from the parcel he received
+            DALParcel.ID = dal.RunnerNumber();  //copies all the fields from the parcel he received
             if (!(parcelBL.Sender.ID <= 99999999 && parcelBL.Sender.ID > 9999999))//check the validity of the fields received
                 throw new InputNotValid("SenderID not valid");
             DALParcel.SenderId = parcelBL.Sender.ID;
@@ -178,7 +178,7 @@ namespace BL
 
             try
             {
-                p.AddParcel(DALParcel);  //Add it to DAL
+                dal.AddParcel(DALParcel);  //Add it to DAL
                 //p.addParcel((DO.Parcel)pack.CopyPropertiesToNew(typeof(DO.Parcel)));
             }
             catch (DO.ParcelException ex)
@@ -197,7 +197,7 @@ namespace BL
             parcelDal.ID = parcelToRemove.ID;
             parcelDal.SenderId = parcelToRemove.Sender.ID;
             parcelDal.TargetId = parcelToRemove.Target.ID;
-            p.RemoveParcel(parcelDal);
+            dal.RemoveParcel(parcelDal);
         }
         #endregion
 

@@ -73,9 +73,9 @@ namespace PL
         private void Check_Click_Update(object sender, RoutedEventArgs e)
         {
             string newName = UpdateNameTextBox.Text;
-            string newPhone="n";
-            if (UpdatePhoneTextBox.Text !="")
-                 newPhone = (UpdatePhoneTextBox.Text);
+            string newPhone = "n";
+            if (UpdatePhoneTextBox.Text != "")
+                newPhone = (UpdatePhoneTextBox.Text);
 
             if (clientActions.name == "" && clientActions.phone == "")// didn't enter any information
             {
@@ -114,20 +114,20 @@ namespace PL
             UpgradeClientGrid.Visibility = Visibility.Hidden;
             //this.comboWeightSelector.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
             //this.comboStationSelector.ItemsSource = bl.DisplayStationList();
-             ListViewClient = (ListView)ClientListWindow;
+            ListViewClient = (ListView)ClientListWindow;
 
         }
-        
-        private void txt_long_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            dataCclient.ClientLoc.longitude = (double)int.Parse( txt_long.Text);
-            
-        }
-        private void txt_lat_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            dataCclient.ClientLoc.latitude = (double)int.Parse(txt_lat.Text);
 
-        }
+        //private void txt_long_TextChanged(object sender, TextChangedEventArgs e)
+        //{
+        //    dataCclient.ClientLoc.longitude = (double)int.Parse( txt_long.Text);
+
+        //}
+        //private void txt_lat_TextChanged(object sender, TextChangedEventArgs e)
+        //{
+        //    dataCclient.ClientLoc.latitude = (double)int.Parse(txt_lat.Text);
+
+        //}
         private void Add_button(object sender, RoutedEventArgs e)
         {
             txt_id.Background = Brushes.White;
@@ -175,7 +175,7 @@ namespace PL
                 return;
 
             }
-            MessageBox.Show("You're added to our system! Welcome!","Success!", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show("You're added to our system! Welcome!", "Success!", MessageBoxButton.OK, MessageBoxImage.Information);
             ListViewClient.ItemsSource = bl.displayClientList();
             //dlw.CheckFields();
             this.Close();
@@ -203,7 +203,7 @@ namespace PL
         }
         #endregion
 
-      
+
         private void ParcelsToClient_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             ParcelToClient myParcelToClient = (ParcelToClient)ParcelsToClient.SelectedItem;
@@ -215,7 +215,7 @@ namespace PL
         {
             ParcelToClient myParcelToClient = (ParcelToClient)ParcelsFromClient.SelectedItem;
             ParcelDescription myParcelDescription = bl.displayParcelList().First(x => x.Id == myParcelToClient.ID);
-           new ParcelWindow(myParcelDescription, bl, listViewParcels).Show();
+            new ParcelWindow(myParcelDescription, bl, listViewParcels).Show();
         }
 
         #region enterFunctions
@@ -223,7 +223,7 @@ namespace PL
         {
             if (e.Key == Key.Enter)
             {
-                
+
                 txt_name.Focus();
             }
 
@@ -231,19 +231,19 @@ namespace PL
 
         private void name_enter(object sender, KeyEventArgs e)
         {
-            if(e.Key == Key.Enter)
+            if (e.Key == Key.Enter)
             {
-                
+
                 txt_phone.Focus();
             }
         }
-        #endregion
+
 
         private void phone_enter(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
             {
-                
+
                 txt_lat.Focus();
             }
         }
@@ -256,5 +256,16 @@ namespace PL
                 txt_long.Focus();
             }
         }
+
+        private void long_enter(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+
+                Add_button(sender, e);//bug il ne prend pas la longitude
+            }
+        }
+
+        #endregion
     }
 }

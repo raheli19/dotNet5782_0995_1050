@@ -22,7 +22,7 @@
     <Grid x:Name="MainGrid">
         <Grid x:Name="UpgradeGrid" Visibility="Hidden">
             <Grid.Background>
-                <ImageBrush ImageSource="/parcelUpdate.png" Opacity="0.35"/>
+                <ImageBrush ImageSource="/images/parcelUpdate.png" Opacity="0.35"/>
             </Grid.Background>
             <Button x:Name="UpdateButton" Content="Update" HorizontalAlignment="Left" 
                    
@@ -31,7 +31,7 @@
             <!--CloseButton-->
             <Button Name="CloseButton" Content="" HorizontalAlignment="Left" Margin="596,345,0,0" VerticalAlignment="Top" ToolTip="Close the Window" Height="50" Width="130" BorderBrush="Black" Click="ClickCloseParcelWindow" Opacity="100" FontFamily="Cambria" FontWeight="Bold" FontStyle="Italic" FontSize="30">
                 <Button.Background>
-                    <ImageBrush ImageSource="/close.png"/>
+                    <ImageBrush ImageSource="/images/close.png"/>
                 </Button.Background>
 
             </Button>
@@ -55,13 +55,13 @@
             </ListView>
             <Label x:Name="details" Content="Parcel's Details:" HorizontalAlignment="Left" Margin="121,10,0,0" VerticalAlignment="Top" Width="225" Height="47" FontSize="28" FontWeight="Bold" FontStyle="Italic" Background="#FFDDDDDD" BorderBrush="#FF020203" BorderThickness="1,1,1,1"/>
         </Grid>
-        <Grid x:Name="AddGrid" Visibility="Hidden">
+        <Grid x:Name="AddGrid" Visibility="Visible">
             <Grid.Background>
-                <ImageBrush ImageSource="/parcelBackgound.png" Opacity="0.35"/>
+                <ImageBrush ImageSource="/images/parcelBackgound.png" Opacity="0.35"/>
             </Grid.Background>
             <Button Content="ADD" HorizontalAlignment="Left" Height="67" Margin="128,357,0,0" VerticalAlignment="Top" Width="148" Click="Add_Click" FontWeight="Bold" FontSize="40" Foreground="White">
                 <Button.Background>
-                    <ImageBrush ImageSource="/addParcel.png" Opacity="0.9"/>
+                    <ImageBrush ImageSource="/images/addParcel.png" Opacity="0.9"/>
                 </Button.Background>
             </Button>
             <ComboBox x:Name="Combo_SenderId" HorizontalAlignment="Left" Height="37" SelectedItem="{Binding ClientInParcel.ID, Mode=TwoWay}" Margin="87,44,0,0" VerticalAlignment="Top" Width="223" SelectionChanged="Combo_SenderId_SelectionChanged"/>
@@ -74,7 +74,7 @@
             <Label Content="Weight" HorizontalAlignment="Left" Height="39" Margin="86,262,0,0" VerticalAlignment="Top" Width="230" FontSize="18" FontWeight="Bold" FontStyle="Italic" HorizontalContentAlignment="Center"/>
             <Button Content="" HorizontalAlignment="Left" ToolTip="Close" Height="49" Margin="644,358,0,0" VerticalAlignment="Top" Width="120" Click="ClickCloseParcelWindow" FontFamily="Cambria" FontWeight="Bold" Foreground="Red" FontSize="22" FontStyle="Normal" BorderThickness="3,3,3,3" SnapsToDevicePixels="True">
                 <Button.Background>
-                    <ImageBrush ImageSource="/close.png"/>
+                    <ImageBrush ImageSource="/images/close.png"/>
                 </Button.Background>
             </Button>
             <!--<Button Content="remove" HorizontalAlignment="Left" Height="73" Margin="495,144,0,0" VerticalAlignment="Top" Width="123" Click="Remove_Button"/>-->

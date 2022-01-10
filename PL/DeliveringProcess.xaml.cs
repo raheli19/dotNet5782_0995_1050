@@ -27,6 +27,8 @@ namespace PL
         BO.Client DataCclient = new BO.Client();
         string clientStatus;
         BO.Parcel DataCParcel = new BO.Parcel();
+
+        #region ctor
         public DeliveringProcess(BLApi.IBL bl, BO.Client DataCclient, string clientStatus)
         {
             InitializeComponent();
@@ -39,12 +41,10 @@ namespace PL
             this.DataCclient = DataCclient;
             this.clientStatus = clientStatus;
         }
+        #endregion
 
-        private void Drone_Id_entered_TextChanged1(object sender, TextChangedEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
 
+        #region AllButtonsClick
         private void ParcelsFromClient_Click(object sender, RoutedEventArgs e)
         {
             if (clientStatus == "Sign Up")   //Join
@@ -124,6 +124,27 @@ namespace PL
 
         }
 
+        private void received_parcel_Click(object sender, RoutedEventArgs e)
+        {
+            Parcel_Id_Entered.Visibility = Visibility.Visible;
+            label_info.Content = "Please enter its Id";
+            label_info.Visibility = Visibility.Visible;
+            BO.DroneDescription delDrone = new DroneDescription();
+            delDrone = bl.displayDroneList().First(x => x.parcelId == DataCParcel.ID);
+            try
+            {
+                bl.delivered(delDrone.Id);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Aie aie aie...", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+
+            }
+        }
+
+        #endregion
+
         private void ComboBox_WeightSelection(object sender, SelectionChangedEventArgs e)
         {
 
@@ -176,7 +197,8 @@ namespace PL
         }
         #endregion
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        #region CloseInfos
+        private void Close_Click(object sender, RoutedEventArgs e)
         {
             listOf_Parcels.Visibility = Visibility.Hidden;
             label_info.Visibility = Visibility.Hidden;
@@ -195,24 +217,6 @@ namespace PL
             parcelsFromClient.Visibility = Visibility.Hidden;
 
         }
-
-        private void received_parcel_Click(object sender, RoutedEventArgs e)
-        {
-            Parcel_Id_Entered.Visibility = Visibility.Visible;
-            label_info.Content = "Please enter its Id";
-            label_info.Visibility = Visibility.Visible;
-            BO.DroneDescription delDrone = new DroneDescription();
-            delDrone = bl.displayDroneList().First(x => x.parcelId == DataCParcel.ID);
-            try
-            {
-                bl.delivered(delDrone.Id);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Aie aie aie...", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-
-            }
-        }
+        #endregion
     }
 }

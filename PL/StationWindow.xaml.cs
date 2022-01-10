@@ -49,6 +49,54 @@ namespace PL
 
         }
 
+        #region enterTab
+        private void id_enter(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+
+                txt_name.Focus();
+            }
+        }
+
+        private void name_enter(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+
+                txt_CS.Focus();
+            }
+        }
+
+        private void CS_enter(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+
+                txt_lat.Focus();
+            }
+        }
+
+        private void lat_enter(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+
+                txt_long.Focus();
+            }
+        }
+        private void long_enter(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+
+                Add_button(sender, e);
+            }
+        }
+        
+        #endregion
+
+
         private void Add_button(object sender, RoutedEventArgs e)
         {
 

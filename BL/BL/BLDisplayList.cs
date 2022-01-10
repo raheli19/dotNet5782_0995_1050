@@ -21,9 +21,9 @@ namespace BL
         /// <returns></returns>
         public IEnumerable<StationDescription> DisplayStationList()
         {
-            IEnumerable<DO.Station> stationsFromDal = p.IEStationList();   //gets the station list from DAL
+            IEnumerable<DO.Station> stationsFromDal = dal.IEStationList();   //gets the station list from DAL
             List<StationDescription> statList = new List<StationDescription>();  //creates a new list of station description
-            foreach (var item in p.IEStationList())
+            foreach (var item in dal.IEStationList())
             {
                 Station station = displayStation(item.ID);      //copies the fields 
                 statList.Add(new StationDescription()
@@ -81,19 +81,19 @@ namespace BL
         /// <returns></returns>
         public IEnumerable<ClientActions> displayClientList()
         {
-            IEnumerable<DO.Client> customersFromDal = p.IEClientList();
+            IEnumerable<DO.Client> customersFromDal = dal.IEClientList();
             List<ClientActions> LstCA = new List<ClientActions>();
 
-            foreach (var item in p.IEClientList())
+            foreach (var item in dal.IEClientList())
             {
                 ClientActions tempCA = new ClientActions();
                 tempCA.Id = item.ID;
                 tempCA.name = item.Name;
                 tempCA.phone = item.Phone;
-                IEnumerable<DO.Parcel> sent_and_delivLst = p.IEParcelList().Where(x => x.SenderId == item.ID && x.Delivered != DateTime.MinValue);
-                IEnumerable<DO.Parcel> sent_and_notDelivLst = p.IEParcelList().Where(x => x.SenderId == item.ID && x.Delivered == DateTime.MinValue);
-                IEnumerable<DO.Parcel> receivLst = p.IEParcelList().Where(x => x.TargetId == item.ID && x.Delivered != DateTime.MinValue);
-                IEnumerable<DO.Parcel> receivingLst = p.IEParcelList().Where(x => x.TargetId == item.ID && x.Delivered != DateTime.MinValue);
+                IEnumerable<DO.Parcel> sent_and_delivLst = dal.IEParcelList().Where(x => x.SenderId == item.ID && x.Delivered != DateTime.MinValue);
+                IEnumerable<DO.Parcel> sent_and_notDelivLst = dal.IEParcelList().Where(x => x.SenderId == item.ID && x.Delivered == DateTime.MinValue);
+                IEnumerable<DO.Parcel> receivLst = dal.IEParcelList().Where(x => x.TargetId == item.ID && x.Delivered != DateTime.MinValue);
+                IEnumerable<DO.Parcel> receivingLst = dal.IEParcelList().Where(x => x.TargetId == item.ID && x.Delivered != DateTime.MinValue);
                 int sent_and_delivLstCount = sent_and_delivLst.Count();
                 int sent_and_notDelivLstCount = sent_and_notDelivLst.Count();
                 int receivLstCount = receivLst.Count();
@@ -116,17 +116,17 @@ namespace BL
         /// <returns></returns>
         public IEnumerable<ParcelDescription> displayParcelList()
         {
-            IEnumerable<DO.Parcel> parcelsFromDal = p.IEParcelList();
+            IEnumerable<DO.Parcel> parcelsFromDal = dal.IEParcelList();
             List<ParcelDescription> parList = new List<ParcelDescription>();
 
-            foreach (var item in p.IEParcelList())
+            foreach (var item in dal.IEParcelList())
             {
                 ParcelDescription tempPar = new ParcelDescription();
                 tempPar.Id = item.ID;
                 try
                 {
-                    tempPar.SenderName = p.ClientById(item.SenderId).Name;
-                    tempPar.TargetName = p.ClientById(item.TargetId).Name;
+                    tempPar.SenderName = dal.ClientById(item.SenderId).Name;
+                    tempPar.TargetName = dal.ClientById(item.TargetId).Name;
                 }
                 catch (DO.ClientException ex)
                 {
@@ -162,7 +162,7 @@ namespace BL
             List<StationDescription> statList = new List<StationDescription>();
             StationDescription tempStat = new StationDescription();
             IEnumerable<DO.Station> dalFreeStations = new List<DO.Station>();
-            dalFreeStations = p.IEStationList(x => x.ChargeSlots > 0);
+            dalFreeStations = dal.IEStationList(x => x.ChargeSlots > 0);
            
 
             foreach (var item in dalFreeStations)
@@ -172,7 +172,7 @@ namespace BL
                     Id = item.ID,
                     name = item.Name,
                     freeChargeSlots = item.ChargeSlots,
-                    fullChargeSlots = p.IEDroneChargeList().Where(x => x.StationId == item.ID).Count(),
+                    fullChargeSlots = dal.IEDroneChargeList().Where(x => x.StationId == item.ID).Count(),
                 }) ;
             }
             return statList;
@@ -199,7 +199,7 @@ namespace BL
         public IEnumerable<ParcelDescription> displayParcelsNotAssigned()
         {
             List<ParcelDescription> PDList = new List<ParcelDescription>();
-            foreach (var item in p.IEParcelList())
+            foreach (var item in dal.IEParcelList())
             {
                 if (item.Scheduled != DateTime.MinValue)
                 {
@@ -240,7 +240,7 @@ namespace BL
                 List<DroneCharging> droneCharging = new List<DroneCharging>();
                 List<int> DronesID = new List<int>();
 
-                IEnumerable<DO.DroneCharge> droneCharges = p.IEDroneChargeList();  //finds the list which contains the the drone charges from DAL
+                IEnumerable<DO.DroneCharge> droneCharges = dal.IEDroneChargeList();  //finds the list which contains the the drone charges from DAL
                 foreach (var item in droneCharges)
                 {
                     if (item.StationId == stationId)  // finds the station with the ID received 

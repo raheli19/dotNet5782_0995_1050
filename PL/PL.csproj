@@ -12,25 +12,19 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="addbutton.png" />
     <None Remove="addParcel.png" />
     <None Remove="adduser.png" />
-    <None Remove="backgroundUser.png" />
     <None Remove="backuser.png" />
-    <None Remove="cancelbutton.png" />
     <None Remove="checked.png" />
     <None Remove="clientListBack.png" />
     <None Remove="clientUpdate.png" />
     <None Remove="close.png" />
-    <None Remove="closebutton.png" />
     <None Remove="colisBackground.png" />
     <None Remove="deliveringProcess.png" />
     <None Remove="drone.png" />
     <None Remove="droneGrouping.png" />
     <None Remove="droneListBack.png" />
-    <None Remove="exit.png" />
     <None Remove="fond.png" />
-    <None Remove="fond2.png" />
     <None Remove="fondessai.png" />
     <None Remove="mainwinddrone.png" />
     <None Remove="parcelBackgound.png" />
@@ -39,7 +33,6 @@
     <None Remove="stationBackground.png" />
     <None Remove="userBack.png" />
     <None Remove="userfonddecran.png" />
-    <None Remove="workeraddclientback.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -47,34 +40,28 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="addbutton.png" />
-    <Resource Include="addParcel.png" />
-    <Resource Include="adduser.png" />
-    <Resource Include="backgroundUser.png" />
-    <Resource Include="backuser.png" />
-    <Resource Include="cancelbutton.png" />
-    <Resource Include="checked.png" />
-    <Resource Include="clientListBack.png" />
-    <Resource Include="clientUpdate.png" />
-    <Resource Include="close.png" />
-    <Resource Include="closebutton.png" />
-    <Resource Include="colisBackground.png" />
-    <Resource Include="deliveringProcess.png" />
-    <Resource Include="drone.png" />
-    <Resource Include="droneGrouping.png" />
-    <Resource Include="droneListBack.png" />
-    <Resource Include="exit.png" />
-    <Resource Include="fond.png" />
-    <Resource Include="fond2.png" />
-    <Resource Include="fondessai.png" />
-    <Resource Include="mainwinddrone.png" />
-    <Resource Include="parcelBackgound.png" />
-    <Resource Include="parcelUpdate.png" />
-    <Resource Include="stationAdd.png" />
-    <Resource Include="stationBackground.png" />
-    <Resource Include="userBack.png" />
-    <Resource Include="userfonddecran.png" />
-    <Resource Include="workeraddclientback.png" />
+    <Resource Include="images\addParcel.png" />
+    <Resource Include="images\adduser.png" />
+    <Resource Include="images\backuser.png" />
+    <Resource Include="images\checked.png" />
+    <Resource Include="images\clientListBack.png" />
+    <Resource Include="images\clientUpdate.png" />
+    <Resource Include="images\close.png" />
+    <Resource Include="images\colisBackground.png" />
+    <Resource Include="images\deliveringProcess.png" />
+    <Resource Include="images\drone.png" />
+    <Resource Include="images\droneGrouping.png" />
+    <Resource Include="images\droneListBack.png" />
+    <Resource Include="images\exit.png" />
+    <Resource Include="images\fond.png" />
+    <Resource Include="images\fondessai.png" />
+    <Resource Include="images\mainwinddrone.png" />
+    <Resource Include="images\parcelBackgound.png" />
+    <Resource Include="images\parcelUpdate.png" />
+    <Resource Include="images\stationAdd.png" />
+    <Resource Include="images\stationBackground.png" />
+    <Resource Include="images\userBack.png" />
+    <Resource Include="images\userfonddecran.png" />
   </ItemGroup>
 
 </Project>

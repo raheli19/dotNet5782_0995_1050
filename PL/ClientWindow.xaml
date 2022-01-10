@@ -20,9 +20,9 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Grid x:Name="UpgradeClientGrid" Visibility="Visible" Margin="-3,0,3,0">
+        <Grid x:Name="UpgradeClientGrid" Visibility="Hidden" Margin="-3,0,3,0">
             <Grid.Background>
-                <ImageBrush ImageSource="/clientUpdate.png" Opacity="0.3"/>
+                <ImageBrush ImageSource="/images/clientUpdate.png" Opacity="0.3"/>
             </Grid.Background>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="193*"/>
@@ -35,7 +35,7 @@
             </Button>
             <Button Content="" HorizontalAlignment="Left" ToolTip="Close" Height="49" Margin="631,353,0,0" VerticalAlignment="Top" Width="120" Click="Button_Close" FontFamily="Cambria" FontWeight="Bold" Foreground="Red" FontSize="22" FontStyle="Normal" BorderThickness="3,3,3,3" SnapsToDevicePixels="True">
                 <Button.Background>
-                    <ImageBrush ImageSource="/close.png"/>
+                    <ImageBrush ImageSource="/images/close.png"/>
                 </Button.Background>
             </Button>
             <Label x:Name="Client_Label"   HorizontalAlignment="Left" Margin="10,120,0,0" VerticalAlignment="Top" Height="298" Width="315" FontWeight="Bold" FontStyle="Italic" FontSize="16">
@@ -55,12 +55,12 @@
             <Label x:Name="UpdateLabel"  HorizontalAlignment="Left" Margin="23,60,0,0" VerticalAlignment="Top" Height="38" Width="302" FontSize="16" FontWeight="Bold" FontStyle="Italic" BorderThickness="1,1,1,1" BorderBrush="Black" Foreground="#FF530C0C" Visibility="Hidden"/>
             <Button x:Name="CheckUpdate" HorizontalAlignment="Left" Height="28" Margin="308,108,0,0" VerticalAlignment="Top"  Width="34" Visibility="Hidden" Click="Check_Click_Update">
                 <Button.Background>
-                    <ImageBrush ImageSource="/checked.png"/>
+                    <ImageBrush ImageSource="/images/checked.png"/>
                 </Button.Background>
             </Button>
             <Button x:Name="CheckUpdate2" HorizontalAlignment="Left" Height="28" Margin="134,108,0,0" VerticalAlignment="Top"  Width="34" Visibility="Hidden" Click="Check_Click_Update">
                 <Button.Background>
-                    <ImageBrush ImageSource="/checked.png"/>
+                    <ImageBrush ImageSource="/images/checked.png"/>
                 </Button.Background>
             </Button>
             <!--<ListView x:Name="ParcelFromClient" ItemsSource="{Binding}" MouseDoubleClick="">    </ListView>-->
@@ -88,9 +88,9 @@
 
 
         </Grid>
-        <Grid x:Name="AddGridClient" Visibility="Hidden">
+        <Grid x:Name="AddGridClient" Visibility="Visible">
             <Grid.Background>
-                <ImageBrush ImageSource="/fondessai.png"/>
+                <ImageBrush ImageSource="/images/fondessai.png"/>
             </Grid.Background>
             <!--buttonadd-->
             <!--<Button x:Name="AddClientButton" Content="Add a New Client" HorizontalAlignment="Left"                  
@@ -108,7 +108,7 @@
                 </Label.BorderBrush>
             </Label>
 
-            <Label Content="Id" HorizontalAlignment="Left" Height="28" Margin="89,104,0,0" VerticalAlignment="Top" Width="102" FontFamily="Arial Black" FontWeight="Bold"/>
+            <Label Content="Id" HorizontalAlignment="Left" Height="28" Margin="89,104,0,0" VerticalAlignment="Top" Width="60" FontFamily="Arial Black" FontWeight="Bold"/>
             <Label Content="Name" HorizontalAlignment="Left" Height="28" Margin="89,162,0,0" VerticalAlignment="Top" Width="120" FontFamily="Arial Black" FontWeight="Normal"/>
             <Label Content="Phone" HorizontalAlignment="Left" Height="28" Margin="89,228,0,0" VerticalAlignment="Top" Width="120" FontFamily="Arial Black"/>
             <Label Content="Latitude" HorizontalAlignment="Left" Height="28" Margin="89,294,0,0" VerticalAlignment="Top" Width="120" FontFamily="Arial Black"/>
@@ -116,11 +116,11 @@
             <TextBox x:Name="txt_id" HorizontalAlignment="Left" KeyDown="id_enter" Height="28" Margin="225,104,0,0" Text="{Binding ID, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top" Width="124" BorderBrush="#FF1111D1" BorderThickness="2,2,2,2"/>
             <TextBox x:Name="txt_name" KeyDown="name_enter" HorizontalAlignment="Left" Height="28" Margin="224,162,0,0" Text="{Binding Name, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top" Width="125" BorderBrush="#FF1111D1" BorderThickness="2,2,2,2"/>
             <TextBox x:Name="txt_phone" HorizontalAlignment="Left" KeyDown="phone_enter" Height="28" Margin="224,232,0,0" Text="{Binding Phone, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top" Width="125" BorderBrush="#FF1111D1" BorderThickness="2,2,2,2"/>
-            <TextBox x:Name="txt_lat" HorizontalAlignment="Left" KeyDown="lat_enter" Height="28" Margin="224,294,0,0" Text="{Binding Localisation.latitude, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top" Width="125" TextChanged="txt_lat_TextChanged" BorderBrush="#FF1111D1" BorderThickness="2,2,2,2"/>
-            <TextBox x:Name="txt_long" HorizontalAlignment="Left" Height="28" Margin="224,357,0,0" Text="{Binding Localisation.longitude, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top" Width="125" TextChanged="txt_long_TextChanged" BorderBrush="#FF1111D1" BorderThickness="2,2,2,2"/>
-            <Button Content="" HorizontalAlignment="Left" Height="53" Margin="560,317,0,0" VerticalAlignment="Top" Width="178" Click="Add_button">
+            <TextBox x:Name="txt_lat" HorizontalAlignment="Left" KeyDown="lat_enter" Height="28" Margin="224,294,0,0" Text="{Binding ClientLoc.latitude, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top" Width="125"  BorderBrush="#FF1111D1" BorderThickness="2,2,2,2"/>
+            <TextBox x:Name="txt_long" HorizontalAlignment="Left" KeyDown="long_enter" Height="28" Margin="224,357,0,0" Text="{Binding ClientLoc.longitude, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top" Width="125"  BorderBrush="#FF1111D1" BorderThickness="2,2,2,2"/>
+            <Button  Content="" ToolTip="ADD" HorizontalAlignment="Left" Height="53" Margin="560,317,0,0" VerticalAlignment="Top" Width="178" Click="Add_button">
                 <Button.Background>
-                    <ImageBrush ImageSource="/addbutton.png"/>
+                    <ImageBrush ImageSource="/images/addbutton.png"/>
                 </Button.Background>
                 <!--<Button.Background>
                         <ImageBrush ImageSource="/addbutton.png"/>
@@ -128,7 +128,7 @@
             </Button>
             <Button Content="" HorizontalAlignment="Left" ToolTip="Close" Height="49" Margin="690,19,0,0" VerticalAlignment="Top" Width="100" Click="Button_Close" FontFamily="Cambria" FontWeight="Bold" Foreground="Red" FontSize="22" FontStyle="Normal" BorderThickness="3,3,3,3" SnapsToDevicePixels="True">
                 <Button.Background>
-                    <ImageBrush ImageSource="/cancelbutton.png"/>
+                    <ImageBrush ImageSource="/images/cancelbutton.png"/>
                 </Button.Background>
             </Button>
 

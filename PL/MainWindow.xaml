@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="473" Width="800">
     <Window.Background>
-        <ImageBrush ImageSource="/mainwinddrone.png"/>
+        <ImageBrush ImageSource="/images/mainwinddrone.png"/>
     </Window.Background>
 
     <Grid x:Name="MainGrid" Height="430" Width="780">

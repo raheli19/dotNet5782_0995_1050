@@ -29,7 +29,7 @@ namespace BL
             List<DroneCharging> droneCharging = new List<DroneCharging>();
             List<int> DronesID = new List<int>();
 
-            IEnumerable<DO.DroneCharge> droneCharges = p.IEDroneChargeList();  //finds the list which contains the the drone charges from DAL
+            IEnumerable<DO.DroneCharge> droneCharges = dal.IEDroneChargeList();  //finds the list which contains the the drone charges from DAL
             foreach (var item in droneCharges)
             {
                 if (item.StationId == stationBL.ID)  // finds the station with the ID received 
@@ -66,7 +66,7 @@ namespace BL
             ParcelInDelivering PID = new ParcelInDelivering();
             if (droneBL.Status == DroneStatuses.shipping)
             {
-                foreach (var item in p.IEParcelList()) //finds the details of the parcel
+                foreach (var item in dal.IEParcelList()) //finds the details of the parcel
                 {
                     try
                     {
@@ -78,17 +78,17 @@ namespace BL
                             ClientInParcel sender = new ClientInParcel();
                             ClientInParcel target = new ClientInParcel();
                             sender.ID = item.SenderId;
-                            sender.name = p.ClientById(item.SenderId).Name;
+                            sender.name = dal.ClientById(item.SenderId).Name;
                             target.ID = item.TargetId;
-                            target.name = p.ClientById(item.TargetId).Name;
+                            target.name = dal.ClientById(item.TargetId).Name;
                             PID.Sender = sender;
                             PID.Target = target;
                             Localisation pickLoc = new Localisation();
                             Localisation delLoc = new Localisation();
-                            pickLoc.latitude = p.ClientById(item.SenderId).Latitude;
-                            pickLoc.longitude = p.ClientById(item.SenderId).Longitude;
-                            delLoc.latitude = p.ClientById(item.TargetId).Latitude;
-                            delLoc.longitude = p.ClientById(item.TargetId).Longitude;
+                            pickLoc.latitude = dal.ClientById(item.SenderId).Latitude;
+                            pickLoc.longitude = dal.ClientById(item.SenderId).Longitude;
+                            delLoc.latitude = dal.ClientById(item.TargetId).Latitude;
+                            delLoc.longitude = dal.ClientById(item.TargetId).Longitude;
                             PID.picking = pickLoc;
                             PID.delivered = delLoc;
                             PID.distance = distance(PID.picking.latitude, PID.picking.longitude, PID.delivered.latitude, PID.delivered.longitude);
@@ -148,11 +148,11 @@ namespace BL
             tempSender.ID = parcelBL.Sender.ID;
             try
             {
-                tempSender.name = p.ClientById(tempSender.ID).Name;
+                tempSender.name = dal.ClientById(tempSender.ID).Name;
                 parcelBL.Sender = tempSender;
 
                 tempTarget.ID = parcelBL.Target.ID;
-                tempTarget.name = p.ClientById(tempTarget.ID).Name;
+                tempTarget.name = dal.ClientById(tempTarget.ID).Name;
                 parcelBL.Target = tempTarget;
 
             }
@@ -182,7 +182,7 @@ namespace BL
         {
             DroneCharging droneCharging = new DroneCharging();
 
-            IEnumerable<DO.DroneCharge> droneCharges = p.IEDroneChargeList();  //finds the list which contains the the drone charges from DAL
+            IEnumerable<DO.DroneCharge> droneCharges = dal.IEDroneChargeList();  //finds the list which contains the the drone charges from DAL
             foreach (var item in droneCharges)
             {
                 Drone droneInStation = GetDrone(item.DroneId);
@@ -192,7 +192,7 @@ namespace BL
                     droneCharging.battery = droneInStation.Battery;
 
                 }
-
+                
 
             }
             return droneCharging;

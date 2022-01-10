@@ -40,7 +40,7 @@ namespace BL
             double minDistance = 99999999;
             double tempDistance = 0;
 
-            foreach (var item in p.IEStationList())
+            foreach (var item in dal.IEStationList())
             {
                 if (flag == true)
                 {
@@ -104,7 +104,7 @@ namespace BL
         {
             try
             {
-                DO.Client c = p.ClientById(id);
+                DO.Client c = dal.ClientById(id);
                 return c.Name;
             }
             catch (DO.ClientException custEX)
@@ -134,7 +134,7 @@ namespace BL
             DO.Parcel tempParcel = new DO.Parcel();
             foreach (var item in list)
             {
-                double dist = distance(p.ClientById(item.SenderId).Latitude, p.ClientById(item.SenderId).Longitude, droneLoc.latitude, droneLoc.longitude);
+                double dist = distance(dal.ClientById(item.SenderId).Latitude, dal.ClientById(item.SenderId).Longitude, droneLoc.latitude, droneLoc.longitude);
                 if (dist < minDist)
                 {
                     minDist = dist;
@@ -174,7 +174,7 @@ namespace BL
         #region GetIdParcel
         public int GetIdParcel(int senderId, int TargetId)
         {
-             int id = p.DalGetIdParcel( senderId,TargetId);
+             int id = dal.DalGetIdParcel( senderId,TargetId);
             return id;
         }
         #endregion
