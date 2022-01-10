@@ -36,6 +36,7 @@ namespace PL
 
         // -------------------------------------------------------ADD------------------------------------------------------------------------------
         // ctor to add a station
+        #region CTOR:AddStation
         public StationWindow(BLApi.IBL bl, object DroneListWindow)
         {
             InitializeComponent();
@@ -48,8 +49,9 @@ namespace PL
             ListViewStation = (ListView)DroneListWindow;
 
         }
+        #endregion
 
-        #region enterTab
+        #region EnterTab
         private void id_enter(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
@@ -93,10 +95,10 @@ namespace PL
                 Add_button(sender, e);
             }
         }
-        
+
         #endregion
 
-
+        #region Add_button
         private void Add_button(object sender, RoutedEventArgs e)
         {
 
@@ -148,10 +150,13 @@ namespace PL
             //dlw.CheckFields();
             this.Close();
         }
+        #endregion
+
         // -------------------------------------------------------UPGRADE------------------------------------------------------------------------------
 
-        #region constructorUPGRADE
         //ctor to upgrade the station
+        #region CTRO:UpdateStation
+
         public StationWindow(object selectedItem, BLApi.IBL bl, object stationListView)
         {
             InitializeComponent();
@@ -184,6 +189,7 @@ namespace PL
         }
         #endregion
 
+        #region DronesChargingListView_MouseDoubleClick
         private void DronesChargingListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
 
@@ -193,9 +199,9 @@ namespace PL
             //comboStatusSelector.SelectedItem = null;
             //comboWeightSelector.SelectedItem = null;
         }
+        #endregion
 
- 
-
+        #region ClickUpdate
         private void ClickUpdate(object sender, RoutedEventArgs e)
         {  MessageBox.Show(/*"The model of your drone is being updated.*/"Please close this window and enter the new name and/or new number of charge slots.", "Success!", MessageBoxButton.OK, MessageBoxImage.Information);
                 UpdateNameTextBox.Visibility = Visibility.Visible;
@@ -209,6 +215,9 @@ namespace PL
             UpdateCSLabel.Content = "Enter the new number of charge slots";
 
         }
+        #endregion
+
+        #region Check_Click_Update
         private void Check_Click_Update(object sender, RoutedEventArgs e)
         {
             if (UpdateNameTextBox.Text != "")
@@ -239,7 +248,10 @@ namespace PL
             //UpdateCSLabel.Visibility = Visibility.Hidden;
             //CheckCSUpdate.Visibility = Visibility.Hidden;
         }
-       public void Check_Click_UpdateCS(object sender, RoutedEventArgs e)
+        #endregion
+
+        #region Check_Click_UpdateCS
+        public void Check_Click_UpdateCS(object sender, RoutedEventArgs e)
         {
             if (UpdateCSTextBox.Text != "")
                 newCS = int.Parse(UpdateCSTextBox.Text);
@@ -263,5 +275,6 @@ namespace PL
             UpdateCSLabel.Visibility = Visibility.Hidden;
             CheckCSUpdate.Visibility = Visibility.Hidden;
         }
+        #endregion
     }
 }
