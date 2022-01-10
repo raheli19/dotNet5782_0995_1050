@@ -27,6 +27,7 @@ namespace PL
             InitializeComponent();
         }
 
+        #region Client_Open
         private void OpenClientWindow(object sender, RoutedEventArgs e) 
         {
             openClientWindow.Cursor = Cursors.AppStarting;
@@ -34,7 +35,9 @@ namespace PL
             openClientWindow.Cursor = Cursors.Arrow;
 
         }
+        #endregion
 
+        #region Worker_Open
         private void OpenWorkerWindow(object sender, RoutedEventArgs e)
         {
             openClientWindow.Cursor = Cursors.AppStarting;
@@ -43,5 +46,6 @@ namespace PL
             openClientWindow.Cursor = Cursors.Arrow;
 
         }
+        #endregion
     }
 }

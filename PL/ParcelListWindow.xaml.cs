@@ -31,6 +31,8 @@ namespace PL
         public static WeightCategories weightStat = 0;
         public bool weightFlag = false;
         public bool priorityFlag = false; //droneFlag
+
+        #region Ctor
         public ParcelListWindow(BLApi.IBL bl)
         {
             InitializeComponent();
@@ -42,27 +44,12 @@ namespace PL
                 boParcelList.Add(item);
 
             }
-            
-
-
-
-          
-
             //combobox?
         }
+        #endregion
 
-        private void ParcelView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            new ParcelWindow(ParcelsListView.SelectedItem, bl, ParcelsListView).Show();
-        }
-
-        private void FilterBySender_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            new ParcelWindow(FilterBySender.SelectedItem, bl, ParcelsListView).Show();
-        }
-
-            #region closeFunctions
-            private void Button_Close(object sender, RoutedEventArgs e)
+        #region Close_Functions
+        private void Button_Close(object sender, RoutedEventArgs e)
         {
             this.checkFlag = true; // will allow us to close the window from the button and not from the "X"
             this.Close();
@@ -78,17 +65,33 @@ namespace PL
         }
         #endregion
 
+        #region OpenParcel
         private void button_addParcel(object sender, RoutedEventArgs e)
         {
             ParcelWindow subWindow = new ParcelWindow(bl, ParcelsListView);
             subWindow.Show();
         }
+        #endregion
+
+        #region Double_Click
 
         private void FilterByTarget_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             new ParcelWindow(FilterByTarget.SelectedItem, bl, ParcelsListView).Show();
         }
+        private void ParcelView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            new ParcelWindow(ParcelsListView.SelectedItem, bl, ParcelsListView).Show();
+        }
 
+        private void FilterBySender_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            new ParcelWindow(FilterBySender.SelectedItem, bl, ParcelsListView).Show();
+        }
+
+        #endregion
+
+        #region Filters_Select
         private void FilterBySender1_Click(object sender, RoutedEventArgs e)
         {
             List<ParcelDescription> parcelsBySender = new List<ParcelDescription>();
@@ -130,15 +133,37 @@ namespace PL
             FilterBySender.Visibility = Visibility.Hidden;
             ParcelsListView.Visibility = Visibility.Hidden;
         }
+        #endregion
 
+        #region Clear_Click
         private void clearGrouping_Click(object sender, RoutedEventArgs e)
         {
             FilterBySender.Visibility = Visibility.Hidden;
             FilterByTarget.Visibility = Visibility.Hidden;
-            ParcelsListView.Visibility= Visibility.Visible; 
+            ParcelsListView.Visibility = Visibility.Visible;
         }
 
-        #region selections
+        private void ClearPriority_Click(object sender, RoutedEventArgs e)
+        {
+            Combo_priority.SelectedItem = null;
+            weightFlag = false;
+            weightStat = 0;
+            ParcelsListView.DataContext = boParcelList;
+
+        }
+
+        private void ClearWeight_Click(object sender, RoutedEventArgs e)
+        {
+            Combo_weight.SelectedItem = null;
+            parcelPriority = 0;
+            priorityFlag = false;
+            ParcelsListView.DataContext = boParcelList;
+
+        }
+
+        #endregion
+
+        #region Combo_Selections
         private void Combo_weight_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (Combo_weight.SelectedItem == null)
@@ -154,7 +179,7 @@ namespace PL
                 this.ParcelsListView.ItemsSource = boParcelList.Where(x => x.weight == weight && x.priority == parcelPriority);
             else
                 this.ParcelsListView.ItemsSource = boParcelList.Where(x => x.weight == weight);
-           
+
         }
 
         private void Combo_priority_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -175,23 +200,6 @@ namespace PL
         }
         #endregion
 
-        private void ClearPriority_Click(object sender, RoutedEventArgs e)
-        {
-            Combo_priority.SelectedItem = null;
-            weightFlag = false;
-            weightStat = 0;
-            ParcelsListView.DataContext = boParcelList;
-
-        }
-
-        private void ClearWeight_Click(object sender, RoutedEventArgs e)
-        {
-            Combo_weight.SelectedItem = null;
-            parcelPriority = 0;
-            priorityFlag = false;
-            ParcelsListView.DataContext = boParcelList;
-
-        }
 
     }
 }
