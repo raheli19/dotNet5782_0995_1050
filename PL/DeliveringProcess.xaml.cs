@@ -34,9 +34,13 @@ namespace PL
             InitializeComponent();
             this.MaxWeightL.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
             this.PriorityL.ItemsSource = Enum.GetValues(typeof(BO.Priorities));
+            this.Combo_TargetId.ItemsSource = bl.AllTargets_Id();
             DataContext = DataCParcel;
             DataCParcel.Sender = new();
             DataCParcel.Target = new();
+            DataCParcel.Sender.ID = DataCclient.ID;
+            DataCParcel.Sender.name = DataCclient.Name;
+            DataCParcel.ID = Dal.Configuration.RunnerIDnumber;
             this.bl = bl;
             this.DataCclient = DataCclient;
             this.clientStatus = clientStatus;
@@ -80,18 +84,21 @@ namespace PL
 
         private void SendNewParcel_Click(object sender, RoutedEventArgs e)
         {
-            senderID.Background = Brushes.White;
-            TargetID.Background = Brushes.White;
+            ////senderID.Background = Brushes.White;
+            Combo_TargetId.Background = Brushes.White;
             //Labels
-            SenderId.Visibility = Visibility.Visible;
+            //SenderId.Visibility = Visibility.Visible;
             TargetId.Visibility = Visibility.Visible;
             MaxWeight.Visibility = Visibility.Visible;
             Priority.Visibility = Visibility.Visible;
             //textboxs and comboBox
-            senderID.Visibility = Visibility.Visible;
-            TargetID.Visibility = Visibility.Visible;
+            //senderID.Visibility = Visibility.Visible;
+            Combo_TargetId.Visibility = Visibility.Visible;
             MaxWeightL.Visibility = Visibility.Visible;
             PriorityL.Visibility = Visibility.Visible;
+            Add_Parcel_ToSend.Visibility = Visibility.Visible;
+
+
 
             try
             {
@@ -99,15 +106,9 @@ namespace PL
             }
             catch (Exception ex)
             {
-                if (ex.Message == "SenderID not valid")
-                {
-                    senderID.Background = Brushes.Red;
-                    MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-
                 if (ex.Message == "TargetID not valid")
                 {
-                    TargetID.Background = Brushes.Red;
+                    Combo_TargetId.Background = Brushes.Red;
                     MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
 
@@ -145,15 +146,9 @@ namespace PL
 
         #endregion
 
-        private void ComboBox_WeightSelection(object sender, SelectionChangedEventArgs e)
-        {
+        
 
-        }
-
-        private void ComboBox_PrioritySelection(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
+        
 
         #region checkPickedUp
         private void Picked_up(object sender, RoutedEventArgs e)
@@ -204,19 +199,44 @@ namespace PL
             label_info.Visibility = Visibility.Hidden;
             Parcel_Id_Entered.Visibility = Visibility.Hidden;
             click_PickedUpButton.Visibility = Visibility.Hidden;
-            SenderId.Visibility = Visibility.Hidden;
             TargetId.Visibility = Visibility.Hidden;
             MaxWeight.Visibility = Visibility.Hidden;
             Priority.Visibility = Visibility.Hidden;
             //textboxs and comboBox
-            senderID.Visibility = Visibility.Hidden;
-            TargetID.Visibility = Visibility.Hidden;
+            Combo_TargetId.Visibility = Visibility.Hidden;
             MaxWeightL.Visibility = Visibility.Hidden;
             PriorityL.Visibility = Visibility.Hidden;
             parcelsToClient.Visibility = Visibility.Hidden;
             parcelsFromClient.Visibility = Visibility.Hidden;
+            Add_Parcel_ToSend.Visibility = Visibility.Hidden;
 
         }
         #endregion
+
+        private void Combo_TargetId_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DataCParcel.Target.ID = (int)Combo_TargetId.SelectedItem;
+            DataCParcel.Target.name = bl.displayClient(DataCParcel.Target.ID).Name;
+
+        }
+
+        private void Add_Parcel_ToSend_Click(object sender, RoutedEventArgs e)
+        {
+            if (MaxWeightL==null || MaxWeightL == null || Combo_TargetId == null)
+            {
+                MessageBox.Show("Please fill al the fields", "WARNING", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            try
+            {
+                bl.addParcel(DataCParcel);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+
+            }
+        }
     }
 }

@@ -26,14 +26,13 @@
         <Label x:Name="parcelsToClient" Content="" HorizontalAlignment="Left" Margin="560,27,0,0" VerticalAlignment="Top" Width="210" Height="330" Background="#FFD8C1E2" Visibility="Hidden"/>
         <Button x:Name="SendNewParcel" ToolTip="send a new one" Content="Send a new parcel" HorizontalAlignment="Left" Margin="29,343,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.029,-0.386" Width="240" Height="44" FontStyle="Italic" FontSize="24" Click="SendNewParcel_Click"/>
         <Button x:Name="PickedUp" ToolTip="checking" Content="Did the drone&#xD;&#xA;picked up the package?" HorizontalAlignment="Left" Margin="32,251,0,0" VerticalAlignment="Top" Width="237" Height="73" FontStyle="Italic" FontSize="23" Click="Picked_up"/>
-        <Label x:Name="SenderId" Visibility="Hidden" Content="SenderId" HorizontalAlignment="Left" Margin="522,27,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Background="#FF88B91A" Width="76"/>
         <Label x:Name="TargetId" Visibility="Hidden"  Content="Target Id" HorizontalAlignment="Left" Margin="522,83,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16" Background="#FF88B91A" Width="76"/>
         <Label x:Name="MaxWeight" Visibility="Hidden"  Content="MaxWeight" HorizontalAlignment="Left" Margin="522,148,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Bold" Background="#FF88B91A"/>
         <Label x:Name="Priority" Visibility="Hidden"  Content="Priority" HorizontalAlignment="Left" Margin="539,208,0,0" VerticalAlignment="Top" Background="#FF88B91A" FontWeight="Bold" FontSize="14"/>
-        <TextBox x:Name="senderID" Visibility="Hidden" Text="{Binding Sender.ID, Mode=TwoWay}" HorizontalAlignment="Left" Margin="634,27,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="96" Height="23"/>
-        <TextBox x:Name="TargetID" Visibility="Hidden" Text="{Binding Target.ID,Mode=TwoWay}" HorizontalAlignment="Left" Margin="634,83,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="96" RenderTransformOrigin="0.406,0.369" Height="31"/>
-        <ComboBox x:Name="MaxWeightL" Visibility="Hidden" Text="{Binding Weight,Mode=TwoWay}" HorizontalAlignment="Left" Margin="634,148,0,0" SelectionChanged="ComboBox_WeightSelection"  VerticalAlignment="Top" Width="96" Height="29"/>
-        <ComboBox x:Name="PriorityL" Visibility="Hidden" Text="{Binding Priority,Mode=TwoWay}" HorizontalAlignment="Left" Margin="634,210,0,0" SelectionChanged="ComboBox_PrioritySelection" VerticalAlignment="Top" Width="96" Height="27"/>
+        <ComboBox x:Name="Combo_TargetId" Visibility="Hidden" Text="{Binding Target.ID, Mode=TwoWay}" HorizontalAlignment="Left" Margin="632,88,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="Combo_TargetId_SelectionChanged"/>
+
+        <ComboBox x:Name="MaxWeightL" Visibility="Hidden" Text="{Binding Weight,Mode=TwoWay}" HorizontalAlignment="Left" Margin="634,148,0,0"   VerticalAlignment="Top" Width="96" Height="29"/>
+        <ComboBox x:Name="PriorityL" Visibility="Hidden" Text="{Binding Priority,Mode=TwoWay}" HorizontalAlignment="Left" Margin="634,210,0,0"  VerticalAlignment="Top" Width="96" Height="27"/>
         <Label x:Name="listOf_Parcels" Content="Label" HorizontalAlignment="Left" Height="254" Margin="350,38,0,0" VerticalAlignment="Top" Width="219" Visibility="Hidden"/>
         <Button x:Name="click_PickedUpButton" ToolTip="yes" Content="" HorizontalAlignment="Left" Visibility="Hidden" Cursor="Hand" Height="32" Margin="648,205,0,0" VerticalAlignment="Top" Width="34" Click="click_PickedUp_Click">
             <Button.Background>
@@ -45,6 +44,7 @@
         <TextBox x:Name="Parcel_Id_Entered" HorizontalAlignment="Left" Height="36" Margin="569,42,0,0" Text="{Binding ID ,Mode=TwoWay}" TextWrapping="Wrap" Visibility="Hidden" VerticalAlignment="Top" Width="161"/>
         <Button Content="CLOSE ALL" ToolTip="CLOSE ALL" HorizontalAlignment="Left" Height="40" Margin="650,357,0,0" VerticalAlignment="Top" Width="108" Click="Close_Click" Background="#FFD11616" FontSize="20" FontWeight="Bold" FontStyle="Normal" BorderBrush="#FF170909"/>
         <Button x:Name="received_parcel" ToolTip="checking" Content="I received my parcel" HorizontalAlignment="Left" Height="48" Margin="32,174,0,0" VerticalAlignment="Top" Width="237" Click="received_parcel_Click" FontSize="24" FontStyle="Italic"/>
+        <Button x:Name="Add_Parcel_ToSend" Visibility="Hidden" Content="ADD" HorizontalAlignment="Left" Height="36" Margin="634,268,0,0" VerticalAlignment="Top" Width="96" Click="Add_Parcel_ToSend_Click"/>
 
 
     </Grid>

@@ -81,7 +81,7 @@ namespace Dal
         #endregion
         
 
-        //-----------------------------------GET PARCEL AND PARCEL LIST-------------------------------------------------------
+        //-----------------------------------GET PARCEL AND PARCEL LIST------------------------------------
 
 
         #region ParcelById

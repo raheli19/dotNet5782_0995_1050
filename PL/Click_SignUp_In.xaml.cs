@@ -33,7 +33,7 @@ namespace PL
             DataCclient.ClientLoc = new Localisation();
             this.bl = bl;
             Sign_Up.Visibility = Visibility.Visible;
-
+            Sign_In.Visibility = Visibility.Hidden;
 
         }
         #endregion
@@ -45,6 +45,7 @@ namespace PL
             DataContext = DataCclient;
             this.bl = bl;
             Sign_In.Visibility = Visibility.Visible;
+            Sign_Up.Visibility = Visibility.Hidden;
         }
         #endregion
 
@@ -91,7 +92,7 @@ namespace PL
         {
             if (e.Key == Key.Enter)
             {
-
+                button_Join.Focus();
                 button_Join_Click(sender, e);// verifier si ca marche
             }
         }

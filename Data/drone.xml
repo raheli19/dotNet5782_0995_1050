@@ -1,28 +1,28 @@
 <?xml version="1.0"?>
 <ArrayOfDrone xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Drone>
-    <ID>1698875</ID>
+    <ID>4997473</ID>
     <Model>Nebula 0</Model>
-    <weight>low</weight>
+    <weight>heavy</weight>
   </Drone>
   <Drone>
-    <ID>4455767</ID>
+    <ID>6931280</ID>
     <Model>Nebula 1</Model>
-    <weight>low</weight>
+    <weight>middle</weight>
   </Drone>
   <Drone>
-    <ID>9092979</ID>
+    <ID>6958605</ID>
     <Model>Nebula 2</Model>
     <weight>heavy</weight>
   </Drone>
   <Drone>
-    <ID>4263316</ID>
+    <ID>5708559</ID>
     <Model>Nebula 3</Model>
-    <weight>low</weight>
+    <weight>heavy</weight>
   </Drone>
   <Drone>
-    <ID>3946303</ID>
+    <ID>1248183</ID>
     <Model>Nebula 4</Model>
-    <weight>low</weight>
+    <weight>middle</weight>
   </Drone>
 </ArrayOfDrone>

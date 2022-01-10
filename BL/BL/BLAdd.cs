@@ -136,8 +136,6 @@ namespace BL
             {
                 throw new AlreadyExist("This Client already exists", ex); //throws a BL exception
             }
-
-
         }
 
         #endregion

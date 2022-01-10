@@ -261,8 +261,8 @@ namespace PL
         {
             if (e.Key == Key.Enter)
             {
-
-                Add_button(sender, e);//bug il ne prend pas la longitude
+                ADD.Focus();
+                Add_button(sender, e);
             }
         }
 
