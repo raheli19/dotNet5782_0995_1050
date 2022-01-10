@@ -8,10 +8,10 @@
     <ChargeSlots>6</ChargeSlots>
   </Station>
   <Station>
-    <ID>6275105</ID>
+    <ID>2448290</ID>
     <Name>Bahnhof 1</Name>
-    <Longitude>26.23203703757936</Longitude>
-    <Latitude>25.44405436364191</Latitude>
+    <Longitude>26.2125798549096</Longitude>
+    <Latitude>25.401478726790042</Latitude>
     <ChargeSlots>5</ChargeSlots>
   </Station>
 </ArrayOfStation>

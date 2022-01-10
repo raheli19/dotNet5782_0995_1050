@@ -6,9 +6,10 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="DroneWindow" Height="450" Width="800" Icon="/images/drone.png"
-        Closing="OnClosing">
+        >
 
     <Window.Resources>
+
         <Style TargetType="{x:Type Button}">
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
@@ -17,13 +18,14 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+        <local:DisplaysButtonsInDroneWindow x:Key="DisplaysButtonsInDroneWindow"></local:DisplaysButtonsInDroneWindow>
     </Window.Resources>
-    
+
     <Grid x:Name="MainGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Grid x:Name="AddDroneGrid" Visibility="Visible">
+        <Grid x:Name="AddDroneGrid" Visibility="Hidden">
 
             <Grid.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -182,7 +184,10 @@
 
         </Grid>
 
-        <Grid Name="UpdateDroneGrid" Visibility="Hidden" Opacity="0.745" Margin="-10,0,0,0">
+        <Grid Name="UpdateDroneGrid" Opacity="0.745" Margin="-10,0,0,0">
+
+
+
             <Grid.Background>
                 <ImageBrush ImageSource="/images/fond.png"/>
             </Grid.Background>
@@ -195,10 +200,10 @@
       Content="DELIVERING THE PACKAGE"-->
 
             <!--Update Button-->
-            <Button x:Name="UpdateButton" Content="UPDATE" HorizontalAlignment="Left" 
-                   
-                    Background="Transparent" Margin="648,166,0,0" VerticalAlignment="Top" ToolTip="UPDATE" Height="51" Width="133" BorderBrush="Black" Click="ClickUpdate" Opacity="100" FontFamily="Cambria" FontSize="30" FontWeight="Bold" FontStyle="Italic">
-
+            <Button x:Name="UpdateButton" Content="UPDATE" HorizontalAlignment="Left"       
+                    Background="Transparent" Margin="648,166,0,0" VerticalAlignment="Top"
+                     ToolTip="UPDATE" Height="51" Width="133" BorderBrush="Black" Click="ClickUpdate"
+                     Opacity="100" FontFamily="Cambria" FontSize="30" FontWeight="Bold" FontStyle="Italic">
             </Button>
             <!--we didn't do binding for this part because we use the same text box for 2 things different (one string and one int) so it was better to not use it instead of using two textboxes-->
             <TextBox x:Name="UpdateTextBox"  Visibility="Hidden"  HorizontalAlignment="Left" Height="28" Margin="283,164,0,0"  Background="White" TextWrapping="Wrap" VerticalAlignment="Top" Width="147"/>
@@ -214,7 +219,8 @@
 
             </Button>
 
-            <Button x:Name="CheckFullyCharged" HorizontalAlignment="Left" Height="28" Margin="396,164,0,0" VerticalAlignment="Top" Width="34" Visibility="Hidden" Click="Check_Click_FullyCharged">
+            <Button x:Name="CheckFullyCharged" HorizontalAlignment="Left" Height="28" Margin="396,164,0,0"
+                    VerticalAlignment="Top" Width="34" Visibility="Hidden" Click="Check_Click_FullyCharged">
                 <Button.Background>
                     <ImageBrush ImageSource="/images/checked.png"/>
                 </Button.Background>
@@ -244,6 +250,11 @@
             <Button Name="DeliveringButton" HorizontalAlignment="Left" Background="Transparent" Margin="347,298,0,0" VerticalAlignment="Top" ToolTip="Delivering the parcel" Height="48" Width="279" BorderBrush="Transparent" Click="Button_DeliveringParcel" Opacity="100" FontFamily="Cambria" FontWeight="Bold" FontStyle="Italic" FontSize="22">
 
             </Button>-->
+
+
+            <CheckBox x:Name="simulator" Visibility="Visible" Content="CheckBox" IsChecked="False" Margin="0,0,692,414" />
+            <Button Name="Simulator" Content="Simulator" Grid.Column="1" HorizontalAlignment="Left" Margin="268,0,0,0" Grid.Row="2" VerticalAlignment="Top" Click="Simulator_Click"  />
+            <Button x:Name="Cancellation" Content="Cancel" Grid.Column="1" HorizontalAlignment="Left" Margin="391,0,0,25" Grid.Row="2" VerticalAlignment="Bottom" Click="Cancellation_Click"/>
 
             <Label x:Name="Drone_Label"   HorizontalAlignment="Left" Margin="10,121,0,0" VerticalAlignment="Top" Height="303" Width="273" FontWeight="Bold" FontStyle="Italic"/>
             <Label x:Name="Drones_Details" Content="Drone's details:" HorizontalAlignment="Left" Margin="20,81,0,0" VerticalAlignment="Top" Width="195" FontSize="24" FontWeight="Bold" FontStyle="Italic" BorderThickness="3,3,3,3" Visibility="Visible"/>

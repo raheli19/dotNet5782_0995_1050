@@ -33,6 +33,9 @@ namespace PL
         BO.DroneDescription dataCdroneUpdate = new BO.DroneDescription();
         //private DroneDescription droneDescription = new DroneDescription();
         //DroneListWindow dlw;
+
+        BackgroundWorker backgroundWorker;
+
         ListView ListViewDrone;
         ListView FilterByWeight;
         ListView FilterByStatus;
@@ -214,7 +217,15 @@ namespace PL
             ListViewDrone = (ListView)dronesListView;
             FilterByWeight = (ListView)filterByWeight;
             FilterByStatus = (ListView)filterByStatus;
-            
+
+            backgroundWorker = new BackgroundWorker();
+
+            backgroundWorker.DoWork += Simulator_DoWork;
+
+            backgroundWorker.WorkerReportsProgress = true;
+            backgroundWorker.WorkerSupportsCancellation = true;
+            backgroundWorker.RunWorkerCompleted += Simulator_RunWorkerCompleted;
+
 
         }
 
@@ -507,5 +518,54 @@ namespace PL
             }
         }
         #endregion
+
+        private void Cancellation_Click(object sender, RoutedEventArgs e)
+        {
+            backgroundWorker.CancelAsync();
+        }
+
+
+        bool stop()
+        {
+            return backgroundWorker.CancellationPending;
+        }
+
+        void update()
+        {
+            try
+            {
+                dataCdrone = bl.displayDrone(dataCdroneUpdate.Id);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void Simulator_DoWork(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
+                bl.StartSimulator(dataCdroneUpdate.Id, update, stop);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+        }
+
+        private void Simulator_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            simulator.IsChecked = false;
+        }
+        private void Simulator_Click(object sender, RoutedEventArgs e)
+        {
+            if (backgroundWorker.IsBusy != true)
+            {
+                backgroundWorker.RunWorkerAsync(); // Start the asynchronous operation.
+                simulator.IsChecked = true;
+            }
+        }
     }
 }

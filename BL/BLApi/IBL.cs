@@ -65,5 +65,8 @@ namespace BLApi
         int GetIdParcel(int senderId, int TargetId);
         void RemoveParcel(Parcel parcelToRemove);
         string Name(int id);
+
+        //------------------------------------simulator-----------------------------
+        void StartSimulator(int id, Action action, Func<bool> stop);
     }
 }

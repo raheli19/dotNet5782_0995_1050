@@ -285,6 +285,7 @@ namespace BL
                                 batteryNeeded += distance * BatteryLightWeight;
                             if (parcelConnect.Weight == BO.WeightCategories.middle)
                                 batteryNeeded += distance * BatteryMiddleWeight;
+
                             connectDrone.initialLoc = GetClient(GetParcel(parcelConnect.ID).Target.ID).ClientLoc; // update the dronelocation to the target location
                             IEnumerable<DO.Station> listStationsFromIdal = dal.IEStationList();
                             BO.Localisation checkL = new BO.Localisation(); // the location of closest station to the drone
@@ -382,16 +383,21 @@ namespace BL
             try
             {
                 BO.DroneDescription updateDrone = DroneList[index];
-                updateDrone.battery -= BatteryAccToDistance(distance(collectDrone.initialLoc.latitude, collectDrone.initialLoc.longitude, collectDrone.myParcel.picking.latitude, collectDrone.myParcel.picking.longitude));
-                updateDrone.loc = collectDrone.myParcel.picking;
-                
-                DroneList[index] = updateDrone;
+                if (updateDrone.battery - BatteryAccToDistance(distance(collectDrone.initialLoc.latitude, collectDrone.initialLoc.longitude, collectDrone.myParcel.picking.latitude, collectDrone.myParcel.picking.longitude)) > 0)
+                {
+                    updateDrone.battery -= BatteryAccToDistance(distance(collectDrone.initialLoc.latitude, collectDrone.initialLoc.longitude, collectDrone.myParcel.picking.latitude, collectDrone.myParcel.picking.longitude));
+                    updateDrone.loc = collectDrone.myParcel.picking;
 
-                
-                DO.Parcel parcelDal = dal.ParcelById(collectDrone.myParcel.ID);
-                parcelDal.PickedUp = DateTime.Now;
+                    DroneList[index] = updateDrone;
 
-                dal.UpdateParcelFromBL(parcelDal);
+
+                    DO.Parcel parcelDal = dal.ParcelById(collectDrone.myParcel.ID);
+                    parcelDal.PickedUp = DateTime.Now;
+
+                    dal.UpdateParcelFromBL(parcelDal);
+                }
+                else
+                    throw new Exception("The drone doesn't have enough battery to collect the parcel");
                 //if ((parcelDal.Requested == DateTime.Now || parcelDal.Scheduled == DateTime.Now) && (parcelDal.PickedUp == DateTime.MinValue))
                 //{
                 //    int senderId = parcelDal.SenderId;
@@ -414,7 +420,7 @@ namespace BL
             }
             catch (Exception ex)
             {
-                throw new BO.InputNotValid("The parcel doesn't fit the requirements", ex);
+                throw new BO.InputNotValid( ex.Message);
             }
 
 
@@ -453,6 +459,7 @@ namespace BL
                     DO.Parcel tempParcel = new DO.Parcel();
                     tempParcel = prcel;
                     tempParcel.Delivered = DateTime.Now;
+                    tempParcel.DroneId = 0;
                     dal.AddParcelFromBL(tempParcel);
 
                 }
@@ -461,11 +468,14 @@ namespace BL
             }
             catch (Exception ex)
             {
-                throw new BO.InputNotValid("The drone doesn't fit the requirements", ex);
+                throw new InvalidOperationException("There is no parcel to deliver");
             }
         }
         #endregion
 
-
+        public void StartSimulator(int id, Action action, Func<bool> stop) 
+        {
+            Simulator simulator = new Simulator(this, id, action, stop);
+        }
     }
 }

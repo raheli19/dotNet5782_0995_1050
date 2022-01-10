@@ -85,10 +85,16 @@ namespace BL
                             PID.Target = target;
                             Localisation pickLoc = new Localisation();
                             Localisation delLoc = new Localisation();
-                            pickLoc.latitude = dal.ClientById(item.SenderId).Latitude;
-                            pickLoc.longitude = dal.ClientById(item.SenderId).Longitude;
-                            delLoc.latitude = dal.ClientById(item.TargetId).Latitude;
-                            delLoc.longitude = dal.ClientById(item.TargetId).Longitude;
+                            if (item.PickedUp != null)
+                            {
+                                pickLoc.latitude = dal.ClientById(item.SenderId).Latitude;
+                                pickLoc.longitude = dal.ClientById(item.SenderId).Longitude;
+                            }
+                            if (item.Delivered !=null)
+                            {
+                                delLoc.latitude = dal.ClientById(item.TargetId).Latitude;
+                                delLoc.longitude = dal.ClientById(item.TargetId).Longitude;
+                            }
                             PID.picking = pickLoc;
                             PID.delivered = delLoc;
                             PID.distance = distance(PID.picking.latitude, PID.picking.longitude, PID.delivered.latitude, PID.delivered.longitude);
