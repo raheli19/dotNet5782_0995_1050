@@ -17,7 +17,7 @@ namespace BL
         Drone drone = new Drone();
         private int timer = 500;
         private int KM = 1;
-        int DELAY = 500;
+        int DELAY = 1000;
         int SPEED = 100;
         Localisation location = new Localisation();
 
@@ -43,6 +43,7 @@ namespace BL
                         lock (bl) 
                         {
                             bl.Assignement(drone.ID);
+                            drone = BL.displayDrone(drone.ID);
                         }
                     }
                     catch(NotAvailable)
@@ -86,15 +87,17 @@ namespace BL
                         lock (bl)
                         {
                             bl.PickedUp(drone.ID);
+                            drone = BL.displayDrone(drone.ID);
                             timer = (int) drone.myParcel.distance / SPEED;
                         }
-                        Thread.Sleep(Convert.ToInt32(timer) * 1000);
+                        Thread.Sleep(Convert.ToInt32(timer) * 10);
                     }
                     else
                     {
                         lock (bl)
                         {
                             bl.delivered(drone.ID);
+                            drone = BL.displayDrone(drone.ID);
                             timer =(int) drone.myParcel.distance / SPEED;
                         }
                         Thread.Sleep(Convert.ToInt32(timer) * 1000);

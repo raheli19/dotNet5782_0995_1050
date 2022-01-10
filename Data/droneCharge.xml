@@ -1,23 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <droneCharge>
   <DroneCharge>
-    <DroneId>3992712</DroneId>
-    <StationId>1788243</StationId>
-  </DroneCharge>
-  <DroneCharge>
-    <DroneId>1146893</DroneId>
-    <StationId>8580760</StationId>
-  </DroneCharge>
-  <DroneCharge>
-    <DroneId>6730559</DroneId>
-    <StationId>1418791</StationId>
-  </DroneCharge>
-  <DroneCharge>
-    <DroneId>5186086</DroneId>
-    <StationId>8580760</StationId>
-  </DroneCharge>
-  <DroneCharge>
-    <DroneId>8804129</DroneId>
-    <StationId>8580760</StationId>
+    <DroneId>9378158</DroneId>
+    <StationId>1080455</StationId>
   </DroneCharge>
 </droneCharge>
