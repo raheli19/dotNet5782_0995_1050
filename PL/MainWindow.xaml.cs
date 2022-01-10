@@ -29,31 +29,28 @@ namespace PL
     public partial class MainWindow : Window
     {
         private BLApi.IBL bl;
+
+        #region Ctors
         public MainWindow()
         {
             InitializeComponent();
 
         }
+
         public MainWindow(BLApi.IBL bl)
         {
-            
-           
             InitializeComponent();
             this.bl = bl;
-            
-
         }
+        #endregion
 
+        #region ButtonOpenLists
         private void MainButton_OpenDroneList(object sender, RoutedEventArgs e)
         {
             new DroneListWindow(bl).Show();
             
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-
-        }
 
         private void MainButton_ClientList(object sender, RoutedEventArgs e)
         {
@@ -69,5 +66,6 @@ namespace PL
         {
             new StationListWindow(bl).Show();
         }
+        #endregion
     }
 }

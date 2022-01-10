@@ -27,17 +27,27 @@ namespace PL
     /// </summary>
     public partial class DroneListWindow : Window
     {
+
         private BLApi.IBL bl;
         DroneStatuses status = new DroneStatuses();
         WeightCategories weight = new WeightCategories();
-        
+        public static DroneStatuses droneStat = 0;
+        public static WeightCategories weightStat = 0;
+        public bool weightFlag = false;
+        public bool statusFlag = false;
+        //private object isDataDirty;
+        private bool checkFlag = false;
+
         private ObservableCollection<BO.DroneDescription> boDroneList = new ObservableCollection<BO.DroneDescription>();
 
+        #region EmptyCtor
         public DroneListWindow()
         {
 
         }
+        #endregion
 
+        #region Ctor
         public DroneListWindow(BLApi.IBL bl)
         {
 
@@ -51,23 +61,12 @@ namespace PL
 
             }
             this.bl = bl;
-            
+
             this.comboStatusSelector.ItemsSource = Enum.GetValues(typeof(BO.DroneStatuses));
             this.comboWeightSelector.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
-
-
-           
-
-
-           
-
         }
-        public static DroneStatuses droneStat = 0;
-        public static WeightCategories weightStat = 0;
-        public bool weightFlag = false;
-        public bool statusFlag = false;
-        //private object isDataDirty;
-        private bool checkFlag = false;
+
+        #endregion
 
         #region SelectStatut
         private void comboStatusSelector_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
@@ -91,9 +90,6 @@ namespace PL
         }
 
         #endregion
-
-
-
 
         #region WeightSelector
         private void comboWeightSelector_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
@@ -144,9 +140,10 @@ namespace PL
         }
         #endregion
 
+        #region DoubleClicks
         private void DroneListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            new DroneWindow(DronesListView.SelectedItem, bl, DronesListView,default,default).Show();
+            new DroneWindow(DronesListView.SelectedItem, bl, DronesListView, default, default).Show();
             comboStatusSelector.SelectedItem = null;
             comboWeightSelector.SelectedItem = null;
         }
@@ -154,17 +151,20 @@ namespace PL
 
         private void FilterByWeight_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            new DroneWindow(FilterByWeight.SelectedItem, bl, DronesListView,FilterByWeight,default).Show();
+            new DroneWindow(FilterByWeight.SelectedItem, bl, DronesListView, FilterByWeight, default).Show();
             comboStatusSelector.SelectedItem = null;
             comboWeightSelector.SelectedItem = null;
         }
 
         private void FilterByStatus_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            new DroneWindow(FilterByStatus.SelectedItem, bl,DronesListView,default, FilterByStatus).Show();
+            new DroneWindow(FilterByStatus.SelectedItem, bl, DronesListView, default, FilterByStatus).Show();
             comboStatusSelector.SelectedItem = null;
             comboWeightSelector.SelectedItem = null;
         }
+
+        #endregion
+
         #region closeFunctions
         private void Button_Close(object sender, RoutedEventArgs e)
         {
@@ -182,6 +182,7 @@ namespace PL
         }
         #endregion
 
+        #region ClearClick
         private void ClearStatus_Click(object sender, RoutedEventArgs e)
         {
             comboStatusSelector.SelectedItem = null;
@@ -200,6 +201,17 @@ namespace PL
 
         }
 
+        private void clearGrouping_Click(object sender, RoutedEventArgs e)
+        {
+            FilterByWeight.Visibility = Visibility.Hidden;
+            FilterByStatus.Visibility = Visibility.Hidden;
+            DronesListView.ItemsSource = bl.displayDroneList();
+            DronesListView.Visibility = Visibility.Visible;
+        }
+
+        #endregion
+
+        #region FilterClick
         private void FilterByWeightButton_Click(object sender, RoutedEventArgs e)
         {
             List<DroneDescription> dronesByWeight = new List<DroneDescription>();
@@ -240,14 +252,7 @@ namespace PL
             FilterByStatus.Visibility = Visibility.Visible;
             DronesListView.Visibility = Visibility.Hidden;
         }
-
-        private void clearGrouping_Click(object sender, RoutedEventArgs e)
-        {
-            FilterByWeight.Visibility = Visibility.Hidden;
-            FilterByStatus.Visibility = Visibility.Hidden;
-            DronesListView.ItemsSource = bl.displayDroneList();
-            DronesListView.Visibility = Visibility.Visible;
-        }
+        #endregion
     }
 }
 

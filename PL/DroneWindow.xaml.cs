@@ -36,6 +36,42 @@ namespace PL
         ListView ListViewDrone;
         ListView FilterByWeight;
         ListView FilterByStatus;
+        #region Close_Function
+        /// <summary>
+        /// This button closes the window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+
+        private void OnClosing(object sender, CancelEventArgs e)
+        {
+
+            if (this.checkFlag)// call from the button
+                e.Cancel = false;
+            else
+                e.Cancel = true;// call from the "X", we don't want to close
+
+        }
+        private void ClickCloseDroneWindow(object sender, RoutedEventArgs e)
+        {
+            this.checkFlag = true; // will allow us to close the window from the button and not from the "X"
+
+            this.Close();
+
+            //    MessageBox.Show("Your drone is fully charged. We are going to unplug it", "Success!");
+        }
+        private void Button_Close(object sender, RoutedEventArgs e)
+        {
+            this.checkFlag = true; // will allow us to close the window from the button and not from the "X"
+            this.Close();
+        }
+
+
+
+
+        #endregion
+
+        //----------------------------------------------------------ADD-------------------------------------------------------------------------------
 
         #region AddDrone
         // ctor to add a drone
@@ -126,11 +162,6 @@ namespace PL
 
         }
         #endregion
-        private void Button_Close(object sender, RoutedEventArgs e)
-        {
-            this.checkFlag = true; // will allow us to close the window from the button and not from the "X"
-            this.Close();
-        }
 
         // -------------------------------------------------------UPGRADE------------------------------------------------------------------------------
 
@@ -326,6 +357,8 @@ namespace PL
         }
         #endregion
 
+        #region ButtonClick
+
         private void Check_Click_FullyCharged(object sender, RoutedEventArgs e)
         {
             string chargeTimeString = UpdateTextBox.Text;
@@ -344,7 +377,7 @@ namespace PL
                 MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            
+
             Drone_Label.Content = bl.displayDrone(dataCdroneUpdate.Id);
             if (ListViewDrone != default)
                 ListViewDrone.ItemsSource = bl.displayDroneList();
@@ -356,6 +389,39 @@ namespace PL
             UpdateLabel.Visibility = Visibility.Hidden;
             CheckFullyCharged.Visibility = Visibility.Hidden;
         }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            clear_button.Cursor = Cursors.Wait;
+            Drone_Id.Text = "";
+            Drone_Model.Text = "";
+            comboStationSelector.SelectedItem = null;
+            comboWeightSelector.SelectedItem = null;
+            clear_button.Cursor = Cursors.Arrow;
+
+        }
+
+        private void ShowParcel_Click(object sender, RoutedEventArgs e)
+        {
+            if (bl.displayDrone(dataCdroneUpdate.Id).Status == DroneStatuses.shipping)
+            {
+                int parcelID = 0;
+                foreach (var item in bl.displayDroneList())
+                {
+                    if (item.Id == dataCdroneUpdate.Id)
+                        parcelID = item.parcelId;
+                }
+                ParcelDescription parcelSelectedItem = bl.displayParcelList().First(x => x.Id == parcelID);
+                new ParcelWindow(parcelSelectedItem, bl, ListViewDrone).Show();
+            }
+            else
+            {
+                MessageBox.Show("There is no parcel attached to your drone...", "Sorry!");
+            }
+
+        }
+
+        #endregion
 
         #region SecondButton_Click
 
@@ -421,68 +487,8 @@ namespace PL
         }
         #endregion
 
-        #region Close_Click
-        /// <summary>
-        /// This button closes the window
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
 
-        private void OnClosing(object sender, CancelEventArgs e)
-        {
-
-            if (this.checkFlag)// call from the button
-                e.Cancel = false;
-            else
-                e.Cancel = true;// call from the "X", we don't want to close
-
-        }
-        private void ClickCloseDroneWindow(object sender, RoutedEventArgs e)
-        {
-            this.checkFlag = true; // will allow us to close the window from the button and not from the "X"
-
-            this.Close();
-            
-            //    MessageBox.Show("Your drone is fully charged. We are going to unplug it", "Success!");
-        }
-
-
-
-        #endregion
-
-
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            clear_button.Cursor = Cursors.Wait;
-            Drone_Id.Text = "";
-            Drone_Model.Text = "";
-            comboStationSelector.SelectedItem = null;
-            comboWeightSelector.SelectedItem = null;
-            clear_button.Cursor = Cursors.Arrow;
-
-        }
-
-        private void ShowParcel_Click(object sender, RoutedEventArgs e)
-        {
-            if (bl.displayDrone(dataCdroneUpdate.Id).Status == DroneStatuses.shipping)
-            {
-                int parcelID = 0;
-                foreach (var item in bl.displayDroneList())
-                {
-                    if (item.Id == dataCdroneUpdate.Id)
-                        parcelID = item.parcelId;
-                }
-                ParcelDescription parcelSelectedItem = bl.displayParcelList().First(x => x.Id == parcelID);
-                new ParcelWindow(parcelSelectedItem, bl, ListViewDrone).Show();
-            }
-            else
-            {
-                MessageBox.Show("There is no parcel attached to your drone...", "Sorry!");
-            }
-
-        }
-
+        #region EnterTab
         private void Id_enter(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
@@ -500,5 +506,6 @@ namespace PL
                 comboWeightSelector.Focus();
             }
         }
+        #endregion
     }
 }
