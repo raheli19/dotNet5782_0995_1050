@@ -27,7 +27,7 @@ namespace PL
         public ObservableCollection<BO.StationDescription> boStationList = new ObservableCollection<BO.StationDescription>();
         private bool checkFlag = false;
 
-
+        #region CTOR
         public StationListWindow(BLApi.IBL bl)
         {
 
@@ -49,32 +49,43 @@ namespace PL
 
 
         }
+        #endregion
 
+        #region StationListView_MouseDoubleClick
         private void StationListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             new StationWindow(StationListView.SelectedItem, bl, StationListView).Show();
             //comboStatusSelector.SelectedItem = null;
             //comboWeightSelector.SelectedItem = null;
         }
+        #endregion
+
+        #region GotOrNotAvailableChargeSlots_MouseDoubleClick
         private void GotOrNotAvailableChargeSlots_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             new StationWindow(GotOrNotAvailableChargeSlots.SelectedItem, bl, StationListView).Show();
             //comboStatusSelector.SelectedItem = null;
             //comboWeightSelector.SelectedItem = null;
         }
+        #endregion
+
+        #region CountAvailableChargeSlots_MouseDoubleClick
         private void CountAvailableChargeSlots_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             new StationWindow(CountAvailableChargeSlots.SelectedItem, bl, StationListView).Show();
             //comboStatusSelector.SelectedItem = null;
             //comboWeightSelector.SelectedItem = null;
         }
+        #endregion
 
-
+        #region ContainsFreeChargeSlots_Click
         private void containsFreeChargeSlots_Click(object sender, RoutedEventArgs e)
         {
             this.StationListView.ItemsSource = boStationList.Where(x => x.freeChargeSlots > 0);
         }
+        #endregion
 
+        #region NumFCS_TextChanged
         private void numFCS_TextChanged(object sender, TextChangedEventArgs e)
         {
             string numFCSstr = numFCS.Text;
@@ -91,8 +102,9 @@ namespace PL
             return;
         }
 
-        
+        #endregion
 
+        #region Button_addStation
         private void button_addStation(object sender, RoutedEventArgs e)
         {
             StationWindow subWindow = new StationWindow(bl, StationListView);
@@ -101,13 +113,17 @@ namespace PL
 
 
         }
+        #endregion
 
+        #region ClearNumFCS_Click
         private void clearNumFCS_Click(object sender, RoutedEventArgs e)
         {
             numFCS.Text = "";
             this.StationListView.ItemsSource = boStationList;
         }
+        #endregion
 
+        #region Button_Click
         private void button_Click(object sender, RoutedEventArgs e)
         {
             List<StationDescription> listByFree = new List<StationDescription>();
@@ -125,7 +141,9 @@ namespace PL
             CountAvailableChargeSlots.Visibility = Visibility.Hidden;
             StationListView.Visibility = Visibility.Hidden;
         }
+        #endregion
 
+        #region Button1_Click
         private void button1_Click(object sender, RoutedEventArgs e)
         {
 
@@ -147,13 +165,16 @@ namespace PL
             GotOrNotAvailableChargeSlots.Visibility = Visibility.Hidden;
             StationListView.Visibility = Visibility.Hidden;
         }
+        #endregion
 
+        #region ClearGrouping_Click
         private void clearGrouping_Click(object sender, RoutedEventArgs e)
         {
             CountAvailableChargeSlots.Visibility = Visibility.Hidden;
             GotOrNotAvailableChargeSlots.Visibility = Visibility.Hidden;
             StationListView.Visibility = Visibility.Visible;
         }
+        #endregion
 
         #region Close_Click
         /// <summary>

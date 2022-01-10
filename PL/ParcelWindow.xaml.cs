@@ -113,8 +113,6 @@ namespace PL
 
         #endregion
 
-
-
         #region UPDATE
         public ParcelWindow(object selectedItem, BLApi.IBL bl, object parcelListView)
         {
@@ -170,6 +168,7 @@ namespace PL
 
         #endregion
 
+        #region Remove_Button
         private void Remove_Button(object sender, RoutedEventArgs e)
         {
             //if (Combo_SenderId.SelectedItem == null || Combo_TargetId.SelectedItem == null)
@@ -202,7 +201,9 @@ namespace PL
             ListViewParcel.ItemsSource = bl.displayParcelList();
 
         }
+        #endregion
 
+        #region DisplaySender_Click
         private void displaySender_Click(object sender, RoutedEventArgs e)
         {
             ClientActions clientActions = new();
@@ -210,7 +211,9 @@ namespace PL
 
             new ClientWindow(clientActions, bl, ClientslistView).Show();
         }
+        #endregion
 
+        #region DisplayTarget_Click
         private void displayTarget_Click(object sender, RoutedEventArgs e)
         {
             ClientActions clientActions = new();
@@ -218,7 +221,7 @@ namespace PL
 
             new ClientWindow(clientActions, bl, ClientslistView).Show();
         }
-
+        #endregion
         //private void Remove_Button(object sender, MouseButtonEventArgs e)
         //{
         //    dataCparcel.ID = bl.GetIdParcel((int)Combo_SenderId.SelectedItem, (int)Combo_TargetId.SelectedItem);
@@ -239,7 +242,7 @@ namespace PL
         //    this.Combo_TargetId.ItemsSource = bl.AllTargets_Id();
         //    ListViewParcel.ItemsSource = bl.displayParcelList();
         //}
-
+        #region enter_tap
         private void enter_tap(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
@@ -254,6 +257,7 @@ namespace PL
                 }
             }
         }
+        #endregion
 
 
     }

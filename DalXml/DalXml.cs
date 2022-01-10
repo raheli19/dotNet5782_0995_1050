@@ -24,8 +24,11 @@ namespace Dal
         static readonly IDal instance = new DalXml();
         public static IDal Instance { get => instance; }
         #endregion
-        XElement DroneChargeRoot;
 
+        XElement DroneChargeRoot;
+        static DalXml() { }
+
+        #region CTOR
         public DalXml()
         {
             string str = Assembly.GetExecutingAssembly().Location;
@@ -50,6 +53,7 @@ namespace Dal
 
 
         }
+
         #endregion
 
         #region CreateFiles
@@ -102,13 +106,7 @@ namespace Dal
         //    }
         //}
         #endregion
-        #endregion
-
-
-
-        static DalXml() { }
-        #endregion
-
+        
         #region DroneCharge
         public void AddDroneCharge(DroneCharge droneChargeToAdd) //XElement
         {
