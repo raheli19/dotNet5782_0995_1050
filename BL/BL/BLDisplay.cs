@@ -1,8 +1,4 @@
-﻿
-//Tania:DroneToCharge, DroneCharged et Assignment verifier
-
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using BO;
@@ -16,11 +12,10 @@ namespace BL
    sealed partial class BL : IBL
     {
 
-        //-----------------------------------PRINT-FUNCTIONS--------------------------------------
-        #region PRINTING
-
+        //-----------------------------------DISPLAY-FUNCTIONS(GET)--------------------------------------
         
-        #region displayStation
+
+        #region DisplayStation
 
         /// <summary>
         /// This function receives a station ID and returns the details of this station 
@@ -48,9 +43,7 @@ namespace BL
         }
         #endregion
 
-      
-
-        #region displayDrone
+        #region DisplayDrone
 
         /// <summary>
         /// This function receives a drone ID and returns the details of the drone searched
@@ -114,7 +107,7 @@ namespace BL
         }
         #endregion
 
-        #region displayClient
+        #region DisplayClient
 
         /// <summary>
         /// This function receives a client ID and returns the details of the client searched
@@ -134,7 +127,7 @@ namespace BL
         }
         #endregion
 
-        #region displayParcel
+        #region DisplayParcel
 
         /// <summary>
         /// This function receives a parcel ID and receives the details of the parcel searched
@@ -184,7 +177,7 @@ namespace BL
         }
         #endregion
 
-
+        #region DisplayDroneCharging
         public DroneCharging displayDroneCharging(int stationId)
         {
             DroneCharging droneCharging = new DroneCharging();
@@ -205,6 +198,5 @@ namespace BL
             return droneCharging;
         }
         #endregion
-
     }
 }

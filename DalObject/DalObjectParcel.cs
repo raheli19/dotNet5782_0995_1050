@@ -13,7 +13,6 @@ namespace Dal
 
         //-----------------------------------CREATE-FUNCTIONS/ADD----------------------------------------
 
-
         #region AddParcel
         public void AddParcel(Parcel pl)
         {
@@ -27,7 +26,7 @@ namespace Dal
         }
         #endregion
 
-        #region removeParcel
+        #region RemoveParcel
         public void RemoveParcel(Parcel p)
         {
             for(int i=0; i< DataSource.ParcelList.Count; i++)
@@ -41,8 +40,9 @@ namespace Dal
         }
         #endregion
 
-        //-----------------------------------UPDATE-FUNCTIONS-------------------------------------------
+        //-----------------------------------UPDATE-FUNCTIONS---------------------------------------------
 
+        #region UpdateParcel
         public void UpdateParcel(Parcel parcel)
         {
             if (!(DataSource.ParcelList.Exists(p => p.ID == parcel.ID)))
@@ -52,7 +52,7 @@ namespace Dal
             int index = DataSource.ParcelList.FindIndex(item => item.ID == parcel.ID);
             DataSource.ParcelList[index] = parcel;
         }
-        #region UPDATING
+        #endregion
 
         #region UpdateParFromBL
         public void UpdateParcelFromBL(Parcel ParcelToUpdate)
@@ -79,9 +79,9 @@ namespace Dal
             DataSource.ParcelList.Add(myParcel);
         }
         #endregion
-        #endregion
+        
 
-        //-----------------------------------ACTIONS-------------------------------------------
+        //-----------------------------------GET PARCEL AND PARCEL LIST-------------------------------------------------------
 
 
         #region ParcelById
@@ -103,12 +103,14 @@ namespace Dal
         }
         #endregion
 
+        #region DalGetIdParcel
         public int DalGetIdParcel(int senderId, int TargetId)
         {
             int id = DataSource.ParcelList.Find(x => x.SenderId == senderId && x.TargetId == TargetId).ID;
             return id;
         }
-        #region IENUMERABLE
+        #endregion
+
         #region ParcelList
         /// <summary>
         /// Returns the parcels' list
@@ -121,9 +123,8 @@ namespace Dal
             return ParcelLst;
         }
         #endregion
-        #endregion
+   
 
-        //----------------------------HELP---------------------
     }
 }
 

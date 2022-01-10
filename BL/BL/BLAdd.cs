@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Text;
 using BO;
 using BLApi;
-
 using System.Linq;
 
 
@@ -14,7 +13,7 @@ namespace BL
     {
         //-----------------------------------ADD-FUNCTIONS----------------------------------------
 
-        #region addStation
+        #region AddStation
         /// <summary>
         /// This function receives a BL type station, creates a new station in DAL with the same values int the commun fields and adds it in the stationList in DAL
         /// </summary>
@@ -48,7 +47,7 @@ namespace BL
         }
         #endregion
 
-        #region addDrone
+        #region AddDrone
         /// <summary>
         /// This function receives a BL drone and a station ID. Adds the drone to the droneList in DAL, to the droneList in BL and associates the drone to its station
         /// </summary>
@@ -107,7 +106,7 @@ namespace BL
         }
         #endregion
 
-        #region addClient
+        #region AddClient
         /// <summary>
         /// This function receives a BL client and add it to DAL
         /// </summary>
@@ -143,7 +142,7 @@ namespace BL
 
         #endregion
 
-        #region addParcel
+        #region AddParcel
         /// <summary>
         /// This function receives a BL parcel and add it to Dal
         /// </summary>

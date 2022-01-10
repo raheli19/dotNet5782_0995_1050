@@ -245,29 +245,6 @@ namespace BO
     }
     #endregion
 
-    #region WeightExcept
-    [Serializable]
-    internal class WeightException : Exception
-    {
-        public WeightException()
-        {
-        }
-
-        public WeightException(string message) : base(message)
-        {
-        }
-
-        public WeightException(string message, Exception innerException) : base(message, innerException)
-        {
-        }
-
-        protected WeightException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
-    }
-    #endregion
-
-
     #region UpdateError
     [Serializable]
     internal class WrongDetailsUpdateException : Exception

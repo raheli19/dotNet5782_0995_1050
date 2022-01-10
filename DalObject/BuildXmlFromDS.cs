@@ -12,6 +12,7 @@ namespace Dal
 {
     public static class BuildXmlFromDS
     {
+        #region CTOR:BuildXmlFromDataSource
         public static void BuildXmlFromDataSource()
         {
             string localPath;
@@ -39,7 +40,9 @@ namespace Dal
             SaveListToXMLSerializer (DataSource.DroneChargeList, dronePath);
             //SaveListToXMLSerializer(DalObject.Instance.PowerConsumptionByDrone().ToList(), configPath);
         }
+        #endregion
 
+        #region CreateElement
         public static XElement CreateElement<T>(T obj)
         {
             var res = new XElement(typeof(T).Name);
@@ -50,6 +53,9 @@ namespace Dal
             return res;
         }
 
+        #endregion
+
+        #region creatXmls
         static void creatXmls<T>(List<T> list, string path, string name)
         {
             XElement root = new XElement(name);
@@ -59,7 +65,9 @@ namespace Dal
             }
             root.Save(path);
         }
+        #endregion
 
+        #region LoadListFromXMLElement
         public static XElement LoadListFromXMLElement(string filePath)
         {
             try
@@ -80,7 +88,9 @@ namespace Dal
                 throw new DO.XmlFileLoadException(filePath);
             }
         }
+        #endregion
 
+        #region LoadListFromXMLSerializer
         public static List<T> LoadListFromXMLSerializer<T>(string filePath)
         {
             try
@@ -102,7 +112,9 @@ namespace Dal
                 throw new DO.XmlFileLoadException(filePath);
             }
         }
+        #endregion
 
+        #region SaveListToXMLSerializer
         public static void SaveListToXMLSerializer<T>(List<T> list, string filePath)
         {
             try
@@ -118,7 +130,9 @@ namespace Dal
                 throw new DO.XmlFileCreateException(filePath);
             }
         }
+        #endregion
 
+        #region SaveListToXMLElement
         public static void SaveListToXMLElement(XElement rootElem, string filePath)
         {
             try
@@ -130,5 +144,6 @@ namespace Dal
                 throw new DO.XmlFileCreateException(filePath);
             }
         }
+        #endregion
     }
 }

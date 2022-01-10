@@ -17,11 +17,9 @@ namespace Dal
         //DalObject() { }
         #endregion
 
-
          DalObject() { DataSource.Initialize(); }//constructor
 
         static Random rand = new Random();
-
         public static int ID { get; private set; }
         public static int DroneId { get; private set; }
 

@@ -1,18 +1,9 @@
-﻿//Tania: et Assignment verifier
-// nouveau case dans le main pour imprimer la list des dronescharges
-// tostring du drone si doit tout imprimer
-// ajout d'un package dans les 2 clients concernés
-// id de la parcel
-// banai
-// toutes les help en pv
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using BO;
 using BLApi;
 using System.Linq;
 using DalApi;
-using static BL.Tools;
 using System.Text;
 
 namespace BL
@@ -20,17 +11,20 @@ namespace BL
 
     sealed partial class BL : IBL
     {
+        #region Singleton
         static readonly IBL instance = new BL();
         public static IBL Instance { get => instance; }
+        #endregion
 
+        #region Variables definition
         static Random rand = new Random();
         double BatteryFree, BatteryLightWeight, BatteryMiddleWeight, BatteryHeavyWeight, ChargingDroneRate;
-
         internal IDal p = DalFactory.GetDal();
         help h = new help();
-
         List<DroneDescription> DroneList = new List<DroneDescription>();
+        #endregion
 
+        #region BLConstructor
         BL()
         {
             //constructor of the BL file
@@ -169,7 +163,11 @@ namespace BL
                 DroneList.Add(drone);
             }
         }
+        #endregion
 
+        #region Help Functions 
+
+        #region ClosestStationToLocation
         private DO.Station ClosestStationToLocation(Localisation L)
         {
 
@@ -200,7 +198,9 @@ namespace BL
             }
             return myStation;
         }
+        #endregion
 
+        #region ClosestParcelToLocation
         /// <summary>
         /// The function gets a location and the list of parcels, and calculates the closest parcel to this location.
         /// </summary>
@@ -240,14 +240,16 @@ namespace BL
             else
                 throw new WrongDetailsUpdateException("No parcel exist for shipping");
         }
-        #region distance between2Locations
+        #endregion
+
+        #region DistanceBetween2Locations
         /// <summary>
         /// The function gets to location and calculates the distance between them
         /// </summary>
         /// <param name="from"></param>
         /// <param name="to"></param>
         /// <returns>Returns the distance between the 2 locations</returns>
-        private double Distance(Localisation from, Localisation to)
+        public double Distance(Localisation from, Localisation to)
         {
 
             int R = 6371 * 1000;
@@ -265,7 +267,7 @@ namespace BL
         }
         #endregion
 
-        #region clientInParcel
+        #region ListOfClientsWithParcel
         /// <summary>
         /// Gets the list of customers, and create list of the customers with parcels
         /// </summary>
@@ -275,13 +277,15 @@ namespace BL
         {
             IEnumerable<DO.Parcel> listParcelsFromIdal = p.IEParcelList();
             List<DO.Client> customerWithParcel = new List<DO.Client>();
-            foreach (var item in L)
+            Func<DO.Parcel, bool> isDelivered = p => p.Delivered != DateTime.MinValue;
+            foreach (var client in L)
             {
-                foreach (var item1 in listParcelsFromIdal)
+                foreach (var parcel in listParcelsFromIdal)
                 {
-                    if (item1.TargetId == item.ID && item1.Delivered != DateTime.MinValue)
+                    if (parcel.TargetId == client.ID /*&& item1.Delivered != DateTime.MinValue*/)
                     {
-                        customerWithParcel.Add(item);
+                        if(isDelivered(parcel)==true)
+                        customerWithParcel.Add(client);
                     }
                 }
             }
@@ -289,6 +293,7 @@ namespace BL
         }
         #endregion
 
+        #region FindParcelsToClient
         public List<ParcelToClient> FindParcelsToClient(int clientId)
         {
             List<ParcelToClient> TempParcLstFromClient = new List<ParcelToClient>();
@@ -334,7 +339,9 @@ namespace BL
             }
             return TempParcLstFromClient;
         }
+        #endregion
 
+        #region FindParcelsFromClient
         public List<ParcelToClient> FindParcelsFromClient(int clientId)
         {
             List<ParcelToClient> TempParcLstToClient = new List<ParcelToClient>();
@@ -380,7 +387,9 @@ namespace BL
             }
             return TempParcLstToClient;
         }
+        #endregion
 
+        #region ParcelsFromCLientList(ToString)
         public string parcelsFromCLiList(int clientID)
         {
             String result = "";
@@ -390,6 +399,9 @@ namespace BL
             result += $"Parcels from client: {parcelsFromClientStr.ToString()},\n";
             return result;
         }
+        #endregion
+
+        #region ParcelsToClientList (ToString)
         public string parcelsToCliList(int clientID)
         {
             String result = "";
@@ -399,7 +411,9 @@ namespace BL
             result += $"Parcel to client: {parcelsToClientStr.ToString()},\n";
             return result;
         }
+        #endregion
 
+        #region AllSenders_Id
         public List<int> AllSenders_Id()
         {
             List<int> idList = new List<int>();
@@ -410,6 +424,9 @@ namespace BL
             List<int> idListWithoutDuplicates = idList.Distinct().ToList();
             return idListWithoutDuplicates;
         }
+        #endregion
+
+        #region AllTargets_Id
         public List<int> AllTargets_Id()
         {
             List<int> idList = new List<int>();
@@ -420,6 +437,8 @@ namespace BL
             List<int> idListWithoutDuplicates = idList.Distinct().ToList();
             return idListWithoutDuplicates;
         }
+        #endregion
 
+        #endregion
     }
 }

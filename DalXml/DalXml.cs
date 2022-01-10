@@ -25,7 +25,9 @@ namespace Dal
         public static IDal Instance { get => instance; }
        
         XElement DroneChargeRoot;
-     
+        static DalXml() { }
+
+        #region CTOR
         public DalXml()
         {
             string str = Assembly.GetExecutingAssembly().Location;
@@ -50,6 +52,7 @@ namespace Dal
 
            
         }
+        #endregion
 
         #region CreateFiles
 
@@ -132,7 +135,7 @@ namespace Dal
 
 
 
-        static DalXml() { }
+       
         #endregion
 
         #region DroneCharge
@@ -513,6 +516,7 @@ namespace Dal
         }
         #endregion
 
+        #region DalObjFunctions
         public double[] ElectricityUse()
         {
             var config = XMLTools.LoadListFromXMLSerializer<string>(configPath);
@@ -533,7 +537,7 @@ namespace Dal
             int real = Convert.ToInt32(runnerNumber);
             return real;
         }
-
+        #endregion
 
 
 

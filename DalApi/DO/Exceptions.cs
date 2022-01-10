@@ -3,6 +3,7 @@ using System.Runtime.Serialization;
 
 namespace DO
 {
+    #region StationException
     [Serializable]
     public class StationException : Exception
     {
@@ -22,8 +23,9 @@ namespace DO
         {
         }
     }
+    #endregion
 
-
+    #region ParcelException
     [Serializable]
     public class ParcelException : Exception
     {
@@ -43,8 +45,9 @@ namespace DO
         {
         }
     }
+    #endregion
 
-
+    #region DroneException
     [Serializable]
     public class DroneException : Exception
     {
@@ -65,8 +68,9 @@ namespace DO
         }
     }
 
+    #endregion
 
-
+    #region ClientException
     [Serializable]
     public class ClientException : Exception
     {
@@ -86,7 +90,9 @@ namespace DO
         {
         }
     }
+    #endregion
 
+    #region LoadingException
     [Serializable]
 
     public class LoadingException : Exception
@@ -100,4 +106,5 @@ namespace DO
         protected LoadingException(SerializationInfo info, StreamingContext context) : base(info, context) { }
 
     }
+    #endregion
 }

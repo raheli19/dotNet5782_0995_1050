@@ -54,7 +54,7 @@ namespace Dal
 
         #endregion
 
-        //-----------------------------------ACTIONS-------------------------------------------
+        //-----------------------------------GET STATION AND STATION LIST-------------------------------------------
 
 
         #region StationById
@@ -75,6 +75,7 @@ namespace Dal
             return sToReturn;
         }
         #endregion
+
         #region IENUMERABLE
         #region StationList
         /// <summary>

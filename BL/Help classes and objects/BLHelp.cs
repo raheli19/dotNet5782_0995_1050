@@ -160,6 +160,7 @@ namespace BL
         }
         #endregion
 
+        #region UpdateBlDroneList
         public void updateBlDroneList(DroneDescription droneToUpdate)
         {
 
@@ -167,17 +168,17 @@ namespace BL
             blD = DroneList.Find(x => droneToUpdate.Id == x.Id);
             DroneList.Remove(blD);
             DroneList.Add(droneToUpdate);
-
-
         }
+        #endregion
 
+        #region GetIdParcel
         public int GetIdParcel(int senderId, int TargetId)
         {
              int id = p.DalGetIdParcel( senderId,TargetId);
             return id;
         }
+        #endregion
 
-        
 
 
     }

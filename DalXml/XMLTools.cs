@@ -15,8 +15,6 @@ namespace Dal
     {
         static XMLTools(){}
 
-
-
         #region SaveLoadWithXMLSerializer
 
         //save a complete listin a specific file- throw exception in case of problems..

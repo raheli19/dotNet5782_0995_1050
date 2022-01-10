@@ -14,20 +14,6 @@ namespace DalApi
     {
         public static IDal GetDal()
         {
-            //if (str == "DalObject")
-            //{
-            //    return Dal.DalObject.I
-            //}
-            // switch(type)
-            //{
-            //    case "list":
-            //        return ;
-
-            //    case "xml":
-            //        return;
-
-            //}
-            //return
             
                 string dalType = DalConfig.DalName; //"list"
                 string dalPkg = DalConfig.DalPackages[dalType];//DalObject

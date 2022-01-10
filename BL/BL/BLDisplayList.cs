@@ -1,8 +1,4 @@
-﻿
-//Tania:DroneToCharge, DroneCharged et Assignment verifier
-
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using BO;
@@ -15,8 +11,8 @@ namespace BL
 
     sealed partial class BL : IBL
     {
-        //-----------------------------------PRINT-FUNCTIONS--------------------------------------
-        #region PRINTING
+        //-----------------------------------DISPLAY LIST-FUNCTIONS(GET)--------------------------------------
+      
        
         #region DisplayStationList
         /// <summary>
@@ -29,22 +25,6 @@ namespace BL
             List<StationDescription> statList = new List<StationDescription>();  //creates a new list of station description
             foreach (var item in p.IEStationList())
             {
-                //StationDescription statD = new StationDescription();
-                //statD.Id = item.ID;
-                //statD.name = item.Name;
-                //foreach( var item2 in p.DroneChargeList())// full chargeSlots
-                //{
-                //    if (item2.StationId == item.ID) // if the drone is in the station
-                //    { 
-                //        statD.fullChargeSlots++;
-
-                //    }
-
-                //}
-
-                //statD.freeChargeSlots = item.ChargeSlots;// free ones
-                //statList.Add(statD);// add it to the list
-
                 Station station = displayStation(item.ID);      //copies the fields 
                 statList.Add(new StationDescription()
                 {
@@ -60,7 +40,7 @@ namespace BL
 
         #endregion
 
-        #region displayDroneList
+        #region DisplayDroneList
 
         /// <summary>
         /// This function returns the list of drones
@@ -93,7 +73,7 @@ namespace BL
 
         #endregion
 
-        #region displayClientList
+        #region DisplayClientList
 
         /// <summary>
         /// This function returns the list of clients with their details
@@ -128,7 +108,7 @@ namespace BL
         }
         #endregion
 
-        #region displayParcelList
+        #region DisplayParcelList
 
         /// <summary>
         /// This function returns the list of parcels with their details
@@ -175,6 +155,8 @@ namespace BL
             return parList;
         }
         #endregion
+
+        #region PrintFreeStations
         public IEnumerable<StationDescription> printFreeStations()
         {
             List<StationDescription> statList = new List<StationDescription>();
@@ -211,6 +193,9 @@ namespace BL
             //    statList.Add(tempStat);
             //}
         }
+        #endregion
+
+        #region DisplayParcelsNotAssigned
         public IEnumerable<ParcelDescription> displayParcelsNotAssigned()
         {
             List<ParcelDescription> PDList = new List<ParcelDescription>();
@@ -245,9 +230,9 @@ namespace BL
             }
             return PDList;
         }
-
         #endregion
 
+        #region DisplayDroneChargingList
         public IEnumerable<DroneCharging> displayDroneChargingList(int stationId)
         {
            
@@ -269,7 +254,7 @@ namespace BL
             }
             return droneCharging;
         }
-
+        #endregion
 
 
     }

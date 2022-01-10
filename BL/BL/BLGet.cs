@@ -16,7 +16,7 @@ namespace BL
     {
         
 
-        //-----------------------------------RETRIEVE-FUNCTIONS--------------------------------------
+        //-----------------------------------RETRIEVE-FUNCTIONS(GET FROM DAL)--------------------------------------
 
         #region GetClient
         /// <summary>

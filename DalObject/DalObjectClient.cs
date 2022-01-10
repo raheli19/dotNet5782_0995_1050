@@ -10,9 +10,7 @@ namespace Dal
     {
 
 
-        //-----------------------------------CREATE-FUNCTIONS/ADD----------------------------------------
-
-
+        //-----------------------------------CREATE-FUNCTIONS/ADD-----------------------------
         #region AddClient
         public void AddClient(Client c)
         {
@@ -24,9 +22,9 @@ namespace Dal
             DataSource.ClientList.Add(c);
         }
         #endregion
-        //-----------------------------------UPDATE-FUNCTIONS-------------------------------------------
 
-        #region UPDATING
+
+        //-----------------------------------UPDATE-FUNCTIONS---------------------------------
         #region UpdateClient
         public void UpdateClient(Client ClientToUpdate)
         {
@@ -48,9 +46,9 @@ namespace Dal
             DataSource.ClientList.Add(myClient);
         }
         #endregion
-        #endregion
+        
 
-        //-----------------------------------ACTIONS-------------------------------------------
+        //-----------------------------------GET CLIENT AND LIST-------------------------------------------
 
         #region ClientById
         /// <summary>
@@ -71,9 +69,6 @@ namespace Dal
         }
         #endregion
 
-
-        #region IENUMERABLE
-
         #region IEClientList
         /// <summary>
         /// Returns the clients' list
@@ -86,7 +81,7 @@ namespace Dal
             return ClientLst;
         }
         #endregion
-        #endregion
+        
 
     }
 }
