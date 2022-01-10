@@ -106,13 +106,7 @@ namespace Dal
         //    }
         //}
         #endregion
-        #endregion
-
-
-
-        static DalXml() { }
-        #endregion
-
+        
         #region DroneCharge
         public void AddDroneCharge(DroneCharge droneChargeToAdd) //XElement
         {
