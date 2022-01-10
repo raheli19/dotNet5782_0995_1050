@@ -19,7 +19,7 @@
                 </Style.Triggers>
             </Style>
         </Grid.Resources>
-        <Grid x:Name="Sign_Up" Visibility="Hidden">
+        <Grid x:Name="Sign_Up" Visibility="Visible">
 
 
             <Label x:Name="info" Content="Please enter your personal details:" HorizontalAlignment="Left" Margin="221,92,0,0" VerticalAlignment="Top" FontSize="20"/>
@@ -30,11 +30,11 @@
             <Label x:Name="Phone" Content="Phone" HorizontalAlignment="Left" Margin="93,266,0,0" VerticalAlignment="Top" FontSize="16" Background="#FF8181F1" Width="90" HorizontalContentAlignment="Center"/>
             <Label x:Name="Latitude" Content="Latitude" HorizontalAlignment="Left" Margin="93,316,0,0" VerticalAlignment="Top" FontSize="16" Background="#FF8181F1" Width="90" HorizontalContentAlignment="Center"/>
             <Label x:Name="Longitude" Content="Longitude" HorizontalAlignment="Left" Margin="93,368,0,0" VerticalAlignment="Top" Background="#FF8181F1" FontSize="18"/>
-            <TextBox x:Name="textBox_PersonalId" Text="{Binding ID ,Mode=OneWayToSource}" HorizontalAlignment="Center" Margin="0,166,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="98" Height="36" />
-            <TextBox x:Name="textBox_Name" Text="{Binding Name,Mode=TwoWay}" HorizontalAlignment="Center" Margin="0,215,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="98" Height="33"/>
-            <TextBox x:Name="textBox_Phone" Text="{Binding Phone,Mode=TwoWay}" HorizontalAlignment="Center" Margin="0,266,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="98" Height="31"/>
-            <TextBox x:Name="textBox_Latitude" Text="{Binding ClientLoc.latitude,Mode=OneWayToSource}"  HorizontalAlignment="Center" Margin="0,316,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="98" Height="31"/>
-            <TextBox x:Name="textBox_Longitude" Text="{Binding ClientLoc.longitude,Mode=OneWayToSource}"  HorizontalAlignment="Center" Margin="0,368,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="98" Height="34"/>
+            <TextBox x:Name="textBox_PersonalId" KeyDown="id_enter" Text="{Binding ID ,Mode=OneWayToSource}" HorizontalAlignment="Center" Margin="0,166,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="98" Height="36" />
+            <TextBox x:Name="textBox_Name" KeyDown="name_enter" Text="{Binding Name,Mode=TwoWay}" HorizontalAlignment="Center" Margin="0,215,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="98" Height="33"/>
+            <TextBox x:Name="textBox_Phone" KeyDown="phone_enter" Text="{Binding Phone,Mode=TwoWay}" HorizontalAlignment="Center" Margin="0,266,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="98" Height="31"/>
+            <TextBox x:Name="textBox_Latitude" KeyDown="lat_enter" Text="{Binding ClientLoc.latitude,Mode=OneWayToSource}"  HorizontalAlignment="Center" Margin="0,316,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="98" Height="31"/>
+            <TextBox x:Name="textBox_Longitude" KeyDown="long_enter" Text="{Binding ClientLoc.longitude,Mode=OneWayToSource}"  HorizontalAlignment="Center" Margin="0,368,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="98" Height="34"/>
 
 
             <CheckBox Name="cbSample" Content="I agree the conditions" Margin="564,110,42,228" FontWeight="Bold" FontStyle="Italic" />
@@ -52,7 +52,7 @@
                     </Style>
                 </TextBlock.Style>
             </TextBlock>
-            <Button x:Name="button_Join" Content="JOIN" HorizontalAlignment="Left" Margin="658,357,0,0" VerticalAlignment="Top" Width="89" Height="45" Background="#FF8C67C5" FontSize="24" FontStyle="Italic" FontWeight="Bold" BorderThickness="4,4,4,4" Click="button_Join_Click"  />
+            <Button x:Name="button_Join" ToolTip="JOIN US" Content="JOIN" HorizontalAlignment="Left" Margin="658,357,0,0" VerticalAlignment="Top" Width="89" Height="45" Background="#FF8C67C5" FontSize="24" FontStyle="Italic" FontWeight="Bold" BorderThickness="4,4,4,4" Click="button_Join_Click"  />
         </Grid>
         <Grid x:Name="Sign_In" Visibility="Hidden">
             <!--New Client Region-->
@@ -66,23 +66,20 @@
                 </Style>
             </Grid.Resources>
             <Grid.Background>
-                <ImageBrush ImageSource="/userBack.png" Opacity="0.5"/>
+                <ImageBrush ImageSource="/images/userBack.png" Opacity="0.5"/>
             </Grid.Background>
             <Label x:Name="Welcome2" Content="We are glad to see you again!" HorizontalAlignment="Center" Margin="0,17,0,0" VerticalAlignment="Top" Width="350" Height="52" FontSize="26" FontWeight="Normal" FontStyle="Italic" BorderThickness="2,2,2,2" BorderBrush="#FF120303" Background="#FFBBBBCB"/>
             <Label x:Name="EnterID" Content="Please enter your personnal ID:" HorizontalAlignment="Left" Margin="10,146,0,0" VerticalAlignment="Top" Width="306" Height="39" FontSize="20" FontWeight="Bold" FontStyle="Normal" BorderThickness="2,2,2,2" BorderBrush="Black"/>
             <TextBox x:Name="textBox_ID" Text="{Binding ID,Mode=TwoWay}" HorizontalAlignment="Left" Margin="103,217,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="137" Height="49" Background="#FFC8C8DD" BorderBrush="#FF080814"/>
-            <Button x:Name="NEXT" Content="NEXT" HorizontalAlignment="Left" Margin="678,366,0,0" VerticalAlignment="Top" Width="89" Height="46" FontStyle="Italic" FontSize="20" FontWeight="Bold" Click="NEXT_Click"/>
+            <Button x:Name="NEXT" ToolTip="next" Content="NEXT" HorizontalAlignment="Left" Margin="678,366,0,0" VerticalAlignment="Top" Width="89" Height="46" FontStyle="Italic" FontSize="20" FontWeight="Bold" Click="NEXT_Click"/>
             <Button Name="CloseButton" Cursor="Hand" HorizontalAlignment="Left" Margin="678,10,0,0" 
                     VerticalAlignment="Top" ToolTip="Close the Window" Height="59" Width="112" BorderBrush="Black" Click="Button_Close" Opacity="100" FontFamily="Cambria" FontWeight="Bold" FontStyle="Italic" FontSize="30"
-                    >
-                <Button Content="" HorizontalAlignment="Left" ToolTip="Close" Height="49" Margin="631,353,0,0" VerticalAlignment="Top" Width="120" Click="Button_Close" FontFamily="Cambria" FontWeight="Bold" Foreground="Red" FontSize="22" FontStyle="Normal" BorderThickness="3,3,3,3" SnapsToDevicePixels="True">
-                    <Button.Background>
-                        <ImageBrush ImageSource="/close.png"/>
-                    </Button.Background>
-                </Button>
+ >
                 <Button.Background>
-                    <ImageBrush ImageSource="/exit.png"/>
+                    <ImageBrush ImageSource="/images/exit.png"/>
                 </Button.Background>
+               
+                
             </Button>
         </Grid>
 

@@ -96,7 +96,7 @@
 
         <ListView x:Name="DronesListView" Cursor="Hand" ItemsSource="{Binding}"  Margin="0,91,0,0" Visibility="Visible" MouseDoubleClick="DroneListView_MouseDoubleClick" Grid.RowSpan="2" FontSize="18" FontWeight="Bold" FontStyle="Italic">
             <ListView.Background>
-                <ImageBrush ImageSource="/droneListBack.png" Opacity="0.35"/>
+                <ImageBrush ImageSource="/images/droneListBack.png" Opacity="0.35"/>
             </ListView.Background>
             <ListView.View>
                 <GridView>
@@ -131,7 +131,7 @@
 
         <ListView Name="FilterByWeight" ItemsSource="{Binding}" MouseDoubleClick="FilterByWeight_MouseDoubleClick" Visibility="Hidden" Margin="-4,79,4,0"  FontSize="18" FontWeight="Bold" FontStyle="Italic" Grid.RowSpan="2" >
             <ListView.Background>
-                <ImageBrush  Opacity="0.4" ImageSource="/droneGrouping.png"/>
+                <ImageBrush  Opacity="0.4" ImageSource="/images/droneGrouping.png"/>
             </ListView.Background>
             <ListView.View>
                 <GridView>
@@ -159,7 +159,7 @@
 
         <ListView Name="FilterByStatus" ItemsSource="{Binding}" MouseDoubleClick="FilterByStatus_MouseDoubleClick" Visibility="Hidden" Margin="0,75,0,0" Grid.RowSpan="2" FontSize="18" FontWeight="Bold" FontStyle="Italic" >
             <ListView.Background>
-                <ImageBrush  Opacity="0.4" ImageSource="/droneGrouping.png"/>
+                <ImageBrush  Opacity="0.4" ImageSource="/images/droneGrouping.png"/>
             </ListView.Background>
             <ListView.View>
                 <GridView>

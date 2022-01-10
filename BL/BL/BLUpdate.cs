@@ -26,13 +26,13 @@ namespace BL
         {
             try
             {
-                DO.Drone droneDAL = p.DroneById(droneId); // find the DALdrone
+                DO.Drone droneDAL = dal.DroneById(droneId); // find the DALdrone
                 BO.DroneDescription droneBL = DroneList.Find(x => x.Id == droneId);
                 DroneList.Remove(droneBL);
                 droneDAL.Model = newModel;  //changes its model
                 droneBL.Model = newModel;
                 DroneList.Add(droneBL);
-                p.UpdateDrone(droneDAL); // this function update the DAL drones' list
+                dal.UpdateDrone(droneDAL); // this function update the DAL drones' list
                 
             }
             catch (DO.DroneException ex)  //catches the DAL exception if there is one
@@ -54,14 +54,14 @@ namespace BL
         {
             try
             {
-                DO.Station stationDAL = p.StationById(stationId);  //finds the station according to its ID
+                DO.Station stationDAL = dal.StationById(stationId);  //finds the station according to its ID
                 if (newName != "n")  //if the user wants to update the station's name
                     stationDAL.Name = newName;
                 if (newCS != -1)    //if the user wants to update the station's number of chargeSlots
                 {
                     stationDAL.ChargeSlots = newCS;
                     int notFreeChargeSlot = 0;
-                    IEnumerable<DO.DroneCharge> listDroneCharge = p.IEDroneChargeList();
+                    IEnumerable<DO.DroneCharge> listDroneCharge = dal.IEDroneChargeList();
                     foreach (var item in listDroneCharge) // calculates the charge slot that not free.
                     {
                         if (item.StationId == stationId)
@@ -71,7 +71,7 @@ namespace BL
                         throw new BO.WrongDetailsUpdateException("All charge slot is to low");
                     stationDAL.ChargeSlots = newCS - notFreeChargeSlot;
                 }
-                p.UpdateStation(stationDAL);  // updates the station in the stations' list (DAL)
+                dal.UpdateStation(stationDAL);  // updates the station in the stations' list (DAL)
                 
             }
             catch (DO.StationException ex)   //catches the Dal exception
@@ -94,7 +94,7 @@ namespace BL
         {
             try
             {
-                DO.Client clientDAL = p.ClientById(clientId);  //search the client in dal
+                DO.Client clientDAL = dal.ClientById(clientId);  //search the client in dal
                 if (newName != "")  //if the user wants to update the client's name
                 {
                     clientDAL.Name = newName;
@@ -103,7 +103,7 @@ namespace BL
                 {
                     clientDAL.Phone = newTel;
                 }
-                p.UpdateClient(clientDAL);  //updates the client in dal
+                dal.UpdateClient(clientDAL);  //updates the client in dal
             }
             catch (DO.ClientException ex)  //catches DAL exception
             {
@@ -147,7 +147,7 @@ namespace BL
                     DroneList.Add(tempDD);
                     try
                     {
-                        p.AddFromBLDroneCharging(blDrone.Id, nearestStation.ID);//ADD The DroneCharge(drone+station) to DAL 
+                        dal.AddFromBLDroneCharging(blDrone.Id, nearestStation.ID);//ADD The DroneCharge(drone+station) to DAL 
                     }
                     catch (DO.DroneException ex)
                     {
@@ -161,7 +161,7 @@ namespace BL
                     stationDAL.ChargeSlots = nearestStation.ChargeSlots - 1;
                     try
                     {
-                        p.UpdateStation(stationDAL);// update the station in the dal list
+                        dal.UpdateStation(stationDAL);// update the station in the dal list
                     }
                     catch (DO.StationException ex)
                     {
@@ -204,7 +204,7 @@ namespace BL
             //update station
             DO.Station stationDAL = new DO.Station();
             
-            foreach (var item in p.IEStationList())
+            foreach (var item in dal.IEStationList())
             {
                 if (item.Longitude == droneBL.loc.longitude && item.Latitude == droneBL.loc.latitude)
                 {
@@ -218,20 +218,20 @@ namespace BL
             stationDAL.ChargeSlots++;
             try
             {
-                p.UpdateStation(stationDAL); // puts back the station with one more chargeSlot free
+                dal.UpdateStation(stationDAL); // puts back the station with one more chargeSlot free
             }
             catch (DO.StationException ex)
             {
                 throw new CannotUpdate("The station cannot be updated", ex);
             }
             bool flag = false;
-            foreach (var item in p.IEDroneChargeList())
+            foreach (var item in dal.IEDroneChargeList())
             {
                 if (item.DroneId == droneBL.Id && item.StationId == stationDAL.ID)
                     flag = true;
             }
             if(flag==true)
-                p.UpdateDroneChargeList(droneBL.Id, stationDAL.ID); // delete it from the dalDroneChargeList
+                dal.UpdateDroneChargeList(droneBL.Id, stationDAL.ID); // delete it from the dalDroneChargeList
 
 
 
@@ -286,7 +286,7 @@ namespace BL
                             if (parcelConnect.Weight == BO.WeightCategories.middle)
                                 batteryNeeded += distance * BatteryMiddleWeight;
                             connectDrone.initialLoc = GetClient(GetParcel(parcelConnect.ID).Target.ID).ClientLoc; // update the dronelocation to the target location
-                            IEnumerable<DO.Station> listStationsFromIdal = p.IEStationList();
+                            IEnumerable<DO.Station> listStationsFromIdal = dal.IEStationList();
                             BO.Localisation checkL = new BO.Localisation(); // the location of closest station to the drone
 
                             try
@@ -327,10 +327,10 @@ namespace BL
                 throw new BO.WrongDetailsUpdateException("All parcels are in scheduled or weight is too high for the drone");
             if (checkFoundParcel == true) // if we found approciate parcel - do the changes
             {
-                DO.Parcel updateParcel = p.ParcelById(parcelConnect.ID); // update the droneid and scheduled time of the parcel.
+                DO.Parcel updateParcel = dal.ParcelById(parcelConnect.ID); // update the droneid and scheduled time of the parcel.
                 updateParcel.DroneId = connectDrone.ID;
                 updateParcel.Scheduled = DateTime.Now;
-                p.UpdateParcelFromBL(updateParcel);
+                dal.UpdateParcelFromBL(updateParcel);
                 foreach (var droneItem in DroneList) // when we found the parcel to deliver.
                 {
                     if (droneItem.Id == connectDrone.ID)
@@ -388,10 +388,10 @@ namespace BL
                 DroneList[index] = updateDrone;
 
                 
-                DO.Parcel parcelDal = p.ParcelById(collectDrone.myParcel.ID);
+                DO.Parcel parcelDal = dal.ParcelById(collectDrone.myParcel.ID);
                 parcelDal.PickedUp = DateTime.Now;
-                
-                p.UpdateParcelFromBL(parcelDal);
+
+                dal.UpdateParcelFromBL(parcelDal);
                 //if ((parcelDal.Requested == DateTime.Now || parcelDal.Scheduled == DateTime.Now) && (parcelDal.PickedUp == DateTime.MinValue))
                 //{
                 //    int senderId = parcelDal.SenderId;
@@ -431,7 +431,7 @@ namespace BL
             }
             try
             {
-                DO.Parcel prcel = p.FindParcelAssociatedWithDrone(DroneId);
+                DO.Parcel prcel = dal.FindParcelAssociatedWithDrone(DroneId);
 
 
                 if (prcel.PickedUp !=null && prcel.Delivered == null)
@@ -439,8 +439,8 @@ namespace BL
 
                     int targetId = prcel.TargetId;
                     BO.Localisation targetLoc = new BO.Localisation();
-                    targetLoc.latitude = p.FindLat(targetId);
-                    targetLoc.longitude = p.FindLong(targetId);
+                    targetLoc.latitude = dal.FindLat(targetId);
+                    targetLoc.longitude = dal.FindLong(targetId);
                     double myDistance = distance(myDrone.loc.latitude, myDrone.loc.longitude, targetLoc.latitude, targetLoc.longitude);
                     BO.DroneDescription tempDD = new BO.DroneDescription();//UPDATE DroneDescriptionLIST IN BL
                     tempDD.loc = new BO.Localisation();
@@ -453,7 +453,7 @@ namespace BL
                     DO.Parcel tempParcel = new DO.Parcel();
                     tempParcel = prcel;
                     tempParcel.Delivered = DateTime.Now;
-                    p.AddParcelFromBL(tempParcel);
+                    dal.AddParcelFromBL(tempParcel);
 
                 }
                 else

@@ -26,7 +26,7 @@ namespace BL
         static Random rand = new Random();
         double BatteryFree, BatteryLightWeight, BatteryMiddleWeight, BatteryHeavyWeight, ChargingDroneRate;
 
-        internal IDal p = DalFactory.GetDal();
+        internal IDal dal = DalFactory.GetDal();
         help h = new help();
 
         List<DroneDescription> DroneList = new List<DroneDescription>();
@@ -37,7 +37,7 @@ namespace BL
 
 
 
-            double[] BatteryUse = p.ElectricityUse();
+            double[] BatteryUse = dal.ElectricityUse();
 
             BatteryFree = BatteryUse[0];
             BatteryLightWeight = BatteryUse[1];
@@ -45,10 +45,10 @@ namespace BL
             BatteryHeavyWeight = BatteryUse[3];
             ChargingDroneRate = BatteryUse[4];
 
-            IEnumerable<DO.Drone> listDronesFromIdal = p.IEDroneList();
-            IEnumerable<DO.Parcel> listParcelsFromIdal = p.IEParcelList();
-            IEnumerable<DO.Station> listStationsFromIdal = p.IEStationList();
-            IEnumerable<DO.Client> listCustomersFromIdal = p.IEClientList();
+            IEnumerable<DO.Drone> listDronesFromIdal = dal.IEDroneList();
+            IEnumerable<DO.Parcel> listParcelsFromIdal = dal.IEParcelList();
+            IEnumerable<DO.Station> listStationsFromIdal = dal.IEStationList();
+            IEnumerable<DO.Client> listCustomersFromIdal = dal.IEClientList();
             Random rand = new Random();
             foreach (var itemDrone in listDronesFromIdal) // go all over the drones from the dal, restarts them and add them to dronelist in BL.
             {
@@ -137,7 +137,7 @@ namespace BL
                                 DroneId = drone.Id,
                                 StationId = itemStation.ID
                             };
-                            p.AddDroneCharge(DroneCharge);
+                            dal.AddDroneCharge(DroneCharge);
                             break;
                         }
                     }
@@ -175,7 +175,7 @@ namespace BL
 
             double minDistance = 0;
             int checkIfFirst = 0;
-            IEnumerable<DO.Station> listStationsFromIdal = p.IEStationList();
+            IEnumerable<DO.Station> listStationsFromIdal = dal.IEStationList();
             DO.Station myStation = new DO.Station();
             foreach (var item in listStationsFromIdal)
             {
@@ -273,7 +273,7 @@ namespace BL
         /// <returns> List of customers with parcel.</returns>
         private List<DO.Client> CustomersWithParcel(IEnumerable<DO.Client> L)
         {
-            IEnumerable<DO.Parcel> listParcelsFromIdal = p.IEParcelList();
+            IEnumerable<DO.Parcel> listParcelsFromIdal = dal.IEParcelList();
             List<DO.Client> customerWithParcel = new List<DO.Client>();
             foreach (var item in L)
             {
@@ -293,7 +293,7 @@ namespace BL
         {
             List<ParcelToClient> TempParcLstFromClient = new List<ParcelToClient>();
 
-            foreach (var parcel in p.IEParcelList())
+            foreach (var parcel in dal.IEParcelList())
             {
                 if (parcel.SenderId == clientId)  //The parcel has been sent by this client so get the info 
                 {
@@ -321,7 +321,7 @@ namespace BL
                     myClient.ID = clientId;
                     try //checks if the clients exists
                     {
-                        myClient.name = p.ClientById(clientId).Name;
+                        myClient.name = dal.ClientById(clientId).Name;
                     }
                     catch (DO.ClientException ex)
                     {
@@ -339,7 +339,7 @@ namespace BL
         {
             List<ParcelToClient> TempParcLstToClient = new List<ParcelToClient>();
 
-            foreach (var parcel in p.IEParcelList())
+            foreach (var parcel in dal.IEParcelList())
             {
                 if (parcel.TargetId == clientId)  //The parcel has been sent by this client
                 {
@@ -367,7 +367,7 @@ namespace BL
                     myClient.ID = clientId;
                     try
                     {
-                        myClient.name = p.ClientById(clientId).Name;
+                        myClient.name = dal.ClientById(clientId).Name;
                     }
                     catch (DO.ClientException ex)
                     {
@@ -403,7 +403,7 @@ namespace BL
         public List<int> AllSenders_Id()
         {
             List<int> idList = new List<int>();
-            foreach (var item in p.IEParcelList())
+            foreach (var item in dal.IEParcelList())
             {
                 idList.Add(item.SenderId);
             }
@@ -413,7 +413,7 @@ namespace BL
         public List<int> AllTargets_Id()
         {
             List<int> idList = new List<int>();
-            foreach (var item in p.IEParcelList())
+            foreach (var item in dal.IEParcelList())
             {
                 idList.Add(item.TargetId);
             }

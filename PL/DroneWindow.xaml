@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="DroneWindow" Height="450" Width="800" Icon="/drone.png"
+        Title="DroneWindow" Height="450" Width="800" Icon="/images/drone.png"
         Closing="OnClosing">
 
     <Window.Resources>
@@ -163,7 +163,7 @@
 
             <!--DroneButton-->
             <Button Name="ImageDrone" Click="OnClick5" Margin="27,294,586,20" ToolTip="Add">
-                <Image Source="/drone.png" Height="118" RenderTransformOrigin="0.5,0.595"/>
+                <Image Source="/images/drone.png" Height="118" RenderTransformOrigin="0.5,0.595"/>
             </Button>
             <Button Name="Add_Drone" BorderBrush="Black" Margin="29,294,716,99" Click="AddDrone_Click" Visibility="Visible" FontFamily="Cambria" FontWeight="Bold" Background="{x:Null}" Opacity="100" FontSize="18">
                 <Button.Effect>
@@ -172,7 +172,7 @@
             </Button>
             <Button Content="" HorizontalAlignment="Left" ToolTip="Close" Height="49" Margin="631,353,0,0" VerticalAlignment="Top" Width="120" Click="Button_Close" FontFamily="Cambria" FontWeight="Bold" Foreground="Red" FontSize="22" FontStyle="Normal" BorderThickness="3,3,3,3" SnapsToDevicePixels="True">
                 <Button.Background>
-                    <ImageBrush ImageSource="/close.png"/>
+                    <ImageBrush ImageSource="/images/close.png"/>
                 </Button.Background>
             </Button>
             <Label x:Name="label"  Content="Please enter the details&#xA;of the drone you want&#xD;&#xA;to add.&#xA;&#xA;To close the window,&#xA;press the button below.&#xA; " HorizontalAlignment="Left" Margin="516,66,0,0" VerticalAlignment="Top" Height="159" Width="230" FontFamily="Century" FontStyle="Normal" FontWeight="Bold" FontSize="18" BorderBrush="Black" BorderThickness="5,5,5,5" />
@@ -184,7 +184,7 @@
 
         <Grid Name="UpdateDroneGrid" Visibility="Hidden" Opacity="0.745" Margin="-10,0,0,0">
             <Grid.Background>
-                <ImageBrush ImageSource="/fond.png"/>
+                <ImageBrush ImageSource="/images/fond.png"/>
             </Grid.Background>
             <!--Contents:
       Content="UPDATE"     
@@ -205,7 +205,7 @@
             <Label x:Name="UpdateLabel"  HorizontalAlignment="Left" Margin="215,121,0,0" VerticalAlignment="Top" Height="38" Width="302" FontSize="16" FontWeight="Bold" FontStyle="Italic" BorderThickness="1,1,1,1" BorderBrush="Black" Foreground="#FF530C0C" Visibility="Hidden"/>
             <Button x:Name="CheckUpdate" HorizontalAlignment="Left" Height="28" Margin="396,164,0,0" VerticalAlignment="Top"  Width="34" Visibility="Hidden" Click="Check_Click_Update">
                 <Button.Background>
-                    <ImageBrush ImageSource="/checked.png"/>
+                    <ImageBrush ImageSource="/images/checked.png"/>
                 </Button.Background>
             </Button>
 
@@ -216,7 +216,7 @@
 
             <Button x:Name="CheckFullyCharged" HorizontalAlignment="Left" Height="28" Margin="396,164,0,0" VerticalAlignment="Top" Width="34" Visibility="Hidden" Click="Check_Click_FullyCharged">
                 <Button.Background>
-                    <ImageBrush ImageSource="/checked.png"/>
+                    <ImageBrush ImageSource="/images/checked.png"/>
                 </Button.Background>
             </Button>
 

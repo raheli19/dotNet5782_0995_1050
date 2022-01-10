@@ -23,32 +23,32 @@ namespace Dal
 
         static readonly IDal instance = new DalXml();
         public static IDal Instance { get => instance; }
-       
+        #endregion
         XElement DroneChargeRoot;
-     
+
         public DalXml()
         {
             string str = Assembly.GetExecutingAssembly().Location;
             string localPath = Path.GetDirectoryName(str);
-            for (int i = 0; i <2 ; i++)
+            for (int i = 0; i < 2; i++)
                 localPath = Path.GetDirectoryName(localPath);
 
             localPath += @"\Data";
 
-           configPath = localPath + @"\config.xml";
-           clientPath = localPath + @"\customer.xml"; //XMLSerializer
-           dronePath = localPath + @"\drone.xml";//XMLSerializer
-           droneChargePath = localPath + @"\droneCharge.xml";//XElement
-           parcelPath = localPath + @"\parcel.xml";//XMLSerializer
-           stationPath = localPath + @"\station.xml";//XMLSerializer
+            configPath = localPath + @"\config.xml";
+            clientPath = localPath + @"\customer.xml"; //XMLSerializer
+            dronePath = localPath + @"\drone.xml";//XMLSerializer
+            droneChargePath = localPath + @"\droneCharge.xml";//XElement
+            parcelPath = localPath + @"\parcel.xml";//XMLSerializer
+            stationPath = localPath + @"\station.xml";//XMLSerializer
 
-            
+
             if (!File.Exists(droneChargePath))
                 CreateDroneChargeFile();
             else
                 LoadDroneChargeData();
 
-           
+
         }
 
         #region CreateFiles
@@ -79,58 +79,6 @@ namespace Dal
                 throw new Exception("File upload problem");
             }
         }
-        #region notes
-        //private void LoadDroneData()
-        //{
-        //    try
-        //    {
-        //        DroneRoot = XElement.Load(dronePath);
-        //    }
-        //    catch
-        //    {
-        //        throw new Exception("File upload problem");
-        //    }
-        //}
-
-        //private void LoadStationData()
-        //{
-        //    try
-        //    {
-        //        StationRoot = XElement.Load(stationPath);
-        //    }
-        //    catch
-        //    {
-        //        throw new Exception("File upload problem");
-        //    }
-        //}
-
-        //private void LoadParcelData()
-        //{
-
-        //    try
-        //    {
-        //        ParcelRoot = XElement.Load(parcelPath);
-        //    }
-        //    catch
-        //    {
-        //        throw new Exception("File upload problem");
-        //    }
-        //}
-        //private void LoadClientData()
-        //{
-        //    try
-        //    {
-        //        ClientRoot = XElement.Load(clientPath);
-        //    }
-        //    catch
-        //    {
-        //        throw new Exception("File upload problem");
-        //    }
-        //}
-        #endregion
-        #endregion
-
-
 
         static DalXml() { }
         #endregion
@@ -158,7 +106,7 @@ namespace Dal
                 listDroneCharge = (from p in DroneChargeRoot.Elements()
                                    select new DroneCharge()
                                    {
-                                       DroneId = Convert.ToInt32(p.Element("DroneId").Value),
+                                      DroneId = Convert.ToInt32(p.Element("DroneId").Value),
                                        StationId = Convert.ToInt32(p.Element("StationId").Value)
 
                                    }).ToList();
@@ -507,22 +455,22 @@ namespace Dal
                 }
 
             }
-            DroneChargeRoot.Elements().Where(el => el.Element("DroneId").Value== droneId.ToString()&& el.Element("StationId").Value == statId.ToString()).Remove();
+            DroneChargeRoot.Elements().Where(el => el.Element("DroneId").Value == droneId.ToString() && el.Element("StationId").Value == statId.ToString()).Remove();
         }
         #endregion
 
         public double[] ElectricityUse()
         {
             var config = XMLTools.LoadListFromXMLSerializer<string>(configPath);
-           double[] arr = new double[5];
+            double[] arr = new double[5];
 
             arr[0] = double.Parse(config[1], CultureInfo.InvariantCulture);
             arr[1] = double.Parse(config[2], CultureInfo.InvariantCulture);
-            arr[2] =double.Parse(config[3], CultureInfo.InvariantCulture);
+            arr[2] = double.Parse(config[3], CultureInfo.InvariantCulture);
             arr[3] = double.Parse(config[4], CultureInfo.InvariantCulture);
             arr[4] = double.Parse(config[5], CultureInfo.InvariantCulture);
             return arr;
-            
+
         }
 
         public int RunnerNumber()
@@ -531,17 +479,6 @@ namespace Dal
             int real = Convert.ToInt32(runnerNumber);
             return real;
         }
-
-
-
-
-
-
-
-
-
-
-
 
 
     }

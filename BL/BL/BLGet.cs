@@ -29,7 +29,7 @@ namespace BL
             Client clientBL = new Client();
             try
             {
-                DO.Client dalClient = p.ClientById(id);//search it in the clients'list from DAL
+                DO.Client dalClient = dal.ClientById(id);//search it in the clients'list from DAL
                 clientBL.ClientLoc = new Localisation();
                 clientBL.ID = dalClient.ID; //copies all the fields 
                 clientBL.Name = dalClient.Name;
@@ -57,7 +57,7 @@ namespace BL
             stationBL.Loc = new Localisation();
             try
             {
-                DO.Station dalStat = p.StationById(id);  //search the station from DAL
+                DO.Station dalStat = dal.StationById(id);  //search the station from DAL
                 stationBL.ID = dalStat.ID;  //Copies all the fields from the DAL station
                 stationBL.Name = dalStat.Name;
                 stationBL.Loc.longitude = dalStat.Longitude;
@@ -97,7 +97,7 @@ namespace BL
             Drone droneBL = new Drone();
             try
             {
-                DO.Drone dalDrone = p.DroneById(id);  //search the drone from DAL
+                DO.Drone dalDrone = dal.DroneById(id);  //search the drone from DAL
                 droneBL.ID = dalDrone.ID;  //copies field by field
                 droneBL.Model = dalDrone.Model;
                 droneBL.MaxWeight = (WeightCategories)dalDrone.weight;
@@ -144,7 +144,7 @@ namespace BL
             parcelBL.Drone = new DroneWithParcel();
             try
             {
-                DO.Parcel dalParcel = p.ParcelById(id);  //search the Parcel in the list from DAL
+                DO.Parcel dalParcel = dal.ParcelById(id);  //search the Parcel in the list from DAL
                 parcelBL.ID = dalParcel.ID;  //copies all the fields
                 parcelBL.Sender.ID = dalParcel.SenderId;
                 parcelBL.Target.ID = dalParcel.TargetId;
