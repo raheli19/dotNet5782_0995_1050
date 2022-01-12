@@ -198,8 +198,12 @@ namespace PL
                 this.ParcelsListView.ItemsSource = boParcelList.Where(x => x.priority == prior);
 
         }
+
         #endregion
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
 
+        }
     }
 }

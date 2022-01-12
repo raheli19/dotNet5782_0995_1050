@@ -20,14 +20,16 @@
     </Window.Resources>
 
     <Grid x:Name="MainGrid">
-        <Grid x:Name="UpgradeGrid" Visibility="Hidden">
+        <Grid x:Name="UpgradeGrid" Visibility="Visible">
             <Grid.Background>
                 <ImageBrush ImageSource="/images/parcelUpdate.png" Opacity="0.35"/>
             </Grid.Background>
             <Button x:Name="UpdateButton" Content="Update" HorizontalAlignment="Left" 
                    
-                    Background="#FFDDDDDD" Margin="572,59,0,0" VerticalAlignment="Top" ToolTip="UPDATE" Height="41" Width="133" BorderBrush="Black" Click="ClickUpdate" Opacity="100" FontFamily="Cambria" FontSize="30" FontWeight="Bold" FontStyle="Italic">
+                    Background="#FFDDDDDD" Margin="572,115,0,0" VerticalAlignment="Top" ToolTip="UPDATE" Height="41" Width="133" BorderBrush="Black" Click="ClickUpdate" Opacity="100" FontFamily="Cambria" FontSize="30" FontWeight="Bold" FontStyle="Italic">
             </Button>
+
+
             <!--CloseButton-->
             <Button Name="CloseButton" Content="" HorizontalAlignment="Left" Margin="596,345,0,0" VerticalAlignment="Top" ToolTip="Close the Window" Height="50" Width="130" BorderBrush="Black" Click="ClickCloseParcelWindow" Opacity="100" FontFamily="Cambria" FontWeight="Bold" FontStyle="Italic" FontSize="30">
                 <Button.Background>
@@ -36,9 +38,9 @@
 
             </Button>
             <Label x:Name="parcelDetails" Content="" HorizontalAlignment="Left" Margin="37,62,0,0" VerticalAlignment="Top" Height="355" Width="421" FontSize="14" FontWeight="Bold" FontStyle="Italic"/>
-            <Button x:Name="displaySender" Content="Display Sender" HorizontalAlignment="Left" Margin="526,130,0,0" VerticalAlignment="Top" FontSize="30" FontWeight="Bold" FontStyle="Italic" Width="225" Height="46" FontFamily="Cambria" Click="displaySender_Click"/>
+            <Button x:Name="displaySender" Content="Display Sender" HorizontalAlignment="Left" Margin="530,172,0,0" VerticalAlignment="Top" FontSize="30" FontWeight="Bold" FontStyle="Italic" Width="225" Height="46" FontFamily="Cambria" Click="displaySender_Click"/>
             <Button x:Name="displayDrone" Content="Display Drone" HorizontalAlignment="Left" Margin="534,284,0,0" VerticalAlignment="Top" FontFamily="Cambria" FontSize="30" FontWeight="Bold" FontStyle="Italic" Height="43"  Width="218"/>
-            <Button x:Name="displayTarget" Content="Display Target" HorizontalAlignment="Left" Margin="524,207,0,0" VerticalAlignment="Top" Width="230" Height="40" FontSize="30" FontFamily="Cambria" FontWeight="Bold" FontStyle="Italic" Click="displayTarget_Click"/>
+            <Button x:Name="displayTarget" Content="Display Target" HorizontalAlignment="Left" Margin="528,231,0,0" VerticalAlignment="Top" Width="230" Height="40" FontSize="30" FontFamily="Cambria" FontWeight="Bold" FontStyle="Italic" Click="displayTarget_Click"/>
             <ListView x:Name="ClientslistView" ItemsSource="{Binding}" Visibility="Hidden">
                 <ListView.View>
                     <GridView>
@@ -55,7 +57,7 @@
             </ListView>
             <Label x:Name="details" Content="Parcel's Details:" HorizontalAlignment="Left" Margin="121,10,0,0" VerticalAlignment="Top" Width="225" Height="47" FontSize="28" FontWeight="Bold" FontStyle="Italic" Background="#FFDDDDDD" BorderBrush="#FF020203" BorderThickness="1,1,1,1"/>
         </Grid>
-        <Grid x:Name="AddGrid" Visibility="Visible">
+        <Grid x:Name="AddGrid" Visibility="Hidden">
             <Grid.Background>
                 <ImageBrush ImageSource="/images/parcelBackgound.png" Opacity="0.35"/>
             </Grid.Background>
@@ -78,8 +80,6 @@
                 </Button.Background>
             </Button>
             <!--<Button Content="remove" HorizontalAlignment="Left" Height="73" Margin="495,144,0,0" VerticalAlignment="Top" Width="123" Click="Remove_Button"/>-->
-            <TextBox  HorizontalAlignment="Left" KeyDown="enter_tap" Height="34" Margin="556,62,0,0" Text="{Binding ID, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top" Width="172"/>
-            <Label Content="Pease enter the id of the Parcel you&#xD;&#xA;   want to delete and press enter" HorizontalAlignment="Left" Height="49" Margin="543,14,0,0" VerticalAlignment="Top" Width="199"/>
 
         </Grid>
     </Grid>
