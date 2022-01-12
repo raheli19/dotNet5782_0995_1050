@@ -29,9 +29,10 @@ namespace Dal
         #region RemoveParcel
         public void RemoveParcel(Parcel p)
         {
-            for(int i=0; i< DataSource.ParcelList.Count; i++)
+
+            for (int i = 0; i < DataSource.ParcelList.Count; i++)
             {
-                if(DataSource.ParcelList[i].ID== p.ID)
+                if (DataSource.ParcelList[i].ID == p.ID)
                 {
                     DataSource.ParcelList.RemoveAt(i);
                     break;

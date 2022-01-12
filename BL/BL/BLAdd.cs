@@ -191,10 +191,11 @@ namespace BL
         {
             //if (parcelToRemove.Delivered == null)
             //    throw new DO.ParcelException("The parcel is not delivered!");
+            if (parcelToRemove.Delivered == null)
+                throw new Exception("The parcel has not been delivered yet!");
             DO.Parcel parcelDal = new DO.Parcel();
             parcelDal.ID = parcelToRemove.ID;
-            parcelDal.SenderId = parcelToRemove.Sender.ID;
-            parcelDal.TargetId = parcelToRemove.Target.ID;
+            parcelDal = dal.ParcelById(parcelToRemove.ID);
             dal.RemoveParcel(parcelDal);
         }
         #endregion

@@ -83,8 +83,8 @@ namespace Dal
         {
             Parcel myParcel = DataSource.ParcelList.Find(x => x.ID == p.ID);
             DataSource.ParcelList.Remove(myParcel);
-            AddParcel(p);
-
+            //AddParcel(p);
+            DataSource.ParcelList.Add(p);
         }
         #endregion
 

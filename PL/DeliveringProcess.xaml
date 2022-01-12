@@ -40,7 +40,7 @@
         <ComboBox x:Name="MaxWeightL" Visibility="Hidden" Text="{Binding Weight,Mode=TwoWay}" HorizontalAlignment="Left" Margin="364,148,0,0"   VerticalAlignment="Top" Width="96" Height="29" Grid.Column="2"/>
         <ComboBox x:Name="PriorityL" Visibility="Hidden" Text="{Binding Priority,Mode=TwoWay}" HorizontalAlignment="Left" Margin="364,210,0,0"  VerticalAlignment="Top" Width="96" Height="27" Grid.Column="2"/>
         <Label x:Name="listOf_Parcels" Content="Label" HorizontalAlignment="Left" Height="254" Margin="80,38,0,0" VerticalAlignment="Top" Width="219" Visibility="Hidden" Grid.Column="2"/>
-        <Button x:Name="click_PickedUpButton" ToolTip="yes" Content="" HorizontalAlignment="Left" Visibility="Hidden" Cursor="Hand" Height="32" Margin="378,205,0,0" VerticalAlignment="Top" Width="34" Click="click_PickedUp_Click" Grid.Column="2">
+        <Button x:Name="click_PickedUpButton" ToolTip="yes" Content="" HorizontalAlignment="Left" Visibility="Hidden" Cursor="Hand" Height="32" Margin="378,205,0,0" VerticalAlignment="Top" Width="34" Click="Picked_up" Grid.Column="2">
             <Button.Background>
                 <ImageBrush ImageSource="/images/checked.png"/>
             </Button.Background>
@@ -55,7 +55,7 @@
         <Button x:Name="UpdateButton" Content="Update" Cursor="Hand" Background="#FFDDDDDD" Margin="0,366,2,0" ToolTip="New Info?" BorderBrush="Black" Click="ClickUpdate" Opacity="100" FontFamily="Segoe UI" FontSize="24" FontWeight="Normal" FontStyle="Italic" Grid.Column="1" Height="38" VerticalAlignment="Top"/>
         <TextBox x:Name="UpdateNameTextBox" Visibility="Hidden" Text="{Binding Name, Mode=TwoWay}" HorizontalAlignment="Left" Height="28" Margin="99,82,0,0"  Background="White" TextWrapping="Wrap" VerticalAlignment="Top" Width="148" Grid.Column="2"/>
         <TextBox x:Name="UpdatePhoneTextBox" Visibility="Hidden" Text="{Binding Phone, Mode=TwoWay}" HorizontalAlignment="Left" Height="28" Margin="99,134,0,0"  Background="White" TextWrapping="Wrap" VerticalAlignment="Top" Width="147" Grid.Column="2"/>
-        <Button x:Name="CheckUpdate" HorizontalAlignment="Left" Height="28" Margin="156,178,0,0" VerticalAlignment="Top"  Width="34" Visibility="Hidden" Click="Check_Click_Update" Grid.Column="2">
+        <Button x:Name="CheckUpdate" HorizontalAlignment="Left" Height="28" Margin="156,178,0,0" VerticalAlignment="Top"  Width="34" Visibility="Hidden" Grid.Column="2">
             <Button.Background>
                 <ImageBrush ImageSource="/images/checked.png"/>
             </Button.Background>
