@@ -17,10 +17,14 @@
         </Style>
     </Window.Resources>-->
     <Grid x:Name="MainGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="13*"/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Grid x:Name="UpgradeClientGrid" Visibility="Hidden" Margin="-3,0,3,0">
+        <Grid x:Name="UpgradeClientGrid" Visibility="Visible" Margin="-3,0,3,0" Grid.RowSpan="2">
             <Grid.Background>
                 <ImageBrush ImageSource="/images/clientUpdate.png" Opacity="0.3"/>
             </Grid.Background>
@@ -28,9 +32,9 @@
                 <ColumnDefinition Width="193*"/>
                 <ColumnDefinition Width="7*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="UpdateButton" Content="UPDATE" HorizontalAlignment="Left" Cursor="Cross"
+            <Button x:Name="UpdateButton" Content="UPDATE" HorizontalAlignment="Left" Cursor="Hand"
                    
-                    Background="#FFF3ACA1" Margin="10,3,0,0" VerticalAlignment="Top" ToolTip="UPDATE" Height="52" Width="134" BorderBrush="Black" Click="ClickUpdate" Opacity="100" FontFamily="Cambria" FontSize="30" FontWeight="Bold" FontStyle="Italic">
+                    Background="#FFF3ACA1" Margin="10,-1,0,0" VerticalAlignment="Top" ToolTip="UPDATE" Height="52" Width="134" BorderBrush="Black" Click="ClickUpdate" Opacity="100" FontFamily="Cambria" FontSize="30" FontWeight="Bold" FontStyle="Italic">
 
             </Button>
             <Button Content="" HorizontalAlignment="Left" ToolTip="Close" Height="49" Margin="631,353,0,0" VerticalAlignment="Top" Width="120" Click="Button_Close" FontFamily="Cambria" FontWeight="Bold" Foreground="Red" FontSize="22" FontStyle="Normal" BorderThickness="3,3,3,3" SnapsToDevicePixels="True">
@@ -39,7 +43,7 @@
                 </Button.Background>
             </Button>
             <Label x:Name="Client_Label"   HorizontalAlignment="Left" Margin="10,120,0,0" VerticalAlignment="Top" Height="298" Width="315" FontWeight="Bold" FontStyle="Italic" FontSize="16">
-                <ListView x:Name="listViewParcels" ItemsSource="{Binding}" Visibility="Hidden" >
+                <ListView x:Name="listViewParcels" ItemsSource="{Binding}" Visibility="Visible" >
                     <ListView.View>
                         <GridView>
                             <GridViewColumn/>
@@ -88,7 +92,7 @@
 
 
         </Grid>
-        <Grid x:Name="AddGridClient" Visibility="Visible">
+        <Grid x:Name="AddGridClient" Visibility="Hidden" Grid.RowSpan="2">
             <Grid.Background>
                 <ImageBrush ImageSource="/images/fondessai.png"/>
             </Grid.Background>
@@ -122,15 +126,13 @@
                 <Button.Background>
                     <ImageBrush ImageSource="/images/addbutton.png"/>
                 </Button.Background>
+
+
                 <!--<Button.Background>
                         <ImageBrush ImageSource="/addbutton.png"/>
                     </Button.Background>-->
             </Button>
-            <Button Content="" HorizontalAlignment="Left" ToolTip="Close" Height="49" Margin="690,19,0,0" VerticalAlignment="Top" Width="100" Click="Button_Close" FontFamily="Cambria" FontWeight="Bold" Foreground="Red" FontSize="22" FontStyle="Normal" BorderThickness="3,3,3,3" SnapsToDevicePixels="True">
-                <Button.Background>
-                    <ImageBrush ImageSource="/images/cancelbutton.png"/>
-                </Button.Background>
-            </Button>
+            <Button Content="CANCEL" HorizontalAlignment="Left" ToolTip="Close" Height="49" Margin="690,19,0,0" VerticalAlignment="Top" Width="100" Click="Button_Close" FontFamily="Cambria" FontWeight="Bold" Foreground="Red" FontSize="22" FontStyle="Normal" BorderThickness="3,3,3,3" SnapsToDevicePixels="True" Background="#FFFBF7F7"/>
 
         </Grid>
 

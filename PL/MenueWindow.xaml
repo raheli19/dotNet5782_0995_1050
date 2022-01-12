@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="MenueWindow" Height="450" Width="800">
-   
+
     <Window.Resources>
         <Style TargetType="{x:Type Button}">
             <Style.Triggers>
@@ -19,9 +19,23 @@
     <Window.Background>
         <ImageBrush ImageSource="/images/mainwinddrone.png"/>
     </Window.Background>
-    <Grid x:Name="MenuGrid" Height="430" Width="780">
-      
-        <Label x:Name="label" Content="Welcome to our Nebula Drone delivery System!&#xD;&#xA;" HorizontalAlignment="Center" Margin="0,21,0,0" VerticalAlignment="Top" Width="552" Height="55" FontSize="24" FontWeight="Bold" FontStyle="Italic" BorderThickness="5,5,5,5">
+    <Grid x:Name="MenuGrid" Width="800" Margin="0,0,0,-6">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="59*"/>
+            <ColumnDefinition Width="142*"/>
+            <ColumnDefinition Width="140*"/>
+            <ColumnDefinition Width="59*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="14*"/>
+            <RowDefinition Height="104*"/>
+            <RowDefinition/>
+            <RowDefinition Height="219*"/>
+            <RowDefinition Height="72*"/>
+            <RowDefinition Height="30*"/>
+        </Grid.RowDefinitions>
+
+        <Label x:Name="label" Content="Welcome to our Nebula Drone delivery System!&#xD;&#xA;" FontSize="24" FontWeight="Bold" FontStyle="Italic" BorderThickness="5,5,5,5" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="1" Margin="6,11,6,38">
             <Label.BorderBrush>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black"/>
@@ -29,11 +43,11 @@
                 </LinearGradientBrush>
             </Label.BorderBrush>
         </Label>
-        <Button Content="Client"  x:Name="openClientWindow"  Click="OpenClientWindow" Height="49" HorizontalAlignment="Left" Margin="27,346,0,0" VerticalAlignment="Top" Width="249" FontSize="33" FontWeight="Normal" FontStyle="Normal"
-                Background="#FF9389C3" BorderThickness="4,4,4,4" BorderBrush="#FF150E36"/>
-        <Button Content="Manager"  Click="OpenWorkerWindow" Height="49" HorizontalAlignment="Left" Margin="521,346,0,0" x:Name="openWorkerWindow" VerticalAlignment="Top" Width="249" FontSize="33" FontWeight="Normal" FontStyle="Normal"
-                Background="#FF9389C3" BorderThickness="4,4,4,4" BorderBrush="#FF150E36"/>
-        <Label x:Name="label1" Content="To start, please press one of the buttons below" HorizontalAlignment="Left" Margin="158,76,0,0" VerticalAlignment="Top" Width="512" Height="50" FontSize="22" FontWeight="Bold" FontStyle="Italic"/>
+        <Button Content="User"  x:Name="openClientWindow"  Click="OpenClientWindow" Margin="59,12,0,11" FontSize="33" FontWeight="Normal" FontStyle="Normal"
+                Background="#FF9389C3" BorderThickness="4,4,4,4" BorderBrush="#FF150E36" Grid.Row="4" Grid.ColumnSpan="2" HorizontalAlignment="Left" Width="249"/>
+        <Button Content="Manager"  Click="OpenWorkerWindow" Margin="0,10,59,13" x:Name="openWorkerWindow" FontSize="33" FontWeight="Normal" FontStyle="Normal"
+                Background="#FF9389C3" BorderThickness="4,4,4,4" BorderBrush="#FF150E36" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" HorizontalAlignment="Right" Width="250"/>
+        <Label x:Name="label1" Content="To start, please press one of the buttons below" Margin="26,60,26,0" FontSize="22" FontWeight="Bold" FontStyle="Italic" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="1" Grid.RowSpan="3" Height="50" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

@@ -127,18 +127,28 @@ namespace PL
 
         private void received_parcel_Click(object sender, RoutedEventArgs e)
         {
-            Parcel_Id_Entered.Visibility = Visibility.Visible;
-            label_info.Content = "Please enter its Id";
-            label_info.Visibility = Visibility.Visible;
+            //Parcel_Id_Entered.Visibility = Visibility.Visible;
+            //label_info.Content = "Please enter its Id";
+            //label_info.Visibility = Visibility.Visible;
             BO.DroneDescription delDrone = new DroneDescription();
-            delDrone = bl.displayDroneList().First(x => x.parcelId == DataCParcel.ID);
+            BO.ParcelDescription parcelDelivered = new ParcelDescription();
+            
+           parcelDelivered = bl.displayParcelList().FirstOrDefault(x => x.TargetName== this.Name);
+            if(parcelDelivered==null)
+            {
+                MessageBox.Show("Aie aie aie...", "There is no parcels for you. ", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+            delDrone = bl.displayDroneList().First(x => x.Id == bl.displayParcel(parcelDelivered.Id).Drone.ID);
             try
             {
+                
+
                 bl.delivered(delDrone.Id);
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Aie aie aie...", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Aie aie aie...",ex.Message, MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
 
             }
@@ -165,11 +175,7 @@ namespace PL
             listOf_Parcels.Content = tempList.ToString(); //doesn't work to print the list!!!!
 
 
-            //DataCParcel.ID = Convert.ToInt32(Parcel_Id_Entered.Text);
-            //DataCParcel.Drone.ID = bl.displayDroneList().First(x => x.parcelId == DataCParcel.ID).Id;
-
-            //selectionne une
-            //met comme quoi il ont pîcked up
+            
         }
 
         private void click_PickedUp_Click(object sender, RoutedEventArgs e)
@@ -178,17 +184,34 @@ namespace PL
             // supposed to go into th elist of the parcel, find it, and assign in the datacontext the id of the associated' drone!
             //DataCParcel.ID = Convert.ToInt32(Parcel_Id_Entered.Text);
             //DataCParcel.Drone.ID = Convert.ToInt32(Drone_Id_entered.Text);
-            try
-            {
-                DataCParcel.Drone.ID = bl.displayDroneList().First(x => x.parcelId == DataCParcel.ID).Id;
 
-                bl.PickedUp(DataCParcel.Drone.ID);
-            }
-            catch (Exception ex)
+            // trouver le drone qui puisse porter
+            // puisse faire la distance+ aller se charger
+
+            List<BO.DroneDescription> listOfDrones = bl.displayDroneList().ToList();
+            BO.DroneDescription associatedDrone = new DroneDescription();
+            if (DataCParcel.Scheduled != DateTime.MinValue)
             {
-                MessageBox.Show(ex.Message, "Aie aie aie...", MessageBoxButton.OK, MessageBoxImage.Warning);
+                try
+                {
+
+                    bl.PickedUp(DataCParcel.Drone.ID);
+
+                }
+
+
+            catch (Exception ex)
+                {
+                    MessageBox.Show("Aie aie aie...",ex.Message, MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+            }
+            else
+            {
+                MessageBox.Show( "Aie aie aie...", "Your Parcel is not associatedDrone yet", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
+
         }
         #endregion
 
@@ -222,7 +245,7 @@ namespace PL
 
         private void Add_Parcel_ToSend_Click(object sender, RoutedEventArgs e)
         {
-            if (MaxWeightL==null || MaxWeightL == null || Combo_TargetId == null)
+            if (MaxWeightL==null || PriorityL == null || Combo_TargetId == null)
             {
                 MessageBox.Show("Please fill al the fields", "WARNING", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
@@ -237,6 +260,64 @@ namespace PL
                 return;
 
             }
+            MaxWeightL.Visibility = Visibility.Hidden;
+            PriorityL.Visibility = Visibility.Hidden;
+            Add_Parcel_ToSend.Visibility = Visibility.Hidden;
+            MaxWeight.Visibility = Visibility.Hidden;
+            Combo_TargetId.Visibility = Visibility.Hidden;
+            Priority.Visibility = Visibility.Hidden;
+            MaxWeight.Visibility = Visibility.Hidden;
+            TargetId.Visibility = Visibility.Hidden;
+            this.clientStatus = "Sign In";
+            MessageBox.Show("The parcel has been added to the list", "Done!", MessageBoxButton.OK, MessageBoxImage.Information);
+
+            return;
         }
+
+        #region UpdateName/Phone
+        private void ClickUpdate(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show(/*"The model of your drone is being updated.*/"Please close this window and enter the new name and/or new phone number.", "Success!", MessageBoxButton.OK, MessageBoxImage.Information);
+            // autres en hidden/visible
+            UpdateNameTextBox.Visibility = Visibility.Visible;
+            UpdatePhoneTextBox.Visibility = Visibility.Visible;
+            UpdateLabel.Visibility = Visibility.Visible;
+            CheckUpdate.Visibility = Visibility.Visible;
+            //CheckUpdate2.Visibility = Visibility.Visible;
+            UpdateLabel.Content = "Enter your new name and/or new phone number";
+            DataContext = this.DataCclient;
+        }
+
+        private void Check_Click_Update(object sender, RoutedEventArgs e)
+        {
+            
+            string newName = UpdateNameTextBox.Text;
+            string newPhone = "n";
+            if (UpdatePhoneTextBox.Text != "")
+                newPhone = (UpdatePhoneTextBox.Text);
+
+            if (UpdateNameTextBox.Text == null && UpdatePhoneTextBox.Text == null)// didn't enter any information
+            {
+                MessageBox.Show("Please enter an information", "ERROR", MessageBoxButton.OK, MessageBoxImage.Information);
+
+            }
+            try
+            {
+                bl.updateClientName_Phone(this.DataCclient.ID, DataCclient.Name, DataCclient.Phone);// not in binding because the datacontext is for the lists
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            
+            UpdateNameTextBox.Visibility = Visibility.Hidden;
+            UpdatePhoneTextBox.Visibility = Visibility.Hidden;
+            UpdateLabel.Visibility = Visibility.Hidden;
+            CheckUpdate.Visibility = Visibility.Hidden;
+            DataContext = DataCParcel;
+        }
+        #endregion
+
     }
 }
