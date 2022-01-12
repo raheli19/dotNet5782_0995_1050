@@ -70,7 +70,7 @@ namespace BL
                 {
                     try
                     {
-                        if (item.DroneId == droneId)
+                        if (item.DroneId == droneId&&tmp.parcelId==item.ID)
                         {
                             PID.ID = item.ID;
                             PID.weight = (WeightCategories)item.Weight;
@@ -100,7 +100,9 @@ namespace BL
                             PID.distance = distance(PID.picking.latitude, PID.picking.longitude, PID.delivered.latitude, PID.delivered.longitude);
                             if (item.PickedUp != null)
                                 PID.deliveringStatus = true;
-                                    }
+                            break;
+                        }
+                       
                     }
                     catch (Exception ex)
                     {

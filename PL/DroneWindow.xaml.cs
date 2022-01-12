@@ -82,7 +82,7 @@ namespace PL
         {
             InitializeComponent();
             this.bl = bl;
-            DataContext = dataCdrone;
+            AddDroneGrid.DataContext = dataCdrone;
             //dlw = new DroneListWindow(bl);
             AddDroneGrid.Visibility = Visibility.Visible;
             UpdateDroneGrid.Visibility = Visibility.Hidden;
@@ -175,7 +175,7 @@ namespace PL
             InitializeComponent();
             this.bl = bl;
             this.dataCdroneUpdate = (DroneDescription)selectedItem;
-            DataContext = dataCdroneUpdate;
+            UpdateDroneGrid.DataContext = bl.displayDrone(dataCdroneUpdate.Id);
             AddDroneGrid.Visibility = Visibility.Hidden;
             UpdateDroneGrid.Visibility = Visibility.Visible;
             Drone_Label.Content = bl.displayDrone(dataCdroneUpdate.Id);
@@ -292,6 +292,8 @@ namespace PL
             {
                 ShowParcel.Visibility = Visibility.Visible;
             }
+            //Model.Content = newName;
+            UpdateDroneGrid.DataContext = bl.displayDrone(dataCdroneUpdate.Id);
         }
         #endregion
 
@@ -327,6 +329,7 @@ namespace PL
                 if (FilterByStatus != default)
                     FilterByStatus.ItemsSource = bl.displayDroneList();
                 Drone_Label.Content = bl.displayDrone(dataCdroneUpdate.Id);
+                //Batt.Content = bl.displayDrone(dataCdroneUpdate.Id).Battery;
 
 
             }
@@ -364,6 +367,15 @@ namespace PL
                 if (FilterByStatus != default)
                     FilterByStatus.ItemsSource = bl.displayDroneList();
                 Drone_Label.Content = bl.displayDrone(dataCdroneUpdate.Id);
+                //Batt.Value = bl.displayDrone(dataCdroneUpdate.Id).Battery;
+                //Battery.Content = bl.displayDrone(dataCdroneUpdate.Id).Battery;
+                //Status.Content = bl.displayDrone(dataCdroneUpdate.Id).Status;
+                //Longitude.Content = bl.displayDrone(dataCdroneUpdate.Id).initialLoc.longitude;
+                //Latitude.Content = bl.displayDrone(dataCdroneUpdate.Id).initialLoc.latitude;
+                //ParcelId.Content = bl.displayDrone(dataCdroneUpdate.Id).myParcel.ID;
+                UpdateDroneGrid.DataContext = bl.displayDrone(dataCdroneUpdate.Id);
+
+
             }
         }
         #endregion
@@ -390,6 +402,9 @@ namespace PL
             }
 
             Drone_Label.Content = bl.displayDrone(dataCdroneUpdate.Id);
+            Batt.Value = bl.displayDrone(dataCdroneUpdate.Id).Battery;
+            UpdateDroneGrid.DataContext = bl.displayDrone(dataCdroneUpdate.Id);
+            //Battery.Content = bl.displayDrone(dataCdroneUpdate.Id).Battery;
             if (ListViewDrone != default)
                 ListViewDrone.ItemsSource = bl.displayDroneList();
             if (FilterByWeight != default)
@@ -467,7 +482,13 @@ namespace PL
                 Drone_Label.Content = bl.displayDrone(dataCdroneUpdate.Id);
 
                 ShowParcel.Visibility = Visibility.Visible;
-
+                Batt.Value = bl.displayDrone(dataCdroneUpdate.Id).Battery;
+                UpdateDroneGrid.DataContext = bl.displayDrone(dataCdroneUpdate.Id);
+                //Battery.Content = bl.displayDrone(dataCdroneUpdate.Id).Battery;
+                //Status.Content = bl.displayDrone(dataCdroneUpdate.Id).Status;
+                //Longitude.Content = bl.displayDrone(dataCdroneUpdate.Id).initialLoc.longitude;
+                //Latitude.Content = bl.displayDrone(dataCdroneUpdate.Id).initialLoc.latitude;
+                //ParcelId.Content = bl.displayDrone(dataCdroneUpdate.Id).myParcel.ID;
             }
 
             //Second case:The status of the drone is shipping,the button is DELIVERING THE PACKAGE
@@ -490,6 +511,15 @@ namespace PL
                 if (FilterByStatus != default)
                     FilterByStatus.ItemsSource = bl.displayDroneList();
                 Drone_Label.Content = bl.displayDrone(dataCdroneUpdate.Id);
+                Batt.Value = bl.displayDrone(dataCdroneUpdate.Id).Battery;
+                Batt.Value = bl.displayDrone(dataCdroneUpdate.Id).Battery;
+                UpdateDroneGrid.DataContext = bl.displayDrone(dataCdroneUpdate.Id);
+                //Battery.Content = bl.displayDrone(dataCdroneUpdate.Id).Battery;
+                //Status.Content = bl.displayDrone(dataCdroneUpdate.Id).Status;
+                //Longitude.Content = bl.displayDrone(dataCdroneUpdate.Id).initialLoc.longitude;
+                //Latitude.Content = bl.displayDrone(dataCdroneUpdate.Id).initialLoc.latitude;
+                //ParcelId.Content = bl.displayDrone(dataCdroneUpdate.Id).myParcel.ID;
+
             }
             else
             {
@@ -534,7 +564,7 @@ namespace PL
         {
             try
             {
-                dataCdrone = bl.displayDrone(dataCdroneUpdate.Id);
+                backgroundWorker.ReportProgress(1);
             }
             catch(Exception ex)
             {
@@ -559,10 +589,21 @@ namespace PL
         {
             simulator.IsChecked = false;
         }
+
+        private void Simulator_ProgressChange(object sender,ProgressChangedEventArgs e)
+        {
+            
+            UpdateDroneGrid.DataContext = bl.displayDrone(dataCdroneUpdate.Id);
+            Drone_Label.Content = bl.displayDrone(dataCdroneUpdate.Id);
+        }
         private void Simulator_Click(object sender, RoutedEventArgs e)
         {
             if (backgroundWorker.IsBusy != true)
             {
+                
+                backgroundWorker.ProgressChanged += Simulator_ProgressChange;
+                backgroundWorker.WorkerReportsProgress = true;
+                backgroundWorker.WorkerSupportsCancellation = true;
                 backgroundWorker.RunWorkerAsync(); // Start the asynchronous operation.
                 simulator.IsChecked = true;
             }

@@ -9,7 +9,7 @@ using System.Windows.Data;
 
 namespace PL
 {
-    public class DisplaysButtonsInDroneWindow : IMultiValueConverter // multi binding
+    public class DisplaysButtonsInDroneWindow : IMultiValueConverter // Multi binding
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
@@ -24,4 +24,23 @@ namespace PL
             throw new NotImplementedException();
         }
     }
+
+
+    public class BatteryBackground : IValueConverter // packade to list
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value != null && (Double)value <= 20)
+                return "#FFE30A0A";
+            else return "#FF159C11";
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+
+
 }

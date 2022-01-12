@@ -14,7 +14,7 @@ namespace BL
         int droneID;
         Action action;
         Func<bool> stop;
-        Drone drone = new Drone();
+        DroneDescription drone = new DroneDescription();
         private int timer = 500;
         private int KM = 1;
         int DELAY = 1000;
@@ -32,9 +32,10 @@ namespace BL
             {
                 lock (bl)
                 {
-                    drone = BL.displayDrone(droneID);
+                    drone = bl.displayDroneList().First(x => x.Id == droneID);
 
                 }
+                action();
                 Thread.Sleep(DELAY);
                 if (drone.Status == DroneStatuses.free)
                 {
@@ -42,9 +43,11 @@ namespace BL
                     {
                         lock (bl) 
                         {
-                            bl.Assignement(drone.ID);
-                            drone = BL.displayDrone(drone.ID);
+                            bl.Assignement(drone.Id);
+                            drone = bl.displayDroneList().First(x => x.Id == droneID);
+                            
                         }
+                        
                     }
                     catch(NotAvailable)
                     {
@@ -54,16 +57,20 @@ namespace BL
                             parcels = bl.displayParcelsNotAssigned();
                         }
                         if (parcels.Any())//if there is no parcels in requested
-                            Thread.Sleep(DELAY);
+                        { Thread.Sleep(DELAY);
+                            action();
+                        }
                         else //if there is no battery to drone to take parcels
                         {
-                            location = drone.initialLoc;
+                            location = drone.loc;
                             lock (bl)
                             {
-                                bl.DroneToCharge(drone.ID);
-                                timer = (int)(bl.Distance(location, drone.initialLoc) / SPEED);
+                                bl.DroneToCharge(drone.Id);
+                                timer = (int)(bl.Distance(location, drone.loc) / SPEED);
+
                             }
                             Thread.Sleep(Convert.ToInt32(timer) * 1000);
+                            action();
                         }
                     }
                 }
@@ -73,34 +80,38 @@ namespace BL
                 {
                     lock (bl)
                     {
-                        bl.DroneCharged(drone.ID,120);
-                        if (drone.Battery != 100)
-                            bl.DroneToCharge(drone.ID);
+                        bl.DroneCharged(drone.Id,120);
+                        if (drone.battery != 100)
+                            bl.DroneToCharge(drone.Id);
                     }
                 }
                 Thread.Sleep(DELAY);
+                action();
 
                 if (drone.Status == DroneStatuses.shipping)
                 {
-                    if(drone.myParcel.deliveringStatus==false) //if the parcel is just connected
+                    
+                    if(bl.displayDrone(droneID).myParcel.deliveringStatus==false) //if the parcel is just connected
                     {
                         lock (bl)
                         {
-                            bl.PickedUp(drone.ID);
-                            drone = BL.displayDrone(drone.ID);
-                            timer = (int) drone.myParcel.distance / SPEED;
+                            bl.PickedUp(drone.Id);
+                            drone = bl.displayDroneList().First(x => x.Id == droneID);
+                            timer = (int)bl.displayDrone(droneID).myParcel.distance / SPEED;
                         }
                         Thread.Sleep(Convert.ToInt32(timer) * 10);
+                        action();
                     }
                     else
                     {
                         lock (bl)
                         {
-                            bl.delivered(drone.ID);
-                            drone = BL.displayDrone(drone.ID);
-                            timer =(int) drone.myParcel.distance / SPEED;
+                            bl.delivered(drone.Id);
+                            drone = bl.displayDroneList().First(x => x.Id == droneID);
+                            timer =(int)bl.displayDrone(droneID).myParcel.distance / SPEED;
                         }
                         Thread.Sleep(Convert.ToInt32(timer) * 1000);
+                        action();
                     }
 
                 }

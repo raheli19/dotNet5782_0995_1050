@@ -386,7 +386,7 @@ namespace BL
                 if (updateDrone.battery - BatteryAccToDistance(distance(collectDrone.initialLoc.latitude, collectDrone.initialLoc.longitude, collectDrone.myParcel.picking.latitude, collectDrone.myParcel.picking.longitude)) > 0)
                 {
                     updateDrone.battery -= BatteryAccToDistance(distance(collectDrone.initialLoc.latitude, collectDrone.initialLoc.longitude, collectDrone.myParcel.picking.latitude, collectDrone.myParcel.picking.longitude));
-                    updateDrone.loc = collectDrone.myParcel.picking;
+                    updateDrone.loc = displayClient( collectDrone.myParcel.Sender.ID).ClientLoc;
 
                     DroneList[index] = updateDrone;
 
@@ -454,6 +454,7 @@ namespace BL
                     tempDD.battery -= BatteryAccToDistance(myDistance);
                     tempDD.loc = targetLoc;
                     tempDD.Status = BO.DroneStatuses.free;
+                    tempDD.parcelId = 0;
                     DroneList.Remove(myDrone);
                     DroneList.Add(tempDD);
                     DO.Parcel tempParcel = new DO.Parcel();

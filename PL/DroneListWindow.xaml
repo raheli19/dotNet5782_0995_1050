@@ -15,6 +15,10 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+
+
+
+        <local:BatteryBackground x:Key="BatteryBackground"></local:BatteryBackground>
     </Window.Resources>
     <Grid Name="MainGrid">
         <Grid.RowDefinitions>
@@ -103,6 +107,15 @@
                     <GridViewColumn Header="Id" Width="100" DisplayMemberBinding="{Binding Id}" />
                     <GridViewColumn Header="Model" Width="120" DisplayMemberBinding="{Binding Model}" />
                     <GridViewColumn Header="Weight" Width="100" DisplayMemberBinding="{Binding weight }" />
+                    <GridViewColumn Width="80" Header="Process">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                
+                                <ProgressBar x:Name="Batt" HorizontalAlignment="Left" Height="20" Width="70" Value="{Binding battery,Mode=OneWay}" Foreground="{Binding battery ,Mode=TwoWay, Converter={StaticResource BatteryBackground}}" />
+                                
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                     <GridViewColumn Header="Battery" Width="80" DisplayMemberBinding="{Binding battery}" />
                     <GridViewColumn Header="Status" Width="120" DisplayMemberBinding="{Binding Status}" />
                     <GridViewColumn Header="Latitude" Width="140" DisplayMemberBinding="{Binding loc.latitude}" />
@@ -124,8 +137,7 @@
         </Button>
         <Button x:Name="ClearStatus" Content="CLEAR" HorizontalAlignment="Left" Margin="112,53,0,0" VerticalAlignment="Top" Click="ClearStatus_Click" ToolTip="ClearStatus" Height="27" Width="128" FontSize="18" FontWeight="Bold" FontStyle="Normal" Background="#FFD2E6F6"/>
         <Button x:Name="ClearWeight" Content="CLEAR" HorizontalAlignment="Left" Margin="400,49,0,0" VerticalAlignment="Top" Click="ClearWeight_Click" Height="27" Width="126" FontSize="18" FontWeight="Bold" Background="#FFCBEBF7"/>
-
-
+        
 
 
 
@@ -138,11 +150,22 @@
                     <GridViewColumn Header="Id" Width="100" DisplayMemberBinding="{Binding Id}" />
                     <GridViewColumn Header="Model" Width="120" DisplayMemberBinding="{Binding Model}" />
                     <GridViewColumn Header="Weight" Width="100" DisplayMemberBinding="{Binding weight }" />
+                    <!--<GridViewColumn Header="Battery" Width="80" DisplayMemberBinding="{Binding battery}" />-->
+                    
+                    <GridViewColumn Width="80" Header="Battery">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <ProgressBar HorizontalAlignment="Left" Height="20" Width="70" Value="{Binding battery,Mode=OneWay}" Foreground="{Binding battery ,Mode=TwoWay, Converter={StaticResource BatteryBackground}}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                     <GridViewColumn Header="Battery" Width="80" DisplayMemberBinding="{Binding battery}" />
                     <GridViewColumn Header="Status" Width="120" DisplayMemberBinding="{Binding Status}" />
                     <GridViewColumn Header="Latitude" Width="140" DisplayMemberBinding="{Binding loc.latitude}" />
                     <GridViewColumn Header="Longitude" Width="140" DisplayMemberBinding="{Binding loc.longitude}" />
                     <GridViewColumn Header="ParcelId" Width="100" DisplayMemberBinding="{Binding parcelId}" />
+                    
+
                 </GridView>
             </ListView.View>
 
@@ -157,6 +180,11 @@
             </ListView.GroupStyle>
         </ListView>
 
+
+
+        <ProgressBar HorizontalAlignment="Left" Height="28" Margin="368,175,0,0" VerticalAlignment="Top" Width="149" x:Name="Batt" Value="{Binding battery,Mode=OneWay}" Foreground="{Binding battery ,Mode=TwoWay, Converter={StaticResource BatteryBackground}}"/>
+
+
         <ListView Name="FilterByStatus" ItemsSource="{Binding}" MouseDoubleClick="FilterByStatus_MouseDoubleClick" Visibility="Hidden" Margin="0,75,0,0" Grid.RowSpan="2" FontSize="18" FontWeight="Bold" FontStyle="Italic" >
             <ListView.Background>
                 <ImageBrush  Opacity="0.4" ImageSource="/images/droneGrouping.png"/>
@@ -166,6 +194,13 @@
                     <GridViewColumn Header="Id" Width="100" DisplayMemberBinding="{Binding Id}" />
                     <GridViewColumn Header="Model" Width="120" DisplayMemberBinding="{Binding Model}" />
                     <GridViewColumn Header="Weight" Width="100" DisplayMemberBinding="{Binding weight }" />
+                    <GridViewColumn Width="80" Header="Battery">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <ProgressBar HorizontalAlignment="Left" Height="20" Width="70" Value="{Binding battery,Mode=OneWay}" Foreground="{Binding battery ,Mode=TwoWay, Converter={StaticResource BatteryBackground}}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                     <GridViewColumn Header="Battery" Width="80" DisplayMemberBinding="{Binding battery}" />
                     <GridViewColumn Header="Status" Width="120" DisplayMemberBinding="{Binding Status}" />
                     <GridViewColumn Header="Latitude" Width="140" DisplayMemberBinding="{Binding loc.latitude}" />

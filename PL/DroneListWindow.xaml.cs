@@ -52,8 +52,7 @@ namespace PL
         {
 
             InitializeComponent();
-            DronesListView.DataContext = boDroneList;
-            DataContext = boDroneList;
+
             foreach (var item in bl.displayDroneList())
             {
                 boDroneList.Add(item);
@@ -61,6 +60,8 @@ namespace PL
 
             }
             this.bl = bl;
+            DronesListView.DataContext = boDroneList;
+            DataContext = boDroneList;
 
             this.comboStatusSelector.ItemsSource = Enum.GetValues(typeof(BO.DroneStatuses));
             this.comboWeightSelector.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
