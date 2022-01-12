@@ -19,26 +19,32 @@
                 </Style.Triggers>
             </Style>
         </Grid.Resources>
-        <Grid x:Name="Sign_Up" Visibility="Visible">
+        <Grid x:Name="Sign_Up" Visibility="Visible" Margin="-4,0,4,0">
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="#FF9292FE" Offset="1"/>
+                </LinearGradientBrush>
+            </Grid.Background>
 
 
-            <Label x:Name="info" Content="Please enter your personal details:" HorizontalAlignment="Left" Margin="221,92,0,0" VerticalAlignment="Top" FontSize="20"/>
+            <Label x:Name="info" Content="Please enter your personal details:" HorizontalAlignment="Left" Margin="221,92,0,0" VerticalAlignment="Top" FontSize="20" FontWeight="Bold"/>
 
-            <Label x:Name="Welcome" Content="We are happy that you decided to join us" HorizontalAlignment="Left" Margin="168,34,0,0" VerticalAlignment="Top" Width="417" FontSize="22" FontStyle="Italic"/>
-            <Label x:Name="Name" Content="Name" HorizontalAlignment="Left" Margin="93,217,0,0" VerticalAlignment="Top" FontSize="16" Background="#FF8181F1" Width="90" HorizontalContentAlignment="Center"/>
-            <Label x:Name="PersonalId" Content="Personal Id" HorizontalAlignment="Left" Margin="93,166,0,0" VerticalAlignment="Top" Height="36" Width="92" FontSize="16" Background="#FF8181F1"/>
-            <Label x:Name="Phone" Content="Phone" HorizontalAlignment="Left" Margin="93,266,0,0" VerticalAlignment="Top" FontSize="16" Background="#FF8181F1" Width="90" HorizontalContentAlignment="Center"/>
-            <Label x:Name="Latitude" Content="Latitude" HorizontalAlignment="Left" Margin="93,316,0,0" VerticalAlignment="Top" FontSize="16" Background="#FF8181F1" Width="90" HorizontalContentAlignment="Center"/>
-            <Label x:Name="Longitude" Content="Longitude" HorizontalAlignment="Left"  Margin="93,368,0,0" VerticalAlignment="Top" Background="#FF8181F1" FontSize="18"/>
-            <TextBox x:Name="textBox_PersonalId" KeyDown="id_enter" Text="{Binding ID ,Mode=OneWayToSource}" HorizontalAlignment="Center" Margin="0,166,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="98" Height="36" />
-            <TextBox x:Name="textBox_Name" KeyDown="name_enter" Text="{Binding Name,Mode=TwoWay}" HorizontalAlignment="Center" Margin="0,215,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="98" Height="33"/>
-            <TextBox x:Name="textBox_Phone" KeyDown="phone_enter" Text="{Binding Phone,Mode=TwoWay}" HorizontalAlignment="Center" Margin="0,266,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="98" Height="31"/>
-            <TextBox x:Name="textBox_Latitude" KeyDown="lat_enter" Text="{Binding ClientLoc.latitude,Mode=OneWayToSource}"  HorizontalAlignment="Center" Margin="0,316,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="98" Height="31"/>
-            <TextBox x:Name="textBox_Longitude" KeyDown="long_enter" Text="{Binding ClientLoc.longitude,Mode=OneWayToSource}"  HorizontalAlignment="Center" Margin="0,368,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="98" Height="34"/>
+            <Label x:Name="Welcome" Content="We are happy that you decided to join us" HorizontalAlignment="Left" Margin="168,34,0,0" VerticalAlignment="Top" Width="446" FontSize="22" FontStyle="Italic" FontWeight="Bold" BorderThickness="2,2,2,2" BorderBrush="#FF413C9B" Foreground="#FFDCC9C9"/>
+            <Label x:Name="Name" Content="Name" HorizontalAlignment="Left" Margin="35,209,0,0" VerticalAlignment="Top" FontSize="16" Background="#FF8181F1" Width="90" HorizontalContentAlignment="Center" BorderThickness="2,2,2,2" BorderBrush="Black"/>
+            <Label x:Name="PersonalId" Content="Personal Id" HorizontalAlignment="Left" Margin="33,148,0,0" VerticalAlignment="Top" Height="36" Width="92" FontSize="16" Background="#FF8181F1" BorderThickness="2,2,2,2" BorderBrush="Black"/>
+            <Label x:Name="Phone" Content="Phone" HorizontalAlignment="Left" Margin="35,266,0,0" VerticalAlignment="Top" FontSize="16" Background="#FF8181F1" Width="90" HorizontalContentAlignment="Center" BorderThickness="2,2,2,2" BorderBrush="Black"/>
+            <Label x:Name="Latitude" Content="Latitude" HorizontalAlignment="Left" Margin="35,316,0,0" VerticalAlignment="Top" FontSize="16" Background="#FF8181F1" Width="90" HorizontalContentAlignment="Center" BorderThickness="2,2,2,2" BorderBrush="Black"/>
+            <Label x:Name="Longitude" Content="Longitude" HorizontalAlignment="Left"  Margin="35,365,0,0" VerticalAlignment="Top" Background="#FF8181F1" FontSize="18" BorderThickness="2,2,2,2" BorderBrush="Black"/>
+            <TextBox x:Name="textBox_PersonalId" KeyDown="id_enter" Text="{Binding ID ,Mode=OneWayToSource}" HorizontalAlignment="Left" Margin="181,148,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="98" Height="36" />
+            <TextBox x:Name="textBox_Name" KeyDown="name_enter" Text="{Binding Name,Mode=TwoWay}" HorizontalAlignment="Left" Margin="181,209,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="98" Height="33"/>
+            <TextBox x:Name="textBox_Phone" KeyDown="phone_enter" Text="{Binding Phone,Mode=TwoWay}" HorizontalAlignment="Left" Margin="181,266,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="98" Height="31"/>
+            <TextBox x:Name="textBox_Latitude" KeyDown="lat_enter" Text="{Binding ClientLoc.latitude,Mode=OneWayToSource}"  HorizontalAlignment="Left" Margin="181,316,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="98" Height="31"/>
+            <TextBox x:Name="textBox_Longitude" KeyDown="long_enter" Text="{Binding ClientLoc.longitude,Mode=OneWayToSource}"  HorizontalAlignment="Left" Margin="181,368,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="98" Height="34"/>
 
 
-            <CheckBox Name="cbSample" Content="I agree the conditions" Margin="564,110,42,228" FontWeight="Bold" FontStyle="Italic" />
-            <TextBlock HorizontalAlignment="Left" Margin="491,217,0,105" FontSize="14" Width="267">
+            <CheckBox Name="cbSample" Content="I agree the conditions" Margin="323,335,283,3" FontWeight="Bold" FontStyle="Italic" />
+            <TextBlock HorizontalAlignment="Left" Margin="511,216,0,106" FontSize="14" Width="267">
                 <TextBlock.Style>
                     <Style TargetType="TextBlock">
                         <Setter Property="Text" Value="" />
@@ -46,13 +52,13 @@
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding ElementName=cbSample, Path=IsChecked}" Value="True">
                                 <Setter Property="Text" Value="Press the button below to join the system!" />
-                                <Setter Property="Foreground" Value="Green" />
+                                <Setter Property="Foreground" Value="White" />
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
                 </TextBlock.Style>
             </TextBlock>
-            <Button x:Name="button_Join" ToolTip="JOIN US" Content="JOIN" HorizontalAlignment="Left" Margin="658,357,0,0" VerticalAlignment="Top" Width="89" Height="45" Background="#FF8C67C5" FontSize="24" FontStyle="Italic" FontWeight="Bold" BorderThickness="4,4,4,4" Click="button_Join_Click"  />
+            <Button x:Name="button_Join" ToolTip="JOIN US" Content="JOIN" IsEnabled="{Binding ElementName=cbSample, Path=IsChecked}" HorizontalAlignment="Left" Margin="658,357,0,0" VerticalAlignment="Top" Width="89" Height="45" Background="#FF8C67C5" FontSize="24" FontStyle="Italic" FontWeight="Bold" BorderThickness="4,4,4,4" Click="button_Join_Click"  />
         </Grid>
         <Grid x:Name="Sign_In" Visibility="Hidden">
             <!--New Client Region-->
@@ -78,8 +84,8 @@
                 <Button.Background>
                     <ImageBrush ImageSource="/images/exit.png"/>
                 </Button.Background>
-               
-                
+
+
             </Button>
         </Grid>
 

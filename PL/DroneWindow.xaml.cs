@@ -329,6 +329,7 @@ namespace PL
                 if (FilterByStatus != default)
                     FilterByStatus.ItemsSource = bl.displayDroneList();
                 Drone_Label.Content = bl.displayDrone(dataCdroneUpdate.Id);
+                UpdateDroneGrid.DataContext = bl.displayDrone(dataCdroneUpdate.Id);
                 //Batt.Content = bl.displayDrone(dataCdroneUpdate.Id).Battery;
 
 
@@ -554,7 +555,12 @@ namespace PL
            
             backgroundWorker.CancelAsync();
             UpdateDroneGrid.DataContext = bl.displayDrone(dataCdroneUpdate.Id);
-
+            if (ListViewDrone != default)
+                ListViewDrone.ItemsSource = bl.displayDroneList();
+            if (FilterByWeight != default)
+                FilterByWeight.ItemsSource = bl.displayDroneList();
+            if (FilterByStatus != default)
+                FilterByStatus.ItemsSource = bl.displayDroneList();
         }
 
 

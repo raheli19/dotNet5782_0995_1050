@@ -132,14 +132,17 @@ namespace PL
                 boClientList.Add(item);
 
             }
+
             DronesListView.DataContext = boDroneList;
-            DataContext = boDroneList;
             foreach (var item in bl.displayDroneList())
             {
                 boDroneList.Add(item);
 
 
             }
+            DronesListView.ItemsSource = bl.displayDroneList();
+
+
         }
 
         private void ClickUpdate(object sender, RoutedEventArgs e)
@@ -257,8 +260,20 @@ namespace PL
                 }
             }
         }
+
         #endregion
 
-
+        private void displayDrone_Click(object sender, RoutedEventArgs e)
+        {
+            //if (bl.displayDrone(bl.displayParcel(dataCparcelUpdate.Id).Drone.ID).ID != 0)
+            try
+            {
+                DroneDescription droneDescription =bl.displayDroneList().First(x => x.parcelId == dataCparcelUpdate.Id);
+                new DroneWindow(droneDescription, bl, DronesListView, default, default).Show();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("The parcel isn't connected to any drone!"); }
+            }
     }
 }

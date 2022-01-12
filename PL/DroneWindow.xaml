@@ -191,7 +191,7 @@
 
 
             <Grid.Background>
-                <ImageBrush ImageSource="/images/fond.png" Opacity="0.6"/>
+                <ImageBrush ImageSource="/images/fond.png" Opacity="0.5"/>
             </Grid.Background>
             <!--Contents:
       Content="UPDATE"     
@@ -203,9 +203,9 @@
 
             <!--Update Button-->
             <Button x:Name="UpdateButton" Content="UPDATE" HorizontalAlignment="Left"       
-                    Background="Transparent" Margin="622,181,0,0" VerticalAlignment="Top"
-                     ToolTip="UPDATE" Height="51" Width="133" BorderBrush="Black" Click="ClickUpdate"
-                     Opacity="100" FontFamily="Cambria" FontSize="30" FontWeight="Bold" FontStyle="Italic">
+                    Background="#FFF6EDDB" Margin="592,181,0,0" VerticalAlignment="Top"
+                     ToolTip="UPDATE" Height="58" Width="132" BorderBrush="Black" Click="ClickUpdate"
+                     Opacity="100" FontFamily="Cambria" FontSize="30" FontWeight="Bold" FontStyle="Normal">
             </Button>
             <!--we didn't do binding for this part because we use the same text box for 2 things different (one string and one int) so it was better to not use it instead of using two textboxes-->
             <TextBox x:Name="UpdateTextBox"  Visibility="Hidden"  HorizontalAlignment="Left" Height="28" Margin="68,63,0,0"  Background="White" TextWrapping="Wrap" VerticalAlignment="Top" Width="147"/>
@@ -217,7 +217,7 @@
             </Button>
 
             <!--FirstButton:Can be:1)Release from charge(FULLY CHARGED?) 2)Send drone to charge Button (BATTERY LOW?) 3)Collect delivery (COLLECT PACKAGE)-->
-            <Button Name="FirstButton"  HorizontalAlignment="Left" Background="Transparent" Margin="533,94,0,0" VerticalAlignment="Top"  Height="61" Width="250" BorderBrush="Black" Click="ClickFirstButton" Opacity="100" FontFamily="Cambria" FontSize="30" FontWeight="Bold" FontStyle="Italic">
+            <Button Name="FirstButton"  HorizontalAlignment="Left" Background="#FFF6EDDB" Margin="533,94,0,0" VerticalAlignment="Top"  Height="65" Width="250" BorderBrush="Black" Click="ClickFirstButton" Opacity="100" FontFamily="Cambria" FontSize="30" FontWeight="Bold" FontStyle="Normal">
 
             </Button>
 
@@ -230,12 +230,12 @@
 
 
             <!--SecondButton:Can be:1)Deliver Parcel(DELIVERING THE PACKAGE) 2)Send Drone To Delivery(READY FOR PICKING!)-->
-            <Button x:Name="SecondButton"  HorizontalAlignment="Left" Background="Transparent" Margin="461,256,0,0" VerticalAlignment="Top"  Height="61" Width="322" BorderBrush="Black" Click="SecondButton_Click" Opacity="100" FontFamily="Cambria" FontSize="30" FontWeight="Bold" FontStyle="Italic">
+            <Button x:Name="SecondButton"  HorizontalAlignment="Left" Background="#FFF6EDDB" Margin="488,256,0,0" VerticalAlignment="Top"  Height="61" Width="312" BorderBrush="Black" Click="SecondButton_Click" Opacity="100" FontFamily="Cambria" FontSize="30" FontWeight="Bold" FontStyle="Normal">
 
             </Button>
 
             <!--CloseButton-->
-            <Button Name="CloseButton" Content="CLOSE" HorizontalAlignment="Left" Background="Transparent" Margin="577,18,0,0" VerticalAlignment="Top" ToolTip="Close the Window" Height="59" Width="130" BorderBrush="Black" Click="ClickCloseDroneWindow" Opacity="100" FontFamily="Cambria" FontWeight="Bold" FontStyle="Italic" FontSize="30">
+            <Button Name="CloseButton" Content="CLOSE" HorizontalAlignment="Left" Background="#FFF6EDDB" Margin="596,18,0,0" VerticalAlignment="Top" ToolTip="Close the Window" Height="59" Width="130" BorderBrush="Black" Click="ClickCloseDroneWindow" Opacity="100" FontFamily="Cambria" FontWeight="Bold" FontStyle="Normal" FontSize="30">
 
             </Button>
 
@@ -254,13 +254,13 @@
             </Button>-->
 
 
-            <CheckBox x:Name="simulator" Visibility="Visible" Content="CheckBox" IsChecked="False" Margin="0,0,692,414" />
-            <Button Name="Simulator" Content="Simulator" HorizontalAlignment="Left" Margin="712,25,0,0" VerticalAlignment="Top" Click="Simulator_Click"  />
-            <Button x:Name="Cancellation" Content="Cancel" Grid.Column="1" HorizontalAlignment="Left" Margin="391,0,0,25" Grid.Row="2" VerticalAlignment="Bottom" Click="Cancellation_Click"/>
+            <CheckBox x:Name="simulator" Visibility="Hidden" Content="CheckBox" IsChecked="False" Margin="0,0,692,414" />
+            <Button Name="Simulator" Content="AUTOMATIC" HorizontalAlignment="Left" Margin="325,297,0,0" VerticalAlignment="Top" Click="Simulator_Click" Height="31" Width="109" FontWeight="Bold"  />
+            <Button x:Name="Cancellation" Content="Cancel" HorizontalAlignment="Left" Margin="348,0,0,53" VerticalAlignment="Bottom" Click="Cancellation_Click" Width="57" Height="32" FontWeight="Bold"/>
 
             <Label x:Name="Drone_Label"   HorizontalAlignment="Left" Margin="10,121,0,0" VerticalAlignment="Top" Height="303" Width="268" FontWeight="Bold" FontStyle="Italic" Background="#FFF0F1E3"/>
-            <Label x:Name="Drones_Details" Content="Drone's details:" HorizontalAlignment="Left" Margin="20,81,0,0" VerticalAlignment="Top" Width="195" FontSize="24" FontWeight="Bold" FontStyle="Italic" BorderThickness="3,3,3,3" Visibility="Visible"/>
-            <Button x:Name="ShowParcel" Content="SHOW PARCEL" HorizontalAlignment="Left" Margin="518,346,0,0" VerticalAlignment="Top" Width="208" Height="53" FontSize="30" FontWeight="Bold" FontStyle="Italic" FontFamily="Cambria" Background="{x:Null}" Visibility="Visible" BorderBrush="#FF07070F" Click="ShowParcel_Click"/>
+            <Label x:Name="Drones_Details" Content="Drone's details:" HorizontalAlignment="Left" Margin="44,71,0,0" VerticalAlignment="Top" Width="195" FontSize="24" FontWeight="Bold" FontStyle="Normal" BorderThickness="3,3,3,3" Visibility="Visible" HorizontalContentAlignment="Center"/>
+            <Button x:Name="ShowParcel" Content="SHOW PARCEL" HorizontalAlignment="Left" Margin="554,331,0,0" VerticalAlignment="Top" Width="208" Height="56" FontSize="30" FontWeight="Bold" FontStyle="Normal" FontFamily="Cambria" Background="#FFF6EDDB" Visibility="Hidden" BorderBrush="#FF07070F" Click="ShowParcel_Click"/>
             <ProgressBar HorizontalAlignment="Left" Height="28" Margin="391,194,0,0" VerticalAlignment="Top" Width="113" x:Name="Batt" Value="{Binding  Battery,Mode=OneWay}" Foreground="{Binding Battery ,Mode=TwoWay, Converter={StaticResource BatteryBackground}}"/>
 
             <TextBlock Text="{Binding ElementName=Batt, Path=Value, StringFormat={}{0:0}%}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="391,198,0,0" Height="19" Width="113" TextAlignment="Center" FontSize="18" FontWeight="Bold" />
@@ -268,20 +268,22 @@
             <Label x:Name="Model" Content="{Binding Model,Mode=TwoWay}" HorizontalAlignment="Left" Margin="390,38,0,0" VerticalAlignment="Top" Height="26" Width="113" Background="#FFD5D5F0"/>
             <Label x:Name="MaxWeight" Content="{Binding MaxWeight,Mode=TwoWay}" HorizontalAlignment="Left" Margin="391,71,0,0" VerticalAlignment="Top" Background="#FFD5D5F0" Height="24" Width="112"/>
             <Label x:Name="Status" Content="{Binding Status,Mode=TwoWay}" HorizontalAlignment="Left" Margin="391,100,0,0" VerticalAlignment="Top" Width="112" Background="#FFD5D5F0" Height="27"/>
-            <Label x:Name="Battery" Content="{Binding Battery,Mode=OneWay}" HorizontalAlignment="Left" Margin="518,174,0,0" VerticalAlignment="Top" Background="{x:Null}" Height="26" Width="112"/>
+            <Label x:Name="Battery" Content="{Binding Battery,Mode=OneWay}" HorizontalAlignment="Left" Margin="392,226,0,0" VerticalAlignment="Top" Background="#FFD5D5F0" Height="25" Width="112"/>
             <Label x:Name="Latitude" Content="{Binding initialLoc.latitude,Mode=TwoWay}" HorizontalAlignment="Left" Margin="391,132,0,0" VerticalAlignment="Top" Height="23" Width="112" Background="#FFD5D5F0"/>
             <Label x:Name="Longitude" Content="{Binding initialLoc.longitude,Mode=TwoWay}" HorizontalAlignment="Left" Margin="391,160,0,0" VerticalAlignment="Top" Height="25" Width="112" Background="#FFD5D5F0"/>
-            <Label x:Name="ParcelId" Content="{Binding myParcel.ID,Mode=TwoWay}" HorizontalAlignment="Left" Margin="391,227,0,0" VerticalAlignment="Top" Height="24" Width="113" Background="#FFD5D5F0"/>
+            <Label x:Name="ParcelId" Content="{Binding myParcel.ID,Mode=TwoWay}" HorizontalAlignment="Left" Margin="391,258,0,0" VerticalAlignment="Top" Height="24" Width="93" Background="#FFD5D5F0"/>
 
 
             <Label x:Name="IDlab" Content="ID" HorizontalAlignment="Left" Margin="283,9,0,0" VerticalAlignment="Top" Width="83" Background="#FFF6EDDB" Height="26" FontWeight="Bold" BorderThickness="2,2,2,2" BorderBrush="#FF0B0B18" HorizontalContentAlignment="Center"/>
             <Label x:Name="Modellab" Content="Model" HorizontalAlignment="Left" Margin="283,38,0,0" VerticalAlignment="Top" Height="28" Width="83" Background="#FFF6EDDB" FontWeight="Bold" BorderThickness="2,2,2,2" BorderBrush="Black" HorizontalContentAlignment="Center"/>
             <Label x:Name="MaxWeightlab" Content="Weight" HorizontalAlignment="Left" Margin="284,68,0,0" VerticalAlignment="Top" Background="#FFF6EDDB" Height="30" Width="82" FontWeight="Bold" FontSize="11" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" BorderThickness="2,2,2,2" BorderBrush="Black"/>
             <Label x:Name="Statuslab" Content="Status" HorizontalAlignment="Left" Margin="284,100,0,0" VerticalAlignment="Top" Width="82" Background="#FFF6EDDB" Height="27" VerticalContentAlignment="Top" FontWeight="Bold" HorizontalContentAlignment="Center" BorderThickness="2,2,2,2" BorderBrush="Black"/>
-            <Label x:Name="Batterylab" Content="Battery" HorizontalAlignment="Left" Margin="284,192,0,0" VerticalAlignment="Top" Background="#FFF6EDDB" Height="30" Width="82" FontSize="11" FontWeight="Bold" BorderThickness="2,2,2,2" BorderBrush="Black" HorizontalContentAlignment="Center"/>
+            <Label x:Name="Batterylab" Content="Process" HorizontalAlignment="Left" Margin="284,192,0,0" VerticalAlignment="Top" Background="#FFF6EDDB" Height="30" Width="82" FontSize="11" FontWeight="Bold" BorderThickness="2,2,2,2" BorderBrush="Black" HorizontalContentAlignment="Center"/>
             <Label x:Name="Latitudelab" Content="Latitude" HorizontalAlignment="Left" Margin="284,129,0,0" VerticalAlignment="Top" Height="30" Width="82" Background="#FFF6EDDB" FontWeight="Bold" BorderThickness="2,2,2,2" BorderBrush="Black" HorizontalContentAlignment="Center" FontSize="11"/>
             <Label x:Name="Longitudelab" Content="Longitude" HorizontalAlignment="Left" Margin="284,160,0,0" VerticalAlignment="Top" Height="29" Width="82" Background="#FFF6EDDB" RenderTransformOrigin="0.502,0.73" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" FontWeight="Bold" FontSize="11" BorderThickness="2,2,2,2" BorderBrush="Black"/>
-            <Label x:Name="ParcelIdlab" Content="Parcel ID" HorizontalAlignment="Left" Margin="284,222,0,0" VerticalAlignment="Top" Height="29" Width="82" Background="#FFF6EDDB" FontWeight="Bold" BorderThickness="2,2,2,2" BorderBrush="Black" FontSize="11" HorizontalContentAlignment="Center"/>
+            <Label x:Name="ParcelIdlab" Content="Parcel ID" HorizontalAlignment="Left" Margin="283,256,0,0" VerticalAlignment="Top" Height="29" Width="82" Background="#FFF6EDDB" FontWeight="Bold" BorderThickness="2,2,2,2" BorderBrush="Black" FontSize="11" HorizontalContentAlignment="Center"/>
+            <Label x:Name="Batteryylab" Content="Battery" HorizontalAlignment="Left" Margin="284,224,0,0" VerticalAlignment="Top" Height="30" Width="82" Background="#FFF6EDDB" FontWeight="Bold" BorderThickness="2,2,2,2" BorderBrush="Black" FontSize="11" HorizontalContentAlignment="Center"/>
+
 
             <!--  <Label Content="UPDATE" Width="109" FontSize="22" FontStyle="Italic" FontWeight="Bold" Margin="187,286,504,74"/>-->
 
