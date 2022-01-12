@@ -92,8 +92,7 @@ namespace PL
         {
             if (e.Key == Key.Enter)
             {
-                button_Join.Focus();
-                button_Join_Click(sender, e);// verifier si ca marche
+                cbSample.Focus();
             }
         }
 
@@ -186,8 +185,19 @@ namespace PL
                 e.Cancel = true;// call from the "X", we don't want to close
 
         }
+
         #endregion
 
-        
+        private void cbSample_Checked(object sender, RoutedEventArgs e)
+        {
+            button_Join.Focus();
+            
+
+        }
+
+        private void join_enter(object sender, KeyEventArgs e)
+        {
+            button_Join_Click(sender, e);// verifier si ca marche
+        }
     }
 }

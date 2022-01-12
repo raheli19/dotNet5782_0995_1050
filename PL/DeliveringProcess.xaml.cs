@@ -161,24 +161,24 @@ namespace PL
         
 
         #region checkPickedUp
-        private void Picked_up(object sender, RoutedEventArgs e)
-        {
-            //affiche liste des parcels qu'ils envoit
-            List<ParcelDescription> tempList = new List<ParcelDescription>();
-            DataCParcel.Drone = new DroneWithParcel();
-            tempList = bl.displayParcelList().Where(x => x.SenderName == DataCclient.Name).ToList();
-            listOf_Parcels.Visibility = Visibility.Visible;
-            label_info.Visibility = Visibility.Visible;
-            Parcel_Id_Entered.Visibility = Visibility.Visible;
-            // Drone_Id_entered.Visibility = Visibility.Visible;
-            click_PickedUpButton.Visibility = Visibility.Visible;
-            listOf_Parcels.Content = tempList.ToString(); //doesn't work to print the list!!!!
+        //private void (object sender, RoutedEventArgs e)
+        //{
+        //    //affiche liste des parcels qu'ils envoit
+        //    List<ParcelDescription> tempList = new List<ParcelDescription>();
+        //    DataCParcel.Drone = new DroneWithParcel();
+        //    tempList = bl.displayParcelList().Where(x => x.SenderName == DataCclient.Name).ToList();
+        //    listOf_Parcels.Visibility = Visibility.Visible;
+        //    label_info.Visibility = Visibility.Visible;
+        //    Parcel_Id_Entered.Visibility = Visibility.Visible;
+        //    // Drone_Id_entered.Visibility = Visibility.Visible;
+        //    click_PickedUpButton.Visibility = Visibility.Visible;
+        //    listOf_Parcels.Content = tempList.ToString(); //doesn't work to print the list!!!!
 
 
             
-        }
+        //}
 
-        private void click_PickedUp_Click(object sender, RoutedEventArgs e)
+        private void Picked_up(object sender, RoutedEventArgs e)
         {
             //enter the id of the parcel from the list
             // supposed to go into th elist of the parcel, find it, and assign in the datacontext the id of the associated' drone!

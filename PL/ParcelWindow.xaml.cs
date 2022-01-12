@@ -171,40 +171,6 @@ namespace PL
 
         #endregion
 
-        #region Remove_Button
-        private void Remove_Button(object sender, RoutedEventArgs e)
-        {
-            //if (Combo_SenderId.SelectedItem == null || Combo_TargetId.SelectedItem == null)
-            //{
-            //    MessageBox.Show("Please make a selection", "WARNING", MessageBoxButton.OK, MessageBoxImage.Warning);
-            //    return;
-            //}
-            //if (Combo_SenderId.SelectedItem.Equals(Combo_TargetId.SelectedItem))
-            //{
-            //    MessageBox.Show("A client didn't sent a parcel to himself! ", "Aie aie aie...", MessageBoxButton.OK, MessageBoxImage.Warning);
-            //    return;
-            //}
-            //dataCparcel.ID = bl.displayParcelList().Where(x => x.SenderName == bl.displayClient((int)Combo_SenderId.SelectedItem).Name && x.TargetName == bl.displayClient((int)Combo_TargetId.SelectedItem).Name);
-            //dataCparcel.ID = bl.GetIdParcel((int)Combo_SenderId.SelectedItem, (int)Combo_TargetId.SelectedItem);
-            try
-            {
-
-                bl.RemoveParcel(dataCparcel);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-            MessageBox.Show("Success!", "The Parcel is removed", MessageBoxButton.OK, MessageBoxImage.Information);
-            //this.Combo_SenderId.SelectedItem = null;
-            //this.Combo_TargetId.SelectedItem = null;
-            this.Combo_SenderId.ItemsSource = bl.AllSenders_Id();
-            this.Combo_TargetId.ItemsSource = bl.AllTargets_Id();
-            ListViewParcel.ItemsSource = bl.displayParcelList();
-
-        }
-        #endregion
 
         #region DisplaySender_Click
         private void displaySender_Click(object sender, RoutedEventArgs e)

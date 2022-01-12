@@ -21,8 +21,22 @@
                 </Style.Triggers>
             </Style>
         </Grid.Resources>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="77*"/>
+            <ColumnDefinition Width="323*"/>
+            <ColumnDefinition Width="282*"/>
+            <ColumnDefinition Width="119*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="16*"/>
+            <RowDefinition Height="84*"/>
+            <RowDefinition Height="133*"/>
+            <RowDefinition Height="82*"/>
+            <RowDefinition Height="93*"/>
+            <RowDefinition Height="26*"/>
+        </Grid.RowDefinitions>
 
-        <TextBlock Text="New Client?" Width="325" Height="40" FontSize="30" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="465,258,0,0" TextAlignment="Center" Foreground="#FFE5D5D5" FontStyle="Italic">
+        <TextBlock Text="New Client?" FontSize="30" Margin="65,17,10,26" TextAlignment="Center" Foreground="#FFE5D5D5" FontStyle="Italic" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2">
             <TextBlock.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black"/>
@@ -42,8 +56,8 @@
             </TextBlock.Style>
         </TextBlock>
         <!--Client already exists Region-->
-        <Button x:Name="button_SignIn"  Content="Sign In" HorizontalAlignment="Left" Margin="115,338,0,0" VerticalAlignment="Top" Height="61" Width="111"
-                FontSize="30" Click="button_SignIn_Click" Background="#FFAE3092" FontWeight="Bold"/>
+        <Button x:Name="button_SignIn"  Content="Sign In" Margin="34,16,178,16"
+                FontSize="30" Click="button_SignIn_Click" Background="#FFAE3092" FontWeight="Bold" Grid.Row="4" Grid.Column="1"/>
         <!--<Style>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
@@ -51,8 +65,8 @@
                 </Trigger>
             </Style.Triggers>
             </Style>-->
-        
-        <TextBlock Text="Already exist?"  Width="303" Height="46" FontSize="30" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="19,255,0,0" TextAlignment="Center" Foreground="#FFE6DADA" FontStyle="Italic">
+
+        <TextBlock Text="Already exist?" FontSize="30"  Margin="19,17,79,20" TextAlignment="Center" Foreground="#FFE6DADA" FontStyle="Italic" Grid.Row="3" Grid.ColumnSpan="2">
             <TextBlock.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black"/>
@@ -71,23 +85,13 @@
                 </Style>
             </TextBlock.Style>
         </TextBlock>
-        <Label x:Name="label" Content="Welcome or welcome back to our system!" HorizontalAlignment="Left" Margin="148,36,0,0" VerticalAlignment="Top" Width="526" Height="52" FontSize="28" FontWeight="Normal" FontStyle="Italic" BorderThickness="3,3,3,3" BorderBrush="#FF1630CF" Foreground="#FF9D9DF4"/>
-        <Image x:Name="image" Height="100" Width="100" Margin="690,9,10,325" Source="/images/userfonddecran.png">
+        <Label x:Name="label" Content="Welcome or welcome back to our system!"  Margin="60,16,18,16" FontSize="28" FontWeight="Normal" FontStyle="Italic" BorderThickness="3,3,3,3" BorderBrush="#FF1630CF" Foreground="#FF9D9DF4" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"/>
+        <Image x:Name="image" Width="100" Margin="10,8,9,8" Source="/images/userfonddecran.png" Grid.Column="3" Grid.Row="1">
             <Image.OpacityMask>
                 <ImageBrush ImageSource="/images/userfonddecran.png" Stretch="Fill"/>
             </Image.OpacityMask>
         </Image>
-        <Label x:Name="label1" Content="" HorizontalAlignment="Left" Margin="0,109,0,0" VerticalAlignment="Top" Width="810" Height="6" RenderTransformOrigin="0.5,0.5" BorderThickness="5,5,5,5" BorderBrush="#FF0B0707">
-            <Label.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform ScaleY="1"/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Label.RenderTransform>
-        </Label>
-        <Button x:Name="button_SignUP" Content="Sign Up" HorizontalAlignment="Left" Margin="584,338,0,0" VerticalAlignment="Top" Height="64" Width="120" FontSize="30" Click="button_SignUp_Click" Background="#FFAE3092" RenderTransformOrigin="0.5,0.5" FontWeight="Bold">
+        <Button x:Name="button_SignUP" Content="Sign Up" Margin="165,15,114,14" FontSize="30" Click="button_SignUp_Click" Background="#FFAE3092" RenderTransformOrigin="0.5,0.5" FontWeight="Bold" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>

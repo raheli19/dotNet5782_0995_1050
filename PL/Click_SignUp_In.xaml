@@ -43,8 +43,8 @@
             <TextBox x:Name="textBox_Longitude" KeyDown="long_enter" Text="{Binding ClientLoc.longitude,Mode=OneWayToSource}"  HorizontalAlignment="Left" Margin="181,368,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="98" Height="34"/>
 
 
-            <CheckBox Name="cbSample" Content="I agree the conditions" Margin="323,335,283,3" FontWeight="Bold" FontStyle="Italic" />
-            <TextBlock HorizontalAlignment="Left" Margin="511,216,0,106" FontSize="14" Width="267">
+            <CheckBox Name="cbSample" Content="I agree the conditions" Margin="564,110,42,228" FontWeight="Bold" FontStyle="Italic" Checked="cbSample_Checked" />
+            <TextBlock HorizontalAlignment="Left" Margin="491,217,0,105" FontSize="14" Width="267">
                 <TextBlock.Style>
                     <Style TargetType="TextBlock">
                         <Setter Property="Text" Value="" />
@@ -58,7 +58,7 @@
                     </Style>
                 </TextBlock.Style>
             </TextBlock>
-            <Button x:Name="button_Join" ToolTip="JOIN US" Content="JOIN" IsEnabled="{Binding ElementName=cbSample, Path=IsChecked}" HorizontalAlignment="Left" Margin="658,357,0,0" VerticalAlignment="Top" Width="89" Height="45" Background="#FF8C67C5" FontSize="24" FontStyle="Italic" FontWeight="Bold" BorderThickness="4,4,4,4" Click="button_Join_Click"  />
+            <Button x:Name="button_Join" KeyDown="join_enter" ToolTip="JOIN US" Content="JOIN" HorizontalAlignment="Left" Margin="658,357,0,0" VerticalAlignment="Top" Width="89" Height="45" Background="#FF8C67C5" FontSize="24" FontStyle="Italic" FontWeight="Bold" BorderThickness="4,4,4,4" Click="button_Join_Click"  />
         </Grid>
         <Grid x:Name="Sign_In" Visibility="Hidden">
             <!--New Client Region-->

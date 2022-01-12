@@ -16,7 +16,8 @@
             </Style.Triggers>
         </Style>
     </Window.Resources>
-    <Grid Background="#FFA1B9DD">
+    <Grid x:Name="MainGrid"  Margin="-4,0,4,0"  >
+        <Grid x:Name="ListParcel" Background="#FFA1B9DD">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="199*"/>
             <ColumnDefinition Width="151*"/>
@@ -29,7 +30,7 @@
             <RowDefinition Height="46*"/>
             <RowDefinition Height="341*"/>
         </Grid.RowDefinitions>
-        <Button Content="ADD PARCEL" Margin="12,27,9,29" Click="button_addParcel" FontWeight="Bold" FontFamily="Segoe UI" Foreground="#FFE8D2D2" BorderThickness="2,2,2,2" BorderBrush="#FF01011A" FontSize="16" FontStyle="Italic" Grid.Column="4" Grid.RowSpan="2">
+        <Button Content="ADD PARCEL" Margin="11,1,10,9" Click="button_addParcel" FontWeight="Bold" FontFamily="Segoe UI" Foreground="#FFE8D2D2" BorderThickness="2,2,2,2" BorderBrush="#FF01011A" FontSize="16" FontStyle="Italic" Grid.Column="4">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FF64B9EB"/>
@@ -63,7 +64,10 @@
             <ListView.Background>
                 <ImageBrush ImageSource="/images/colisBackground.png" Opacity="0.5"/>
             </ListView.Background>
+
+
         </ListView>
+
         <Button x:Name="FilterBySender1" Content="FilterBySender" Margin="12,5,7,6" FontSize="16" FontWeight="Bold" FontStyle="Italic" Click="FilterBySender1_Click" Grid.Column="2">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -83,7 +87,7 @@
 
 
 
-        <ListView Name="FilterBySender" ItemsSource="{Binding}" MouseDoubleClick="FilterBySender_MouseDoubleClick" Visibility="Hidden" Margin="0,4,0,-6"  FontSize="18" FontWeight="Bold" FontStyle="Italic" Grid.RowSpan="2" Grid.ColumnSpan="5" >
+            <ListView Name="FilterBySender" ItemsSource="{Binding}" MouseDoubleClick="FilterBySender_MouseDoubleClick" Visibility="Hidden"  FontSize="18" FontWeight="Bold" FontStyle="Italic" Grid.ColumnSpan="5" Grid.Row="2" Margin="0,2,0,-6">
             <ListView.Background>
                 <ImageBrush  Opacity="0.4" ImageSource="/images/colisBackground.png"/>
             </ListView.Background>
@@ -145,5 +149,18 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
+        <Button Content="Remove" Grid.Column="4" HorizontalAlignment="Right" Margin="0,8,20,12" Grid.Row="1" Width="92" Click="Remove_Click"/>
     </Grid>
+        <Grid x:Name="RemoveGrid"  Visibility="Hidden" Height="140" Margin="143,36,0,165" Grid.ColumnSpan="5" Grid.Row="2" HorizontalAlignment="Left" Width="257">
+            <Border Padding="5" BorderThickness="1" BorderBrush="Red" Background="AntiqueWhite" CornerRadius="10"/>
+            <TextBox x:Name="ID" KeyDown="enter_tap" Margin="10,58,9,10" Text="{Binding ID, Mode=TwoWay}" TextWrapping="Wrap" Grid.ColumnSpan="2" BorderBrush="#FF0B0D13"/>
+            <Label Content="Pease enter the id of the Parcel you&#xD;&#xA;   want to delete and press enter" Height="49" Margin="4,0,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+
+        </Grid>
+
+
+
+    </Grid>
+    
+    
 </Window>

@@ -25,6 +25,8 @@ namespace PL
         private BLApi.IBL bl;
         Priorities prior = new Priorities();//statut
         WeightCategories weight = new WeightCategories();
+        public BO.Parcel dataCparcel = new Parcel();
+        
         private ObservableCollection<BO.ParcelDescription> boParcelList = new ObservableCollection<BO.ParcelDescription>();
         private bool checkFlag = false;
         public static Priorities parcelPriority = 0;//dronestat
@@ -36,8 +38,10 @@ namespace PL
         public ParcelListWindow(BLApi.IBL bl)
         {
             InitializeComponent();
-            DataContext = boParcelList;
+            //DataContext = boParcelList;
             ParcelsListView.DataContext = boParcelList;
+            dataCparcel.ID = 9;
+            RemoveGrid.DataContext = dataCparcel;
             this.bl = bl;
             foreach (var item in bl.displayParcelList())
             {
@@ -203,7 +207,69 @@ namespace PL
 
         private void Remove_Click(object sender, RoutedEventArgs e)
         {
+            RemoveGrid.Visibility = Visibility.Visible;
 
         }
+
+        #region enter_tap
+        private void enter_tap(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                try
+                {
+                    RemoveGrid.DataContext = bl.displayParcel(Convert.ToInt32( ID.Text) );
+                    dataCparcel = bl.displayParcel(Convert.ToInt32(ID.Text));
+                    RemoveGrid.Visibility = Visibility.Visible;
+                    this.Remove_Button(sender, e, dataCparcel); }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+
+                }
+
+            }
+        }
+        #endregion
+
+        #region Remove_Button
+        private void Remove_Button( object sender, RoutedEventArgs e, BO.Parcel parcel)
+        {
+            //if (Combo_SenderId.SelectedItem == null || Combo_TargetId.SelectedItem == null)
+            //{
+            //    MessageBox.Show("Please make a selection", "WARNING", MessageBoxButton.OK, MessageBoxImage.Warning);
+            //    return;
+            //}
+            //if (Combo_SenderId.SelectedItem.Equals(Combo_TargetId.SelectedItem))
+            //{
+            //    MessageBox.Show("A client didn't sent a parcel to himself! ", "Aie aie aie...", MessageBoxButton.OK, MessageBoxImage.Warning);
+            //    return;
+            //}
+            //dataCparcel.ID = bl.displayParcelList().Where(x => x.SenderName == bl.displayClient((int)Combo_SenderId.SelectedItem).Name && x.TargetName == bl.displayClient((int)Combo_TargetId.SelectedItem).Name);
+            //dataCparcel.ID = bl.GetIdParcel((int)Combo_SenderId.SelectedItem, (int)Combo_TargetId.SelectedItem);
+            try
+            {
+
+                bl.RemoveParcel(bl.displayParcel(parcel.ID));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            MessageBox.Show("Success!", "The Parcel is removed", MessageBoxButton.OK, MessageBoxImage.Information);
+            //this.Combo_SenderId.SelectedItem = null;
+            //this.Combo_TargetId.SelectedItem = null;
+            //this.Combo_SenderId.ItemsSource = bl.AllSenders_Id();
+            //this.Combo_TargetId.ItemsSource = bl.AllTargets_Id();
+            ParcelsListView.ItemsSource = bl.displayParcelList();
+            RemoveGrid.Visibility = Visibility.Hidden;
+
+        }
+
+        #endregion
+
+        
     }
 }
