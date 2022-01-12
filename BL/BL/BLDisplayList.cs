@@ -201,7 +201,7 @@ namespace BL
             List<ParcelDescription> PDList = new List<ParcelDescription>();
             foreach (var item in dal.IEParcelList())
             {
-                if (item.Scheduled != DateTime.MinValue)
+                if (item.Scheduled == null)
                 {
                     ParcelDescription tempPD = new ParcelDescription();
                     tempPD.Id = item.ID;
@@ -209,19 +209,19 @@ namespace BL
                     tempPD.TargetName = Name(item.TargetId);
                     tempPD.weight = (WeightCategories)item.Weight;
                     tempPD.priority = (Priorities)item.Priority;
-                    if (item.Requested != DateTime.MinValue)
+                    if (item.Requested != null)
                     {
                         tempPD.Status = ParcelStatus.requested;
                     }
-                    else if (item.Scheduled != DateTime.MinValue)
+                    else if (item.Scheduled != null)
                     {
                         tempPD.Status = ParcelStatus.scheduled;
                     }
-                    else if (item.PickedUp != DateTime.MinValue)
+                    else if (item.PickedUp != null)
                     {
                         tempPD.Status = ParcelStatus.pickedup;
                     }
-                    else if (item.Delivered != DateTime.MinValue)
+                    else if (item.Delivered != null)
                     {
                         tempPD.Status = ParcelStatus.delivered;
                     }

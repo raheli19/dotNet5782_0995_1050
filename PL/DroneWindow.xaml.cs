@@ -551,7 +551,10 @@ namespace PL
 
         private void Cancellation_Click(object sender, RoutedEventArgs e)
         {
+           
             backgroundWorker.CancelAsync();
+            UpdateDroneGrid.DataContext = bl.displayDrone(dataCdroneUpdate.Id);
+
         }
 
 
