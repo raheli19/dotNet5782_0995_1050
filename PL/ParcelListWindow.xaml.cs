@@ -201,7 +201,7 @@ namespace PL
 
         #endregion
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Remove_Click(object sender, RoutedEventArgs e)
         {
 
         }
