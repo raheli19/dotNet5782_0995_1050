@@ -20,12 +20,17 @@
 
         <local:BatteryBackground x:Key="BatteryBackground"></local:BatteryBackground>
     </Window.Resources>
+
     <Grid Name="MainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="13*"/>
             <RowDefinition Height="49*"/>
         </Grid.RowDefinitions>
         <Grid Name="UpGrid" Height="auto" Width="auto">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="44*"/>
+                <RowDefinition Height="47*"/>
+            </Grid.RowDefinitions>
             <Grid.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black" Offset="0"/>
@@ -44,7 +49,7 @@
             <ComboBox Name="comboStatusSelector"   ToolTip="Choose a Status" AutomationProperties.Name="Drone's Statut" 
                       
                       BorderThickness="1,1,1,1" FontStretch="Normal" 
-                      FontStyle="Italic" FontWeight="ExtraBlack" OpacityMask="#FF3E3E40" Margin="111,12,28,46" SelectionChanged="comboStatusSelector_SelectionChanged_1" Grid.ColumnSpan="2" >
+                      FontStyle="Italic" FontWeight="ExtraBlack" OpacityMask="#FF3E3E40" Margin="3,6,3,5" SelectionChanged="comboStatusSelector_SelectionChanged_1" Grid.Column="1" >
                 <ComboBox.Background>
                     <LinearGradientBrush EndPoint="0,1">
                         <GradientStop Color="Blue"/>
@@ -52,10 +57,11 @@
                     </LinearGradientBrush>
                 </ComboBox.Background>
             </ComboBox>
+            <Button x:Name="ClearWeight" Content="CLEAR" Margin="4,9,10,11" Click="ClearWeight_Click" FontSize="18" FontWeight="Bold" Background="#FFCBEBF7" Grid.Column="3" Grid.Row="1"/>
+            <Button x:Name="ClearStatus" Content="CLEAR" Margin="3,12,2,8" Click="ClearStatus_Click" ToolTip="ClearStatus" FontSize="18" FontWeight="Bold" FontStyle="Normal" Background="#FFD2E6F6" Grid.Row="1" Grid.Column="1"/>
 
-            <ComboBox  Name="comboWeightSelector"  Grid.Column="3" ToolTip="Choose a Weight" HorizontalAlignment="Left" 
-                       VerticalAlignment="Top" Width="128" Height="32" Margin="1,6,0,0" FontWeight="Bold" FontStyle="Italic" SelectionChanged="comboWeightSelector_SelectionChanged_1"/>
-            <Label Content="Drone Max Weight: " Grid.Column="1" Height="38" VerticalAlignment="Top" BorderThickness="4,4,4,4" Foreground="#FFF9E4E4" FontWeight="Bold" FontStyle="Italic" HorizontalAlignment="Left" Width="133" Margin="123,10,0,0" Grid.ColumnSpan="2">
+            <ComboBox  Name="comboWeightSelector"  Grid.Column="3" ToolTip="Choose a Weight" Margin="6,6,6,6" FontWeight="Bold" FontStyle="Italic" SelectionChanged="comboWeightSelector_SelectionChanged_1"/>
+            <Label Content="Drone Max Weight: " Grid.Column="2" BorderThickness="2,2,2,2" Foreground="#FFF9E4E4" FontWeight="Bold" FontStyle="Italic" Margin="24,10,21,10" FontSize="8">
                 <Label.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="Black"/>
@@ -69,7 +75,7 @@
                     </LinearGradientBrush>
                 </Label.BorderBrush>
             </Label>
-            <Label x:Name="lblTBD" Content="Drone status: " Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="37" Width="96" Margin="10,16,0,0" BorderThickness="4,4,4,4" FontWeight="Bold" Foreground="#FFD7CACA" FontStyle="Italic">
+            <Label x:Name="lblTBD" Content="Drone status: " Margin="23,10,22,10" BorderThickness="2,2,2,2" FontWeight="Bold" Foreground="#FFD7CACA" FontStyle="Italic" Width="88" Height="24" FontSize="8">
                 <Label.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="Black"/>
@@ -83,7 +89,7 @@
                     </LinearGradientBrush>
                 </Label.BorderBrush>
             </Label>
-            <Button Content="ADD DRONE" Margin="0,0,10,46" Click="button_addDrone" FontWeight="Bold" FontFamily="Segoe UI" Foreground="#FFE8D2D2" BorderThickness="4,4,4,4" BorderBrush="#FF2F2C52" FontSize="16" Grid.Column="5" Height="39" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="104">
+            <Button Content="ADD DRONE" Click="button_addDrone" FontWeight="Bold" FontFamily="Segoe UI" Foreground="#FFE8D2D2" BorderThickness="4,4,4,4" BorderBrush="#FF2F2C52" FontSize="16" Grid.Column="5" Margin="14,3,15,2">
                 <Button.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="Black"/>
@@ -92,9 +98,19 @@
                 </Button.Background>
 
             </Button>
-            <Button x:Name="FilterByStatusButton" Content="FilterByStatus" Grid.Column="4" HorizontalAlignment="Center" Margin="0,8,0,0" VerticalAlignment="Top" Width="128" Height="35" FontSize="16" FontWeight="Bold" FontStyle="Italic" Click="FilterByStatusButton_Click" Background="#FF84C5CE"/>
-            <Button x:Name="FilterByWeightButton" Content="FilterByWeight" Grid.Column="4" HorizontalAlignment="Center" Margin="0,54,0,0" VerticalAlignment="Top" Width="128" Height="30" FontSize="16" FontWeight="Bold" FontStyle="Italic" Click="FilterByWeightButton_Click" Background="#FF84C5CE"/>
-            <Button x:Name="clearGrouping" Content="CLEAR GROUPING" Grid.Column="2" HorizontalAlignment="Center" Margin="0,53,0,0" VerticalAlignment="Top" Width="133" Height="36" FontSize="14" FontWeight="Bold" FontStyle="Italic" Click="clearGrouping_Click"/>
+            <Button x:Name="FilterByStatusButton" Content="FilterByStatus" Grid.Column="4" FontSize="16" FontWeight="Bold" FontStyle="Italic" Click="FilterByStatusButton_Click" Background="#FF84C5CE" Margin="10,6,10,6"/>
+            <Button x:Name="FilterByWeightButton" Content="FilterByWeight" Grid.Column="4" FontSize="16" FontWeight="Bold" FontStyle="Italic" Click="FilterByWeightButton_Click" Background="#FF84C5CE" Grid.Row="1" Margin="10,10,10,5"/>
+            <Button x:Name="clearGrouping" Content="CLEAR GROUPING" Grid.Column="2" FontSize="11" FontWeight="Bold" FontStyle="Italic" Click="clearGrouping_Click"  Grid.Row="1" Margin="7,10,7,10"/>
+            <Button Content="CLOSE" Margin="25,7,27,8" Click="Button_Close" Foreground="#FFFDFCFC" FontFamily="Segoe UI" FontWeight="Bold" FontSize="16" BorderThickness="4,4,4,4" BorderBrush="#FFD55D5D" Grid.Column="5" Grid.Row="1">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="Black" Offset="1"/>
+                        <GradientStop Color="#FFF63535"/>
+                        <GradientStop Color="#FF4E0707" Offset="0.913"/>
+                        <GradientStop Color="#FFE25353" Offset="0.073"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
 
         </Grid>
 
@@ -125,19 +141,7 @@
             </ListView.View>
         </ListView>
         <!-- <Button Content="Add a Drone" HorizontalAlignment="Left" Margin="640,0,0,0" VerticalAlignment="Center" Width="150" Height="48" Click="button_addDrone"/>-->
-        <Button Content="CLOSE" HorizontalAlignment="Left" Margin="689,49,0,5" Click="Button_Close" Width="101" Foreground="#FFFDFCFC" FontFamily="Segoe UI" FontWeight="Bold" FontSize="16" BorderThickness="4,4,4,4" BorderBrush="#FFD55D5D">
-            <Button.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="Black" Offset="1"/>
-                    <GradientStop Color="#FFF63535"/>
-                    <GradientStop Color="#FF4E0707" Offset="0.913"/>
-                    <GradientStop Color="#FFE25353" Offset="0.073"/>
-                </LinearGradientBrush>
-            </Button.Background>
-        </Button>
-        <Button x:Name="ClearStatus" Content="CLEAR" HorizontalAlignment="Left" Margin="112,53,0,0" VerticalAlignment="Top" Click="ClearStatus_Click" ToolTip="ClearStatus" Height="27" Width="128" FontSize="18" FontWeight="Bold" FontStyle="Normal" Background="#FFD2E6F6"/>
-        <Button x:Name="ClearWeight" Content="CLEAR" HorizontalAlignment="Left" Margin="400,49,0,0" VerticalAlignment="Top" Click="ClearWeight_Click" Height="27" Width="126" FontSize="18" FontWeight="Bold" Background="#FFCBEBF7"/>
-        
+
 
 
 

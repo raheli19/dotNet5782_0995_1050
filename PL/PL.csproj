@@ -12,6 +12,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="addbutton.png" />
     <None Remove="addParcel.png" />
     <None Remove="adduser.png" />
     <None Remove="backuser.png" />
@@ -26,6 +27,7 @@
     <None Remove="droneListBack.png" />
     <None Remove="fond.png" />
     <None Remove="fondessai.png" />
+    <None Remove="images\addbutton.png" />
     <None Remove="mainwinddrone.png" />
     <None Remove="parcelBackgound.png" />
     <None Remove="parcelUpdate.png" />
@@ -40,6 +42,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="images\addbutton.png" />
     <Resource Include="images\addParcel.png" />
     <Resource Include="images\adduser.png" />
     <Resource Include="images\backuser.png" />

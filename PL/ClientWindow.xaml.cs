@@ -37,7 +37,7 @@ namespace PL
             InitializeComponent();
             this.bl = bl;
             dataCclient.ClientLoc = new Localisation();
-            DataContext = dataCclient;
+            //DataContext = dataCclient;
             this.clientActions = (ClientActions)selectedItem;
             AddGridClient.Visibility = Visibility.Hidden;
             UpgradeClientGrid.Visibility = Visibility.Visible;
@@ -61,6 +61,7 @@ namespace PL
         {
             MessageBox.Show(/*"The model of your drone is being updated.*/"Please close this window and enter the new name and/or new phone number.", "Success!", MessageBoxButton.OK, MessageBoxImage.Information);
             // autres en hidden/visible
+            Client_Details.Visibility = Visibility.Hidden;
             UpdateNameTextBox.Visibility = Visibility.Visible;
             UpdatePhoneTextBox.Visibility = Visibility.Visible;
             UpdateLabel.Visibility = Visibility.Visible;
@@ -77,14 +78,14 @@ namespace PL
             if (UpdatePhoneTextBox.Text != "")
                 newPhone = (UpdatePhoneTextBox.Text);
 
-            if (clientActions.name == "" && clientActions.phone == "")// didn't enter any information
+            if (UpdateNameTextBox.Text == null && UpdatePhoneTextBox.Text == null)// didn't enter any information
             {
                 MessageBox.Show("Please enter an information", "ERROR", MessageBoxButton.OK, MessageBoxImage.Information);
 
             }
             try
             {
-                bl.updateClientName_Phone(clientActions.Id, newName, newPhone);
+                bl.updateClientName_Phone(clientActions.Id, newName, newPhone);// not in binding because the datacontext is for the lists
             }
             catch (Exception ex)
             {
@@ -97,6 +98,7 @@ namespace PL
             UpdatePhoneTextBox.Visibility = Visibility.Hidden;
             UpdateLabel.Visibility = Visibility.Hidden;
             CheckUpdate.Visibility = Visibility.Hidden;
+            Client_Details.Visibility = Visibility.Visible;
         }
 
 

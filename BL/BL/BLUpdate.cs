@@ -478,5 +478,7 @@ namespace BL
         {
             Simulator simulator = new Simulator(this, id, action, stop);
         }
+
+        
     }
 }
