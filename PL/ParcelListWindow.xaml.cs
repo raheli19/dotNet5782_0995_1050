@@ -55,6 +55,11 @@ namespace PL
         #endregion
 
         #region Close_Functions
+        /// <summary>
+        /// closes the window from the button and not from the X
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_Close(object sender, RoutedEventArgs e)
         {
             this.checkFlag = true; // will allow us to close the window from the button and not from the "X"
@@ -72,6 +77,11 @@ namespace PL
         #endregion
 
         #region OpenParcel
+        /// <summary>
+        /// open the window to add a parcel
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button_addParcel(object sender, RoutedEventArgs e)
         {
             ParcelWindow subWindow = new ParcelWindow(bl, ParcelsListView);
@@ -81,15 +91,30 @@ namespace PL
 
         #region Double_Click
 
+        /// <summary>
+        /// filter by target
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FilterByTarget_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             new ParcelWindow(FilterByTarget.SelectedItem, bl, ParcelsListView).Show();
         }
+        /// <summary>
+        /// open the parcel's window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ParcelView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             new ParcelWindow(ParcelsListView.SelectedItem, bl, ParcelsListView).Show();
         }
 
+        /// <summary>
+        /// filter by sender
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FilterBySender_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             new ParcelWindow(FilterBySender.SelectedItem, bl, ParcelsListView).Show();
@@ -98,6 +123,11 @@ namespace PL
         #endregion
 
         #region Filters_Select
+        /// <summary>
+        /// grouping by sender
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FilterBySender1_Click(object sender, RoutedEventArgs e)
         {
             List<ParcelDescription> parcelsBySender = new List<ParcelDescription>();
@@ -118,6 +148,11 @@ namespace PL
             ParcelsListView.Visibility = Visibility.Hidden;
         }
 
+        /// <summary>
+        /// grouping by target
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FilterByTarget1_Click(object sender, RoutedEventArgs e)
         {
             List<ParcelDescription> parcelsByTarget = new List<ParcelDescription>();
@@ -142,6 +177,11 @@ namespace PL
         #endregion
 
         #region Clear_Click
+        /// <summary>
+        /// clear grouping on the mainlist
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void clearGrouping_Click(object sender, RoutedEventArgs e)
         {
             FilterBySender.Visibility = Visibility.Hidden;
@@ -149,6 +189,11 @@ namespace PL
             ParcelsListView.Visibility = Visibility.Visible;
         }
 
+        /// <summary>
+        /// clear filter
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ClearPriority_Click(object sender, RoutedEventArgs e)
         {
             Combo_priority.SelectedItem = null;
@@ -161,7 +206,11 @@ namespace PL
 
 
         }
-
+        /// <summary>
+        /// clear filter
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ClearWeight_Click(object sender, RoutedEventArgs e)
         {
             Combo_weight.SelectedItem = null;
@@ -176,6 +225,11 @@ namespace PL
         #endregion
 
         #region Combo_Selections
+        /// <summary>
+        /// select weight
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Combo_weight_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (Combo_weight.SelectedItem == null)
@@ -193,7 +247,11 @@ namespace PL
                 this.ParcelsListView.ItemsSource = boParcelList.Where(x => x.weight == weight);
 
         }
-
+        /// <summary>
+        /// select priority
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Combo_priority_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (Combo_priority.SelectedItem == null)
@@ -213,6 +271,7 @@ namespace PL
         #endregion
 
         #region enter_tap
+        // allow us to go to the next textbox by enter
         private void enter_tap(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
@@ -235,12 +294,22 @@ namespace PL
         #endregion
 
         #region Remove_Button
+        /// <summary>
+        /// remove a parcel
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Remove_Click(object sender, RoutedEventArgs e)
         {
             RemoveGrid.Visibility = Visibility.Visible;
 
         }
-
+        /// <summary>
+        /// opens the grid to remove a parcel
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <param name="parcel"></param>
         private void Remove_Button( object sender, RoutedEventArgs e, BO.Parcel parcel)
         {
             try

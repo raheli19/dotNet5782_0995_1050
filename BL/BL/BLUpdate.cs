@@ -13,7 +13,7 @@ namespace BL
 
     sealed partial class BL : IBL
     {
-        
+
         //----------------------------------UPDATE-FUNCTIONS-------------------------------------
 
         #region Update DroneName
@@ -33,7 +33,7 @@ namespace BL
                 droneBL.Model = newModel;
                 DroneList.Add(droneBL);
                 dal.UpdateDrone(droneDAL); // this function update the DAL drones' list
-                
+
             }
             catch (DO.DroneException ex)  //catches the DAL exception if there is one
             {
@@ -72,7 +72,7 @@ namespace BL
                     stationDAL.ChargeSlots = newCS - notFreeChargeSlot;
                 }
                 dal.UpdateStation(stationDAL);  // updates the station in the stations' list (DAL)
-                
+
             }
             catch (DO.StationException ex)   //catches the Dal exception
             {
@@ -99,7 +99,7 @@ namespace BL
                 {
                     clientDAL.Name = newName;
                 }
-                if (newTel!= "n")
+                if (newTel != "n")
                 {
                     clientDAL.Phone = newTel;
                 }
@@ -114,9 +114,13 @@ namespace BL
         #endregion
 
         #region DroneToCharge
+        /// <summary>
+        /// Plug in the drone 
+        /// </summary>
+        /// <param name="DroneId"></param>
         public void DroneToCharge(int DroneId)
         {
-            
+
             DroneDescription blDrone = new DroneDescription();
             blDrone.loc = new Localisation();
             blDrone = DroneList.Find(Drone => Drone.Id == DroneId);
@@ -137,7 +141,7 @@ namespace BL
                     throw new NotEoughBattery("Can not send the drone to the station, it doesn't have enough battery!");
                 if (canGoToCharge == true)
                 {
-                    blDrone.battery = BatteryAccToDistance(distacctobatt-d);// substract the account of percetn from the battery to go to the nearest station
+                    blDrone.battery = BatteryAccToDistance(distacctobatt - d);// substract the account of percetn from the battery to go to the nearest station
                     DroneDescription tempDD = new DroneDescription();//UPDATE DroneDescriptionLIST IN BL
                     tempDD = blDrone;
                     tempDD.loc = nearestStation.Loc;
@@ -180,6 +184,11 @@ namespace BL
         #endregion
 
         #region DroneCharged
+        /// <summary>
+        /// The drone is charged, we calculate his battery according to the amount of time it has charged
+        /// </summary>
+        /// <param name="ID"></param>
+        /// <param name="time"></param>
         public void DroneCharged(int ID, double time)
         {
             DroneDescription droneBL = new DroneDescription();
@@ -187,7 +196,7 @@ namespace BL
             //droneBL.Id = ID;
             //droneBL.Status = DroneStatuses.free; // signs if we don't find it
             droneBL = DroneList.Find(x => ID == x.Id);
-            
+
             if (droneBL == null)
                 throw new IDNotFound("This drone doesn't exists!");
             if (droneBL.Status != DroneStatuses.maintenance)// if the drone is not charging
@@ -198,12 +207,12 @@ namespace BL
             droneBL.Status = DroneStatuses.free;
             droneBL.battery = BatteryAccToTime(time, droneBL.battery);
             if (droneBL.battery >= 100)
-                droneBL.battery = 100; 
+                droneBL.battery = 100;
             DroneList.Add(droneBL);
 
             //update station
             DO.Station stationDAL = new DO.Station();
-            
+
             foreach (var item in dal.IEStationList())
             {
                 if (item.Longitude == droneBL.loc.longitude && item.Latitude == droneBL.loc.latitude)
@@ -230,7 +239,7 @@ namespace BL
                 if (item.DroneId == droneBL.Id && item.StationId == stationDAL.ID)
                     flag = true;
             }
-            if(flag==true)
+            if (flag == true)
                 dal.UpdateDroneChargeList(droneBL.Id, stationDAL.ID); // delete it from the dalDroneChargeList
 
 
@@ -266,7 +275,7 @@ namespace BL
             double batteryNeeded = 0;
             for (int i = (int)BO.Priorities.emergency; i >= (int)BO.Priorities.regular; i--)
             {
-                priorityLevelList = parcelWithNoDrones.ToList().FindAll(parcel => parcel.priority == (BO.Priorities)i && parcel.Status==BO.ParcelStatus.requested);
+                priorityLevelList = parcelWithNoDrones.ToList().FindAll(parcel => parcel.priority == (BO.Priorities)i && parcel.Status == BO.ParcelStatus.requested);
                 for (int j = (int)connectDrone.MaxWeight; j >= (int)BO.WeightCategories.low; j--)
                 {
                     weightLevelList = priorityLevelList.ToList().FindAll(parcel => parcel.weight == (BO.WeightCategories)j);
@@ -375,7 +384,7 @@ namespace BL
             BO.DroneDescription myDrone = DroneList.Find(Drone => Drone.Id == droneId);  //finds the drone in the droneList in BL
             int index = DroneList.FindIndex(Drone => Drone.Id == droneId);
             //myDrone.loc = new Localisation();
-           // collectDrone.initialLoc = new Localisation();
+            // collectDrone.initialLoc = new Localisation();
             if (myDrone == null)  //the drone is not among the drone List
             {
                 throw new BO.IDNotFound("Drone not found");  //throws a BL exception
@@ -386,7 +395,7 @@ namespace BL
                 if (updateDrone.battery - BatteryAccToDistance(distance(collectDrone.initialLoc.latitude, collectDrone.initialLoc.longitude, collectDrone.myParcel.picking.latitude, collectDrone.myParcel.picking.longitude)) > 0)
                 {
                     updateDrone.battery -= BatteryAccToDistance(distance(collectDrone.initialLoc.latitude, collectDrone.initialLoc.longitude, collectDrone.myParcel.picking.latitude, collectDrone.myParcel.picking.longitude));
-                    updateDrone.loc = displayClient( collectDrone.myParcel.Sender.ID).ClientLoc;
+                    updateDrone.loc = displayClient(collectDrone.myParcel.Sender.ID).ClientLoc;
 
                     DroneList[index] = updateDrone;
 
@@ -420,7 +429,7 @@ namespace BL
             }
             catch (Exception ex)
             {
-                throw new BO.InputNotValid( ex.Message);
+                throw new BO.InputNotValid(ex.Message);
             }
 
 
@@ -428,6 +437,10 @@ namespace BL
         #endregion
 
         #region Delivered
+        /// <summary>
+        /// The drone has delivered the parcel, we make all the requested updates
+        /// </summary>
+        /// <param name="DroneId"></param>
         public void delivered(int DroneId)
         {
             BO.DroneDescription myDrone = DroneList.Find(Drone => Drone.Id == DroneId);
@@ -440,7 +453,7 @@ namespace BL
                 DO.Parcel prcel = dal.FindParcelAssociatedWithDrone(DroneId);
 
 
-                if (prcel.PickedUp !=null && prcel.Delivered == null)
+                if (prcel.PickedUp != null && prcel.Delivered == null)
                 {
 
                     int targetId = prcel.TargetId;
@@ -474,11 +487,18 @@ namespace BL
         }
         #endregion
 
-        public void StartSimulator(int id, Action action, Func<bool> stop) 
+        #region Simulator
+        /// <summary>
+        /// The functions starts the simulator
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="action"></param>
+        /// <param name="stop"></param>
+        public void StartSimulator(int id, Action action, Func<bool> stop)
         {
             Simulator simulator = new Simulator(this, id, action, stop);
         }
+        #endregion
 
-        
     }
 }

@@ -28,6 +28,10 @@ namespace PL
         private bool checkFlag = false;
 
         #region CTOR
+        /// <summary>
+        /// ctor
+        /// </summary>
+        /// <param name="bl"></param>
         public StationListWindow(BLApi.IBL bl)
         {
 
@@ -52,33 +56,49 @@ namespace PL
         #endregion
 
         #region StationListView_MouseDoubleClick
+        /// <summary>
+        /// open the window of a station ou doubled click on
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void StationListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             new StationWindow(StationListView.SelectedItem, bl, StationListView).Show();
-            //comboStatusSelector.SelectedItem = null;
-            //comboWeightSelector.SelectedItem = null;
         }
         #endregion
 
         #region GotOrNotAvailableChargeSlots_MouseDoubleClick
+        /// <summary>
+        /// opens a station window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void GotOrNotAvailableChargeSlots_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             new StationWindow(GotOrNotAvailableChargeSlots.SelectedItem, bl, StationListView).Show();
-            //comboStatusSelector.SelectedItem = null;
-            //comboWeightSelector.SelectedItem = null;
+
         }
         #endregion
 
         #region CountAvailableChargeSlots_MouseDoubleClick
+        /// <summary>
+        /// open station window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CountAvailableChargeSlots_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             new StationWindow(CountAvailableChargeSlots.SelectedItem, bl, StationListView).Show();
-            //comboStatusSelector.SelectedItem = null;
-            //comboWeightSelector.SelectedItem = null;
+
         }
         #endregion
 
         #region ContainsFreeChargeSlots_Click
+        /// <summary>
+        /// filter
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void containsFreeChargeSlots_Click(object sender, RoutedEventArgs e)
         {
             this.StationListView.ItemsSource = boStationList.Where(x => x.freeChargeSlots > 0);
@@ -86,6 +106,11 @@ namespace PL
         #endregion
 
         #region NumFCS_TextChanged
+        /// <summary>
+        /// filter by amount of free charge slots
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void numFCS_TextChanged(object sender, TextChangedEventArgs e)
         {
             string numFCSstr = numFCS.Text;
@@ -105,6 +130,11 @@ namespace PL
         #endregion
 
         #region Button_addStation
+        /// <summary>
+        /// addstation
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button_addStation(object sender, RoutedEventArgs e)
         {
             StationWindow subWindow = new StationWindow(bl, StationListView);
@@ -124,6 +154,11 @@ namespace PL
         #endregion
 
         #region Button_Click
+        /// <summary>
+        /// grouping
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button_Click(object sender, RoutedEventArgs e)
         {
             List<StationDescription> listByFree = new List<StationDescription>();
@@ -144,10 +179,13 @@ namespace PL
         #endregion
 
         #region Button1_Click
+        /// <summary>
+        /// grouping
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button1_Click(object sender, RoutedEventArgs e)
         {
-
-
             List<StationDescription> listByNumFree = new List<StationDescription>();
             foreach (var item in bl.DisplayStationList())
             {
@@ -168,6 +206,11 @@ namespace PL
         #endregion
 
         #region ClearGrouping_Click
+        /// <summary>
+        /// clear grouping
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void clearGrouping_Click(object sender, RoutedEventArgs e)
         {
             CountAvailableChargeSlots.Visibility = Visibility.Hidden;

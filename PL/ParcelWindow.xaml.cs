@@ -22,6 +22,7 @@ namespace PL
     /// </summary>
     public partial class ParcelWindow : Window
     {
+        #region ctor
         private BLApi.IBL bl;
         BO.Parcel dataCparcel = new BO.Parcel();
         BO.ParcelDescription dataCparcelUpdate = new BO.ParcelDescription();
@@ -31,8 +32,14 @@ namespace PL
         private bool checkFlag = false;
         private ObservableCollection<BO.ClientActions> boClientList = new ObservableCollection<BO.ClientActions>();
         private ObservableCollection<BO.DroneDescription> boDroneList = new ObservableCollection<BO.DroneDescription>();
+        #endregion
 
         #region ADDPARCEL
+        /// <summary>
+        /// opens the add parcel grid
+        /// </summary>
+        /// <param name="bl"></param>
+        /// <param name="ParcelListWindow"></param>
         public ParcelWindow(BLApi.IBL bl, object ParcelListWindow)
         {
             InitializeComponent();
@@ -56,6 +63,11 @@ namespace PL
 
         }
 
+        /// <summary>
+        /// add the parcel
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Add_Click(object sender, RoutedEventArgs e)
         {
 
@@ -86,25 +98,43 @@ namespace PL
         }
 
         #region comboboxSelections
+        /// <summary>
+        /// slect a sender
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Combo_SenderId_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             dataCparcel.Sender.ID = (int)Combo_SenderId.SelectedItem;
             dataCparcel.Sender.name = bl.displayClient(dataCparcel.Sender.ID).Name;
 
         }
-
+        /// <summary>
+        /// select a target
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Combo_TargetId_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             dataCparcel.Target.ID = (int)Combo_TargetId.SelectedItem;
             dataCparcel.Target.name = bl.displayClient(dataCparcel.Target.ID).Name;
 
         }
-
+        /// <summary>
+        /// select a priority
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Combo_Priority_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             dataCparcel.Priority = (Priorities)Combo_Priority.SelectedItem;
         }
-
+        
+        /// <summary>
+        /// select a weight
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Combo_Weight_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             dataCparcel.Weight = (WeightCategories)Combo_Weight.SelectedItem;
@@ -114,6 +144,12 @@ namespace PL
         #endregion
 
         #region UPDATE
+        /// <summary>
+        /// open the update grid
+        /// </summary>
+        /// <param name="selectedItem"></param>
+        /// <param name="bl"></param>
+        /// <param name="parcelListView"></param>
         public ParcelWindow(object selectedItem, BLApi.IBL bl, object parcelListView)
         {
             InitializeComponent();
@@ -145,10 +181,7 @@ namespace PL
 
         }
 
-        private void ClickUpdate(object sender, RoutedEventArgs e)
-        {
-
-        }
+        
         #endregion
 
         #region closeFunctions
@@ -173,6 +206,11 @@ namespace PL
 
 
         #region DisplaySender_Click
+        /// <summary>
+        /// opens the window of the sender
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void displaySender_Click(object sender, RoutedEventArgs e)
         {
             ClientActions clientActions = new();
@@ -183,6 +221,11 @@ namespace PL
         #endregion
 
         #region DisplayTarget_Click
+        /// <summary>
+        /// opens the window of the target
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void displayTarget_Click(object sender, RoutedEventArgs e)
         {
             ClientActions clientActions = new();
@@ -192,6 +235,12 @@ namespace PL
         }
         #endregion
 
+        #region DisplayDrone_Click
+        /// <summary>
+        /// opens the window of the drone
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void displayDrone_Click(object sender, RoutedEventArgs e)
         {
             //if (bl.displayDrone(bl.displayParcel(dataCparcelUpdate.Id).Drone.ID).ID != 0)
@@ -205,6 +254,7 @@ namespace PL
                 MessageBox.Show("The parcel isn't connected to any drone!");
             }
         }
+        #endregion
     }
-    
+
 }

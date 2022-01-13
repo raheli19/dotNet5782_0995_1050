@@ -52,6 +52,7 @@ namespace PL
         #endregion
 
         #region EnterTab
+        // allows us to do enter => goes to the next texbox
         private void id_enter(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
@@ -61,6 +62,10 @@ namespace PL
             }
         }
 
+        private void Add_enter(object sender, KeyEventArgs e)
+        {
+            Add_button(sender, e);
+        }
         private void name_enter(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
@@ -99,6 +104,11 @@ namespace PL
         #endregion
 
         #region Add_button
+        /// <summary>
+        /// add a station to the system
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Add_button(object sender, RoutedEventArgs e)
         {
 
@@ -189,7 +199,12 @@ namespace PL
         }
         #endregion
 
-        #region DronesChargingListView_MouseDoubleClick
+        #region StationListView_MouseDoubleClick
+        /// <summary>
+        /// opens the details of the drone 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DronesChargingListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
 
@@ -202,6 +217,11 @@ namespace PL
         #endregion
 
         #region ClickUpdate
+        /// <summary>
+        /// updates the station
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ClickUpdate(object sender, RoutedEventArgs e)
         {  MessageBox.Show(/*"The model of your drone is being updated.*/"Please close this window and enter the new name and/or new number of charge slots.", "Success!", MessageBoxButton.OK, MessageBoxImage.Information);
                 UpdateNameTextBox.Visibility = Visibility.Visible;
@@ -218,6 +238,11 @@ namespace PL
         #endregion
 
         #region Check_Click_Update
+        /// <summary>
+        /// update the station
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Check_Click_Update(object sender, RoutedEventArgs e)
         {
             if (UpdateNameTextBox.Text != "")
@@ -225,11 +250,7 @@ namespace PL
             else
                 newName = "n";
            
-            //if (stationDescription.name == "")
-            //{
-            //    MessageBox.Show("Please enter a name", "ERROR", MessageBoxButton.OK, MessageBoxImage.Information);
-
-            //}
+        
             try
             {
                 bl.updateStationName_CS(dataCstationUpdate.Id, newName);
@@ -244,13 +265,15 @@ namespace PL
             UpdateNameTextBox.Visibility = Visibility.Hidden;
             UpdateNameLabel.Visibility = Visibility.Hidden;
             CheckNameUpdate.Visibility = Visibility.Hidden;
-            //UpdateCSTextBox.Visibility = Visibility.Hidden;
-            //UpdateCSLabel.Visibility = Visibility.Hidden;
-            //CheckCSUpdate.Visibility = Visibility.Hidden;
         }
         #endregion
 
         #region Check_Click_UpdateCS
+        /// <summary>
+        /// updates num of free charge slots
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void Check_Click_UpdateCS(object sender, RoutedEventArgs e)
         {
             if (UpdateCSTextBox.Text != "")
@@ -268,9 +291,6 @@ namespace PL
             }
             ListViewStation.ItemsSource = bl.DisplayStationList();
             stationDetails.Content = bl.displayStation(dataCstationUpdate.Id);
-            //UpdateNameTextBox.Visibility = Visibility.Hidden;
-            //UpdateNameLabel.Visibility = Visibility.Hidden;
-            //CheckNameUpdate.Visibility = Visibility.Hidden;
             UpdateCSTextBox.Visibility = Visibility.Hidden;
             UpdateCSLabel.Visibility = Visibility.Hidden;
             CheckCSUpdate.Visibility = Visibility.Hidden;
@@ -278,9 +298,6 @@ namespace PL
 
         #endregion
 
-        private void Add_enter(object sender, KeyEventArgs e)
-        {
-            Add_button(sender, e);
-        }
+        
     }
 }

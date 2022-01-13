@@ -19,7 +19,7 @@
                 </Style.Triggers>
             </Style>
         </Grid.Resources>
-        <Grid x:Name="Sign_Up" Visibility="Visible" Margin="-4,0,4,0">
+        <Grid x:Name="Sign_Up" Visibility="Hidden" Margin="-4,0,4,0">
             <Grid.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black"/>

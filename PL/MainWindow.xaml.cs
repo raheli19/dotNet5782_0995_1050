@@ -45,23 +45,42 @@ namespace PL
         #endregion
 
         #region ButtonOpenLists
+        /// <summary>
+        /// open dronelist window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MainButton_OpenDroneList(object sender, RoutedEventArgs e)
         {
             new DroneListWindow(bl).Show();
             
         }
 
-
+        /// <summary>
+        /// openclient list window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MainButton_ClientList(object sender, RoutedEventArgs e)
         {
             new ClientListWindow(bl).Show();
         }
 
+        /// <summary>
+        /// open parcel list window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MainButton_OpenParcelList(object sender, RoutedEventArgs e)
         {
             new ParcelListWindow(bl).Show();
         }
 
+        /// <summary>
+        /// open the station list window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MainButton_OpenStationsList(object sender, RoutedEventArgs e)
         {
             new StationListWindow(bl).Show();

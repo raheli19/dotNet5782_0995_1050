@@ -25,4 +25,9 @@
     <Model>Nebula 4</Model>
     <weight>heavy</weight>
   </Drone>
+  <Drone>
+    <ID>33333333</ID>
+    <Model>DDF</Model>
+    <weight>low</weight>
+  </Drone>
 </ArrayOfDrone>

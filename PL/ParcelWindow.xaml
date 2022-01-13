@@ -24,10 +24,6 @@
             <Grid.Background>
                 <ImageBrush ImageSource="/images/parcelUpdate.png" Opacity="0.35"/>
             </Grid.Background>
-            <Button x:Name="UpdateButton" Content="Update" HorizontalAlignment="Left" 
-                   
-                    Background="#FFDDDDDD" Margin="572,115,0,0" VerticalAlignment="Top" ToolTip="UPDATE" Height="41" Width="133" BorderBrush="Black" Click="ClickUpdate" Opacity="100" FontFamily="Cambria" FontSize="30" FontWeight="Bold" FontStyle="Italic">
-            </Button>
 
 
             <!--CloseButton-->
