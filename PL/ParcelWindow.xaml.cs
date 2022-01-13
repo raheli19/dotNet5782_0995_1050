@@ -217,7 +217,8 @@ namespace PL
             if (e.Key == Key.Enter)
             {
                 try
-                { this.Remove_Button(sender, e); }
+                { //this.Remove_Button(sender, e); }
+                }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -234,12 +235,14 @@ namespace PL
             //if (bl.displayDrone(bl.displayParcel(dataCparcelUpdate.Id).Drone.ID).ID != 0)
             try
             {
-                DroneDescription droneDescription =bl.displayDroneList().First(x => x.parcelId == dataCparcelUpdate.Id);
+                DroneDescription droneDescription = bl.displayDroneList().First(x => x.parcelId == dataCparcelUpdate.Id);
                 new DroneWindow(droneDescription, bl, DronesListView, default, default).Show();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("The parcel isn't connected to any drone!"); }
+                MessageBox.Show("The parcel isn't connected to any drone!");
             }
+        }
     }
+    
 }
