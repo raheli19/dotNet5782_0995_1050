@@ -21,10 +21,10 @@
         <Grid.ColumnDefinitions>
 
         </Grid.ColumnDefinitions>
-        <Button Content="Show DroneList" Cursor="Hand" Click="MainButton_OpenDroneList" x:Name="openDroneList" FontSize="22" FontWeight="Bold" FontStyle="Normal" Background="#FF9389C3" BorderThickness="4,4,4,4" BorderBrush="#FF150E36" Grid.Row="3" Margin="612,15,8,21"/>
-        <Button Content="Show ClientList" Cursor="Hand" Click="MainButton_ClientList" Margin="612,11,8,6" x:Name="openClientList" FontSize="22" FontWeight="Bold" FontStyle="Normal" Background="#FF9389C3" BorderThickness="4,4,4,4" BorderBrush="#FF150E36" Grid.Row="4"/>
-        <Button Content="Show ParcelList" Cursor="Hand" Click="MainButton_OpenParcelList" Margin="2,12,613,22" x:Name="openParcelList" FontSize="22" FontWeight="Bold" FontStyle="Normal" Background="#FF9389C3" BorderThickness="4,4,4,4" BorderBrush="#FF150E36" Grid.Row="3"/>
-        <Button Content="Show StationsList" Cursor="Hand" Click="MainButton_OpenStationsList" x:Name="openParcelList_Copy" FontSize="22" FontWeight="Bold" FontStyle="Normal" Background="#FF9389C3" BorderThickness="4,4,4,4" BorderBrush="#FF150E36" Grid.Row="4" Margin="14,8,586,8"/>
+        <Button Content="Show DroneList" ToolTip="DRONES LIST" Cursor="Hand" Click="MainButton_OpenDroneList" x:Name="openDroneList" FontSize="22" FontWeight="Bold" FontStyle="Normal" Background="#FF9389C3" BorderThickness="4,4,4,4" BorderBrush="#FF150E36" Grid.Row="3" Margin="612,15,8,21"/>
+        <Button Content="Show ClientList" ToolTip="CLIENT LIST" Cursor="Hand" Click="MainButton_ClientList" Margin="430,11,190,6" x:Name="openClientList" FontSize="22" FontWeight="Bold" FontStyle="Normal" Background="#FF9389C3" BorderThickness="4,4,4,4" BorderBrush="#FF150E36" Grid.Row="4"/>
+        <Button Content="Show ParcelList" ToolTip="PARCEL LIST" Cursor="Hand" Click="MainButton_OpenParcelList" Margin="2,12,613,22" x:Name="openParcelList" FontSize="22" FontWeight="Bold" FontStyle="Normal" Background="#FF9389C3" BorderThickness="4,4,4,4" BorderBrush="#FF150E36" Grid.Row="3"/>
+        <Button Content="Show StationsList" ToolTip="STATIONS LIST" Cursor="Hand" Click="MainButton_OpenStationsList" x:Name="openParcelList_Copy" FontSize="22" FontWeight="Bold" FontStyle="Normal" Background="#FF9389C3" BorderThickness="4,4,4,4" BorderBrush="#FF150E36" Grid.Row="4" Margin="188,8,412,8"/>
 
         <Label x:Name="label" Content="Welcome to our Nebula Drone delivery System!&#xD;&#xA;" Margin="118,0,0,5" FontSize="24" FontWeight="Bold" FontStyle="Italic" BorderThickness="5,5,5,5" Grid.ColumnSpan="4" Grid.Row="1" HorizontalAlignment="Left" Width="552" Height="54" VerticalAlignment="Bottom" Grid.Column="1">
             <Label.BorderBrush>

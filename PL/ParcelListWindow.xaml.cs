@@ -48,6 +48,9 @@ namespace PL
 
             }
             //combobox?
+            this.Combo_priority.ItemsSource = Enum.GetValues(typeof(BO.Priorities));
+            this.Combo_weight.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
+
         }
         #endregion
 
@@ -151,7 +154,11 @@ namespace PL
             Combo_priority.SelectedItem = null;
             weightFlag = false;
             weightStat = 0;
-            ParcelsListView.DataContext = boParcelList;
+            //if (Combo_weight.SelectedItem == null)
+            //    ParcelsListView.ItemsSource = boParcelList;
+            //else
+            //    ParcelsListView.ItemsSource = boParcelList.SelectAll(x => x.weight == (WeightCategories)Combo_priority.SelectedItem);
+
 
         }
 
@@ -160,8 +167,10 @@ namespace PL
             Combo_weight.SelectedItem = null;
             parcelPriority = 0;
             priorityFlag = false;
-            ParcelsListView.DataContext = boParcelList;
-
+            //if(Combo_priority.SelectedItem == null)
+            //     ParcelsListView.ItemsSource = boParcelList;
+            //else
+            //    ParcelsListView.ItemsSource = boParcelList.Where(x => x.priority == (Priorities) Combo_priority.SelectedItem);
         }
 
         #endregion
@@ -199,7 +208,6 @@ namespace PL
                 this.ParcelsListView.ItemsSource = boParcelList.Where(x => x.priority == prior && x.weight == weightStat);
             else
                 this.ParcelsListView.ItemsSource = boParcelList.Where(x => x.priority == prior);
-
         }
 
         #endregion
