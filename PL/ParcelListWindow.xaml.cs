@@ -256,6 +256,7 @@ namespace PL
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                RemoveGrid.Visibility = Visibility.Hidden;
                 return;
             }
             MessageBox.Show("Success!", "The Parcel is removed", MessageBoxButton.OK, MessageBoxImage.Information);

@@ -191,43 +191,6 @@ namespace PL
             new ClientWindow(clientActions, bl, ClientslistView).Show();
         }
         #endregion
-        //private void Remove_Button(object sender, MouseButtonEventArgs e)
-        //{
-        //    dataCparcel.ID = bl.GetIdParcel((int)Combo_SenderId.SelectedItem, (int)Combo_TargetId.SelectedItem);
-        //    try
-        //    {
-
-        //        bl.RemoveParcel(dataCparcel);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
-        //        return;
-        //    }
-        //    MessageBox.Show("Success!", "The Parcel is removed", MessageBoxButton.OK, MessageBoxImage.Information);
-        //    //this.Combo_SenderId.SelectedItem = null;
-        //    //this.Combo_TargetId.SelectedItem = null;
-        //    this.Combo_SenderId.ItemsSource = bl.AllSenders_Id();
-        //    this.Combo_TargetId.ItemsSource = bl.AllTargets_Id();
-        //    ListViewParcel.ItemsSource = bl.displayParcelList();
-        //}
-        #region enter_tap
-        private void enter_tap(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-            {
-                try
-                { this.Remove_Button(sender, e); }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return;
-
-                }
-            }
-        }
-
-        #endregion
 
         private void displayDrone_Click(object sender, RoutedEventArgs e)
         {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -47,5 +48,14 @@ namespace PL
 
         }
         #endregion
+
+        //private void OnClosing(object sender, CancelEventArgs e)
+        //{
+
+           
+            
+        //        e.Cancel = true;// call from the "X", we don't want to close
+        //    bl.DroneCharged()
+        //}
     }
 }
