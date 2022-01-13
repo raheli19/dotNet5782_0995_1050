@@ -39,25 +39,50 @@ namespace PL
             }
             
         }
-
+        #region ClientListView_MouseDoubleClick
+        /// <summary>
+        /// Opens clientwindow
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ClientListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             ClientWindow subWindow = new ClientWindow(ClientListView.SelectedItem, bl, ClientListView);
             subWindow.Show();
         }
+        #endregion
 
+        #region AddClient_Click
+        /// <summary>
+        /// Opens client window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddClient_Click(object sender, RoutedEventArgs e)
         {
             ClientWindow subWindow = new ClientWindow(bl, ClientListView);
 
             subWindow.Show();
         }
+        #endregion
+
         #region closeFct
+        /// <summary>
+        /// Button to close the window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_Close(object sender, RoutedEventArgs e)
         {
             this.checkFlag = true; // will allow us to close the window from the button and not from the "X"
             this.Close();
         }
+
+        /// <summary>
+        /// Close/Not the window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OnClosing(object sender, CancelEventArgs e)
         {
 
@@ -70,9 +95,6 @@ namespace PL
 
         #endregion
 
-        private void ClientListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
+      
     }
 }

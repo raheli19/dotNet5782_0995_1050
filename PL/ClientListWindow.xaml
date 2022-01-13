@@ -31,7 +31,7 @@
             <RowDefinition Height="54*"/>
             <RowDefinition Height="163*"/>
         </Grid.RowDefinitions>
-        <ListView x:Name="ClientListView" Cursor="Hand" ItemsSource="{Binding}"  Margin="0,91,0,0" Visibility="Visible" MouseDoubleClick="ClientListView_MouseDoubleClick" Grid.RowSpan="2" SelectionChanged="ClientListView_SelectionChanged" FontSize="18" FontWeight="Bold" FontStyle="Italic">
+        <ListView x:Name="ClientListView" Cursor="Hand" ItemsSource="{Binding}"  Margin="0,91,0,0" Visibility="Visible" MouseDoubleClick="ClientListView_MouseDoubleClick" Grid.RowSpan="2"  FontSize="18" FontWeight="Bold" FontStyle="Italic">
             <ListView.Background>
                 <ImageBrush ImageSource="/images/clientListBack.png" Opacity="0.4"/>
             </ListView.Background>

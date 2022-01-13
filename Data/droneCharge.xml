@@ -4,4 +4,24 @@
     <DroneId>1644171</DroneId>
     <StationId>2433481</StationId>
   </DroneCharge>
+  <DroneCharge>
+    <DroneId>4398880</DroneId>
+    <StationId>2448290</StationId>
+  </DroneCharge>
+  <DroneCharge>
+    <DroneId>9092979</DroneId>
+    <StationId>8999614</StationId>
+  </DroneCharge>
+  <DroneCharge>
+    <DroneId>4263316</DroneId>
+    <StationId>8999614</StationId>
+  </DroneCharge>
+  <DroneCharge>
+    <DroneId>9092979</DroneId>
+    <StationId>2448290</StationId>
+  </DroneCharge>
+  <DroneCharge>
+    <DroneId>4263316</DroneId>
+    <StationId>8999614</StationId>
+  </DroneCharge>
 </droneCharge>

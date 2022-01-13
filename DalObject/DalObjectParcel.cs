@@ -8,18 +8,16 @@ namespace Dal
 {
     sealed partial class DalObject : IDal
     {
-        //public static int ID { get; private set; }
-        //public static int DroneId { get; private set; }  
 
         //-----------------------------------CREATE-FUNCTIONS/ADD----------------------------------------
 
         #region AddParcel
+        /// <summary>
+        /// Add a new parcel to the parcel list
+        /// </summary>
+        /// <param name="pl"></param>
         public void AddParcel(Parcel pl)
         {
-            //if (DataSource.ParcelList.Exists(parcel => parcel.ID == pl.ID))
-            //{
-            //    throw new ParcelException($"id {pl.ID} already exists!!");
-            //}
             pl.ID = Configuration.RunnerIDnumber;
             DataSource.ParcelList.Add(pl);
             Configuration.RunnerIDnumber++;
@@ -27,6 +25,10 @@ namespace Dal
         #endregion
 
         #region RemoveParcel
+        /// <summary>
+        /// Removes a parcel from the parcel list
+        /// </summary>
+        /// <param name="p"></param>
         public void RemoveParcel(Parcel p)
         {
 
@@ -44,6 +46,10 @@ namespace Dal
         //-----------------------------------UPDATE-FUNCTIONS---------------------------------------------
 
         #region UpdateParcel
+        /// <summary>
+        /// Updates the details of a parcel
+        /// </summary>
+        /// <param name="parcel"></param>
         public void UpdateParcel(Parcel parcel)
         {
             if (!(DataSource.ParcelList.Exists(p => p.ID == parcel.ID)))
@@ -56,6 +62,10 @@ namespace Dal
         #endregion
 
         #region UpdateParFromBL
+        /// <summary>
+        /// Updates the details of a parcel from bl
+        /// </summary>
+        /// <param name="ParcelToUpdate"></param>
         public void UpdateParcelFromBL(Parcel ParcelToUpdate)
         {
             Parcel myParcel = new Parcel();
@@ -105,6 +115,12 @@ namespace Dal
         #endregion
 
         #region DalGetIdParcel
+        /// <summary>
+        /// Receives a sender and target id and finds the id of the parcel which contains these details
+        /// </summary>
+        /// <param name="senderId"></param>
+        /// <param name="TargetId"></param>
+        /// <returns></returns>
         public int DalGetIdParcel(int senderId, int TargetId)
         {
             int id = DataSource.ParcelList.Find(x => x.SenderId == senderId && x.TargetId == TargetId).ID;

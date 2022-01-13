@@ -37,7 +37,7 @@
             </Grid.Background>
 
             <!--ID -->
-            <Button  Content="Drone Id" Margin="20,14,652,348" Background="#FF3B3BBA" Click="Button_Click" FontFamily="Cambria" FontWeight="Bold" FontSize="13">
+            <Button  Content="Drone Id" Margin="20,14,652,348" Background="#FF3B3BBA" FontFamily="Cambria" FontWeight="Bold" FontSize="13">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
                         <Grid>
@@ -68,7 +68,7 @@
 
 
             <!--Model -->
-            <Button Content="Drone Model"  Margin="109,106,563,253" Background="#FF1C1C1C" FontFamily="Cambria" FontWeight="Bold" FontSize="13" BorderThickness="1,4,1,1" Click="Button_Click">
+            <Button Content="Drone Model"  Margin="109,106,563,253" Background="#FF1C1C1C" FontFamily="Cambria" FontWeight="Bold" FontSize="13" BorderThickness="1,4,1,1" >
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
                         <Grid>
@@ -98,7 +98,7 @@
             </Button>
 
             <!--Weight -->
-            <Button Content="Drone Weight" Margin="191,216,481,140" Background="#FF3B3BBA" FontFamily="Cambria" FontWeight="Bold" FontSize="13" Click="Button_Click">
+            <Button Content="Drone Weight" Margin="191,216,481,140" Background="#FF3B3BBA" FontFamily="Cambria" FontWeight="Bold" FontSize="13" >
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
                         <Grid>
@@ -128,7 +128,7 @@
             </Button>
 
             <!--StationID -->
-            <Button Content="Station Id" Margin="281,303,391,56" FontFamily="Cambria" FontSize="13" FontWeight="Bold" Click="Button_Click" Foreground="Black">
+            <Button Content="Station Id" Margin="281,303,391,56" FontFamily="Cambria" FontSize="13" FontWeight="Bold" Foreground="Black">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
                         <Grid>
@@ -156,8 +156,8 @@
                     </ControlTemplate>
                 </Button.Template>
             </Button>
-            <ComboBox Name="comboWeightSelector" HorizontalAlignment="Left" SelectedItem="{Binding MaxWeight, Mode=TwoWay}" Margin="345,230,0,0" VerticalAlignment="Top" Width="181" Height="50" ToolTip="Drone Weight" SelectionChanged="ComboBox_WeightSelection" FontWeight="Bold" FontSize="14"/>
-            <ComboBox Name="comboStationSelector" HorizontalAlignment="Left" SelectedItem="{Binding Station, Mode=TwoWay}" Margin="436,316,0,0" VerticalAlignment="Top" Width="180" Height="51" SelectionChanged="ComboBox_SelectionChanged" FontSize="14" FontWeight="Bold"/>
+            <ComboBox Name="comboWeightSelector" HorizontalAlignment="Left" SelectedItem="{Binding MaxWeight, Mode=TwoWay}" Margin="345,230,0,0" VerticalAlignment="Top" Width="181" Height="50" ToolTip="Drone Weight"  FontWeight="Bold" FontSize="14"/>
+            <ComboBox Name="comboStationSelector" HorizontalAlignment="Left" SelectedItem="{Binding Station, Mode=TwoWay}" Margin="436,316,0,0" VerticalAlignment="Top" Width="180" Height="51"  FontSize="14" FontWeight="Bold"/>
             <TextBox x:Name="Drone_Id" KeyDown="Id_enter" Text="{Binding ID, Mode=TwoWay}" HorizontalAlignment="Left" Height="44" Margin="180,28,0,0" ToolTip="Enter Drone Id" TextWrapping="Wrap" VerticalAlignment="Top" Width="181" FontSize="14" FontWeight="Bold" />
             <TextBox x:Name="Drone_Model" KeyDown="Model_enter" Text="{Binding Model, Mode=TwoWay}" HorizontalAlignment="Left" Height="52" Margin="270,118,0,0" ToolTip="Enter Drone Model" TextWrapping="Wrap" VerticalAlignment="Top" Width="190" FontSize="14" FontWeight="Bold" />
 
@@ -166,7 +166,7 @@
 
 
             <!--DroneButton-->
-            <Button Name="ImageDrone" Click="OnClick5" Margin="27,294,586,20" ToolTip="Add">
+            <Button Name="ImageDrone"  Margin="27,294,586,20" ToolTip="Add">
                 <Image Source="/images/drone.png" Height="118" RenderTransformOrigin="0.5,0.595"/>
             </Button>
             <Button Name="Add_Drone" BorderBrush="Black" Margin="29,294,716,99" Click="AddDrone_Click" Visibility="Visible" FontFamily="Cambria" FontWeight="Bold" Background="{x:Null}" Opacity="100" FontSize="18">

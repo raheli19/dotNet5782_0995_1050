@@ -9,6 +9,11 @@ using System.Windows.Data;
 
 namespace PL
 {
+    #region DisplaysButtonsInDroneWindow
+
+    /// <summary>
+    /// Multi binding for xaml window
+    /// </summary>
     public class DisplaysButtonsInDroneWindow : IMultiValueConverter // Multi binding
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
@@ -25,7 +30,13 @@ namespace PL
         }
     }
 
+    #endregion
 
+    #region BatteryBackground
+
+    /// <summary>
+    /// Colors the purcent of the battery
+    /// </summary>
     public class BatteryBackground : IValueConverter // packade to list
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -40,7 +51,7 @@ namespace PL
             throw new NotImplementedException();
         }
     }
-
+    #endregion
 
 
 }

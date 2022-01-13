@@ -14,6 +14,10 @@ namespace Dal
 
 
         #region AddStation
+        /// <summary>
+        /// Add a station to the station list
+        /// </summary>
+        /// <param name="s"></param>
         public void AddStation(Station s)
         {
 
@@ -31,6 +35,10 @@ namespace Dal
 
         #region UPDATING
         #region UpdateStation
+        /// <summary>
+        /// Updates details of a station
+        /// </summary>
+        /// <param name="stationToUpdate"></param>
         public void UpdateStation(Station stationToUpdate)
         {
             Station myStation = new Station();

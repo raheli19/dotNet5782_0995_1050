@@ -31,6 +31,13 @@ namespace PL
         private ObservableCollection<BO.ParcelDescription> boParcelList = new ObservableCollection<BO.ParcelDescription>();
 
         #region UpgradeClient
+
+        /// <summary>
+        /// Constructor to update a client
+        /// </summary>
+        /// <param name="selectedItem"></param>
+        /// <param name="bl"></param>
+        /// <param name="ClientListWindow"></param>
         public ClientWindow(object selectedItem, BLApi.IBL bl, object ClientListWindow)
         {
 
@@ -57,20 +64,30 @@ namespace PL
 
         }
 
+        /// <summary>
+        /// Call a function to update details of client
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// 
         private void ClickUpdate(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(/*"The model of your drone is being updated.*/"Please close this window and enter the new name and/or new phone number.", "Success!", MessageBoxButton.OK, MessageBoxImage.Information);
-            // autres en hidden/visible
+            MessageBox.Show("Please close this window and enter the new name and/or new phone number.", "Success!", MessageBoxButton.OK, MessageBoxImage.Information);
+       
             Client_Details.Visibility = Visibility.Hidden;
             UpdateNameTextBox.Visibility = Visibility.Visible;
             UpdatePhoneTextBox.Visibility = Visibility.Visible;
             UpdateLabel.Visibility = Visibility.Visible;
             CheckUpdate.Visibility = Visibility.Visible;
-            //CheckUpdate2.Visibility = Visibility.Visible;
             UpdateLabel.Content = "Enter the new name and/or new phone number";
 
         }
 
+        /// <summary>
+        /// Updates details of client
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Check_Click_Update(object sender, RoutedEventArgs e)
         {
             string newName = UpdateNameTextBox.Text;
@@ -104,40 +121,29 @@ namespace PL
 
         #endregion
 
-        #region addClient
+        #region AddClient
         public ClientWindow(BLApi.IBL bl, object ClientListWindow)
         {
             InitializeComponent();
             this.bl = bl;
             DataContext = dataCclient;
             dataCclient.ClientLoc = new Localisation();
-            //dlw = new DroneListWindow(bl);
             AddGridClient.Visibility = Visibility.Visible;
             UpgradeClientGrid.Visibility = Visibility.Hidden;
-            //this.comboWeightSelector.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
-            //this.comboStationSelector.ItemsSource = bl.DisplayStationList();
             ListViewClient = (ListView)ClientListWindow;
 
         }
-
-        //private void txt_long_TextChanged(object sender, TextChangedEventArgs e)
-        //{
-        //    dataCclient.ClientLoc.longitude = (double)int.Parse( txt_long.Text);
-
-        //}
-        //private void txt_lat_TextChanged(object sender, TextChangedEventArgs e)
-        //{
-        //    dataCclient.ClientLoc.latitude = (double)int.Parse(txt_lat.Text);
-
-        //}
+        /// <summary>
+        /// Add a new client
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Add_button(object sender, RoutedEventArgs e)
         {
             txt_id.Background = Brushes.White;
             txt_phone.Background = Brushes.White;
             txt_lat.Background = Brushes.White;
             txt_long.Background = Brushes.White;
-            //if (txt_id.Text =="" && dataCclient.Name ="" && dataCclient.Phone="")
-            //MessageBox.Show("Please fill al the fields", "WARNING", MessageBoxButton.OK, MessageBoxImage.Warning);
             if (txt_id.Text == "" || txt_name.Text == "" || txt_lat.Text == "" || txt_long.Text == "" || txt_phone.Text == "")
             {
                 MessageBox.Show("Please fill al the fields", "WARNING", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -186,14 +192,24 @@ namespace PL
 
         #endregion
 
-
-
         #region closeFct
+
+        /// <summary>
+        /// Close the window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_Close(object sender, RoutedEventArgs e)
         {
             this.checkFlag = true; // will allow us to close the window from the button and not from the "X"
             this.Close();
         }
+
+        /// <summary>
+        /// On closing function
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OnClosing(object sender, CancelEventArgs e)
         {
 
@@ -205,22 +221,40 @@ namespace PL
         }
         #endregion
 
-
+        #region ParcelsToClient_MouseDoubleClick
+        /// <summary>
+        ///Returns list of parcelsToClient by MouseDoubleClick
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ParcelsToClient_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             ParcelToClient myParcelToClient = (ParcelToClient)ParcelsToClient.SelectedItem;
             ParcelDescription myParcelDescription = bl.displayParcelList().First(x => x.Id == myParcelToClient.ID);
             new ParcelWindow(myParcelDescription, bl, listViewParcels).Show();
         }
+        #endregion
 
+        #region ParcelsFromClient_MouseDoubleClick
+        /// <summary>
+        /// Returns list of parcelsFromClient by MouseDoubleClick
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ParcelsFromClient_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             ParcelToClient myParcelToClient = (ParcelToClient)ParcelsFromClient.SelectedItem;
             ParcelDescription myParcelDescription = bl.displayParcelList().First(x => x.Id == myParcelToClient.ID);
             new ParcelWindow(myParcelDescription, bl, listViewParcels).Show();
         }
+        #endregion 
 
         #region enterFunctions
+        /// <summary>
+        /// These functions allow us to pass from textbox to another
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void id_enter(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)

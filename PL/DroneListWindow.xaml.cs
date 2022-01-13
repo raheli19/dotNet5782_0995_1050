@@ -70,6 +70,11 @@ namespace PL
         #endregion
 
         #region SelectStatut
+        /// <summary>
+        /// Functions to filter by status
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void comboStatusSelector_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
             FilterStatus();
@@ -93,6 +98,11 @@ namespace PL
         #endregion
 
         #region WeightSelector
+        /// <summary>
+        /// Functions to filter by weight
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void comboWeightSelector_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
             FilterWeight();
@@ -128,13 +138,17 @@ namespace PL
         #endregion
 
         #region AddDroneOpenWindow
+        /// <summary>
+        /// Opens drone window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button_addDrone(object sender, RoutedEventArgs e)
         {
             DroneWindow subWindow = new DroneWindow(bl, DronesListView);
 
             subWindow.ShowDialog();
             subWindow.Hide();
-            //comboStatusSelector_SelectionChanged(comboStatusSelector, new SelectionChangedEventArgs());
             FilterStatus();
             FilterWeight();
 
@@ -142,6 +156,11 @@ namespace PL
         #endregion
 
         #region DoubleClicks
+        /// <summary>
+        /// Opens drone window 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DroneListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             new DroneWindow(DronesListView.SelectedItem, bl, DronesListView, default, default).Show();
@@ -167,6 +186,12 @@ namespace PL
         #endregion
 
         #region closeFunctions
+
+        /// <summary>
+        /// Functions to close the window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_Close(object sender, RoutedEventArgs e)
         {
             this.checkFlag = true; // will allow us to close the window from the button and not from the "X"
@@ -184,6 +209,11 @@ namespace PL
         #endregion
 
         #region ClearClick
+        /// <summary>
+        /// Functions to clear the status and /or the weight
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ClearStatus_Click(object sender, RoutedEventArgs e)
         {
             comboStatusSelector.SelectedItem = null;
@@ -213,6 +243,11 @@ namespace PL
         #endregion
 
         #region FilterClick
+        /// <summary>
+        /// Functions to filter by weight and status (Grouping)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FilterByWeightButton_Click(object sender, RoutedEventArgs e)
         {
             List<DroneDescription> dronesByWeight = new List<DroneDescription>();

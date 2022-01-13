@@ -12,6 +12,10 @@ namespace Dal
 
         //-----------------------------------CREATE-FUNCTIONS/ADD-----------------------------
         #region AddClient
+        /// <summary>
+        /// Add a new client to list of clients
+        /// </summary>
+        /// <param name="c"></param>
         public void AddClient(Client c)
         {
 
@@ -26,6 +30,10 @@ namespace Dal
 
         //-----------------------------------UPDATE-FUNCTIONS---------------------------------
         #region UpdateClient
+        /// <summary>
+        /// Update details of a client
+        /// </summary>
+        /// <param name="ClientToUpdate"></param>
         public void UpdateClient(Client ClientToUpdate)
         {
             Client myClient = new();

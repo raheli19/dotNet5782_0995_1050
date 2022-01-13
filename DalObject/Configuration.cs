@@ -8,13 +8,6 @@ namespace Dal
 {
     static public class Configuration
     {
-
-
-        //internal static bool statut;/// 1 if free, 0 if not
-        //internal static WeightCategories light;
-        //internal static WeightCategories middle;
-        //internal static WeightCategories heavy;
-        //internal static int charging; // chargement % per hour
         public static int RunnerIDnumber = 1000;
 
         public static double BatteryFree = 0.0005; // % of battery per km.

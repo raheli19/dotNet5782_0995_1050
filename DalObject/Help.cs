@@ -13,6 +13,12 @@ namespace Dal
         //---------------------------------------------------HELP------------------------------------------------
 
         #region FindParcelAssociatedWithDrone
+
+        /// <summary>
+        ///  Find Parcel Associated With Drone
+        /// </summary>
+        /// <param name="droneId"></param>
+        /// <returns></returns>
         public Parcel FindParcelAssociatedWithDrone(int droneId)
         {
             Parcel myParcel = new Parcel();
@@ -31,6 +37,11 @@ namespace Dal
         #endregion
 
         #region FindLat
+        /// <summary>
+        /// Find latitude of client by its id
+        /// </summary>
+        /// <param name="myID"></param>
+        /// <returns></returns>
         public double FindLat(int myID)
         {
             Client myClient = new Client();
@@ -49,6 +60,11 @@ namespace Dal
         #endregion
 
         #region FindLong
+        /// <summary>
+        /// Find longitude of client by its id
+        /// </summary>
+        /// <param name="myID"></param>
+        /// <returns></returns>
         public double FindLong(int myID)
         {
             Client myClient = new Client();
@@ -67,6 +83,11 @@ namespace Dal
         #endregion
 
         #region AddFromBLDroneCharging
+        /// <summary>
+        /// Add a drone charge from bl
+        /// </summary>
+        /// <param name="DroneID"></param>
+        /// <param name="StationID"></param>
         public void AddFromBLDroneCharging(int DroneID, int StationID)
         {
             DroneCharge DC = new DroneCharge();
@@ -79,6 +100,10 @@ namespace Dal
         #endregion
 
         #region AddParcelFromBL
+        /// <summary>
+        /// Add a parcel from bl
+        /// </summary>
+        /// <param name="p"></param>
         public void AddParcelFromBL(Parcel p)
         {
             Parcel myParcel = DataSource.ParcelList.Find(x => x.ID == p.ID);
@@ -89,6 +114,10 @@ namespace Dal
         #endregion
 
         #region IdStation
+        /// <summary>
+        /// Returns list of station'ids
+        /// </summary>
+        /// <returns></returns>
         public List<int> IdStation()
         {
             List<int> IdStation = new List<int>();
@@ -103,7 +132,11 @@ namespace Dal
         }
         #endregion
 
-        #region clientReceivedParcel
+        #region ClientReceivedParcel
+        /// <summary>
+        /// Returns list of id of the clients that have received 
+        /// </summary>
+        /// <returns></returns>
         public List<int> clientReceivedParcel() // return list of id of the clients that have received 
         {
             List<int> list = new List<int>();

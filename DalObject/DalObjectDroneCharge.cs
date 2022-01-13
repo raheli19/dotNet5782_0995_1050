@@ -13,6 +13,10 @@ namespace Dal
         //-----------------------------------CREATE-FUNCTIONS/ADD----------------------------------------
 
         #region AddDroneCharge
+        /// <summary>
+        /// Add a drone Charge to the droneChargeList
+        /// </summary>
+        /// <param name="dc"></param>
         public void AddDroneCharge(DroneCharge dc)
         {
 
@@ -27,6 +31,11 @@ namespace Dal
         //-----------------------------------UPDATE-FUNCTIONS-------------------------------------------
 
         #region  UpdateDroneChargeList
+        /// <summary>
+        /// Updates details of a droneCharge
+        /// </summary>
+        /// <param name="droneId"></param>
+        /// <param name="statId"></param>
         public void UpdateDroneChargeList(int droneId, int statId)
         {
             DO.DroneCharge dalDr = new DroneCharge();
@@ -49,7 +58,10 @@ namespace Dal
         //-----------------------------------ACTIONS-------------------------------------------
 
         #region IEDroneChargeList
-
+        /// <summary>
+        /// IEnumerable which returns the list of drones charge
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<DO.DroneCharge> IEDroneChargeList()
         {
             List<DroneCharge> DroneChargeLst = new List<DroneCharge>();

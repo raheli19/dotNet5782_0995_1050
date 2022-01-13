@@ -12,8 +12,15 @@ namespace Dal
     {
 
         //-----------------------------------CREATE-FUNCTIONS/ADD----------------------------------------
+     
+
 
         #region AddDrone
+
+        /// <summary>
+        /// Add a new drone to the dronelist
+        /// </summary>
+        /// <param name="d"></param>
         public void AddDrone(Drone d)// add a new drone to the dronelist
         {
             if (DataSource.DroneChargeList.Exists(drone => drone.ID == d.ID))
@@ -29,6 +36,10 @@ namespace Dal
         //-----------------------------------UPDATE-FUNCTIONS-------------------------------------------
 
         #region UpdateDrone
+        /// <summary>
+        /// Update details of a drone
+        /// </summary>
+        /// <param name="droneToUpdate"></param>
         public void UpdateDrone(Drone droneToUpdate)
         {
             Drone myDrone = new Drone();

@@ -39,6 +39,8 @@ namespace PL
         ListView ListViewDrone;
         ListView FilterByWeight;
         ListView FilterByStatus;
+
+
         #region Close_Function
         /// <summary>
         /// This button closes the window
@@ -46,6 +48,9 @@ namespace PL
         /// <param name="sender"></param>
         /// <param name="e"></param>
 
+        
+        
+        
         private void OnClosing(object sender, CancelEventArgs e)
         {
 
@@ -71,13 +76,17 @@ namespace PL
 
 
 
-
         #endregion
 
         //----------------------------------------------------------ADD-------------------------------------------------------------------------------
 
         #region AddDrone
         // ctor to add a drone
+        /// <summary>
+        /// ctor to add a drone
+        /// </summary>
+        /// <param name="bl"></param>
+        /// <param name="DroneListWindow"></param>
         public DroneWindow(BLApi.IBL bl, object DroneListWindow)
         {
             InitializeComponent();
@@ -92,7 +101,13 @@ namespace PL
 
         }
 
+
         #region add_Click
+        /// <summary>
+        /// Functions to add a drone
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddDrone_Click(object sender, RoutedEventArgs e)
         {
             Drone_Id.Background = Brushes.White;
@@ -111,10 +126,7 @@ namespace PL
                 MessageBox.Show("Please enter an integer Id", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            //string droneModel = Drone_Model.Text;
-            //WeightCategories droneWeight = (WeightCategories)comboWeightSelector.SelectedItem;
             StationDescription stationId = (StationDescription)comboStationSelector.SelectedItem;
-            //BO.Drone drone = new Drone() { ID = droneIdInt, Model = droneModel, MaxWeight = droneWeight };
             try
             {
                 bl.addDrone(dataCdrone, stationId.Id);
@@ -129,47 +141,25 @@ namespace PL
             }
             MessageBox.Show("Success!", "Added the drone", MessageBoxButton.OK, MessageBoxImage.Information);
             ListViewDrone.ItemsSource = bl.displayDroneList();
-            //dlw.CheckFields();
             this.Close();
         }
 
         #endregion
         #endregion
 
-        #region buttonsNotNeeded
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-
-        private void ComboBox_WeightSelection(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
-
-        void OnClick5(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-
-        void OnClick6(object sender, RoutedEventArgs e)
-        {
-
-        }
-        #endregion
 
         // -------------------------------------------------------UPGRADE------------------------------------------------------------------------------
 
         #region constructorUPGRADE
         //ctor to upgrade the drone
+        /// <summary>
+        /// ctor to upgrade the drone
+        /// </summary>
+        /// <param name="selectedItem"></param>
+        /// <param name="bl"></param>
+        /// <param name="dronesListView"></param>
+        /// <param name="filterByWeight"></param>
+        /// <param name="filterByStatus"></param>
         public DroneWindow(object selectedItem, BLApi.IBL bl, object dronesListView, object filterByWeight,object filterByStatus)
         {
             InitializeComponent();
@@ -260,6 +250,11 @@ namespace PL
 
         }
 
+        /// <summary>
+        /// Updates details of drone
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Check_Click_Update(object sender, RoutedEventArgs e)
         {
             newName = UpdateTextBox.Text;
@@ -368,12 +363,6 @@ namespace PL
                 if (FilterByStatus != default)
                     FilterByStatus.ItemsSource = bl.displayDroneList();
                 Drone_Label.Content = bl.displayDrone(dataCdroneUpdate.Id);
-                //Batt.Value = bl.displayDrone(dataCdroneUpdate.Id).Battery;
-                //Battery.Content = bl.displayDrone(dataCdroneUpdate.Id).Battery;
-                //Status.Content = bl.displayDrone(dataCdroneUpdate.Id).Status;
-                //Longitude.Content = bl.displayDrone(dataCdroneUpdate.Id).initialLoc.longitude;
-                //Latitude.Content = bl.displayDrone(dataCdroneUpdate.Id).initialLoc.latitude;
-                //ParcelId.Content = bl.displayDrone(dataCdroneUpdate.Id).myParcel.ID;
                 UpdateDroneGrid.DataContext = bl.displayDrone(dataCdroneUpdate.Id);
 
 
@@ -383,6 +372,11 @@ namespace PL
 
         #region ButtonClick
 
+        /// <summary>
+        /// Drone goes to charge
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Check_Click_FullyCharged(object sender, RoutedEventArgs e)
         {
             string chargeTimeString = UpdateTextBox.Text;
@@ -405,7 +399,6 @@ namespace PL
             Drone_Label.Content = bl.displayDrone(dataCdroneUpdate.Id);
             Batt.Value = bl.displayDrone(dataCdroneUpdate.Id).Battery;
             UpdateDroneGrid.DataContext = bl.displayDrone(dataCdroneUpdate.Id);
-            //Battery.Content = bl.displayDrone(dataCdroneUpdate.Id).Battery;
             if (ListViewDrone != default)
                 ListViewDrone.ItemsSource = bl.displayDroneList();
             if (FilterByWeight != default)
@@ -428,6 +421,11 @@ namespace PL
 
         }
 
+        /// <summary>
+        /// Show parcel attached to drone
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ShowParcel_Click(object sender, RoutedEventArgs e)
         {
             if (bl.displayDrone(dataCdroneUpdate.Id).Status == DroneStatuses.shipping)
@@ -485,11 +483,6 @@ namespace PL
                 ShowParcel.Visibility = Visibility.Visible;
                 Batt.Value = bl.displayDrone(dataCdroneUpdate.Id).Battery;
                 UpdateDroneGrid.DataContext = bl.displayDrone(dataCdroneUpdate.Id);
-                //Battery.Content = bl.displayDrone(dataCdroneUpdate.Id).Battery;
-                //Status.Content = bl.displayDrone(dataCdroneUpdate.Id).Status;
-                //Longitude.Content = bl.displayDrone(dataCdroneUpdate.Id).initialLoc.longitude;
-                //Latitude.Content = bl.displayDrone(dataCdroneUpdate.Id).initialLoc.latitude;
-                //ParcelId.Content = bl.displayDrone(dataCdroneUpdate.Id).myParcel.ID;
             }
 
             //Second case:The status of the drone is shipping,the button is DELIVERING THE PACKAGE
@@ -515,11 +508,6 @@ namespace PL
                 Batt.Value = bl.displayDrone(dataCdroneUpdate.Id).Battery;
                 Batt.Value = bl.displayDrone(dataCdroneUpdate.Id).Battery;
                 UpdateDroneGrid.DataContext = bl.displayDrone(dataCdroneUpdate.Id);
-                //Battery.Content = bl.displayDrone(dataCdroneUpdate.Id).Battery;
-                //Status.Content = bl.displayDrone(dataCdroneUpdate.Id).Status;
-                //Longitude.Content = bl.displayDrone(dataCdroneUpdate.Id).initialLoc.longitude;
-                //Latitude.Content = bl.displayDrone(dataCdroneUpdate.Id).initialLoc.latitude;
-                //ParcelId.Content = bl.displayDrone(dataCdroneUpdate.Id).myParcel.ID;
 
             }
             else
@@ -530,6 +518,11 @@ namespace PL
         #endregion
 
         #region EnterTab
+        /// <summary>
+        /// Goes to next field
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Id_enter(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
@@ -550,6 +543,11 @@ namespace PL
         #endregion
 
         #region Simulator
+        /// <summary>
+        /// Function to add simulator
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Simulator_DoWork(object sender, DoWorkEventArgs e)
         {
             try
@@ -562,6 +560,12 @@ namespace PL
             }
 
         }
+
+        /// <summary>
+        /// Stops simulator
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
 
         private void Cancellation_Click(object sender, RoutedEventArgs e)
         {

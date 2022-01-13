@@ -85,26 +85,6 @@ namespace Dal
             }
         }
 
-        //    try
-        //    {
-        //        ParcelRoot = XElement.Load(parcelPath);
-        //    }
-        //    catch
-        //    {
-        //        throw new Exception("File upload problem");
-        //    }
-        //}
-        //private void LoadClientData()
-        //{
-        //    try
-        //    {
-        //        ClientRoot = XElement.Load(clientPath);
-        //    }
-        //    catch
-        //    {
-        //        throw new Exception("File upload problem");
-        //    }
-        //}
         #endregion
         
         #region DroneCharge
@@ -120,8 +100,7 @@ namespace Dal
 
         public IEnumerable<DroneCharge> IEDroneChargeList()
         {
-            //List<DroneCharge> listOfAllDronesCharge = XMLTools.LoadListFromXMLSerializer<DroneCharge>(droneChargePath);
-            //return listOfAllDronesCharge;
+            
 
             LoadDroneChargeData();
             List<DroneCharge> listDroneCharge;

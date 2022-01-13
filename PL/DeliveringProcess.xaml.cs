@@ -46,6 +46,12 @@ namespace PL
         #endregion
 
         #region AllButtonsClick
+
+        /// <summary>
+        /// Shows list of parcels from client
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ParcelsFromClient_Click(object sender, RoutedEventArgs e)
         {
             if (clientStatus == "Sign Up")   //Join
@@ -62,7 +68,11 @@ namespace PL
             }
         }
 
-
+        /// <summary>
+        /// Choose target id to add a parcel
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Combo_TargetId_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             DataCParcel.Target.ID = (int)Combo_TargetId.SelectedItem;
@@ -70,6 +80,11 @@ namespace PL
 
         }
 
+        /// <summary>
+        /// This function adds a parcel
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Add_Parcel_ToSend_Click(object sender, RoutedEventArgs e)
         {
             if (MaxWeightL == null || PriorityL == null || Combo_TargetId == null)
@@ -101,6 +116,11 @@ namespace PL
             return;
         }
 
+        /// <summary>
+        /// Shows list of parcels to client
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ParcelsToClient_Click(object sender, RoutedEventArgs e)
         {
             // enters the number of the parcel // fromthe list
@@ -118,17 +138,18 @@ namespace PL
             }
         }
 
+        /// <summary>
+        /// Send a new parcel
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SendNewParcel_Click(object sender, RoutedEventArgs e)
         {
-            ////senderID.Background = Brushes.White;
             Combo_TargetId.Background = Brushes.White;
-            //Labels
-            //SenderId.Visibility = Visibility.Visible;
             TargetId.Visibility = Visibility.Visible;
             MaxWeight.Visibility = Visibility.Visible;
             Priority.Visibility = Visibility.Visible;
             //textboxs and comboBox
-            //senderID.Visibility = Visibility.Visible;
             Combo_TargetId.Visibility = Visibility.Visible;
             MaxWeightL.Visibility = Visibility.Visible;
             PriorityL.Visibility = Visibility.Visible;
@@ -160,12 +181,13 @@ namespace PL
         {
 
         }
-
+        /// <summary>
+        /// Shows received parcels
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void received_parcel_Click(object sender, RoutedEventArgs e)
         {
-            //Parcel_Id_Entered.Visibility = Visibility.Visible;
-            //label_info.Content = "Please enter its Id";
-            //label_info.Visibility = Visibility.Visible;
             BO.DroneDescription delDrone = new DroneDescription();
             BO.ParcelDescription parcelDelivered = new ParcelDescription();
 
@@ -192,18 +214,17 @@ namespace PL
 
         #endregion
 
-        #region checkPickedUp
-
+        #region CheckPickedUp
+        /// <summary>
+        /// Picks parcel
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Picked_up(object sender, RoutedEventArgs e)
         {
             //enter the id of the parcel from the list
             // supposed to go into th elist of the parcel, find it, and assign in the datacontext the id of the associated' drone!
-            //DataCParcel.ID = Convert.ToInt32(Parcel_Id_Entered.Text);
-            //DataCParcel.Drone.ID = Convert.ToInt32(Drone_Id_entered.Text);
-
-            // trouver le drone qui puisse porter
-            // puisse faire la distance+ aller se charger
-
+            
             List<BO.DroneDescription> listOfDrones = bl.displayDroneList().ToList();
             BO.DroneDescription associatedDrone = new DroneDescription();
             if (DataCParcel.Scheduled != DateTime.MinValue)
@@ -232,6 +253,11 @@ namespace PL
         #endregion
 
         #region CloseInfos
+        /// <summary>
+        /// Close window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Close_Click(object sender, RoutedEventArgs e)
         {
             listOf_Parcels.Visibility = Visibility.Hidden;
@@ -253,6 +279,11 @@ namespace PL
         #endregion
 
         #region UpdateName/Phone
+        /// <summary>
+        /// Functions to update name and/or phone of client
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ClickUpdate(object sender, RoutedEventArgs e)
         {
             MessageBox.Show(/*"The model of your drone is being updated.*/"Please close this window and enter the new name and/or new phone number.", "Success!", MessageBoxButton.OK, MessageBoxImage.Information);

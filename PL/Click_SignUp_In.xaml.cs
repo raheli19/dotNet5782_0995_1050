@@ -15,9 +15,6 @@ using System.Windows.Shapes;
 using BO;
 namespace PL
 {
-    /// <summary>
-    /// Logique d'interaction pour Click_SignUp_In.xaml
-    /// </summary>
     public partial class Click_SignUp_In : Window
     {
         BO.Client DataCclient = new BO.Client();
@@ -26,6 +23,11 @@ namespace PL
         private bool checkFlag = false;
 
         #region ctor GridSignUp
+        /// <summary>
+        /// Constructor of the grid Sign up
+        /// </summary>
+        /// <param name="bl"></param>
+        /// <param name="Sign_Uptemp"></param>
         public Click_SignUp_In(BLApi.IBL bl,int Sign_Uptemp)
         {
             InitializeComponent();
@@ -39,6 +41,11 @@ namespace PL
         #endregion
 
         #region GridSinIn
+
+        /// <summary>
+        /// Constructor of the grid Sign in
+        /// </summary>
+        /// <param name="bl"></param>
         public Click_SignUp_In(BLApi.IBL bl)
         {
             InitializeComponent();
@@ -50,6 +57,11 @@ namespace PL
         #endregion
 
         #region enterFunctions
+        /// <summary>
+        /// Goes to the next field by enter
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void id_enter(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
@@ -98,8 +110,12 @@ namespace PL
 
         #endregion
 
-
         #region JoinButtonClicked
+        /// <summary>
+        /// Button to add a client to bl 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button_Join_Click(object sender, RoutedEventArgs e)
         {
             textBox_PersonalId.Background = Brushes.White;
@@ -147,6 +163,12 @@ namespace PL
         #endregion
 
         #region nextButtonClick
+
+        /// <summary>
+        /// Button to display the details of a client
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void NEXT_Click(object sender, RoutedEventArgs e)
         {
             clientStatus = "Sign In";
@@ -188,16 +210,20 @@ namespace PL
 
         #endregion
 
+        #region cbSample_Checked
         private void cbSample_Checked(object sender, RoutedEventArgs e)
         {
             button_Join.Focus();
             
 
         }
+        #endregion
 
+        #region join_enter
         private void join_enter(object sender, KeyEventArgs e)
         {
             button_Join_Click(sender, e);// verifier si ca marche
         }
+        #endregion
     }
 }
