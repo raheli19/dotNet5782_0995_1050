@@ -30,6 +30,11 @@ namespace PL
         #endregion
 
         #region Button_SignIn_Click
+        /// <summary>
+        /// open the sign in window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button_SignIn_Click(object sender, RoutedEventArgs e)
         {
             new Click_SignUp_In(bl).Show();
@@ -38,6 +43,11 @@ namespace PL
         #endregion
 
         #region Button_SignUp_Click
+        /// <summary>
+        /// opens the sign up window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button_SignUp_Click(object sender, RoutedEventArgs e)
         {
             new Click_SignUp_In(bl,3).Show();

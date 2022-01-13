@@ -138,7 +138,7 @@ namespace BL
         #region DisplayParcel
 
         /// <summary>
-        /// This function receives a parcel ID and receives the details of the parcel searched
+        /// This function receives a parcel ID and returns the details of the parcel searched
         /// </summary>
         /// <param name="parcelId"></param>
         /// <returns></returns>
@@ -186,6 +186,11 @@ namespace BL
         #endregion
 
         #region DisplayDroneCharging
+        /// <summary>
+        /// Receives id of a station and returns all the drones that are charging there
+        /// </summary>
+        /// <param name="stationId"></param>
+        /// <returns></returns>
         public DroneCharging displayDroneCharging(int stationId)
         {
             DroneCharging droneCharging = new DroneCharging();

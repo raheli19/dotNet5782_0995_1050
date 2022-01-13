@@ -13,7 +13,9 @@ namespace Dal
     internal class DalXml : IDal
     {
         #region singleton
-
+        /// <summary>
+        /// Allows us to create each type an single object
+        /// </summary>
         private string configPath;
         private string clientPath;
         private string dronePath;
@@ -29,6 +31,9 @@ namespace Dal
         static DalXml() { }
 
         #region CTOR
+        /// <summary>
+        /// Ctor of the xml
+        /// </summary>
         public DalXml()
         {
             string str = Assembly.GetExecutingAssembly().Location;
@@ -57,7 +62,9 @@ namespace Dal
         #endregion
 
         #region CreateFiles
-
+        /// <summary>
+        /// Creates the xelement file
+        /// </summary>
 
         private void CreateDroneChargeFile()
         {
@@ -70,9 +77,9 @@ namespace Dal
         #endregion
 
         #region LoadData
-
-
-
+        /// <summary>
+        /// Load the xelement data
+        /// </summary>
         private void LoadDroneChargeData()
         {
             try
@@ -84,30 +91,13 @@ namespace Dal
                 throw new Exception("File upload problem");
             }
         }
-
-        //    try
-        //    {
-        //        ParcelRoot = XElement.Load(parcelPath);
-        //    }
-        //    catch
-        //    {
-        //        throw new Exception("File upload problem");
-        //    }
-        //}
-        //private void LoadClientData()
-        //{
-        //    try
-        //    {
-        //        ClientRoot = XElement.Load(clientPath);
-        //    }
-        //    catch
-        //    {
-        //        throw new Exception("File upload problem");
-        //    }
-        //}
         #endregion
         
         #region DroneCharge
+        /// <summary>
+        /// Function that add a drone to charge
+        /// </summary>
+        /// <param name="droneChargeToAdd"></param>
         public void AddDroneCharge(DroneCharge droneChargeToAdd) //XElement
         {
             XElement droneId = new XElement("DroneId", droneChargeToAdd.DroneId);
@@ -118,6 +108,10 @@ namespace Dal
             DroneChargeRoot.Save(droneChargePath);
         }
 
+        /// <summary>
+        /// returns the list of all the drone that are charging
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<DroneCharge> IEDroneChargeList()
         {
             //List<DroneCharge> listOfAllDronesCharge = XMLTools.LoadListFromXMLSerializer<DroneCharge>(droneChargePath);
@@ -147,6 +141,10 @@ namespace Dal
         #endregion
 
         #region Drone
+        /// <summary>
+        /// Add a new drone
+        /// </summary>
+        /// <param name="droneToAdd"></param>
         public void AddDrone(Drone droneToAdd) //XMLSerializer
         {
             List<DO.Drone> listOfDrones = XMLTools.LoadListFromXMLSerializer<Drone>(dronePath);
@@ -163,7 +161,11 @@ namespace Dal
             XMLTools.SaveListToXMLSerializer<Drone>(listOfDrones, dronePath);
         }
 
-
+        /// <summary>
+        /// returns the drone that we asked by sending its id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public DO.Drone DroneById(int id)
         {
             var listOfDrones = XMLTools.LoadListFromXMLSerializer<Drone>(dronePath);
@@ -175,6 +177,10 @@ namespace Dal
             return listOfDrones.FirstOrDefault(x => x.ID == id);
         }
 
+        /// <summary>
+        /// update the drone // name
+        /// </summary>
+        /// <param name="droneToUpdate"></param>
         public void UpdateDrone(Drone droneToUpdate)
         {
             var listOfdrones = XMLTools.LoadListFromXMLSerializer<DO.Drone>(dronePath);
@@ -194,6 +200,10 @@ namespace Dal
             XMLTools.SaveListToXMLSerializer<DO.Drone>(listOfdrones, dronePath);
         }
 
+        /// <summary>
+        /// returns list of drones in the system
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<Drone> IEDroneList()
         {
             {
@@ -205,6 +215,10 @@ namespace Dal
         #endregion
 
         #region Client
+        /// <summary>
+        /// add a new client in the system
+        /// </summary>
+        /// <param name="clientToAdd"></param>
         public void AddClient(Client clientToAdd)
         {
             List<DO.Client> listOfClients = XMLTools.LoadListFromXMLSerializer<Client>(clientPath);
@@ -220,6 +234,11 @@ namespace Dal
             XMLTools.SaveListToXMLSerializer<Client>(listOfClients, clientPath);
         }
 
+        /// <summary>
+        /// returns the client that we asked by sending its id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public DO.Client ClientById(int id)
         {
             List<DO.Client> ListOfClients = XMLTools.LoadListFromXMLSerializer<DO.Client>(clientPath);
@@ -229,6 +248,10 @@ namespace Dal
             return ListOfClients.FirstOrDefault(x => x.ID == id);
         }
 
+        /// <summary>
+        /// update the client's details
+        /// </summary>
+        /// <param name="clientToUpdate"></param>
         public void UpdateClient(Client clientToUpdate)
         {
             var listOfClients = XMLTools.LoadListFromXMLSerializer<DO.Client>(clientPath);
@@ -249,6 +272,10 @@ namespace Dal
             XMLTools.SaveListToXMLSerializer<DO.Client>(listOfClients, clientPath);
         }
 
+        /// <summary>
+        /// returns list of all the clients of the systems
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<Client> IEClientList()
         {
             List<Client> listOfAllClients = XMLTools.LoadListFromXMLSerializer<Client>(clientPath);
@@ -258,6 +285,10 @@ namespace Dal
         #endregion
 
         #region Parcel
+        /// <summary>
+        /// add a new parcel
+        /// </summary>
+        /// <param name="parcelToAdd"></param>
         public void AddParcel(Parcel parcelToAdd)
         {
             List<DO.Parcel> listOfParcels = XMLTools.LoadListFromXMLSerializer<Parcel>(parcelPath);
@@ -273,6 +304,10 @@ namespace Dal
             XMLTools.SaveListToXMLSerializer<Parcel>(listOfParcels, parcelPath);
         }
 
+        /// <summary>
+        /// update the details of the parcel
+        /// </summary>
+        /// <param name="ParcelToUpdate"></param>
         public void UpdateParcelFromBL(Parcel ParcelToUpdate)
         {
             var listOfParcels = XMLTools.LoadListFromXMLSerializer<DO.Parcel>(parcelPath);
@@ -298,6 +333,11 @@ namespace Dal
             XMLTools.SaveListToXMLSerializer<DO.Parcel>(listOfParcels, parcelPath);
         }
 
+        /// <summary>
+        /// returns the parcel asked by its id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public DO.Parcel ParcelById(int id)
         {
             List<DO.Parcel> listOfParcels = XMLTools.LoadListFromXMLSerializer<DO.Parcel>(parcelPath);
@@ -311,12 +351,20 @@ namespace Dal
 
         }
 
+        /// <summary>
+        /// returns the list of all the parcels of the system
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<Parcel> IEParcelList()
         {
             List<Parcel> listOfAllParcels = XMLTools.LoadListFromXMLSerializer<Parcel>(parcelPath);
             return listOfAllParcels;
         }
 
+        /// <summary>
+        /// delete a parcel - only if it has been delivered
+        /// </summary>
+        /// <param name="parcelToDelete"></param>
         public void RemoveParcel(Parcel parcelToDelete)
         {
             List<Parcel> listOfAllParcels = XMLTools.LoadListFromXMLSerializer<Parcel>(parcelPath);
@@ -329,6 +377,10 @@ namespace Dal
 
 
         ////HELPFUNCTION
+        /// <summary>
+        /// update a parcel
+        /// </summary>
+        /// <param name="parcelToChange"></param>
         public void AddParcelFromBL(Parcel parcelToChange)
         {
             List<Parcel> listOfAllParcels = XMLTools.LoadListFromXMLSerializer<Parcel>(parcelPath);
@@ -339,6 +391,11 @@ namespace Dal
             XMLTools.SaveListToXMLSerializer(listOfAllParcels, parcelPath);
         }
 
+        /// <summary>
+        /// returns the parcel attached to the drone 
+        /// </summary>
+        /// <param name="droneId"></param>
+        /// <returns></returns>
         public Parcel FindParcelAssociatedWithDrone(int droneId)
         {
             List<Parcel> listOfParcels = XMLTools.LoadListFromXMLSerializer<Parcel>(parcelPath);
@@ -353,6 +410,10 @@ namespace Dal
         #endregion
 
         #region Station
+        /// <summary>
+        /// add a station to the system
+        /// </summary>
+        /// <param name="stationToAdd"></param>
         public void AddStation(Station stationToAdd)
         {
             List<DO.Station> listOfStations = XMLTools.LoadListFromXMLSerializer<Station>(stationPath);
@@ -368,6 +429,11 @@ namespace Dal
             XMLTools.SaveListToXMLSerializer<Station>(listOfStations, stationPath);
         }
 
+        /// <summary>
+        /// returns the station that we received its id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public DO.Station StationById(int id)
         {
             List<DO.Station> listOfStation = XMLTools.LoadListFromXMLSerializer<DO.Station>(stationPath);
@@ -378,6 +444,10 @@ namespace Dal
 
         }
 
+        /// <summary>
+        /// update a station
+        /// </summary>
+        /// <param name="stationToUpdate"></param>
         public void UpdateStation(Station stationToUpdate)
         {
             var listOfStations = XMLTools.LoadListFromXMLSerializer<DO.Station>(stationPath);
@@ -398,6 +468,11 @@ namespace Dal
             XMLTools.SaveListToXMLSerializer<DO.Station>(listOfStations, stationPath);
         }
 
+        /// <summary>
+        /// returns list of all the stations of the system
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
         public IEnumerable<Station> IEStationList(Func<Station, bool> predicate = null)
         {
             List<DO.Station> listOfStations = XMLTools.LoadListFromXMLSerializer<DO.Station>(stationPath);
@@ -407,6 +482,11 @@ namespace Dal
         #endregion
 
         #region Help
+        /// <summary>
+        /// function that returns the latitude of the client
+        /// </summary>
+        /// <param name="myId"></param>
+        /// <returns></returns>
         public double FindLat(int myId)
         {
             List<DO.Client> ListOfClients = XMLTools.LoadListFromXMLSerializer<DO.Client>(clientPath);
@@ -414,7 +494,11 @@ namespace Dal
             return clientLat.Latitude;
 
         }
-
+        /// <summary>
+        /// function that returns the longitude of the client
+        /// </summary>
+        /// <param name="myId"></param>
+        /// <returns></returns>
         public double FindLong(int myId)
         {
             List<DO.Client> ListOfClients = XMLTools.LoadListFromXMLSerializer<DO.Client>(clientPath);
@@ -423,6 +507,10 @@ namespace Dal
 
         }
 
+        /// <summary>
+        /// returns list of the stations'id 
+        /// </summary>
+        /// <returns></returns>
         public List<int> IdStation()
         {
             var listOfStations = XMLTools.LoadListFromXMLSerializer<DO.Station>(stationPath);
@@ -436,7 +524,10 @@ namespace Dal
             return listOfId;
 
         }
-
+         /// <summary>
+         /// list of the parcels the client received
+         /// </summary>
+         /// <returns></returns>
         public List<int> clientReceivedParcel()
         {
             List<DO.Parcel> listOfParcels = XMLTools.LoadListFromXMLSerializer<DO.Parcel>(parcelPath);
@@ -450,6 +541,12 @@ namespace Dal
             return listId;
         }
 
+        /// <summary>
+        /// returns the id of a parcel
+        /// </summary>
+        /// <param name="senderId"></param>
+        /// <param name="TargetId"></param>
+        /// <returns></returns>
         public int DalGetIdParcel(int senderId, int TargetId)
         {
             List<DO.Parcel> listOfParcels = XMLTools.LoadListFromXMLSerializer<DO.Parcel>(parcelPath);
@@ -458,6 +555,11 @@ namespace Dal
             return id;
         }
 
+        /// <summary>
+        /// plug in a drone to a station
+        /// </summary>
+        /// <param name="DroneID"></param>
+        /// <param name="StationID"></param>
         public void AddFromBLDroneCharging(int DroneID, int StationID)
         {
 
@@ -469,6 +571,11 @@ namespace Dal
             DroneChargeRoot.Save(droneChargePath);
         }
 
+        /// <summary>
+        /// update the list of the dronescharge
+        /// </summary>
+        /// <param name="droneId"></param>
+        /// <param name="statId"></param>
         public void UpdateDroneChargeList(int droneId, int statId)
         {
             DO.DroneCharge dalDr = new DroneCharge();
@@ -486,6 +593,10 @@ namespace Dal
         #endregion
 
         #region DalObjFunctions
+        /// <summary>
+        /// use of the battery
+        /// </summary>
+        /// <returns></returns>
         public double[] ElectricityUse()
         {
             var config = XMLTools.LoadListFromXMLSerializer<string>(configPath);
@@ -500,6 +611,10 @@ namespace Dal
 
         }
 
+        /// <summary>
+        /// returns the runner number 
+        /// </summary>
+        /// <returns></returns>
         public int RunnerNumber()
         {
             var runnerNumber = XMLTools.LoadListFromXMLSerializer<string>(configPath);

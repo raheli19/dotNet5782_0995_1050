@@ -32,6 +32,11 @@ namespace PL
         }
 
         #region Client_Open
+        /// <summary>
+        /// open the user window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OpenClientWindow(object sender, RoutedEventArgs e)
         {
             openClientWindow.Cursor = Cursors.AppStarting;
@@ -42,6 +47,11 @@ namespace PL
         #endregion
 
         #region Worker_Open
+        /// <summary>
+        /// open the main window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OpenWorkerWindow(object sender, RoutedEventArgs e)
         {
             openClientWindow.Cursor = Cursors.AppStarting;
@@ -52,13 +62,5 @@ namespace PL
         }
         #endregion
 
-        //private void OnClosing(object sender, CancelEventArgs e)
-        //{
-
-
-
-        //        e.Cancel = true;// call from the "X", we don't want to close
-        //    bl.DroneCharged()
-        //}
     }
 }

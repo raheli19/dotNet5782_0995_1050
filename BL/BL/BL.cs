@@ -169,7 +169,13 @@ namespace BL
 
         #region Help Functions 
 
+
         #region ClosestStationToLocation
+        /// <summary>
+        /// Function to find the closest station from the drone
+        /// </summary>
+        /// <param name="L"></param>
+        /// <returns></returns>
         private DO.Station ClosestStationToLocation(Localisation L)
         {
 
@@ -201,6 +207,8 @@ namespace BL
             return myStation;
         }
         #endregion
+
+        
 
         #region ClosestParcelToLocation
         /// <summary>
@@ -296,6 +304,11 @@ namespace BL
         #endregion
 
         #region FindParcelsToClient
+        /// <summary>
+        /// Returns a list of all the Parcel that the clients is the target
+        /// </summary>
+        /// <param name="clientId"></param>
+        /// <returns></returns>
         public List<ParcelToClient> FindParcelsToClient(int clientId)
         {
             List<ParcelToClient> TempParcLstFromClient = new List<ParcelToClient>();
@@ -344,6 +357,11 @@ namespace BL
         #endregion
 
         #region FindParcelsFromClient
+        /// <summary>
+        /// Returns list of all the parcel the client is the sender
+        /// </summary>
+        /// <param name="clientId"></param>
+        /// <returns></returns>
         public List<ParcelToClient> FindParcelsFromClient(int clientId)
         {
             List<ParcelToClient> TempParcLstToClient = new List<ParcelToClient>();
@@ -392,6 +410,11 @@ namespace BL
         #endregion
 
         #region ParcelsFromCLientList(ToString)
+        /// <summary>
+        /// ToString for the list of the parcels he is sending
+        /// </summary>
+        /// <param name="clientID"></param>
+        /// <returns></returns>
         public string parcelsFromCLiList(int clientID)
         {
             String result = "";
@@ -404,6 +427,11 @@ namespace BL
         #endregion
 
         #region ParcelsToClientList (ToString)
+        /// <summary>
+        /// ToString for the list of the parcels he is receiving
+        /// </summary>
+        /// <param name="clientID"></param>
+        /// <returns></returns>
         public string parcelsToCliList(int clientID)
         {
             String result = "";
@@ -416,6 +444,10 @@ namespace BL
         #endregion
 
         #region AllSenders_Id
+        /// <summary>
+        /// Returns a list of all the clients that are sender in the system // for the comboboxes
+        /// </summary>
+        /// <returns></returns>
         public List<int> AllSenders_Id()
         {
             List<int> idList = new List<int>();
@@ -429,6 +461,10 @@ namespace BL
         #endregion
 
         #region AllTargets_Id
+        /// <summary>
+        /// Returns list of all the id of the targets in the system // for comboboxes
+        /// </summary>
+        /// <returns></returns>
         public List<int> AllTargets_Id()
         {
             List<int> idList = new List<int>();

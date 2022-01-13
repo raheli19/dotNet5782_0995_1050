@@ -21,6 +21,14 @@ namespace BL
         int SPEED = 100;
         Localisation location = new Localisation();
 
+        #region Simulator
+        /// <summary>
+        /// function of the simulator 
+        /// </summary>
+        /// <param name="bl"></param>
+        /// <param name="id"></param>
+        /// <param name="action"></param>
+        /// <param name="stop"></param>
         public Simulator(BLApi.IBL bl,int id,Action action, Func<bool>stop)
         {
             BL = bl;
@@ -119,7 +127,7 @@ namespace BL
                 }
             }
         }
+        #endregion
 
-  
     }
 }

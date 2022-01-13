@@ -64,19 +64,7 @@ namespace BL
                 stationBL.Loc.latitude = dalStat.Latitude;
                 stationBL.ChargeSlots = dalStat.ChargeSlots;
 
-                //List<DroneCharging> droneCharging = new List<DroneCharging>();
-                //List<int> DronesID = new List<int>();
-
-                //IEnumerable<DO.DroneCharge> droneCharges = p.IEDroneChargeList();  //finds the list which contains the the drone charges from DAL
-                //foreach (var item in droneCharges)
-                //{
-                //    if (item.StationId == stationBL.ID)  // finds the station with the ID received 
-                //    {
-                //        Drone droneInStation = GetDrone(item.DroneId);   // finds the drones contained in this station
-                //        stationBL.DroneCharging.Add(new DroneCharging() { ID = item.DroneId, battery = droneInStation.Battery, });
-
-                //    }
-                //}
+                
             }
             catch (DO.StationException statEX) //catches the DAL exception
             {
@@ -104,22 +92,6 @@ namespace BL
                 droneBL.Battery = DroneList.Find(x => x.Id == id).battery;
                 droneBL.initialLoc = DroneList.Find(x => x.Id == id).loc;
                 
-                //if (DroneList.Find(x => x.Id == id).parcelId != 0)
-                //{
-                //    Parcel tempParcel = GetParcel(DroneList.Find(x => x.Id == id).parcelId);
-                //    droneBL.myParcel.ID = tempParcel.ID ;
-                //    if(tempParcel.PickedUp!=DateTime.MinValue) // the drone picked up the parcel
-                //        droneBL.myParcel.deliveringStatus = true;  //parcel is in delivering
-                //    if (tempParcel.Delivered != DateTime.MinValue)
-                //        droneBL.myParcel.deliveringStatus = false;
-                //    if(tempParcel.Scheduled!=DateTime.MinValue)
-                //        droneBL.myParcel.deliveringStatus = false;
-                //    if (tempParcel.Requested != DateTime.MinValue)
-                //        droneBL.myParcel.deliveringStatus = false;
-                //    droneBL.myParcel.weight = tempParcel.Weight;
-                //    droneBL.myParcel.priority = tempParcel.Priority;
-                //    droneBL.
-                //}
             }
             catch (DO.DroneException drEX) //catches DAL exception
             {

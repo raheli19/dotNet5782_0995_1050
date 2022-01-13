@@ -12,8 +12,8 @@ namespace BL
     sealed partial class BL : IBL
     {
         //-----------------------------------DISPLAY LIST-FUNCTIONS(GET)--------------------------------------
-      
-       
+
+
         #region DisplayStationList
         /// <summary>
         /// This function gets all the stations with their details
@@ -49,7 +49,7 @@ namespace BL
         public IEnumerable<DroneDescription> displayDroneList()
         {
             List<DroneDescription> temp = new List<DroneDescription>();
-            
+
             foreach (var item in DroneList)
             {
 
@@ -60,12 +60,10 @@ namespace BL
                     weight = (WeightCategories)item.weight,
                     loc = item.loc,
                     parcelId = item.parcelId,
-                    Status=item.Status,
+                    Status = item.Status,
                     battery = item.battery,
                 }); ;
             }
-            //if (DroneList.Count == 0)
-            //    throw new EmptyListException("No drones to display.");
             return temp;
 
 
@@ -157,13 +155,17 @@ namespace BL
         #endregion
 
         #region PrintFreeStations
+        /// <summary>
+        /// Returns list of stations wich have freeChargesSlots
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<StationDescription> printFreeStations()
         {
             List<StationDescription> statList = new List<StationDescription>();
             StationDescription tempStat = new StationDescription();
             IEnumerable<DO.Station> dalFreeStations = new List<DO.Station>();
             dalFreeStations = dal.IEStationList(x => x.ChargeSlots > 0);
-           
+
 
             foreach (var item in dalFreeStations)
             {
@@ -173,29 +175,18 @@ namespace BL
                     name = item.Name,
                     freeChargeSlots = item.ChargeSlots,
                     fullChargeSlots = dal.IEDroneChargeList().Where(x => x.StationId == item.ID).Count(),
-                }) ;
+                });
             }
             return statList;
 
-            //foreach (var item in p.IEStationList())
-            //{
-            //    if (item.ChargeSlots > 0)
-            //    {
-            //        tempStat.Id = item.ID;
-            //        tempStat.name = item.Name;
-            //        tempStat.freeChargeSlots = item.ChargeSlots;
-            //        foreach (var item2 in p.IEDroneChargeList())// full chargeSlots
-            //        {
-            //            if (item2.StationId == item.ID)
-            //                tempStat.fullChargeSlots++;
-            //        }
-            //    }
-            //    statList.Add(tempStat);
-            //}
         }
         #endregion
 
         #region DisplayParcelsNotAssigned
+        /// <summary>
+        /// returns lists of parcels that are not assigned yet
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<ParcelDescription> displayParcelsNotAssigned()
         {
             List<ParcelDescription> PDList = new List<ParcelDescription>();
@@ -233,24 +224,27 @@ namespace BL
         #endregion
 
         #region DisplayDroneChargingList
+        /// <summary>
+        /// Retruns list of all the drones that are charging
+        /// </summary>
+        /// <param name="stationId"></param>
+        /// <returns></returns>
         public IEnumerable<DroneCharging> displayDroneChargingList(int stationId)
         {
-           
-                DronesChargingInStation dc = new DronesChargingInStation();
-                List<DroneCharging> droneCharging = new List<DroneCharging>();
-                List<int> DronesID = new List<int>();
 
-                IEnumerable<DO.DroneCharge> droneCharges = dal.IEDroneChargeList();  //finds the list which contains the the drone charges from DAL
-                foreach (var item in droneCharges)
+            DronesChargingInStation dc = new DronesChargingInStation();
+            List<DroneCharging> droneCharging = new List<DroneCharging>();
+            List<int> DronesID = new List<int>();
+
+            IEnumerable<DO.DroneCharge> droneCharges = dal.IEDroneChargeList();  //finds the list which contains the the drone charges from DAL
+            foreach (var item in droneCharges)
+            {
+                if (item.StationId == stationId)  // finds the station with the ID received 
                 {
-                    if (item.StationId == stationId)  // finds the station with the ID received 
-                    {
-                        Drone droneInStation = GetDrone(item.DroneId);   // finds the drones contained in this station
-                        droneCharging.Add(new DroneCharging() { ID = item.DroneId, battery = droneInStation.Battery, });
+                    Drone droneInStation = GetDrone(item.DroneId);   // finds the drones contained in this station
+                    droneCharging.Add(new DroneCharging() { ID = item.DroneId, battery = droneInStation.Battery, });
 
-                    }
-
-              
+                }
             }
             return droneCharging;
         }
