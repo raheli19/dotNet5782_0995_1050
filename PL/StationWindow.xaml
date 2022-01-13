@@ -7,30 +7,30 @@
         mc:Ignorable="d"
         Title="StationWindow" Height="450" Width="800">
     <Grid x:Name="MainGrid" Margin="-4,0,4,0">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="74*"/>
-            <RowDefinition Height="64*"/>
-            <RowDefinition Height="62*"/>
-            <RowDefinition Height="67*"/>
-            <RowDefinition Height="54*"/>
-            <RowDefinition Height="71*"/>
-            <RowDefinition Height="43*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="294*"/>
-            <ColumnDefinition Width="195*"/>
-            <ColumnDefinition Width="165*"/>
-            <ColumnDefinition Width="146*"/>
-        </Grid.ColumnDefinitions>
-        <Grid x:Name="AddStationGrid" Visibility="Hidden" Grid.RowSpan="7" Grid.ColumnSpan="4">
+        <Grid x:Name="AddStationGrid" Visibility="Visible" >
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="39*"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
             <Grid.Background>
                 <ImageBrush ImageSource="/images/stationAdd.png" Opacity="0.35"/>
             </Grid.Background>
+
+
+            <Button  x:Name="ADD" Content="ADD" KeyDown="Add_enter" Margin="290,338,365,34" Click="Add_button" FontSize="30" FontWeight="Bold" Foreground="#FF38383F" Background="#FF6A6A73" FontStyle="Italic" />
+            <TextBox x:Name="txt_id" KeyDown="id_enter" Text="{Binding ID, Mode=TwoWay}" TextWrapping="Wrap" Margin="606,73,39,322"  />
+            <TextBox x:Name="txt_name" KeyDown="name_enter" Text="{Binding Name, Mode=TwoWay}" TextWrapping="Wrap"  Margin="606,130,39,256"/>
+            <TextBox x:Name="txt_lat" KeyDown="lat_enter" Margin="606,252,39,140" Text="{Binding Loc.latitude, Mode=TwoWay}" TextWrapping="Wrap"  />
+            <TextBox x:Name="txt_long" KeyDown="long_enter" Text="{Binding Loc.longitude, Mode=TwoWay}" TextWrapping="Wrap"  Margin="606,312,39,82"  />
+            <Label Content="Longitude" Margin="460,312,194,34" RenderTransformOrigin="0.512,2.912" FontSize="25" FontWeight="Bold" FontStyle="Italic" Foreground="#FF4C2525" />
+            <Label Content="Latitude" FontSize="25" FontWeight="Bold" FontStyle="Italic" Foreground="#FF4C2525" Margin="476,252,194,122"/>
+            <Label Content="Charge Slots" FontSize="25" FontWeight="Bold" FontStyle="Italic" Foreground="#FF4C2525"  Margin="440,185,199,187"/>
+            <Label Content="Name" Margin="497,124,194,249" FontSize="25" FontWeight="Bold" FontStyle="Italic" Foreground="#FF4C2525"  />
+            <Label Content="ID" FontSize="25" FontWeight="Bold" Foreground="#FF4C2525" FontStyle="Italic"  Margin="520,0,188,325" Height="36" VerticalAlignment="Bottom"/>
+            <TextBox x:Name="txt_CS" KeyDown="CS_enter" Margin="606,183,39,203" Text="{Binding ChargeSlots, Mode=TwoWay}" TextWrapping="Wrap" />
+
+
+
 
         </Grid>
         <Grid Name="UpdateStationGrid" Visibility="Hidden" Opacity="0.745" Margin="-10,0,0,0" Grid.RowSpan="7" Grid.ColumnSpan="4">
@@ -83,17 +83,7 @@
                 </ListView.View>
             </ListView>
         </Grid>
-        <Button  x:Name="ADD" Content="ADD" Margin="41,13,34,10" Click="Add_button" FontSize="30" FontWeight="Bold" Foreground="#FF38383F" Background="#FF6A6A73" FontStyle="Italic" Grid.Row="5" Grid.Column="1"/>
-        <TextBox x:Name="txt_id" KeyDown="id_enter" Text="{Binding ID, Mode=TwoWay}" TextWrapping="Wrap" Grid.Column="3" Grid.Row="1" Margin="11,22,11,14"/>
-        <TextBox x:Name="txt_name" KeyDown="name_enter" Text="{Binding Name, Mode=TwoWay}" TextWrapping="Wrap" Grid.Column="3" Grid.Row="2" Margin="10,17,10,17"/>
-        <TextBox x:Name="txt_lat" KeyDown="lat_enter" Margin="11,10,10,16" Text="{Binding Loc.latitude, Mode=TwoWay}" TextWrapping="Wrap" Grid.Column="3" Grid.Row="4" />
-        <TextBox x:Name="txt_long" KeyDown="long_enter" Text="{Binding Loc.longitude, Mode=TwoWay}" TextWrapping="Wrap" Grid.Column="3" Grid.Row="5" Margin="11,22,10,21" />
-        <Label Content="Longitude" Margin="22,10,16,10" RenderTransformOrigin="0.512,2.912" FontSize="25" FontWeight="Bold" FontStyle="Italic" Foreground="#FF4C2525" Grid.Column="2" Grid.Row="5"/>
-        <Label Content="Latitude" FontSize="25" FontWeight="Bold" FontStyle="Italic" Foreground="#FF4C2525" Grid.Column="2" Grid.Row="4" Margin="22,2,22,2"/>
-        <Label Content="Charge Slots" FontSize="25" FontWeight="Bold" FontStyle="Italic" Foreground="#FF4C2525" Grid.Column="2" Grid.Row="3" Margin="1,10,2,3"/>
-        <Label Content="Name" Margin="28,5,17,5" FontSize="25" FontWeight="Bold" FontStyle="Italic" Foreground="#FF4C2525" Grid.Column="2" Grid.Row="2" RenderTransformOrigin="0.427,0.349"/>
-        <Label Content="ID" FontSize="25" FontWeight="Bold" Foreground="#FF4C2525" FontStyle="Italic" Grid.Column="2" Grid.Row="1" Margin="59,0,60,6" Height="44" VerticalAlignment="Bottom"/>
-        <TextBox x:Name="txt_CS" KeyDown="CS_enter" Margin="10,17,10,21" Text="{Binding ChargeSlots, Mode=TwoWay}" TextWrapping="Wrap" Grid.Column="3" Grid.Row="3"/>
+
 
     </Grid>
 </Window>

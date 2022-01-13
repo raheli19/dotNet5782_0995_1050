@@ -91,8 +91,8 @@ namespace PL
         {
             if (e.Key == Key.Enter)
             {
-
-                Add_button(sender, e);
+                ADD.Focus();
+                
             }
         }
 
@@ -275,6 +275,12 @@ namespace PL
             UpdateCSLabel.Visibility = Visibility.Hidden;
             CheckCSUpdate.Visibility = Visibility.Hidden;
         }
+
         #endregion
+
+        private void Add_enter(object sender, KeyEventArgs e)
+        {
+            Add_button(sender, e);
+        }
     }
 }
