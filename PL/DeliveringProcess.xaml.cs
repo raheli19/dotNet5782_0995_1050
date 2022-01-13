@@ -16,10 +16,8 @@ using BO;
 namespace PL
 {
     /// <summary>
-    /// Logique d'interaction pour DeliveringProcess.xaml
+    /// Logic interaction for DeliveringProcess.xaml
     /// </summary>
-
-
 
     public partial class DeliveringProcess : Window
     {
@@ -47,7 +45,6 @@ namespace PL
         }
         #endregion
 
-
         #region AllButtonsClick
         private void ParcelsFromClient_Click(object sender, RoutedEventArgs e)
         {
@@ -63,6 +60,45 @@ namespace PL
 
 
             }
+        }
+
+
+        private void Combo_TargetId_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DataCParcel.Target.ID = (int)Combo_TargetId.SelectedItem;
+            DataCParcel.Target.name = bl.displayClient(DataCParcel.Target.ID).Name;
+
+        }
+
+        private void Add_Parcel_ToSend_Click(object sender, RoutedEventArgs e)
+        {
+            if (MaxWeightL == null || PriorityL == null || Combo_TargetId == null)
+            {
+                MessageBox.Show("Please fill al the fields", "WARNING", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            try
+            {
+                bl.addParcel(DataCParcel);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+
+            }
+            MaxWeightL.Visibility = Visibility.Hidden;
+            PriorityL.Visibility = Visibility.Hidden;
+            Add_Parcel_ToSend.Visibility = Visibility.Hidden;
+            MaxWeight.Visibility = Visibility.Hidden;
+            Combo_TargetId.Visibility = Visibility.Hidden;
+            Priority.Visibility = Visibility.Hidden;
+            MaxWeight.Visibility = Visibility.Hidden;
+            TargetId.Visibility = Visibility.Hidden;
+            this.clientStatus = "Sign In";
+            MessageBox.Show("The parcel has been added to the list", "Done!", MessageBoxButton.OK, MessageBoxImage.Information);
+
+            return;
         }
 
         private void ParcelsToClient_Click(object sender, RoutedEventArgs e)
@@ -132,9 +168,9 @@ namespace PL
             //label_info.Visibility = Visibility.Visible;
             BO.DroneDescription delDrone = new DroneDescription();
             BO.ParcelDescription parcelDelivered = new ParcelDescription();
-            
-           parcelDelivered = bl.displayParcelList().FirstOrDefault(x => x.TargetName== this.Name);
-            if(parcelDelivered==null)
+
+            parcelDelivered = bl.displayParcelList().FirstOrDefault(x => x.TargetName == this.Name);
+            if (parcelDelivered == null)
             {
                 MessageBox.Show("Aie aie aie...", "There is no parcels for you. ", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
@@ -142,13 +178,13 @@ namespace PL
             delDrone = bl.displayDroneList().First(x => x.Id == bl.displayParcel(parcelDelivered.Id).Drone.ID);
             try
             {
-                
+
 
                 bl.delivered(delDrone.Id);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Aie aie aie...",ex.Message, MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Aie aie aie...", ex.Message, MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
 
             }
@@ -156,27 +192,7 @@ namespace PL
 
         #endregion
 
-        
-
-        
-
         #region checkPickedUp
-        //private void (object sender, RoutedEventArgs e)
-        //{
-        //    //affiche liste des parcels qu'ils envoit
-        //    List<ParcelDescription> tempList = new List<ParcelDescription>();
-        //    DataCParcel.Drone = new DroneWithParcel();
-        //    tempList = bl.displayParcelList().Where(x => x.SenderName == DataCclient.Name).ToList();
-        //    listOf_Parcels.Visibility = Visibility.Visible;
-        //    label_info.Visibility = Visibility.Visible;
-        //    Parcel_Id_Entered.Visibility = Visibility.Visible;
-        //    // Drone_Id_entered.Visibility = Visibility.Visible;
-        //    click_PickedUpButton.Visibility = Visibility.Visible;
-        //    listOf_Parcels.Content = tempList.ToString(); //doesn't work to print the list!!!!
-
-
-            
-        //}
 
         private void Picked_up(object sender, RoutedEventArgs e)
         {
@@ -200,15 +216,15 @@ namespace PL
                 }
 
 
-            catch (Exception ex)
+                catch (Exception ex)
                 {
-                    MessageBox.Show("Aie aie aie...",ex.Message, MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Aie aie aie...", ex.Message, MessageBoxButton.OK, MessageBoxImage.Warning);
                     return;
                 }
             }
             else
             {
-                MessageBox.Show( "Aie aie aie...", "Your Parcel is not associatedDrone yet", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Aie aie aie...", "Your Parcel is not associatedDrone yet", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
@@ -236,44 +252,6 @@ namespace PL
         }
         #endregion
 
-        private void Combo_TargetId_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            DataCParcel.Target.ID = (int)Combo_TargetId.SelectedItem;
-            DataCParcel.Target.name = bl.displayClient(DataCParcel.Target.ID).Name;
-
-        }
-
-        private void Add_Parcel_ToSend_Click(object sender, RoutedEventArgs e)
-        {
-            if (MaxWeightL==null || PriorityL == null || Combo_TargetId == null)
-            {
-                MessageBox.Show("Please fill al the fields", "WARNING", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-            try
-            {
-                bl.addParcel(DataCParcel);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-
-            }
-            MaxWeightL.Visibility = Visibility.Hidden;
-            PriorityL.Visibility = Visibility.Hidden;
-            Add_Parcel_ToSend.Visibility = Visibility.Hidden;
-            MaxWeight.Visibility = Visibility.Hidden;
-            Combo_TargetId.Visibility = Visibility.Hidden;
-            Priority.Visibility = Visibility.Hidden;
-            MaxWeight.Visibility = Visibility.Hidden;
-            TargetId.Visibility = Visibility.Hidden;
-            this.clientStatus = "Sign In";
-            MessageBox.Show("The parcel has been added to the list", "Done!", MessageBoxButton.OK, MessageBoxImage.Information);
-
-            return;
-        }
-
         #region UpdateName/Phone
         private void ClickUpdate(object sender, RoutedEventArgs e)
         {
@@ -290,7 +268,7 @@ namespace PL
 
         private void Check_Click_Update(object sender, RoutedEventArgs e)
         {
-            
+
             string newName = UpdateNameTextBox.Text;
             string newPhone = "n";
             if (UpdatePhoneTextBox.Text != "")
@@ -310,7 +288,7 @@ namespace PL
                 MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            
+
             UpdateNameTextBox.Visibility = Visibility.Hidden;
             UpdatePhoneTextBox.Visibility = Visibility.Hidden;
             UpdateLabel.Visibility = Visibility.Hidden;

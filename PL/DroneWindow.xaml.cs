@@ -529,7 +529,6 @@ namespace PL
         }
         #endregion
 
-
         #region EnterTab
         private void Id_enter(object sender, KeyEventArgs e)
         {
@@ -550,9 +549,23 @@ namespace PL
         }
         #endregion
 
+        #region Simulator
+        private void Simulator_DoWork(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
+                bl.StartSimulator(dataCdroneUpdate.Id, update, stop);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+        }
+
         private void Cancellation_Click(object sender, RoutedEventArgs e)
         {
-           
+
             backgroundWorker.CancelAsync();
             UpdateDroneGrid.DataContext = bl.displayDrone(dataCdroneUpdate.Id);
             if (ListViewDrone != default)
@@ -562,7 +575,6 @@ namespace PL
             if (FilterByStatus != default)
                 FilterByStatus.ItemsSource = bl.displayDroneList();
         }
-
 
         bool stop()
         {
@@ -575,23 +587,10 @@ namespace PL
             {
                 backgroundWorker.ReportProgress(1);
             }
-            catch(Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void Simulator_DoWork(object sender, DoWorkEventArgs e)
-        {
-            try
-            {
-                bl.StartSimulator(dataCdroneUpdate.Id, update, stop);
-            }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-
         }
 
         private void Simulator_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -617,5 +616,6 @@ namespace PL
                 simulator.IsChecked = true;
             }
         }
+        #endregion
     }
 }

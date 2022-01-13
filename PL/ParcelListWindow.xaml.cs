@@ -40,7 +40,6 @@ namespace PL
             InitializeComponent();
             //DataContext = boParcelList;
             ParcelsListView.DataContext = boParcelList;
-            dataCparcel.ID = 9;
             RemoveGrid.DataContext = dataCparcel;
             this.bl = bl;
             foreach (var item in bl.displayParcelList())
@@ -205,12 +204,6 @@ namespace PL
 
         #endregion
 
-        private void Remove_Click(object sender, RoutedEventArgs e)
-        {
-            RemoveGrid.Visibility = Visibility.Visible;
-
-        }
-
         #region enter_tap
         private void enter_tap(object sender, KeyEventArgs e)
         {
@@ -234,20 +227,14 @@ namespace PL
         #endregion
 
         #region Remove_Button
+        private void Remove_Click(object sender, RoutedEventArgs e)
+        {
+            RemoveGrid.Visibility = Visibility.Visible;
+
+        }
+
         private void Remove_Button( object sender, RoutedEventArgs e, BO.Parcel parcel)
         {
-            //if (Combo_SenderId.SelectedItem == null || Combo_TargetId.SelectedItem == null)
-            //{
-            //    MessageBox.Show("Please make a selection", "WARNING", MessageBoxButton.OK, MessageBoxImage.Warning);
-            //    return;
-            //}
-            //if (Combo_SenderId.SelectedItem.Equals(Combo_TargetId.SelectedItem))
-            //{
-            //    MessageBox.Show("A client didn't sent a parcel to himself! ", "Aie aie aie...", MessageBoxButton.OK, MessageBoxImage.Warning);
-            //    return;
-            //}
-            //dataCparcel.ID = bl.displayParcelList().Where(x => x.SenderName == bl.displayClient((int)Combo_SenderId.SelectedItem).Name && x.TargetName == bl.displayClient((int)Combo_TargetId.SelectedItem).Name);
-            //dataCparcel.ID = bl.GetIdParcel((int)Combo_SenderId.SelectedItem, (int)Combo_TargetId.SelectedItem);
             try
             {
 
@@ -256,13 +243,10 @@ namespace PL
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                RemoveGrid.Visibility = Visibility.Hidden;
                 return;
             }
             MessageBox.Show("Success!", "The Parcel is removed", MessageBoxButton.OK, MessageBoxImage.Information);
-            //this.Combo_SenderId.SelectedItem = null;
-            //this.Combo_TargetId.SelectedItem = null;
-            //this.Combo_SenderId.ItemsSource = bl.AllSenders_Id();
-            //this.Combo_TargetId.ItemsSource = bl.AllTargets_Id();
             ParcelsListView.ItemsSource = bl.displayParcelList();
             RemoveGrid.Visibility = Visibility.Hidden;
 
