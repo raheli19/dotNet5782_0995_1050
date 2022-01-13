@@ -22,14 +22,17 @@ namespace PL
     public partial class MenueWindow : Window
     {
         internal readonly BLApi.IBL bl = BLFactory.GetBL();
-        //RAHEL
+
+        /// <summary>
+        /// Ctor and initialization
+        /// </summary>
         public MenueWindow()
         {
             InitializeComponent();
         }
 
         #region Client_Open
-        private void OpenClientWindow(object sender, RoutedEventArgs e) 
+        private void OpenClientWindow(object sender, RoutedEventArgs e)
         {
             openClientWindow.Cursor = Cursors.AppStarting;
             new SignUpSignIn(bl).Show();
@@ -52,8 +55,8 @@ namespace PL
         //private void OnClosing(object sender, CancelEventArgs e)
         //{
 
-           
-            
+
+
         //        e.Cancel = true;// call from the "X", we don't want to close
         //    bl.DroneCharged()
         //}
