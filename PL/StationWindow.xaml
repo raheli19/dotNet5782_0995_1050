@@ -22,7 +22,7 @@
             <ColumnDefinition Width="165*"/>
             <ColumnDefinition Width="146*"/>
         </Grid.ColumnDefinitions>
-        <Grid x:Name="AddStationGrid" Visibility="Visible" Grid.RowSpan="7" Grid.ColumnSpan="4">
+        <Grid x:Name="AddStationGrid" Visibility="Hidden" Grid.RowSpan="7" Grid.ColumnSpan="4">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="39*"/>
                 <ColumnDefinition/>
